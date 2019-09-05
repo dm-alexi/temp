@@ -1,12 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/05 21:13:24 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/05 21:15:05 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 
-void    ft_bzero(void *buf, size_t n)
+void	ft_bzero(void *buf, size_t n)
 {
-    unsigned char   *s;
-    unsigned char   *e;
+	unsigned char	*s;
 
-    s = (unsigned char*)buf;
-    e = s + n;
-    while (s != e)
-        *s++ = '\0';
+	s = (unsigned char*)buf;
+	while (n--)
+		*s++ = '\0';
 }

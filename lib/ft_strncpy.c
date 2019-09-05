@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/05 22:00:14 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/05 22:00:38 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 
-char    *ft_strncpy(char *dst, const char *src, size_t n)
+char	*ft_strncpy(char *dst, const char *src, size_t n)
 {
-    char    *s;
+	char	*s;
 
-    s = dst;
-    while (n && (*s++ = *src++))
-        --n;
-    while (n--)
-        *s++ = '\0';
-    return (dst);
+	s = dst;
+	while (n && (*s++ = *src++))
+		--n;
+	while (n--)
+		*s++ = '\0';
+	return (dst);
 }

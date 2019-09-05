@@ -1,16 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/05 22:03:02 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/05 22:04:36 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 
-char    *ft_strnew(size_t size)
+char	*ft_strnew(size_t size)
 {
-    char    *str;
-    char    *s;
-    char    *e;
+	char	*str;
+	char	*s;
 
-    if (!(str = (char*)malloc(size)))
-        return (NULL);
-    s = str;
-    e = str + size;
-    while (s != e)
-        *s++ = '\0';
-    return (str);
+	if (!(str = (char*)malloc(size)))
+		return (NULL);
+	s = str;
+	while (size--)
+		*s++ = '\0';
+	return (str);
 }

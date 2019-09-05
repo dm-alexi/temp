@@ -6,14 +6,14 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 19:09:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/05 19:29:33 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/05 22:07:54 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-char    *ft_strstr(const char *s1, const char *s2)
+char	*ft_strstr(const char *s1, const char *s2)
 {
 	size_t	n1;
 	size_t	n2;
@@ -30,5 +30,5 @@ char    *ft_strstr(const char *s1, const char *s2)
 			return (s);
 		++s;
 	}
-    return (NULL);
+	return (NULL);
 }

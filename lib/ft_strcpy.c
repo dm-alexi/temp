@@ -1,9 +1,21 @@
-char    *ft_strcpy(char *dst, const char *src)
-{
-    char    *s;
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/05 21:48:23 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/05 21:48:39 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-    s = dst;
-    while ((*s++ = *src++))
-        ;
-    return (dst);
+char	*ft_strcpy(char *dst, const char *src)
+{
+	char	*s;
+
+	s = dst;
+	while ((*s++ = *src++))
+		;
+	return (dst);
 }

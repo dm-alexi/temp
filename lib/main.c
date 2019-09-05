@@ -87,13 +87,20 @@ int main()
     printf("%s\n", ft_itoa(2147483647));
     printf("%s\n", ft_itoa(-2147483648));
     */
-    
+/*    
 	printf("%s\n", ft_strstr("", "abcdabcabcdabcdab"));
     printf("%s\n", ft_strstr("abcdabcabcdabcdab", "ab"));
 	printf("%s\n", ft_strstr("abcdabcabcdabcdab", "ca"));
 	printf("%s\n", ft_strstr("abcdabcabcdabcdab", "dab"));
 	printf("%s\n", ft_strstr("abcdabcabcdabcdab", "abc"));
 	printf("%s\n", ft_strstr("abcdabcabcdabcdab", "fg"));
-
+*/
+	
+//	char **arr = ft_strsplit("*hello*fellow***students*", '*');
+	char **arr = ft_strsplit("****", '*');
+	int i = 0;
+	while (arr[i])
+		printf("%s\n", arr[i++]);
+	
     return 0;
 }

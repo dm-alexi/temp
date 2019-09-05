@@ -87,7 +87,13 @@ int main()
     printf("%s\n", ft_itoa(2147483647));
     printf("%s\n", ft_itoa(-2147483648));
     */
-    ft_strstr("", "abcdabcabcdabcdab");
-
+/*    
+	printf("%s\n", ft_strstr("", "abcdabcabcdabcdab"));
+    printf("%s\n", ft_strstr("abcdabcabcdabcdab", "ab"));
+	printf("%s\n", ft_strstr("abcdabcabcdabcdab", "ca"));
+	printf("%s\n", ft_strstr("abcdabcabcdabcdab", "dab"));
+	printf("%s\n", ft_strstr("abcdabcabcdabcdab", "abc"));
+	printf("%s\n", ft_strstr("abcdabcabcdabcdab", "fg"));
+*/
     return 0;
 }

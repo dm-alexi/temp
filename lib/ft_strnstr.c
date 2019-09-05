@@ -1,38 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/05 18:22:50 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/05 19:35:25 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/09/05 19:29:17 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/05 19:32:43 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft.h"
 
-size_t	ft_strlcat(char *dest, char *src, size_t size)
+char    *ft_strnstr(const char *s1, const char *s2, size_t len)
 {
-	size_t	i;
-	size_t	j;
-	size_t	slen;
-	size_t	dlen;
+	size_t	n1;
+	size_t	n2;
+	char	*s;
 
-	dlen = 0;
-	slen = 0;
-	i = 0;
-	while (dest[dlen])
-		++dlen;
-	while (src[slen])
-		++slen;
-	while (dest[i] && i < size - 1)
-		++i;
-	if (i == size - 1)
-		return (size + slen);
-	j = 0;
-	while (i < size - 1 && src[j])
-		dest[i++] = src[j++];
-	dest[i] = '\0';
-	return (dlen + slen);
+	n1 = ft_strlen(s1);
+	n2 = ft_strlen(s2);
+	if (n2 > len)
+		n2 = len;
+	if (n2 > n1)
+		return (NULL);
+	s = (char*)s1;
+	while ((size_t)(s - s1) <= n1 - n2)
+	{
+		if (*s == *s2 && !ft_strncmp(s, s2, n2))
+			return (s);
+		++s;
+	}
+    return (NULL);
 }

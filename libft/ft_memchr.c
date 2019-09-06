@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/05 22:16:14 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/05 22:27:38 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/09/05 22:25:33 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/05 22:26:40 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-void	*ft_memccpy(void *dst, const void *src, int c, size_t num)
+void	*ft_memchr(const void *ptr, int val, size_t num)
 {
-	char	*s;
-	char	*t;
+	const unsigned char	*s;
+	unsigned char	c;
 
-	t = (char*)dst;
-	s = (char*)src;
-	while (num && (*t++ = *s++) != c)
-		--num;
-	return (num ? (void*)t : NULL);
+	c = (unsigned char)val;
+	s = ptr;
+	while (num && *s != c)
+    {
+        --num;
+        ++s;
+    }
+	return (num ? NULL : (void*)s);
 }

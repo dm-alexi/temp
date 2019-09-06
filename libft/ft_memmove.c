@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/05 22:25:33 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/05 22:26:40 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/09/05 21:24:46 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/05 21:25:35 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-void	*ft_memchr(void *ptr, int c, size_t num)
+void	*ft_memmove(void *dst, const void *src, size_t num)
 {
-	unsigned char	*s;
-	unsigned char	*e;
-	unsigned char	v;
+	const unsigned char   *s;
+	unsigned char   *t;
 
-	v = (unsigned char)c;
-	s = (unsigned char*)ptr;
-	e = s + num;
-	while (s != e && *s != v)
-		++s;
-	return (s == e ? NULL : (void*)s);
+    if (dst == src)
+        return (dst);
+    t = dst;
+	s = src;
+	if (s > t)
+        while (num--)
+            *t++ = *s++;
+    else
+    {
+        s += num - 1;
+        t += num - 1;
+        while (num--)
+            *t-- = *s--;
+    }
+	return (dst);
 }

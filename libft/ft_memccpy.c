@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/05 21:47:50 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/05 21:48:08 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/09/05 22:16:14 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/05 22:27:38 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strcmp(const char *s1, const char *s2)
+#include <stdlib.h>
+
+void	*ft_memccpy(void *dst, const void *src, int val, size_t num)
 {
-	while (*s1 && *s1 == *s2)
-	{
-		++s1;
-		++s2;
-	}
-	return (*s1 - *s2);
+	const unsigned char	*s;
+	unsigned char	*t;
+	unsigned char   c;
+
+	t = dst;
+	s = src;
+	c = (unsigned char)val;
+	while (num && (*t++ = *s++) != c)
+		--num;
+	return (num ? (void*)t : NULL);
 }

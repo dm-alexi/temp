@@ -12,14 +12,16 @@
 
 #include <stdlib.h>
 
-char	*ft_strncat(char *dst, const char *src, size_t n)
+char	*ft_strncat(char *dst, const char *src, size_t num)
 {
 	char	*s;
 
-	s = dst;
+	if (!num)
+        return (dst);
+    s = dst;
 	while (*s)
 		++s;
-	while (n-- && (*s++ = *src++))
+	while (num-- && (*s++ = *src++))
 		;
 	*s = '\0';
 	return (dst);

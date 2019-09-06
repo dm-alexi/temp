@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/05 22:24:21 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/05 22:24:52 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/09/05 21:47:50 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/05 21:48:08 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-char	*ft_strrchr(const char *str, int character)
+int		ft_strcmp(const char *s1, const char *s2)
 {
-	char	c;
-	char	*s;
-
-	c = (char)character;
-	s = NULL;
-	while (*str)
+	if (s1 == s2)
+        return (0);
+	while (*s1 && *s1 == *s2)
 	{
-		if (*str == c)
-			s = (char*)str;
-		++str;
+		++s1;
+		++s2;
 	}
-	return (c == '\0' ? (char*)str : s);
+	if (*s1 == *s2)
+        return (0);
+	return (*s1 > *s2 ? 1 : -1);
 }

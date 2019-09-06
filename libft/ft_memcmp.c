@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/05 21:13:24 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/05 21:15:05 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/09/05 22:23:12 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/05 22:24:10 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-void	ft_bzero(void *buf, size_t n)
+int		ft_memcmp(const void *ptr1, const void *ptr2, size_t num)
 {
-	unsigned char	*s;
+	const unsigned char	*s1;
+	const unsigned char	*s2;
 
-	s = (unsigned char*)buf;
-	while (n--)
-		*s++ = '\0';
+	if (ptr1 == ptr2)
+        return (0);
+	s1 = ptr1;
+	s2 = ptr2;
+	while (num && *s1 == *s2)
+	{
+		--num;
+		++s1;
+		++s2;
+	}
+	if (!num)
+		return (0);
+	return (*s1 > *s2 ? 1 : -1);
 }

@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/05 22:00:14 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/05 22:00:38 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/09/05 22:24:21 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/05 22:24:52 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-char	*ft_strncpy(char *dst, const char *src, size_t n)
+char	*ft_strrchr(const char *str, int val)
 {
+	char	c;
 	char	*s;
 
-	s = dst;
-	while (n && (*s++ = *src++))
-		--n;
-	while (n--)
-		*s++ = '\0';
-	return (dst);
+	c = (char)val;
+	s = NULL;
+	while (*str)
+	{
+		if (*str == c)
+			s = (char*)str;
+		++str;
+	}
+	return (c == '\0' ? (char*)str : s);
 }

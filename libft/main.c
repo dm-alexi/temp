@@ -69,7 +69,8 @@ int main()
     ft_putnbr(-2147483648);
     ft_putchar('\n');
 */
-    //printf("%d\t%d", ft_atoi("222222222222"), atoi("222222222222"));
+//    printf("%d\t%d\n%llu", ft_atoi("9999999999999999999"), atoi("9999999999999999999"), 9999999999999999999);
+    printf("%d\t%d", ft_atoi("9999999999999999999"), atoi("9999999999999999999"));
 
     //printf(ft_strsub("0123456789", 5, 4));
 
@@ -88,7 +89,7 @@ int main()
     printf("%s\n", ft_itoa(-55491));
     printf("%s\n", ft_itoa(2147483647));
     printf("%s\n", ft_itoa(-2147483648));
-    */
+*/  
 /*
 	printf("%s\n", ft_strstr("", "abcdabcabcdabcdab"));
     printf("%s\n", ft_strstr("abcdabcabcdabcdab", "ab"));

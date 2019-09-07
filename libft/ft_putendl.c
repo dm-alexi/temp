@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 21:28:37 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/05 21:28:51 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/07 15:38:04 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 void	ft_putendl(char const *s)
 {
-	write(1, s, ft_strlen(s));
-	write(1, "\n", 1);
+	if (s)
+	{
+		write(1, s, ft_strlen(s));
+		write(1, "\n", 1);
+	}
 }

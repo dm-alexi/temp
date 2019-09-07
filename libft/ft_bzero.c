@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 21:13:24 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/05 21:15:05 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/07 11:25:28 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_bzero(void *ptr, size_t num)
 {
 	unsigned char	*s;
 
-    s = ptr;
-    while (num--)
-        *s++ = '\0';
+	s = ptr;
+	while (num--)
+		*s++ = '\0';
 }

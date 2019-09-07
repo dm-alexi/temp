@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 22:14:21 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/07 11:45:18 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/07 11:44:39 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 typedef struct		s_list
 {
-	void			*content;
-	size_t			content_size;
-	struct s_list	*next;
+    void            *content;
+    size_t          content_size;
+    struct s_list   *next;
 }					t_list;
 
 /* libc functions */

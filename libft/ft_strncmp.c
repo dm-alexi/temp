@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 21:59:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/05 21:59:54 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/07 11:42:44 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		ft_strncmp(const char *s1, const char *s2, size_t num)
 {
 	if (s1 == s2)
-        return (0);
+		return (0);
 	while (num && *s1 && *s1 == *s2)
 	{
 		--num;

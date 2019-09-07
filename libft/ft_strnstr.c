@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 19:29:17 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/05 22:06:11 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/07 19:04:29 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ char	*ft_strnstr(const char *s1, const char *s2, size_t len)
 
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
-	if (len2 > len)
-		len2 = len;
+	if (len1 > len)
+		len1 = len;
 	if (len2 > len1)
 		return (NULL);
 	s = (char*)s1;

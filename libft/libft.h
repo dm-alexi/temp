@@ -6,12 +6,13 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 22:14:21 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/07 14:33:14 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/07 17:11:28 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# include <stdlib.h>
 
 typedef struct	s_s
 {
@@ -37,7 +38,7 @@ char			*ft_strcpy(char *dst, const char *src);
 char			*ft_strncpy(char *dst, const char *src, size_t num);
 char			*ft_strcat(char *dst, const char *src);
 char			*ft_strncat(char *dst, const char *src, size_t num);
-size_t			ft_strlcat(char *dest, char *src, size_t size);
+size_t			ft_strlcat(char *dst, char *src, size_t size);
 char			*ft_strchr(const char *str, int val);
 char			*ft_strrchr(const char *str, int val);
 char			*ft_strstr(const char *s1, const char *s2);

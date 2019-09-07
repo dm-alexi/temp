@@ -70,7 +70,7 @@ int main()
     ft_putchar('\n');
 */
 //    printf("%d\t%d\n%llu", ft_atoi("9999999999999999999"), atoi("9999999999999999999"), 9999999999999999999);
-    printf("%d\t%d", ft_atoi("9999999999999999999"), atoi("9999999999999999999"));
+//    printf("%d\t%d", ft_atoi("9999999999999999999"), atoi("9999999999999999999"));
 
     //printf(ft_strsub("0123456789", 5, 4));
 
@@ -106,6 +106,10 @@ int main()
 		printf("%s\n", arr[i++]);
 	*/
 
+	char *s = "      split       this for   me  !       ";
+	char **result = ft_strsplit(s, ' ');
+	while (*result)
+		printf("%s\n", *(result++));
 
     return 0;
 }

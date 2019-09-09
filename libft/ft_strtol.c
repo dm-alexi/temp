@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 22:43:57 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/09 22:48:56 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/09 23:11:08 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static long int		ft_strtol_process(const char *nptr, char **endptr,
 			++nptr;
 		*endptr = (char*)nptr;
 	}
-	return (n);
+	return (neg ? -n : n);
 }
 
 long int			ft_strtol(const char *nptr, char **endptr, int base)

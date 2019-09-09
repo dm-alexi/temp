@@ -33,14 +33,16 @@ static void memswap(void *a, void *b, size_t size)
 */
 int main()
 {
-	char *dest;
-	dest = (char *)malloc(sizeof(*dest) * 15);
-	memset(dest, 0, 15);
-	memset(dest, 's', 13);
-	printf("%s\n", ft_strncpy(dest, "lorem", 9));
-	for (int i = 0; i < 15; ++i)
-		printf("%c", dest[i] ? dest[i] : '|');
-
+	printf("%d\n", ft_atoi("0"));
+    printf("%d\n", ft_atoi("20"));
+    printf("%d\n", ft_atoi("25389"));
+    printf("%d\n", ft_atoi("-25389"));
+    printf("%d\n", ft_atoi("2147483647"));
+    printf("%d\n", ft_atoi("99999999999999999999999999"));
+    printf("%d\n", atoi("99999999999999999999999999"));
+    printf("%d\n", ft_atoi("-99999999999999999999999999"));
+    printf("%d\n", atoi("-99999999999999999999999999"));
+	printf("%d\n", ft_atoi("-47-5"));
 /*
     char szNumbers[] = "2001 60c0c0 -1101110100110100100000 0x6fffff";
   char * pEnd;

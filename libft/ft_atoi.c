@@ -6,26 +6,14 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 21:11:50 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/05 21:12:53 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/09 22:59:21 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include "libft.h"
+
 int		ft_atoi(char *str)
 {
-	int		n;
-	int		sign;
-
-	n = 0;
-	sign = 1;
-	while (*str == ' ' || *str == '\t' || *str == '\n' ||
-		*str == '\v' || *str == '\f' || *str == '\r')
-		++str;
-	if (*str == '-' || *str == '+')
-	{
-		sign = *str == '-' ? -1 : 1;
-		++str;
-	}
-	while (*str >= '0' && *str <= '9')
-		n = n * 10 + *str++ - '0';
-	return (n * sign);
+	return ((int)ft_strtol(str, NULL, 10));
 }

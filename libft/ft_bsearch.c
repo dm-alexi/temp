@@ -12,7 +12,7 @@
 
 #include <stdlib.h>
 
-void *bsearch(const void *key, const void *base, size_t num,
+void *ft_bsearch(const void *key, const void *base, size_t num,
     size_t size, int (*compar)(const void *, const void *))
 {
     int k;
@@ -27,7 +27,7 @@ void *bsearch(const void *key, const void *base, size_t num,
     while (l <= r)
     {
         m = l + (r - l) / size / 2 * size;
-        if ((k = compar(key, m) < 0))
+        if ((k = compar(key, m)) < 0)
             r = m - size;
         else if (k > 0)
             l = m + size;

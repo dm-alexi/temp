@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 22:14:21 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/09 20:36:21 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/09 22:10:13 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,5 @@ t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 				**other useful functions
 */
 int				ft_isspace(int c);
-
 
 #endif

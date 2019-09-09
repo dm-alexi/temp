@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 21:58:24 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/07 11:42:27 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/09 21:46:57 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ char	*ft_strncat(char *dst, const char *src, size_t num)
 	s = dst;
 	while (*s)
 		++s;
-	while (num-- && (*s++ = *src++))
-		;
+	while (num && *src)
+	{
+		--num;
+		*s++ = *src++;
+	}
 	*s = '\0';
 	return (dst);
 }

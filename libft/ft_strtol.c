@@ -16,8 +16,8 @@ static int  is_valid(char c, int base)
 
 static long int ft_strtol_process(const char *nptr, char **endptr, int base, int neg)
 {
-    static const long int longmax = 9223372036854775807;
-    static const long int longmin = -9223372036854775808;
+    static const long int longmax = 9223372036854775807L;
+    static const long int longmin = -9223372036854775808L;
     long int    n;
     char c;
 

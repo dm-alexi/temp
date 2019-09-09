@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <memory.h>
+#include <limits.h>
 #include "libft.h"
 
 void plusone(char *s) { ++*s; }
@@ -11,7 +12,7 @@ int cmp(const void *a,const void *b)
 {
     return *(int*)(a) - *(int*)(b);
 }
-
+/*
 static void memswap(void *a, void *b, size_t size)
 {
     unsigned char *s;
@@ -29,9 +30,17 @@ static void memswap(void *a, void *b, size_t size)
         ++i;
     }
 }
-
+*/
 int main()
 {
+	char *dest;
+	dest = (char *)malloc(sizeof(*dest) * 15);
+	memset(dest, 0, 15);
+	memset(dest, 's', 13);
+	printf("%s\n", ft_strncpy(dest, "lorem", 9));
+	for (int i = 0; i < 15; ++i)
+		printf("%c", dest[i] ? dest[i] : '|');
+
 /*
     char szNumbers[] = "2001 60c0c0 -1101110100110100100000 0x6fffff";
   char * pEnd;
@@ -44,7 +53,7 @@ int main()
   li5 = strtol("0x6fffff", NULL, 0);
   printf("%ld\n", li5);
   int a = 0;
-  printf("%d", a);*/
+  printf("%d", a);
 
     int arr[] = {50, 16, 11, -2, 0, 34, 0, 34, 99, 4, 8, 1};
     ft_qsort(arr, 12, 4, cmp);
@@ -52,6 +61,6 @@ int main()
 
     for (int i = 0; i < 12; ++i)
         printf("%d ", arr[i]);
-
+*/
     return 0;
 }

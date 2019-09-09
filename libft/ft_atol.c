@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/09 20:12:34 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/09 20:12:44 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-long int atol(const char *nptr)
+long int	atol(const char *nptr)
 {
-    return (strtol(nptr, NULL, 10));
+	return (strtol(nptr, NULL, 10));
 }

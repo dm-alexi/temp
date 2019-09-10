@@ -97,15 +97,19 @@ t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 /*
 				**other useful functions
 */
+
 int				ft_isspace(int c);
 long int		ft_strtol(const char *nptr, char **endptr, int base);
 long int		ft_atol(const char *nptr);
 void            ft_memswap(void *a, void *b, size_t size);
 void            ft_isort(void* base, size_t num, size_t size,
                 int (*compar)(const void*, const void*));
-void            *ft_bsearch(const void *key, const void *base, size_t num,
-                size_t size, int (*compar)(const void *, const void *));
 void            ft_qsort(void* base, size_t num, size_t size,
                 int (*compar)(const void*, const void*));
+void            *ft_bsearch(const void *key, const void *base, size_t num,
+                size_t size, int (*compar)(const void *, const void *));
+void            ft_lstadd_sorted(t_list **alst, t_list *new,
+                int (*compar)(const void*, const void*));
+void            ft_lstsort(t_list **alst, int (*compar)(const void*, const void*));
 
 #endif

@@ -10,7 +10,12 @@ void plusodd(unsigned int i, char *s) { *s += i % 2; }
 
 int cmp(const void *a,const void *b)
 {
-    return *(int*)(a) - *(int*)(b);
+    return *(int*)(b) - *(int*)(a);
+}
+
+void print(t_list *elem)
+{
+    printf("%d ", *(int*)(elem->content));
 }
 
 int main()
@@ -41,12 +46,16 @@ int main()
   int a = 0;
   printf("%d", a);
 */
-    int arr[] = {50, 16, 11, -2, 0, 34, 34, 34, 99, 4, 8, 1, 14};
-    //int arr[] = {50, 16, 11, -2, 0, 34, 7, 36, 99, 4, 8, 1};
-    ft_qsort(arr, 13, 4, cmp);
-
-    for (int i = 0; i < 13; ++i)
-        printf("%d ", arr[i]);
+    t_list *t = NULL;
+    int a[4] = {10, 9, 22, 21};
+    ft_lstadd(&t, ft_lstnew(a + 2, 4));
+    ft_lstadd(&t, ft_lstnew(a + 1, 4));
+    ft_lstadd(&t, ft_lstnew(a, 4));
+    ft_lstadd(&t, ft_lstnew(a + 3, 4));
+    ft_lstiter(t, print);
+    putchar('\n');
+    ft_lstsort(&t, cmp);
+    ft_lstiter(t, print);
 
     return 0;
 }

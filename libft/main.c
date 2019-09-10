@@ -20,7 +20,7 @@ void print(t_list *elem)
 
 int main()
 {
-/*
+
 	printf("%d\n", ft_atoi("0"));
     printf("%d\n", ft_atoi("20"));
     printf("%d\n", ft_atoi("25389"));
@@ -30,8 +30,9 @@ int main()
     printf("%d\n", atoi("99999999999999999999999999"));
     printf("%d\n", ft_atoi("-99999999999999999999999999"));
     printf("%d\n", atoi("-99999999999999999999999999"));
-	printf("%d\n", ft_atoi("-47-5"));
-	*/
+	printf("%d\n", ft_atoi(NULL));
+//    printf("%d\n", atoi(NULL));
+
 /*
     char szNumbers[] = "2001 60c0c0 -1101110100110100100000 0x6fffff";
   char * pEnd;
@@ -46,16 +47,5 @@ int main()
   int a = 0;
   printf("%d", a);
 */
-    t_list *t = NULL;
-    int a[4] = {10, 9, 22, 21};
-    ft_lstadd(&t, ft_lstnew(a + 2, 4));
-    ft_lstadd(&t, ft_lstnew(a + 1, 4));
-    ft_lstadd(&t, ft_lstnew(a, 4));
-    ft_lstadd(&t, ft_lstnew(a + 3, 4));
-    ft_lstiter(t, print);
-    putchar('\n');
-    ft_lstsort(&t, cmp);
-    ft_lstiter(t, print);
-
     return 0;
 }

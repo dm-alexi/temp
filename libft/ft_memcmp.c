@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 22:23:12 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/07 11:41:01 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/10 20:21:43 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ int		ft_memcmp(const void *ptr1, const void *ptr2, size_t num)
 	}
 	if (!num)
 		return (0);
-	return (*s1 > *s2 ? 1 : -1);
+	return ((int)*s1 - (int)*s2);
 }

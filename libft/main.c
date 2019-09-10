@@ -12,27 +12,10 @@ int cmp(const void *a,const void *b)
 {
     return *(int*)(a) - *(int*)(b);
 }
-/*
-static void memswap(void *a, void *b, size_t size)
-{
-    unsigned char *s;
-    unsigned char *t;
-    size_t i;
 
-    s = a;
-    t = b;
-    i = 0;
-    while (i < size)
-    {
-        *(s + i) ^= *(t + i);
-        *(t + i) ^= *(s + i);
-        *(s + i) ^= *(t + i);
-        ++i;
-    }
-}
-*/
 int main()
 {
+/*
 	printf("%d\n", ft_atoi("0"));
     printf("%d\n", ft_atoi("20"));
     printf("%d\n", ft_atoi("25389"));
@@ -43,6 +26,7 @@ int main()
     printf("%d\n", ft_atoi("-99999999999999999999999999"));
     printf("%d\n", atoi("-99999999999999999999999999"));
 	printf("%d\n", ft_atoi("-47-5"));
+	*/
 /*
     char szNumbers[] = "2001 60c0c0 -1101110100110100100000 0x6fffff";
   char * pEnd;
@@ -56,13 +40,13 @@ int main()
   printf("%ld\n", li5);
   int a = 0;
   printf("%d", a);
-
-    int arr[] = {50, 16, 11, -2, 0, 34, 0, 34, 99, 4, 8, 1};
-    ft_qsort(arr, 12, 4, cmp);
-    unsigned char *l = (unsigned char*)arr, *r = l + 4 * (12 - 1);
-
-    for (int i = 0; i < 12; ++i)
-        printf("%d ", arr[i]);
 */
+    int arr[] = {50, 16, 11, -2, 0, 34, 34, 34, 99, 4, 8, 1, 14};
+    //int arr[] = {50, 16, 11, -2, 0, 34, 7, 36, 99, 4, 8, 1};
+    ft_qsort(arr, 13, 4, cmp);
+
+    for (int i = 0; i < 13; ++i)
+        printf("%d ", arr[i]);
+
     return 0;
 }

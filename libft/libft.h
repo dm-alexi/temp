@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 22:14:21 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/09 22:50:58 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/10 19:48:50 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,15 +101,14 @@ t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 int				ft_isspace(int c);
 long int		ft_strtol(const char *nptr, char **endptr, int base);
 long int		ft_atol(const char *nptr);
-void            ft_memswap(void *a, void *b, size_t size);
-void            ft_isort(void* base, size_t num, size_t size,
-                int (*compar)(const void*, const void*));
-void            ft_qsort(void* base, size_t num, size_t size,
-                int (*compar)(const void*, const void*));
-void            *ft_bsearch(const void *key, const void *base, size_t num,
-                size_t size, int (*compar)(const void *, const void *));
-void            ft_lstadd_sorted(t_list **alst, t_list *new,
-                int (*compar)(const void*, const void*));
-void            ft_lstsort(t_list **alst, int (*compar)(const void*, const void*));
+void			ft_memswap(void *a, void *b, size_t size);
+void			ft_isort(void *base, size_t num, size_t size,
+					int (*compar)(const void*, const void*));
+void			ft_qsort(void *base, size_t num, size_t size,
+					int (*compar)(const void*, const void*));
+void			ft_lstadd_sorted(t_list **alst, t_list *new,
+					int (*compar)(const void*, const void*));
+void			ft_lstsort(t_list **alst,
+					int (*compar)(const void*, const void*));
 
 #endif

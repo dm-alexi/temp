@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/11 19:00:34 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/11 21:38:08 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int		get_next_line(const int fd, char **line)
 	size_t			slen;
 	int				r;
 
+	if (!line)
+		return (-1);
 	*line = NULL;
 	slen = 0;
 	if (!buf.len)

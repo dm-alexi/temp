@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 20:10:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/11 21:14:13 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/11 21:27:54 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static size_t	word_count(char const *s, char c)
 	return (n);
 }
 
-static char		**clean(char **arr, int n)
+static char		**clean(char **arr, size_t n)
 {
-	while (--n)
+	while (n--)
 		free(arr[n]);
 	free(arr);
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/11 18:55:52 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/11 19:00:34 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ int		get_next_line(const int fd, char **line)
 	slen = 0;
 	if (!buf.len)
 	{
-		if ((r = read(fd, &(buf.str), BUF_SIZE)) <= 0)
+		if ((r = read(fd, &(buf.str), BUFF_SIZE)) <= 0)
 			return (r);
 		buf.len = r;
 	}
 	while (!(r = getbuf(line, &buf, &slen)))
 	{
-		r = read(fd, &(buf.str), BUF_SIZE);
+		r = read(fd, &(buf.str), BUFF_SIZE);
 		if (r <= 0)
 			break ;
 		buf.len = r;

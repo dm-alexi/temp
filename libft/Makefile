@@ -6,8 +6,8 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME):
-	gcc $(FLAGS) $(SRC)
-	ar rc $(NAME) $(OBJ)
+	@gcc $(FLAGS) $(SRC)
+	@ar rc $(NAME) $(OBJ)
 
 clean:
 	@rm -f $(OBJ)

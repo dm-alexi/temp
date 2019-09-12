@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/12 16:21:29 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/09/05 19:29:17 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/07 19:04:29 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdlib.h>
-# define BUFF_SIZE 1000000
+#include <stdlib.h>
+#include "libft.h"
 
-typedef struct	s_buf
+char	*ft_strnstr(const char *s1, const char *s2, size_t len)
 {
-	size_t	len;
-	char	str[BUFF_SIZE];
-}				t_buf;
+	size_t	len1;
+	size_t	len2;
+	char	*s;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	if (len1 > len)
+		len1 = len;
+	if (len2 > len1)
+		return (NULL);
+	s = (char*)s1;
+	while ((size_t)(s - s1) <= len1 - len2)
+	{
+		if (!ft_strncmp(s, s2, len2))
+			return (s);
+		++s;
+	}
+	return (NULL);
+}

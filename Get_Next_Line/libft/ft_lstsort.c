@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_lstsort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/12 16:21:29 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/09/10 19:37:41 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/10 19:38:15 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdlib.h>
-# define BUFF_SIZE 1000000
+#include <stdlib.h>
+#include "libft.h"
 
-typedef struct	s_buf
+/*
+** Stable O(n^2) sort, no memory allocation.
+*/
+
+void	ft_lstsort(t_list **alst, int (*compar)(const void*, const void*))
 {
-	size_t	len;
-	char	str[BUFF_SIZE];
-}				t_buf;
+	t_list	*t;
+	t_list	*tmp;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	if (!alst || !compar)
+		return ;
+	t = NULL;
+	while (*alst)
+	{
+		tmp = (*alst)->next;
+		ft_lstadd_sorted(&t, *alst, compar);
+		*alst = tmp;
+	}
+	*alst = t;
+}

@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_putendl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/12 16:21:29 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/09/05 21:28:37 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/07 15:38:04 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdlib.h>
-# define BUFF_SIZE 1000000
+#include <unistd.h>
+#include "libft.h"
 
-typedef struct	s_buf
+void	ft_putendl(char const *s)
 {
-	size_t	len;
-	char	str[BUFF_SIZE];
-}				t_buf;
-
-int				get_next_line(const int fd, char **line);
-
-#endif
+	if (s)
+	{
+		write(1, s, ft_strlen(s));
+		write(1, "\n", 1);
+	}
+}

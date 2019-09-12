@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_lstadd_sorted.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/12 16:21:29 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/09/10 19:36:53 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/10 19:37:31 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdlib.h>
-# define BUFF_SIZE 1000000
+#include "libft.h"
 
-typedef struct	s_buf
+void	ft_lstadd_sorted(t_list **alst, t_list *new,
+	int (*compar)(const void*, const void*))
 {
-	size_t	len;
-	char	str[BUFF_SIZE];
-}				t_buf;
+	t_list	*t;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	if (!alst || !new || !compar)
+		return ;
+	if (!*alst || compar((*alst)->content, new->content) > 0)
+	{
+		new->next = *alst;
+		*alst = new;
+		return ;
+	}
+	t = *alst;
+	while (t->next && compar(t->next->content, new->content) <= 0)
+		t = t->next;
+	new->next = t->next;
+	t->next = new;
+}

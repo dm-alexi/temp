@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memswap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/12 16:21:29 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/09/10 19:32:57 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/10 19:33:46 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdlib.h>
-# define BUFF_SIZE 1000000
+#include <stdlib.h>
 
-typedef struct	s_buf
+/*
+** The function swaps two regions of memory.
+** Undefined behavior in case of overlapping.
+*/
+
+void	ft_memswap(void *a, void *b, size_t size)
 {
-	size_t	len;
-	char	str[BUFF_SIZE];
-}				t_buf;
+	unsigned char	*s;
+	unsigned char	*t;
+	size_t			i;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	if (a == b || !size)
+		return ;
+	s = a;
+	t = b;
+	i = 0;
+	while (i < size)
+	{
+		*(s + i) ^= *(t + i);
+		*(t + i) ^= *(s + i);
+		*(s + i) ^= *(t + i);
+		++i;
+	}
+}

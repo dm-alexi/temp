@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/12 15:51:45 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/12 15:57:44 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		getbuf(char **line, t_buf *buf, size_t *sl)
 	while ((size_t)(s - buf->str) < buf->len && *s != '\n')
 		++s;
 	n = s - buf->str;
-	if (!(n + 1) || !(*line = (char*)ft_realloc(*line, *sl + 1, *sl + n + 1)))
+	if (!(n + 1) || !(*line = (char*)ft_realloc(*line, *sl, *sl + n + 1)))
 		return (-1);
 	ft_memcpy(*line + *sl, buf->str, n);
 	*sl += n;

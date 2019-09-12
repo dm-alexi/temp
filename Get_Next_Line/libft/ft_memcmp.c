@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/12 16:21:29 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/09/05 22:23:12 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/12 13:35:27 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdlib.h>
-# define BUFF_SIZE 1000000
+#include <stdlib.h>
 
-typedef struct	s_buf
+int		ft_memcmp(const void *ptr1, const void *ptr2, size_t num)
 {
-	size_t	len;
-	char	str[BUFF_SIZE];
-}				t_buf;
+	const unsigned char		*s1;
+	const unsigned char		*s2;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	if (ptr1 == ptr2)
+		return (0);
+	s1 = ptr1;
+	s2 = ptr2;
+	while (num && *s1 == *s2)
+	{
+		--num;
+		++s1;
+		++s2;
+	}
+	if (!num)
+		return (0);
+	return (*s1 - *s2);
+}

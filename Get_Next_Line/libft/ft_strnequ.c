@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strnequ.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/12 16:21:29 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/09/05 22:01:54 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/09 22:07:24 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdlib.h>
-# define BUFF_SIZE 1000000
+#include <stdlib.h>
 
-typedef struct	s_buf
+int		ft_strnequ(char const *s1, char const *s2, size_t n)
 {
-	size_t	len;
-	char	str[BUFF_SIZE];
-}				t_buf;
-
-int				get_next_line(const int fd, char **line);
-
-#endif
+	if (s1 == s2)
+		return (1);
+	if (!s1 || !s2)
+		return (0);
+	while (n && *s1 == *s2)
+	{
+		if (!*s1)
+			return (1);
+		--n;
+		++s1;
+		++s2;
+	}
+	return (!n);
+}

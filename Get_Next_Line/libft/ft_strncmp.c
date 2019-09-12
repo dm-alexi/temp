@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/12 16:21:29 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/09/05 21:59:41 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/12 13:40:00 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdlib.h>
-# define BUFF_SIZE 1000000
+#include <stdlib.h>
 
-typedef struct	s_buf
+int		ft_strncmp(const char *s1, const char *s2, size_t num)
 {
-	size_t	len;
-	char	str[BUFF_SIZE];
-}				t_buf;
+	unsigned char	*str1;
+	unsigned char	*str2;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	if (s1 == s2)
+		return (0);
+	str1 = (unsigned char*)s1;
+	str2 = (unsigned char*)s2;
+	while (num && *str1 == *str2)
+	{
+		if (!*str1)
+			return (0);
+		--num;
+		++str1;
+		++str2;
+	}
+	if (!num)
+		return (0);
+	return (*str1 - *str2);
+}

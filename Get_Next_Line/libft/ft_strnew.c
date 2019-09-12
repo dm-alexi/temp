@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/12 16:21:29 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/09/05 22:03:02 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/10 19:58:56 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdlib.h>
-# define BUFF_SIZE 1000000
+#include <stdlib.h>
 
-typedef struct	s_buf
+char	*ft_strnew(size_t size)
 {
-	size_t	len;
-	char	str[BUFF_SIZE];
-}				t_buf;
+	char	*str;
+	char	*s;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	if (!++size || !(str = (char*)malloc(size)))
+		return (NULL);
+	s = str;
+	while (size--)
+		*s++ = '\0';
+	return (str);
+}

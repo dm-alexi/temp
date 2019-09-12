@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 22:43:57 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/12 16:59:57 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/10 20:43:23 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 ** Due to the task restrictions we don't have access to limits.h,
 ** so we assume sizeof(int) == 4 && sizeof(long) == 8
-** as it agrees with our current UNIX environment.
+** as it agrees with our current environment.
 ** Also, errno is not changed in case of overflow, for the same reason.
 */
 

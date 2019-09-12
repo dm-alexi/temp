@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/12 16:21:29 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/09/05 22:24:21 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/05 22:24:52 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdlib.h>
-# define BUFF_SIZE 1000000
+#include <stdlib.h>
 
-typedef struct	s_buf
+char	*ft_strrchr(const char *str, int val)
 {
-	size_t	len;
-	char	str[BUFF_SIZE];
-}				t_buf;
+	char	c;
+	char	*s;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	c = (char)val;
+	s = NULL;
+	while (*str)
+	{
+		if (*str == c)
+			s = (char*)str;
+		++str;
+	}
+	return (c == '\0' ? (char*)str : s);
+}

@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/12 16:21:29 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/09/05 21:45:18 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/05 21:45:41 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdlib.h>
-# define BUFF_SIZE 1000000
-
-typedef struct	s_buf
+char	*ft_strcat(char *dst, const char *src)
 {
-	size_t	len;
-	char	str[BUFF_SIZE];
-}				t_buf;
+	char	*s;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	s = dst;
+	while (*s)
+		++s;
+	while ((*s++ = *src++))
+		;
+	return (dst);
+}

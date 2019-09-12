@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/12 16:21:29 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/09/05 21:29:44 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/07 18:46:23 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdlib.h>
-# define BUFF_SIZE 1000000
+#include <unistd.h>
 
-typedef struct	s_buf
+void	ft_putnbr(int n)
 {
-	size_t	len;
-	char	str[BUFF_SIZE];
-}				t_buf;
+	char	s[20];
+	char	*t;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	t = s + 19;
+	if (n == 0)
+		*t-- = '0';
+	else if (n < 0)
+	{
+		write(1, "-", 1);
+		*t-- = -(n % 10) + '0';
+		n = -(n / 10);
+	}
+	while (n)
+	{
+		*t-- = n % 10 + '0';
+		n /= 10;
+	}
+	write(1, t + 1, 19 - (t - s));
+}

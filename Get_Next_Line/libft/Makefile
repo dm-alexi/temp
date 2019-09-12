@@ -9,9 +9,6 @@ $(NAME):
 	@gcc $(FLAGS) $(SRC)
 	@ar rc $(NAME) $(OBJ)
 
-%.o: %.c libft.h
-	gcc -o $@ $(FLAGS) $<
-
 clean:
 	@rm -f $(OBJ)
 

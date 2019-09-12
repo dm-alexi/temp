@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/12 16:21:29 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/07/21 11:36:52 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/11 22:03:37 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdlib.h>
-# define BUFF_SIZE 1000000
+#include <stdlib.h>
+#include "libft.h"
 
-typedef struct	s_buf
+void	*ft_realloc(void *ptr, size_t size, size_t new_size)
 {
-	size_t	len;
-	char	str[BUFF_SIZE];
-}				t_buf;
+	void	*p;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	if (new_size == size)
+		return (ptr);
+	if (!(p = malloc(new_size)))
+		return (NULL);
+	ft_memcpy(p, ptr, size < new_size ? size : new_size);
+	free(ptr);
+	return (p);
+}

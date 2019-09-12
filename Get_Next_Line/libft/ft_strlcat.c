@@ -1,26 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/12 16:21:29 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/09/05 18:22:50 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/12 13:52:53 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdlib.h>
-# define BUFF_SIZE 1000000
+#include <stdlib.h>
+#include "libft.h"
 
-typedef struct	s_buf
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
+	char	*s;
+	char	*d;
+	size_t	n;
 	size_t	len;
-	char	str[BUFF_SIZE];
-}				t_buf;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	d = dst;
+	n = size;
+	while (n-- && *d)
+		++d;
+	len = d - dst;
+	n = size - len;
+	if (!n--)
+		return (len + ft_strlen(src));
+	s = (char *)src;
+	while (*s)
+	{
+		if (n)
+		{
+			*d++ = *s;
+			--n;
+		}
+		++s;
+	}
+	*d = '\0';
+	return (len + (s - src));
+}

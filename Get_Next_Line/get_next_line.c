@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/11 21:38:08 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/12 15:51:45 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "get_next_line.h"
 #include "libft.h"
 
-int		getbuf(char **line, t_buf *buf, size_t *slen)
+int		getbuf(char **line, t_buf *buf, size_t *sl)
 {
 	char	*s;
 	size_t	n;
@@ -28,11 +28,11 @@ int		getbuf(char **line, t_buf *buf, size_t *slen)
 	while ((size_t)(s - buf->str) < buf->len && *s != '\n')
 		++s;
 	n = s - buf->str;
-	if (!(n + 1) || !(*line = (char*)realloc(*line, *slen + n + 1)))
+	if (!(n + 1) || !(*line = (char*)ft_realloc(*line, *sl + 1, *sl + n + 1)))
 		return (-1);
-	ft_memcpy(*line + *slen, buf->str, n);
-	*slen += n;
-	*(*line + *slen) = '\0';
+	ft_memcpy(*line + *sl, buf->str, n);
+	*sl += n;
+	*(*line + *sl) = '\0';
 	if (n < buf->len)
 		finished = (++n == buf->len);
 	ft_memcpy(buf->str, buf->str + n, buf->len - n);

@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 21:47:50 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/10 20:29:45 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/12 13:39:31 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ int		ft_strcmp(const char *s1, const char *s2)
 	}
 	if (*str1 == *str2)
 		return (0);
-	return ((int)*str1 - (int)*str2);
+	return (*str1 - *str2);
 }

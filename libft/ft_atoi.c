@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 21:11:50 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/09 22:59:21 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/12 13:42:08 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 
 int		ft_atoi(char *str)
 {
-	return ((int)ft_strtol(str, NULL, 10));
+	return ((int)ft_strtol(str, (char **)NULL, 10));
 }

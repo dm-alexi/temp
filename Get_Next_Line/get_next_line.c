@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/12 15:57:44 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/12 17:50:42 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "get_next_line.h"
 #include "libft.h"
-
+/*
 int		getbuf(char **line, t_buf *buf, size_t *sl)
 {
 	char	*s;
@@ -38,16 +38,37 @@ int		getbuf(char **line, t_buf *buf, size_t *sl)
 	ft_memcpy(buf->str, buf->str + n, buf->len - n);
 	buf->len -= n;
 	return (finished || buf->len);
+}*/
+
+int		getbuf(t_buf *buf, t_list *last)
+{
+	char	*s;
+	size_t	n;
+	int		finished;
+
+	if (!buf.len)
+		return (0);
+	finished = 0;
+	s = buf->str;
+	while ((size_t)(s - buf->str) < buf->len && *s != '\n')
+		++s;
+	n = s - buf->str;
+	if (!(
+		
 }
 
 int		get_next_line(const int fd, char **line)
 {
 	static t_buf	buf = {0, {0}};
+	t_list			*t;
 	size_t			slen;
 	int				r;
 
 	if (!line)
 		return (-1);
+	if (!(t =    ;
+
+
 	*line = NULL;
 	slen = 0;
 	if (!buf.len)

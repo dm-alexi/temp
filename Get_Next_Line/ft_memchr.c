@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/12 16:21:29 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/09/05 22:25:33 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/07 17:01:09 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 2
+#include <stdlib.h>
 
-typedef struct s_buf
+void	*ft_memchr(const void *ptr, int val, size_t num)
 {
-    int len;
-    struct s_buf *next;
-    char str[BUFF_SIZE];
-} t_buf;
+	const unsigned char		*s;
+	unsigned char			c;
 
-typedef struct s_file
-{
-    int fd;
-    struct s_file *next;
-    t_buf *buf;
-} t_file;
-
-int				get_next_line(const int fd, char **line);
-
-#endif
+	c = (unsigned char)val;
+	s = ptr;
+	while (num && *s != c)
+	{
+		--num;
+		++s;
+	}
+	return (num ? (void*)s : NULL);
+}

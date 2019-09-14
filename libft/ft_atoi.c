@@ -61,7 +61,8 @@ static long int		ft_strtol_static(const char *nptr, char **endptr, int base)
 
 	if (base < 0 || base == 1 || base > 36)
 		return (0);
-	while (ft_isspace(*nptr))
+	while (*nptr == ' ' || *nptr == '\t' || *nptr == '\n' ||
+		*nptr == '\v' || *nptr == '\f' || *nptr == '\r');
 		++nptr;
 	if (*nptr == '+' || *nptr == '-')
 		neg = (*nptr++ == '-');

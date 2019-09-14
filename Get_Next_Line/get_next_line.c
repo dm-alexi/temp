@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/12 17:50:42 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/14 17:20:03 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,23 +48,30 @@ int fillbuf(t_file *file, t_buf *buf)
 {
     int r;
     char *s;
+	t_buf *t;
 
     if (!buf->len)
         if ((r = read(file->fd, buf->str, BUFF_SIZE)) <= 0)
+		{
             return (r);
+		}
         else
-            buf->len = r;
-//make it iterative!!!
-    if (!(s = ft_memchr(buf->str, '\n', buf->len)))
+		{
+			buf->len = r;
+		}
+	t = buf;
+    while (!(s = ft_memchr(t->str, '\n', t->len)))
     {
-        buf->next = (t_buf*)malloc(sizeof(t_buf));
-        buf->next->len = 0;
-        buf->next->next = NULL;
-        if ((r = fillbuf(file, buf->next)) == -1)
+        t->next = (t_buf*)malloc(sizeof(t_buf));
+        t->next->next = NULL;
+        if ((t->next->len = read(file->fd, buf->str, BUFF_SIZE)) == -1)
             return (-1);
+		else if (t->next->len == 0)
+			break;
+		r += t->next->len;
+		t = t->next;
     }
-    //printf("%d\n", s ? s - buf->str + 1 : buf->len + r);
-    return (s ? s - buf->str + 1: buf->len + r);
+    return (r + 1);
 }
 
 int readbuf(t_file *file, char **line)
@@ -101,7 +108,7 @@ int		get_next_line(const int fd, char **line)
 {
 	static t_file	*files = NULL;
 	t_file *f;
-	t_buf  *t;
+//	t_buf  *t;
 	int r;
 
     f = getfile(fd, &files);

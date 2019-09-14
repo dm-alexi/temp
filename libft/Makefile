@@ -5,18 +5,17 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME):
-	@gcc $(FLAGS) $(SRC)
-	@ar rc $(NAME) $(OBJ)
+$(NAME): $(OBJ)
+	ar rc $(NAME) $(OBJ)
 
-%.o: %.c libft.h
+$(OBJ): %.o: %.c libft.h
 	gcc -o $@ $(FLAGS) $<
 
 clean:
-	@rm -f $(OBJ)
+	rm -f $(OBJ)
 
 fclean: clean
-	@rm -f $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 

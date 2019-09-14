@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 21:11:50 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/14 22:49:03 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/14 23:33:10 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static long int		ft_strtol_process(const char *nptr, char **endptr,
 	return (neg ? -n : n);
 }
 
-static long int		ft_strtol(const char *nptr, char **endptr, int base)
+static long int		ft_strtol_static(const char *nptr, char **endptr, int base)
 {
 	int		neg;
 
@@ -76,5 +76,5 @@ static long int		ft_strtol(const char *nptr, char **endptr, int base)
 
 int					ft_atoi(const char *str)
 {
-	return ((int)ft_strtol(str, (char **)NULL, 10));
+	return ((int)ft_strtol_static(str, (char **)NULL, 10));
 }

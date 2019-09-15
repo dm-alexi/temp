@@ -9,7 +9,7 @@ $(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ)
 
 $(OBJ): %.o: %.c libft.h
-	gcc -o $@ $(FLAGS) $<
+	gcc $(FLAGS) -o $@ $<
 
 clean:
 	rm -f $(OBJ)

@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/14 17:20:03 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/15 16:39:16 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,32 +46,36 @@ t_file  *getfile(const int fd, t_file **files)
 
 int fillbuf(t_file *file, t_buf *buf)
 {
-    int r;
+    int len;
     char *s;
 	t_buf *t;
 
     if (!buf->len)
-        if ((r = read(file->fd, buf->str, BUFF_SIZE)) <= 0)
-		{
-            return (r);
-		}
-        else
-		{
-			buf->len = r;
-		}
+	{
+		if ((len = read(file->fd, buf->str, BUFF_SIZE)) <= 0)
+			return (len);
+        else buf->len = len;
+	}
+	len = 0;
 	t = buf;
-    while (!(s = ft_memchr(t->str, '\n', t->len)))
+//	printf("(%d)\n", len);
+    while (!(s = (char*)ft_memchr(t->str, '\n', t->len)))
     {
+//		printf("%s", t->str);
+		len += t->len;
         t->next = (t_buf*)malloc(sizeof(t_buf));
-        t->next->next = NULL;
-        if ((t->next->len = read(file->fd, buf->str, BUFF_SIZE)) == -1)
-            return (-1);
-		else if (t->next->len == 0)
-			break;
-		r += t->next->len;
 		t = t->next;
+        t->next = NULL;
+        if ((t->len = read(file->fd, t->str, BUFF_SIZE)) == -1)
+            return (-1);
+		else if (t->len == 0)
+			break;
+//		printf("(%d)\n", len);
     }
-    return (r + 1);
+	if (s)
+		len += s - t->str;
+//	printf("\n--%d\n", s - t->str);
+    return (len + 1);
 }
 
 int readbuf(t_file *file, char **line)
@@ -81,11 +85,13 @@ int readbuf(t_file *file, char **line)
     t_buf *tmp;
     int len;
 
-    if ((len = fillbuf(file, (t = file->buf))) <= 0)
+	t = file->buf;
+    if ((len = fillbuf(file, t)) <= 0)
         return (len);
     if (!(*line = (char*)malloc(len)))
         return (-1);
-    s = *line;
+	s = *line;
+	s[len-1] = '\0';
     while ((tmp = t->next))
     {
         ft_memcpy(s, t->str, t->len);
@@ -95,7 +101,7 @@ int readbuf(t_file *file, char **line)
         t = tmp;
     }
     ft_memcpy(s, t->str, len - 1);
-    *(s + len - 1) = '\0';
+//    *(s + len - 1) = '\0';
     t->len = t->len > len ? t->len - len : 0;
     if (t->len)
         ft_memcpy(t->str, t->str + len, t->len);
@@ -111,7 +117,9 @@ int		get_next_line(const int fd, char **line)
 //	t_buf  *t;
 	int r;
 
-    f = getfile(fd, &files);
+    if (fd < 0)
+		return (-1);
+	f = getfile(fd, &files);
     if ((r = readbuf(f, line)) <= 0)
     {
         /*

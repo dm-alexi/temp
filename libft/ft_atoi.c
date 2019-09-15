@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 21:11:50 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/14 23:33:10 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/15 13:14:40 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static long int		ft_strtol_static(const char *nptr, char **endptr, int base)
 	if (base < 0 || base == 1 || base > 36)
 		return (0);
 	while (*nptr == ' ' || *nptr == '\t' || *nptr == '\n' ||
-		*nptr == '\v' || *nptr == '\f' || *nptr == '\r');
+	*nptr == '\v' || *nptr == '\f' || *nptr == '\r')
 		++nptr;
 	if (*nptr == '+' || *nptr == '-')
 		neg = (*nptr++ == '-');

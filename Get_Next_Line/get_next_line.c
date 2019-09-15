@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/15 20:08:13 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/15 20:41:34 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,7 @@ int		readbuf(t_file *file, char **line)
 	}
 	ft_memcpy(s, t->str, len - 1);
 	t->len = t->len > len ? t->len - len : 0;
-	if (t->len)
-		ft_memcpy(t->str, t->str + len, t->len);
+	ft_memcpy(t->str, t->str + len, t->len);
 	file->buf = t;
 	return (1);
 }

@@ -13,21 +13,29 @@
 #include <stdlib.h>
 #include "libft.h"
 
+static int intlen(int n)
+{
+    int len;
+
+    len = 0;
+    while (n && ++len)
+        n /= 10;
+    return (len);
+}
+
 char	*ft_itoa(int n)
 {
 	char	*s;
 	int		len;
-	int		k;
+	int		sign;
 
 	if (!n)
 		return (ft_strdup("0"));
-	len = 0;
-	k = n;
-	while (k && ++len)
-		k /= 10;
-	if (!(s = (char*)malloc(len + 1 + (n < 0))))
+	len = intlen(n);
+	sign = (n < 0);
+	if (!(s = (char*)malloc(len + 1 + sign)))
 		return (NULL);
-	s[len + (n < 0)] = '\0';
+	s[len + sign] = '\0';
 	if (n < 0)
 	{
 		s[0] = '-';

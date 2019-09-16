@@ -11,13 +11,8 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-
-/*
-** Due to the task restrictions we don't have access to limits.h,
-** so we assume sizeof(int) == 4 && sizeof(long) == 8
-** as it agrees with our current UNIX environment.
-** Also, errno is not changed in case of overflow, for the same reason.
-*/
+#define LONGMAX (~0UL >> 1)
+#define LONGMIN (~0UL >> 1) + 1
 
 static int			is_valid(char c, int base)
 {
@@ -28,8 +23,6 @@ static int			is_valid(char c, int base)
 static long int		ft_strtol_process(const char *nptr, char **endptr,
 		int base, int neg)
 {
-	static const long int	longmax = 9223372036854775807;
-	static const long int	longmin = 0x8000000000000000;
 	long int				n;
 	char					c;
 
@@ -37,9 +30,9 @@ static long int		ft_strtol_process(const char *nptr, char **endptr,
 	while (is_valid((c = ft_toupper(*nptr)), base))
 	{
 		c = ft_isdigit(c) ? c - '0' : c - 'A' + 10;
-		if (n > (longmax - c) / base)
+		if (n > (LONGMAX - c) / base)
 		{
-			n = neg ? longmin : longmax;
+			n = neg ? LONGMIN : LONGMAX;
 			break ;
 		}
 		n = n * base + c;

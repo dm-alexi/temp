@@ -12,7 +12,7 @@
 
 #include "libft.h"
 #define LONGMAX (~0UL >> 1)
-#define LONGMIN (~0UL >> 1) + 1
+#define LONGMIN ((~0UL >> 1) + 1)
 
 static int			is_valid(char c, int base)
 {

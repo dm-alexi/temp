@@ -14,60 +14,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "get_next_line.h"
-#include "libft.h"
-
-t_file	*getfile(const int fd, t_file **files)
-{
-	t_file	*t;
-	t_file	*tmp;
-
-	t = *files;
-	if (t && t->fd <= fd)
-	{
-		while (t->next && t->next->fd <= fd)
-			t = t->next;
-		if (t->fd == fd)
-			return (t);
-	}
-	if (!(tmp = (t_file*)malloc(sizeof(t_file))) ||
-		!(tmp->buf = (t_buf*)malloc(sizeof(t_buf))))
-	{
-		free(tmp);
-		return (NULL);
-	}
-	tmp->next = !t || t->fd > fd ? t : t->next;
-	tmp->buf->next = NULL;
-	tmp->buf->len = 0;
-	tmp->fd = fd;
-	if (!t || t->fd > fd)
-		return ((*files = tmp));
-	return ((t->next = tmp));
-}
-
-void	delfile(const int fd, t_file **files)
-{
-	t_file	*t;
-	t_file	*tmp;
-	t_buf	*buf;
-
-	tmp = NULL;
-	t = *files;
-	if (t->fd == fd)
-		*files = t->next;
-	while (t->fd != fd)
-	{
-		tmp = t;
-		t = t->next;
-	}
-	if (tmp)
-		tmp->next = t->next;
-	while ((buf = t->buf))
-	{
-		t->buf = t->buf->next;
-		free(buf);
-	}
-	free(t);
-}
 
 int		fillbuf(const int fd, t_buf *buf)
 {
@@ -95,47 +41,88 @@ int		fillbuf(const int fd, t_buf *buf)
 	return (len + 1);
 }
 
-int		readbuf(t_file *file, char **line)
+int		readbuf(const int fd, t_file *f, char **line)
 {
 	char	*s;
-	t_buf	*t;
 	t_buf	*tmp;
 	int		len;
 
-	t = file->buf;
-	if ((len = fillbuf(file->fd, t)) <= 0)
+	if ((len = fillbuf(fd, f->arr[fd])) <= 0)
 		return (len);
 	if (!(*line = (char*)malloc(len)))
 		return (-1);
 	s = *line;
 	*(s + len - 1) = '\0';
-	while ((tmp = t->next))
+	while ((tmp = f->arr[fd]->next))
 	{
-		ft_memcpy(s, t->str, t->len);
-		s += t->len;
-		len -= t->len;
-		free(t);
-		t = tmp;
+		ft_memcpy(s, f->arr[fd]->str, f->arr[fd]->len);
+		s += f->arr[fd]->len;
+		len -= f->arr[fd]->len;
+		free(f->arr[fd]);
+		f->arr[fd] = tmp;
 	}
-	ft_memcpy(s, t->str, len - 1);
-	t->len = t->len > len ? t->len - len : 0;
-	ft_memcpy(t->str, t->str + len, t->len);
-	file->buf = t;
+	ft_memcpy(s, f->arr[fd]->str, len - 1);
+	f->arr[fd]->len = f->arr[fd]->len > len ? f->arr[fd]->len - len : 0;
+	ft_memcpy(f->arr[fd]->str, f->arr[fd]->str + len, f->arr[fd]->len);
 	return (1);
+}
+
+void delfile(int fd, t_file *f)
+{
+    t_buf *t;
+    t_buf **tmp;
+
+    while ((t = f->arr[fd]))
+    {
+        f->arr[fd] = f->arr[fd]->next;
+        free(t);
+    }
+    if (fd == f->len - 1)
+        while (fd >= 0 && !f->arr[fd])
+            --fd;
+    if (fd < 0)
+    {
+        free(f->arr);
+        f->len = 0;
+    }
+    else if ((tmp = ft_realloc(f->arr, f->len * sizeof(t_buf*), (fd + 1) * sizeof(t_buf*))))
+    {
+        f->arr = tmp;
+        f->len = fd + 1;
+    }
+}
+
+int expand(const int fd, t_file *f)
+{
+    size_t  size;
+    t_buf **tmp;
+
+    size = (fd + 1) * sizeof(t_buf*);
+    if (!(tmp = (t_buf**)ft_realloc(f->arr, f->len * sizeof(t_buf*), size)))
+        return (1);
+    ft_bzero(tmp + f->len, size - f->len * sizeof(t_buf*));
+    f->arr = tmp;
+    f->len = fd + 1;
+    return (0);
 }
 
 int		get_next_line(const int fd, char **line)
 {
-	static t_file	*files = NULL;
-	t_file			*f;
+	static t_file	f = {0, NULL};
 	int				r;
 
-	if (fd < 0)
-		return (-1);
-	f = getfile(fd, &files);
-	if ((r = readbuf(f, line)) <= 0)
+    if (fd < 0 || !line || (fd >= f.len && expand(fd, &f)))
+        return (-1);
+    if (!f.arr[fd])
+    {
+        if (!(f.arr[fd] = (t_buf*)malloc(sizeof(t_buf))))
+            return (-1);
+        f.arr[fd]->next = NULL;
+        f.arr[fd]->len = 0;
+    }
+	if ((r = readbuf(fd, &f, line)) <= 0)
 	{
-		delfile(fd, &files);
+		delfile(fd, &f);
 		return (r);
 	}
 	return (1);

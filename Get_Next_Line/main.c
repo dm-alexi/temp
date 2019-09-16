@@ -14,22 +14,35 @@ int main()
     while (get_next_line(fd, &s) > 0)
         printf("%s\n", s);*/
 /*
-    while ((l = get_next_line(fd, &s)) > 0 && i < 10)
+    while ((l = get_next_line(fd1, &s)) > 0 && i < 10)
     {
-        printf("%2d\t%d: %s\n", i++, l, s);
+        printf("%2d\t%d: %s\n", i, l, s);
+     ++i;
 		}*/
-    
+
+    printf("%d %d %d\n", fd, fd1, fd2);
+    printf("%s\n", get_next_line(fd2, &s) > 0 ? s : "no more data");
     printf("%s\n", get_next_line(fd, &s) > 0 ? s : "no more data");
-    printf("%s\n", get_next_line(fd1, &s) > 0 ? s : "no more data");
     printf("%s\n", get_next_line(fd, &s) > 0 ? s : "no more data");
     printf("%s\n", get_next_line(fd1, &s) > 0 ? s : "no more data");
     printf("%s\n", get_next_line(fd, &s) > 0 ? s : "no more data");
     printf("%s\n", get_next_line(fd2, &s) > 0 ? s : "no more data");
     printf("%s\n", get_next_line(fd2, &s) > 0 ? s : "no more data");
-    printf("%s\n", get_next_line(fd, &s) > 0 ? s : "no more data");
     printf("%s\n", get_next_line(fd, &s) > 0 ? s : "no more data");
     printf("%s\n", get_next_line(fd, &s) > 0 ? s : "no more data");
 	printf("%s\n", get_next_line(fd1, &s) > 0 ? s : "no more data");
-	printf("%s\n", get_next_line(fd, &s) > 0 ? s : "no more data");
+	printf("%s\n", get_next_line(fd1, &s) > 0 ? s : "no more data");
+	printf("%s\n", get_next_line(fd1, &s) > 0 ? s : "no more data");
+	printf("%s\n", get_next_line(fd2, &s) > 0 ? s : "no more data");
+	printf("%s\n", get_next_line(fd2, &s) > 0 ? s : "no more data");
+    printf("%s\n", get_next_line(fd2, &s) > 0 ? s : "no more data");
+    printf("%s\n", get_next_line(fd2, &s) > 0 ? s : "no more data");
+    printf("%s\n", get_next_line(fd2, &s) > 0 ? s : "no more data");
+    printf("%s\n", get_next_line(fd1, &s) > 0 ? s : "no more data");
+    printf("%s\n", get_next_line(fd1, &s) > 0 ? s : "no more data");
+    printf("%s\n", get_next_line(fd, &s) > 0 ? s : "no more data");
+    printf("%s\n", get_next_line(fd, &s) > 0 ? s : "no more data");
+    printf("%s\n", get_next_line(fd, &s) > 0 ? s : "no more data");
+    printf("%s\n", get_next_line(fd2, &s) > 0 ? s : "no more data");
     return 0;
 }

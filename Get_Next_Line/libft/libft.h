@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 22:14:21 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/12 13:53:22 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/15 22:15:43 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void			ft_bzero(void *ptr, size_t num);
 void			*ft_memcpy(void *dst, const void *src, size_t num);
 void			*ft_memccpy(void *dst, const void *src, int val, size_t num);
 void			*ft_memmove(void *dst, const void *src, size_t num);
-void			*ft_memchr(void *ptr, int val, size_t num);
+void			*ft_memchr(const void *ptr, int val, size_t num);
 int				ft_memcmp(const void *ptr1, const void *ptr2, size_t num);
 size_t			ft_strlen(const char *str);
 char			*ft_strdup(const char *src);
@@ -45,7 +45,7 @@ char			*ft_strstr(const char *s1, const char *s2);
 char			*ft_strnstr(const char *s1, const char *s2, size_t len);
 int				ft_strcmp(const char *str1, const char *str2);
 int				ft_strncmp(const char *s1, const char *s2, size_t num);
-int				ft_atoi(char *str);
+int				ft_atoi(const char *str);
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);
 int				ft_isalnum(int c);
@@ -84,7 +84,7 @@ void			ft_putendl_fd(char const *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
 
 /*
-				**list functions
+				**list processing functions
 */
 
 t_list			*ft_lstnew(void const *content, size_t content_size);

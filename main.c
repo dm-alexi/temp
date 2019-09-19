@@ -5,6 +5,9 @@
 #include <limits.h>
 #include "libft.h"
 
+#define LONGMAX ((long)(~0UL >> 1))
+#define LONGMIN ((long)((~0UL >> 1) + 1))
+
 void plusone(char *s) { ++*s; }
 void plusodd(unsigned int i, char *s) { *s += i % 2; }
 
@@ -21,6 +24,8 @@ void print(t_list *elem)
 int main()
 {
 
+	printf("%li\n", LONGMAX);
+    printf("%li\n", LONGMIN);
 	printf("%d\n", ft_atoi("0"));
     printf("%d\n", ft_atoi("20"));
     printf("%d\n", ft_atoi("25389"));

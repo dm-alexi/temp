@@ -6,13 +6,13 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 22:43:57 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/12 16:59:57 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/19 11:40:27 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#define LONGMAX (~0UL >> 1)
-#define LONGMIN ((~0UL >> 1) + 1)
+#define LONGMAX ((long)(~0UL >> 1))
+#define LONGMIN ((long)((~0UL >> 1) + 1))
 
 static int			is_valid(char c, int base)
 {

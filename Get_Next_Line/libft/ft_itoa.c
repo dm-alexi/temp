@@ -6,36 +6,46 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 21:18:19 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/10 20:08:58 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/19 11:34:48 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-char	*ft_itoa(int n)
+static int	intlen(int n)
+{
+	int		len;
+
+	len = 0;
+	while (n && ++len)
+		n /= 10;
+	return (len);
+}
+
+char		*ft_itoa(int n)
 {
 	char	*s;
-	char	tmp[21];
+	int		len;
 	int		sign;
 
-	sign = 0;
-	s = tmp + 20;
-	*s-- = '\0';
-	if (n == 0)
-		*s-- = '0';
-	else if (n < 0)
+	if (!n)
+		return (ft_strdup("0"));
+	len = intlen(n);
+	sign = (n < 0);
+	if (!(s = (char*)malloc(len + 1 + sign)))
+		return (NULL);
+	s[len + sign] = '\0';
+	if (n < 0)
 	{
-		sign = 1;
-		*s-- = -(n % 10) + '0';
+		s[0] = '-';
+		s[len] = -(n % 10) + '0';
 		n = -(n / 10);
 	}
 	while (n)
 	{
-		*s-- = n % 10 + '0';
+		s[--len] = n % 10 + '0';
 		n /= 10;
 	}
-	if (sign)
-		*s-- = '-';
-	return (ft_strdup(s + 1));
+	return (s);
 }

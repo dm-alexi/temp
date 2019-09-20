@@ -14,6 +14,13 @@
 #include <stdlib.h>
 #include "get_next_line.h"
 
+/*
+** Fills the buffer by repeatedly reading BUFF_SIZE bytes from a give file,
+** stops at encountering '\n'. Returns the size of a string needed to contain
+** the resulting line, including the terminating '\0'. In case of a read() error
+** returns -1. If the end of file is reached and no data is read, returns 0.
+*/
+
 int		fillbuf(const int fd, t_buf *buf)
 {
 	int		len;
@@ -39,6 +46,12 @@ int		fillbuf(const int fd, t_buf *buf)
 		len += s - t->str;
 	return (len + 1);
 }
+
+/*
+** Calls fillbuf(), allocates memory for a line, copies the line and rearranges
+** the buffer. If read() or malloc() error occurs, returns -1. If the buffer
+** is empty and the end of file is reached, returns 0.
+*/
 
 int		readbuf(const int fd, t_file *f, char **line)
 {
@@ -66,6 +79,11 @@ int		readbuf(const int fd, t_file *f, char **line)
 	return (1);
 }
 
+/*
+** Deletes a file descriptor from the array f->arr. If possible, reallocates
+** the array to a minimum size necessary. 
+*/
+
 void	delfile(int fd, t_file *f)
 {
 	t_buf	*t;
@@ -91,6 +109,11 @@ void	delfile(int fd, t_file *f)
 		f->len = fd + 1;
 	}
 }
+
+/*
+** Expands the array f->arr to include newly added file descriptor.
+** Upon successful execution returns 0, otherwise 1.
+*/
 
 int		expand(const int fd, t_file *f)
 {

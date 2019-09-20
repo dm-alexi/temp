@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/07 11:33:31 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/07 11:35:45 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/09/05 21:11:50 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/15 18:34:39 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
 
-void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
+#ifndef FILLIT_H
+# define FILLIT_H
+
+typedef struct	s_node
 {
-	t_list	*t;
-	t_list	*tmp;
+	struct s_node	*u;
+	struct s_node	*d;
+	struct s_node	*l;
+	struct s_node	*r;
+	struct s_col	*col;
+}				node;
 
-	if (!alst || !del)
-		return ;
-	t = *alst;
-	while (t)
-	{
-		tmp = t->next;
-		del(t->content, t->content_size);
-		free(t);
-		t = tmp;
-	}
-	*alst = NULL;
-}
+typedef struct	s_col
+{
+	int		size;
+	struct s_node	head;
+	struct s_col	*l;
+	struct s_col	*r;
+}				column;
+
+#endif

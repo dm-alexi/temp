@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/19 13:30:18 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/21 17:28:48 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int		readbuf(const int fd, t_file *f, char **line)
 
 /*
 ** Deletes a file descriptor from the array f->arr. If possible, reallocates
-** the array to a minimum size necessary. 
+** the array to a minimum size necessary.
 */
 
 void	delfile(int fd, t_file *f)
@@ -100,6 +100,7 @@ void	delfile(int fd, t_file *f)
 	if (fd < 0)
 	{
 		free(f->arr);
+		f->arr = NULL;
 		f->len = 0;
 	}
 	else if ((tmp = ft_realloc(f->arr, f->len * sizeof(t_buf*),

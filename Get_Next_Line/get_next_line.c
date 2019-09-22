@@ -6,7 +6,7 @@
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/21 17:28:48 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/22 19:06:42 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,28 @@ int		fillbuf(const int fd, t_buf *buf)
 {
 	int		len;
 	char	*s;
-	t_buf	*t;
 
-	if (!buf->len && (buf->len = read(fd, buf->str, BUFF_SIZE)) <= 0)
-		return (buf->len);
-	len = 0;
-	t = buf;
-	while (!(s = (char*)ft_memchr(t->str, '\n', t->len)))
+	if (!buf->len)
 	{
-		len += t->len;
-		t->next = (t_buf*)malloc(sizeof(t_buf));
-		t = t->next;
-		t->next = NULL;
-		if ((t->len = read(fd, t->str, BUFF_SIZE)) == -1)
+		buf->offset = buf->str;
+		if ((buf->len = read(fd, buf->str, BUFF_SIZE)) <= 0)
+			return (buf->len);
+	}
+	len = 0;
+	while (!(s = (char*)ft_memchr(buf->offset, '\n', buf->len)))
+	{
+		len += buf->len;
+		buf->next = (t_buf*)malloc(sizeof(t_buf));
+		buf = buf->next;
+		buf->next = NULL;
+		buf->offset = buf->str;
+		if ((buf->len = read(fd, buf->str, BUFF_SIZE)) == -1)
 			return (-1);
-		else if (t->len == 0)
+		else if (buf->len == 0)
 			break ;
 	}
 	if (s)
-		len += s - t->str;
+		len += s - buf->offset;
 	return (len + 1);
 }
 
@@ -67,15 +70,15 @@ int		readbuf(const int fd, t_file *f, char **line)
 	*(s + len - 1) = '\0';
 	while ((tmp = f->arr[fd]->next))
 	{
-		ft_memcpy(s, f->arr[fd]->str, f->arr[fd]->len);
+		ft_memcpy(s, f->arr[fd]->offset, f->arr[fd]->len);
 		s += f->arr[fd]->len;
 		len -= f->arr[fd]->len;
 		free(f->arr[fd]);
 		f->arr[fd] = tmp;
 	}
-	ft_memcpy(s, f->arr[fd]->str, len - 1);
+	ft_memcpy(s, f->arr[fd]->offset, len - 1);
+	f->arr[fd]->offset += len;
 	f->arr[fd]->len = f->arr[fd]->len > len ? f->arr[fd]->len - len : 0;
-	ft_memcpy(f->arr[fd]->str, f->arr[fd]->str + len, f->arr[fd]->len);
 	return (1);
 }
 
@@ -132,7 +135,7 @@ int		expand(const int fd, t_file *f)
 
 int		get_next_line(const int fd, char **line)
 {
-	static t_file	f = {0, NULL};
+	static t_file	f;
 	int				r;
 
 	if (fd < 0 || !line || (fd >= f.len && expand(fd, &f)))
@@ -143,6 +146,7 @@ int		get_next_line(const int fd, char **line)
 			return (-1);
 		f.arr[fd]->next = NULL;
 		f.arr[fd]->len = 0;
+		f.arr[fd]->offset = f.arr[fd]->str;
 	}
 	if ((r = readbuf(fd, &f, line)) <= 0)
 	{

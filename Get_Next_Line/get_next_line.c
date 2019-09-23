@@ -83,7 +83,7 @@ int		readbuf(const int fd, t_file *f, char **line)
 }
 
 /*
-** Deletes a file descriptor from the array f->arr. If possible, reallocates
+** Deletes a file descriptor from the array f.arr. If possible, reallocates
 ** the array to a minimum size necessary.
 */
 
@@ -105,19 +105,16 @@ void	delfile(int fd, t_file *f)
         {
             free(f->arr);
             f->arr = NULL;
-            f->len = 0;
         }
         else if ((tmp = ft_realloc(f->arr, f->len * sizeof(t_buf*),
             (fd + 1) * sizeof(t_buf*))))
-        {
             f->arr = tmp;
-            f->len = fd + 1;
-        }
+        f->len = fd + 1;
     }
 }
 
 /*
-** Expands the array f->arr to include newly added file descriptor.
+** Expands the array f.arr to include newly added file descriptor.
 ** Upon successful execution returns 0, otherwise 1.
 */
 

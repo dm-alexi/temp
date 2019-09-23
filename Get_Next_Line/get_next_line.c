@@ -98,20 +98,22 @@ void	delfile(int fd, t_file *f)
 		free(t);
 	}
 	if (fd == f->len - 1)
-		while (fd >= 0 && !f->arr[fd])
+    {
+        while (fd >= 0 && !f->arr[fd])
 			--fd;
-	if (fd < 0)
-	{
-		free(f->arr);
-		f->arr = NULL;
-		f->len = 0;
-	}
-	else if ((tmp = ft_realloc(f->arr, f->len * sizeof(t_buf*),
-		(fd + 1) * sizeof(t_buf*))))
-	{
-		f->arr = tmp;
-		f->len = fd + 1;
-	}
+        if (fd < 0)
+        {
+            free(f->arr);
+            f->arr = NULL;
+            f->len = 0;
+        }
+        else if ((tmp = ft_realloc(f->arr, f->len * sizeof(t_buf*),
+            (fd + 1) * sizeof(t_buf*))))
+        {
+            f->arr = tmp;
+            f->len = fd + 1;
+        }
+    }
 }
 
 /*
@@ -149,9 +151,6 @@ int		get_next_line(const int fd, char **line)
 		f.arr[fd]->offset = f.arr[fd]->str;
 	}
 	if ((r = readbuf(fd, &f, line)) <= 0)
-	{
 		delfile(fd, &f);
-		return (r);
-	}
-	return (1);
+    return (r);
 }

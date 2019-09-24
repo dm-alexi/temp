@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,34 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
-#ifndef FILLIT_H
-# define FILLIT_H
-# include <stdlib.h>
-
-typedef struct	s_node
+int					ft_atoi(const char *str)
 {
-	struct s_node	*u;
-	struct s_node	*d;
-	struct s_node	*l;
-	struct s_node	*r;
-	struct s_col	*column;
-}				node;
-
-typedef struct	s_col
-{
-	int				size;
-	struct s_col	*prev;
-	struct s_col	*next;
-	struct s_node	head;
-	char			name[5];
-}				col;
-
-col		*make_columns(int n, int sq);
-int		**get_rows(int num, int type, int sq);
-node	*new_node(col *column);
-node	*add_node(col *column, node *start);
-node	*add_row(col *col_arr, int **row, int n);
-int		**clear_rows(int **arr);
-
-#endif
+	return ((int)ft_strtol(str, (char **)NULL, 10));
+}

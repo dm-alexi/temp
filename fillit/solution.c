@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   solution.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/25 19:21:58 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/25 19:22:00 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
 
 static void		cover(col *c)
@@ -91,10 +103,6 @@ node	**solve(col *arr, int n)
 		--k;
 		t = t->d;
 	}
-	//cover(current);
-	//cover_all(t);
-	//uncover_all(t);
-	//uncover(current);
 	for (int i = 1; i <= n + 16; ++i)
 		printf("%d %s %d\n", i, arr[i].name, arr[i].size);
 	return (NULL);

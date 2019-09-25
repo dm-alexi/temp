@@ -30,17 +30,17 @@ node	*add_node(col *column, node *start)
         column->head.u = c;
         c->d = &(column->head);
         c->column = column;
-        start->l->r = c;
-        c->l = start->l->r;
-        start->l = c;
+        c->l = start->l;
         c->r = start;
+        start->l->r = c;
+        start->l = c;
         column->size++;
 	}
 	return (c);
 }
 
 //calls for optimization
-node	*add_row(col *col_arr, int **rows, int n)
+node	*add_row(col *col_arr, int **rows)
 {
 	node	*start;
 
@@ -50,7 +50,7 @@ node	*add_row(col *col_arr, int **rows, int n)
 		if (!(start = new_node(&(col_arr[(*r)[0]]))))
 			exit(1);
 		for (int i = 1; i < 5; ++i)
-			if (!(add_node(&(col_arr[(*r)[i] + n]), start)))
+			if (!(add_node(&(col_arr[(*r)[i]]), start)))
 				exit(1);
 	}
 	return (start);

@@ -33,28 +33,27 @@ static int	*arr_fill(int n, int num, int t, int sq)
 
 	if (!(res = (int*)malloc(sizeof(int) * 5)))
 		return (NULL);
-	res[0] = num;
 	i = 1;
 	if (t <= 13)
-		res[i++] = n;
+		res[i++] = n + num + 1;
 	if (!(t == 1 || t == 5 || t == 7 || t == 10 || t == 12 || t == 18))
-		res[i++] = n + 1;
+		res[i++] = n + 1 + num + 1;
 	if (t == 2 || t == 4 || t == 6 || t == 8 || t == 15 || t == 18)
-		res[i++] = n + 2;
+		res[i++] = n + 2 + num + 1;
 	if (!(t == 2 || t == 6 || t == 8 || t == 11 || t == 13 || t == 19))
-		res[i++] = n + sq;
+		res[i++] = n + sq + num + 1;
 	 if (t > 4 && t != 7 && t != 8)
-		res[i++] = n + sq + 1;
+		res[i++] = n + sq + 1 + num + 1;
 	if (t == 8 || t == 11 || t == 12 || t == 17 || t == 18)
-		res[i++] = n + sq + 2;
+		res[i++] = n + sq + 2 + num + 1;
 	if (t == 1 || t == 3 || t == 5 || t == 7 || t == 14 || t == 19)
-		res[i++] = n + 2 * sq;
+		res[i++] = n + 2 * sq + num + 1;
 	if (t == 7 || t == 10 || t == 13 || t == 16 || t == 19)
-		res[i++] = n + 2 * sq + 1;
+		res[i++] = n + 2 * sq + 1 + num + 1;
 	if (t == 1)
-		res[i] = n + 3 * sq;
+		res[i] = n + 3 * sq + num + 1;
 	if (t == 2)
-		res[i] = n + 3;
+		res[i] = n + 3 + num + 1;
 	return (res);
 }
 
@@ -69,7 +68,7 @@ int			**clear_rows(int **arr)
 	return (NULL);
 }
 
-int			**get_rows(int num, int type, int sq)
+int			**get_rows(int ord, int num, int type, int sq)
 {
 	int		n;
 	int		i;
@@ -85,11 +84,14 @@ int			**get_rows(int num, int type, int sq)
 	while (i < sq)
 	{
 		j = 0;
-		while (j <= i)
+		while (j < sq)
 		{
-			if (valid(i - j, j, type, sq))
-				if (!(arr[k++] = arr_fill(((i - j) * sq) + j, num, type, sq)))
+			if (valid(i, j, type, sq))
+			{
+				if (!(arr[k] = arr_fill(i * sq + j, num, type, sq)))
 					exit(1);
+				arr[k++][0] = ord;
+			}
 			++j;
 		}
 		++i;

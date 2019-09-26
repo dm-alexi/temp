@@ -1,7 +1,7 @@
 NAME = fillit
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
-HEAD = 
+HEAD = fillit.h
 SRC = 
 OBJ = $(SRC:.c=.o)
 

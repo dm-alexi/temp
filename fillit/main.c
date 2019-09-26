@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "fillit.h"
 
-int main()
+int		main(int ac, char **av)
 {
 	int		sq;
 	int		n;
@@ -45,13 +45,14 @@ int main()
 		printf("\n");
 	}*/
 	res = solve(col_arr, n);
+	/*
 	for (int i = 0; i < n; ++i)
 	{
 		for (node *j = res[i]->r; j != res[i]; j = j->r)
-			printf("%3d ", j->column - col_arr);
+			printf("%3ld ", j->column - col_arr);
 		printf("\n");
-	}
-
+	}*/
+	print_result(res, n, sq, col_arr);
 
     return 0;
 }

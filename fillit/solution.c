@@ -103,7 +103,7 @@ node	**solve(col *arr, int n)
 		--k;
 		t = t->d;
 	}
-	for (int i = 1; i <= n + 16; ++i)
-		printf("%d %s %d\n", i, arr[i].name, arr[i].size);
+	//for (int i = 1; i <= n + 16; ++i)
+	//	printf("%d %s %d\n", i, arr[i].name, arr[i].size);
 	return (NULL);
 }

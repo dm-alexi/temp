@@ -13,7 +13,7 @@
 
 #ifndef FILLIT_H
 # define FILLIT_H
-# include <stdlib.h>
+# include "libft/libft.h"
 
 typedef struct	s_node
 {
@@ -35,10 +35,9 @@ typedef struct	s_col
 
 col		*make_columns(int n, int sq);
 int		**get_rows(int ord, int num, int type, int sq);
-node	*new_node(col *column);
-node	*add_node(col *column, node *start);
 node	*add_row(col *col_arr, int **row);
 int		**clear_rows(int **arr);
 node	**solve(col *arr, int n);
+void    print_result(node **res, int n, int sq, col *root);
 
 #endif

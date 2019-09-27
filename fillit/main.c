@@ -28,13 +28,13 @@ int		main(int ac, char **av)
     /*
     for (int i = 0; i <= n + sq * sq; ++i)
 		printf("%s ", col_arr[i].name);*/
-	rows = get_rows(1, n, 51, sq);
+	rows = get_rows(2, n, 51, sq);
 	add_row(col_arr, rows);
 	clear_rows(rows);
-	rows = get_rows(2, n, 785, sq);
+	rows = get_rows(3, n, 785, sq);
 	add_row(col_arr, rows);
 	clear_rows(rows);
-	rows = get_rows(3, n, 306, sq);
+	rows = get_rows(1, n, 306, sq);
 	add_row(col_arr, rows);
 	clear_rows(rows);
 	/*

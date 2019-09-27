@@ -74,7 +74,6 @@ int			**get_rows(int ord, int num, int type, int sq)
 {
 	int		n;
 	int		i;
-	int		j;
 	int		k;
 	int		**arr;
 
@@ -83,18 +82,13 @@ int			**get_rows(int ord, int num, int type, int sq)
 		exit(1);
 	k = 0;
 	i = 0;
-	while (i < sq)
+	while (i < sq * sq)
 	{
-		j = 0;
-		while (j < sq)
+		if (valid(i / sq, i % sq, type, sq))
 		{
-			if (valid(i, j, type, sq))
-			{
-				if (!(arr[k] = arr_fill(i * sq + j, num, type, sq)))
-					exit(1);
-				arr[k++][0] = ord;
-			}
-			++j;
+			if (!(arr[k] = arr_fill(i, num, type, sq)))
+				exit(1);
+			arr[k++][0] = ord;
 		}
 		++i;
 	}

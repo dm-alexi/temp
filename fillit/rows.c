@@ -15,9 +15,9 @@
 // magic const here
 static int	count_positions(int type, int sq)
 {
-	if (type <= 2)
+	if (type == 15 || type == 4369)
 		return (sq * (sq - 3) + 1);
-	if (type == 9)
+	if (type == 51)
 		return ((sq - 1) * (sq - 1) + 1);
 	return ((sq - 1) * (sq - 2) + 1);
 }
@@ -25,47 +25,37 @@ static int	count_positions(int type, int sq)
 // magic const here
 static int	valid(int i, int j, int type, int sq)
 {
-	if (type == 1)
+	if (type == 15)
 		return (i <= sq - 4);
-	if (type == 2)
+	if (type == 4369)
 		return (j <= sq - 4);
-    if (type == 9)
+    if (type == 51)
 		return (i <= sq - 2 && j <= sq - 2);
-	if (type == 3 || type == 5 || type == 7 || type == 10 || type == 13 ||
-		type == 14 || type == 16 || type == 19)
-		return (i <= sq - 3 && j <= sq - 2);
-	return (i <= sq - 2 && j <= sq - 3);
+	if (type < 256)
+		return (i <= sq - 2 && j <= sq - 3);
+	return (i <= sq - 3 && j <= sq - 2);
 }
 
 // magic const here
-static int	*arr_fill(int n, int num, int t, int sq)
+static int	*arr_fill(int n, int num, int type, int sq)
 {
 	int		*res;
 	int		i;
+	int		j;
+	int		degree;
 
 	if (!(res = (int*)malloc(sizeof(int) * 5)))
 		return (NULL);
 	i = 1;
-	if (t <= 13)
-		res[i++] = n + num + 1;
-	if (!(t == 1 || t == 5 || t == 7 || t == 10 || t == 12 || t == 18))
-		res[i++] = n + 1 + num + 1;
-	if (t == 2 || t == 4 || t == 6 || t == 8 || t == 15 || t == 18)
-		res[i++] = n + 2 + num + 1;
-	if (!(t == 2 || t == 6 || t == 8 || t == 11 || t == 13 || t == 19))
-		res[i++] = n + sq + num + 1;
-	 if (t > 4 && t != 7 && t != 8)
-		res[i++] = n + sq + 1 + num + 1;
-	if (t == 8 || t == 11 || t == 12 || t == 17 || t == 18)
-		res[i++] = n + sq + 2 + num + 1;
-	if (t == 1 || t == 3 || t == 5 || t == 7 || t == 14 || t == 19)
-		res[i++] = n + 2 * sq + num + 1;
-	if (t == 7 || t == 10 || t == 13 || t == 16 || t == 19)
-		res[i++] = n + 2 * sq + 1 + num + 1;
-	if (t == 1)
-		res[i] = n + 3 * sq + num + 1;
-	if (t == 2)
-		res[i] = n + 3 + num + 1;
+	j = 1;
+	degree = 0;
+	while (degree < 13)
+	{
+		if (type & j)
+            res[i++] = n + degree % 4 + sq * (degree / 4) + num + 1;
+		++degree;
+		j <<= 1;
+	}
 	return (res);
 }
 

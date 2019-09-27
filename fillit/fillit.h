@@ -30,7 +30,7 @@ typedef struct	s_col
 	struct s_col	*prev;
 	struct s_col	*next;
 	struct s_node	head;
-	char			name[5];
+	int				order;
 }				col;
 
 col		*make_columns(int n, int sq);
@@ -39,5 +39,6 @@ node	*add_row(col *col_arr, int **row);
 int		**clear_rows(int **arr);
 node	**solve(col *arr, int n);
 void    print_result(node **res, int n, int sq, col *root);
+int     *get_figures(char *s);
 
 #endif

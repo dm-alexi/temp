@@ -23,7 +23,7 @@ col				*make_columns(int n, int sq)
 	i = 0;
 	while (++i <= n)
 	{
-		arr[i].order = i;
+		arr[i].order = i - 1;
 		arr[i].head.u = &(arr[i].head);
 		arr[i].head.d = &(arr[i].head);
 		arr[i].prev = arr + i - 1;
@@ -37,7 +37,7 @@ col				*make_columns(int n, int sq)
 		arr[i].head.d = &(arr[i].head);
 		arr[i].prev = arr + i;
 		arr[i].next = arr + i;
-		arr[i].order = i;
+		arr[i].order = i - 1;
 	}
 	return (arr);
 }

@@ -23,13 +23,11 @@ static node		*new_node(col *column)
 		column->head.u = c;
 		c->d = &(column->head);
 		c->column = column;
-		c->l = c;
-		c->r = c;
 	}
 	return (c);
 }
 
-static node		*add_node(col *column, node *start)
+static node		*add_node(col *column, node *t)
 {
 	node	*c;
 
@@ -40,19 +38,17 @@ static node		*add_node(col *column, node *start)
 		column->head.u = c;
 		c->d = &(column->head);
 		c->column = column;
-		c->l = start->l;
-		c->r = start;
-		start->l->r = c;
-		start->l = c;
+		c->l = t;
+		t->r = c;
 		column->size++;
 	}
 	return (c);
 }
 
-//calls for optimization
 node			*add_row(col *col_arr, int **rows)
 {
 	node	*start;
+	node	*t;
 	int		**r;
 
 	r = rows;
@@ -61,9 +57,12 @@ node			*add_row(col *col_arr, int **rows)
 		col_arr[(*r)[0]].size++;
 		if (!(start = new_node(&(col_arr[(*r)[0]]))))
 			exit(1);
+		t = start;
 		for (int i = 1; i < 5; ++i)
-			if (!(add_node(&(col_arr[(*r)[i]]), start)))
+			if (!(t = add_node(&(col_arr[(*r)[i]]), t)))
 				exit(1);
+		start->l = t;
+		t->r = start;
 		++r;
 	}
 	return (start);

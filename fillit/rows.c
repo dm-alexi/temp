@@ -23,20 +23,19 @@ static int	count_positions(int type, int sq)
 }
 
 // magic const here
-static int	valid(int i, int j, int type, int sq)
+static int	valid(int i, int type, int sq)
 {
 	if (type == 15)
-		return (i <= sq - 4);
+		return (i / sq <= sq - 4);
 	if (type == 4369)
-		return (j <= sq - 4);
+		return (i % sq <= sq - 4);
     if (type == 51)
-		return (i <= sq - 2 && j <= sq - 2);
+		return (i / sq <= sq - 2 && i % sq <= sq - 2);
 	if (type < 256)
-		return (i <= sq - 2 && j <= sq - 3);
-	return (i <= sq - 3 && j <= sq - 2);
+		return (i / sq <= sq - 2 && i % sq <= sq - 3);
+	return (i / sq <= sq - 3 && i % sq <= sq - 2);
 }
 
-// magic const here
 static int	*arr_fill(int n, int num, int type, int sq)
 {
 	int		*res;
@@ -59,7 +58,7 @@ static int	*arr_fill(int n, int num, int type, int sq)
 	return (res);
 }
 
-int			**clear_rows(int **arr)
+void			clear_rows(int **arr)
 {
     int		**tmp;
 
@@ -67,7 +66,6 @@ int			**clear_rows(int **arr)
     while (*tmp)
 		free(*tmp++);
 	free(arr);
-	return (NULL);
 }
 
 int			**get_rows(int ord, int num, int type, int sq)
@@ -84,7 +82,7 @@ int			**get_rows(int ord, int num, int type, int sq)
 	i = 0;
 	while (i < sq * sq)
 	{
-		if (valid(i / sq, i % sq, type, sq))
+		if (valid(i, type, sq))
 		{
 			if (!(arr[k] = arr_fill(i, num, type, sq)))
 				exit(1);

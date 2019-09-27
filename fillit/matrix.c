@@ -16,7 +16,7 @@ void    print_result(node **res, int n, int sq, col *root)
         j = res[i]->r;
         while (j != res[i])
         {
-            k = j->column - root - n - 1;
+            k = j->column->order;
             s[k + k / sq] = 'A' + i;
             j = j->r;
         }

@@ -12,7 +12,6 @@
 
 #include "fillit.h"
 
-// magic const here
 static int	count_positions(int type, int sq)
 {
 	if (type == 15 || type == 4369)
@@ -22,7 +21,6 @@ static int	count_positions(int type, int sq)
 	return ((sq - 1) * (sq - 2) + 1);
 }
 
-// magic const here
 static int	valid(int i, int type, int sq)
 {
 	if (type == 15)

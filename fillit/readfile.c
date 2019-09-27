@@ -50,6 +50,7 @@ int     get_figure(int fd)
             return (-1);
 		++i;
     }
+    //printf("ok");
     return (moveupleft(res));
 }
 

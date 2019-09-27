@@ -55,8 +55,9 @@ int		main(int ac, char **av)
 	print_result(res, n, sq, col_arr);
 
 	int *t = get_figures("test1.txt");
-	while (*t)
-		printf("%d ", *t++);
+	if (t)
+		while (*t)
+			printf("%d ", *t++);
 /*
 	FILE *f = fopen("test4", "w");
 	fprintf(f, "##..\n.#..\n.#..\n....\n");

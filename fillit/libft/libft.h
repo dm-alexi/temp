@@ -111,5 +111,6 @@ void			ft_lstadd_sorted(t_list **alst, t_list *new,
 					int (*compar)(const void*, const void*));
 void			ft_lstsort(t_list **alst,
 					int (*compar)(const void*, const void*));
+int             ft_isqrt(int nb);
 
 #endif

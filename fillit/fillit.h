@@ -33,12 +33,12 @@ typedef struct	s_col
 	int				order;
 }				col;
 
-col		*make_columns(int n, int sq);
 int		**get_rows(int ord, int num, int type, int sq);
 node	*add_row(col *col_arr, int **row);
-void	clear_rows(int **arr);
 node	**solve(col *arr, int n);
-void    print_result(node **res, int n, int sq, col *root);
+void    print_result(node **res, int n, int sq);
 int     *get_figures(char *s);
+void    del_columns(col *arr, int n);
+col     *make_matrix(int *figures, int n, int sq);
 
 #endif

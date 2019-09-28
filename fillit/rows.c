@@ -24,9 +24,9 @@ static int	count_positions(int type, int sq)
 static int	valid(int i, int type, int sq)
 {
 	if (type == 15)
-		return (i / sq <= sq - 4);
-	if (type == 4369)
 		return (i % sq <= sq - 4);
+	if (type == 4369)
+		return (i / sq <= sq - 4);
     if (type == 51)
 		return (i / sq <= sq - 2 && i % sq <= sq - 2);
 	if (type < 256)
@@ -54,16 +54,6 @@ static int	*arr_fill(int n, int num, int type, int sq)
 		j <<= 1;
 	}
 	return (res);
-}
-
-void			clear_rows(int **arr)
-{
-    int		**tmp;
-
-    tmp = arr;
-    while (*tmp)
-		free(*tmp++);
-	free(arr);
 }
 
 int			**get_rows(int ord, int num, int type, int sq)

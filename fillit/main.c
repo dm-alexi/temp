@@ -11,53 +11,35 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <stdlib.h>
 #include "fillit.h"
 
 int		main(int ac, char **av)
 {
 	int		sq;
 	int		n;
+	int     figures[] = {4369, 15, 71, 54, 51, 99, 547, 39, 4369, 15, 71, 54, 51, 99, 547, 39, 39};
 	col		*col_arr;
-	int		**rows;
 	node	**res;
 
-	n = 3;
-	sq = 4;
-    col_arr = make_columns(n, sq);
-    /*
-    for (int i = 0; i <= n + sq * sq; ++i)
-		printf("%s ", col_arr[i].name);*/
-	rows = get_rows(1, n, 51, sq);
-	add_row(col_arr, rows);
-	clear_rows(rows);
-	rows = get_rows(3, n, 785, sq);
-	add_row(col_arr, rows);
-	clear_rows(rows);
-	rows = get_rows(2, n, 306, sq);
-	add_row(col_arr, rows);
-	clear_rows(rows);
+	n = 17;
+	sq = ft_isqrt(4 * n);
+    if (sq * sq < 4 * n)
+        ++sq;
+    col_arr = make_matrix(figures, n, sq);
+    printf("matrix built\n");
+	while (!(res = solve(col_arr, n)))
+    {
+        del_columns(col_arr, n + sq * sq);
+        col_arr = make_matrix(figures, n, ++sq);
+        printf("Next try: %d x %d\n", sq);
+    }
+	print_result(res, n, sq);
+    del_columns(col_arr, n + sq * sq);
 	/*
-	for (int **r = rows; *r; ++r)
-	{
-		for (int i = 0; i < 5; ++i)
-			printf("%3d ", (*r)[i]);
-		printf("\n");
-	}*/
-	res = solve(col_arr, n);
-	/*
-	for (int i = 0; i < n; ++i)
-	{
-		for (node *j = res[i]->r; j != res[i]; j = j->r)
-			printf("%3ld ", j->column - col_arr);
-		printf("\n");
-	}*/
-	print_result(res, n, sq, col_arr);
-
 	int *t = get_figures("test1.txt");
 	if (t)
 		while (*t)
-			printf("%d ", *t++);
+			printf("%d ", *t++);*/
 /*
 	FILE *f = fopen("test4", "w");
 	fprintf(f, "##..\n.#..\n.#..\n....\n");

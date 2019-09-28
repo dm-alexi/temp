@@ -1,6 +1,6 @@
 #include "fillit.h"
 
-void    print_result(node **res, int n, int sq, col *root)
+void    print_result(node **res, int n, int sq)
 {
     char    *s;
     node    *j;

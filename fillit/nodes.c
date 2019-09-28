@@ -45,6 +45,16 @@ static node		*add_node(col *column, node *t)
 	return (c);
 }
 
+static void		clear_rows(int **arr)
+{
+    int		**tmp;
+
+    tmp = arr;
+    while (*tmp)
+		free(*tmp++);
+	free(arr);
+}
+
 node			*add_row(col *col_arr, int **rows)
 {
 	node	*start;
@@ -65,5 +75,6 @@ node			*add_row(col *col_arr, int **rows)
 		t->r = start;
 		++r;
 	}
+	clear_rows(rows);
 	return (start);
 }

@@ -2,7 +2,7 @@
 #include <fcntl.h>
 #include "fillit.h"
 
-int		moveupleft(int n)
+static int		moveupleft(int n)
 {
 	static const int	legal[19] = {15, 23, 39, 51, 54, 71, 99, 113, 114, 116,
 	275, 305, 306, 547, 561, 562, 785, 802, 4369};
@@ -19,7 +19,7 @@ int		moveupleft(int n)
 	return (-1);
 }
 
-int     get_figure(int fd)
+static int     get_figure(int fd)
 {
     char    s[21];
     int     r;

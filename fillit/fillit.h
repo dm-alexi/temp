@@ -37,7 +37,7 @@ int		**get_rows(int ord, int num, int type, int sq);
 node	*add_row(col *col_arr, int **row);
 node	**solve(col *arr, int n);
 void    print_result(node **res, int n, int sq);
-int     *get_figures(char *s);
+int     *get_figures(char *s, int *n);
 void    del_columns(col *arr, int n);
 col     *make_matrix(int *figures, int n, int sq);
 

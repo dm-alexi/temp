@@ -2,16 +2,16 @@ NAME = fillit
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
 HEAD = fillit.h
-SRC = 
+SRC = main.c columns.c nodes.c print.c readfile.c rows.c solution.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $^ $(FLAGS) -o $@
+	$(CC) $^ $(FLAGS) -o $@ -L libft -lft
 
 %.o: %.c $(HEAD)
-	$(CC) $< $(FLAGS) -o $@
+	$(CC) $< $(FLAGS) -o $@ -L libft -lft
 
 clean:
 	rm -f $(OBJ)

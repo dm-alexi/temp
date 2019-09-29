@@ -25,15 +25,9 @@ static int     get_figure(int fd)
     int     r;
     int     i;
     int     res;
-/*
+
     if ((r = read(fd, s, 21)) < 20)
 		return (r ? -1 : 0);
-*/
-	//test
-	ft_strncpy(s, "###.\n..#.\n....\n....\n\n", 20);
-	//ft_strncpy(s, "##..\n#...\n#...\n....\n\n", 20);
-	//ft_strncpy(s, "....\n####\n....\n....\n\n", 20);
-	r = 20;
 
     res = 0;
     i = 0;
@@ -50,26 +44,26 @@ static int     get_figure(int fd)
             return (-1);
 		++i;
     }
-    //printf("ok");
     return (moveupleft(res));
 }
 
-int     *get_figures(char *s)
+int     *get_figures(char *s, int *n)
 {
     int     fd;
     int     k;
-    int     i;
     int     *res;
 
     if (!(res = (int*)malloc(sizeof(int) * 26)))
         exit(1);
     if ((fd = open(s, 0)) < 0)
         return (NULL);
-    i = 0;
-    /*while ((k = get_figure(fd)) > 0)
-        res[i++] = k;
-        */
-	res[i++] = get_figure(fd);
-	res[i] = 0;
-    return (res);
+    *n = 0;
+    while ((k = get_figure(fd)) > 0)
+        res[(*n)++] = k;
+    if (k == -1 || !*n)
+    {
+        free(res);
+        res = NULL;
+    }
+	return (res);
 }

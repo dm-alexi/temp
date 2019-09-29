@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   columns.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 19:22:06 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/25 19:22:08 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/29 20:38:05 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static col	*make_columns(int n, int sq)
+static t_col	*make_columns(int n, int sq)
 {
-	col		*arr;
+	t_col		*arr;
 	int		i;
 
-	if (!(arr = (col*)ft_memalloc(sizeof(col) * (sq * sq + n + 1))))
+	if (!(arr = (t_col*)ft_memalloc(sizeof(t_col) * (sq * sq + n + 1))))
 		return (NULL);
 	i = 0;
 	while (++i <= n)
@@ -40,10 +40,10 @@ static col	*make_columns(int n, int sq)
 	return (arr);
 }
 
-void        del_columns(col *arr, int n)
+void        del_columns(t_col *arr, int n)
 {
     int     i;
-    node    *t;
+    t_node    *t;
 
     i = 0;
     while(++i <= n)
@@ -58,10 +58,10 @@ void        del_columns(col *arr, int n)
     free(arr);
 }
 
-col         *make_matrix(int *figures, int n, int sq)
+t_col         *make_matrix(int *figures, int n, int sq)
 {
     int     i;
-    col     *arr;
+    t_col     *arr;
 
     arr = make_columns(n, sq);
     i = 0;

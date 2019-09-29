@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   nodes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 19:21:47 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/25 19:21:51 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/29 20:39:01 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static node		*new_node(col *column)
+static t_node		*new_node(t_col *column)
 {
-	node	*c;
+	t_node	*c;
 
-	if ((c = (node*)malloc(sizeof(node))))
+	if ((c = (t_node*)malloc(sizeof(t_node))))
 	{
 		column->head.u->d = c;
 		c->u = column->head.u;
@@ -27,11 +27,11 @@ static node		*new_node(col *column)
 	return (c);
 }
 
-static node		*add_node(col *column, node *t)
+static t_node		*add_node(t_col *column, t_node *t)
 {
-	node	*c;
+	t_node	*c;
 
-	if ((c = (node*)malloc(sizeof(node))))
+	if ((c = (t_node*)malloc(sizeof(t_node))))
 	{
 		column->head.u->d = c;
 		c->u = column->head.u;
@@ -55,11 +55,12 @@ static void		clear_rows(int **arr)
 	free(arr);
 }
 
-node			*add_row(col *col_arr, int **rows)
+t_node			*add_row(t_col *col_arr, int **rows)
 {
-	node	*start;
-	node	*t;
+	t_node	*start;
+	t_node	*t;
 	int		**r;
+	int		i;
 
 	r = rows;
 	while (*r)
@@ -68,7 +69,8 @@ node			*add_row(col *col_arr, int **rows)
 		if (!(start = new_node(&(col_arr[(*r)[0]]))))
 			exit(1);
 		t = start;
-		for (int i = 1; i < 5; ++i)
+		i = 0;
+		while (++i < 5)
 			if (!(t = add_node(&(col_arr[(*r)[i]]), t)))
 				exit(1);
 		start->l = t;

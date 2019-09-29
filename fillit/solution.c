@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   solution.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 19:21:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/25 19:22:00 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/29 20:40:12 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static void		cover(col *c)
+static void		cover(t_col *c)
 {
-	node	*v;
-	node	*h;
+	t_node	*v;
+	t_node	*h;
 
 	c->prev->next = c->next;
 	c->next->prev = c->prev;
@@ -34,9 +34,9 @@ static void		cover(col *c)
 	}
 }
 
-static void		cover_all(node *c)
+static void		cover_all(t_node *c)
 {
-	node	*t;
+	t_node	*t;
 
 	cover(c->column);
 	t = c->r;
@@ -47,10 +47,10 @@ static void		cover_all(node *c)
 	}
 }
 
-static void		uncover(col *c)
+static void		uncover(t_col *c)
 {
-	node	*v;
-	node	*h;
+	t_node	*v;
+	t_node	*h;
 
 	v = c->head.u;
 	while (v != &(c->head))
@@ -69,9 +69,9 @@ static void		uncover(col *c)
 	c->next->prev = c;
 }
 
-static void		uncover_all(node *c)
+static void		uncover_all(t_node *c)
 {
-	node	*t;
+	t_node	*t;
 
 	t = c->l;
 	while (t != c)
@@ -82,12 +82,12 @@ static void		uncover_all(node *c)
 	uncover(c->column);
 }
 
-node	        **solve(col *arr, int n)
+t_node	        **solve(t_col *arr, int n)
 {
-	static node		*solution[26];
+	static t_node		*solution[26];
 	static int		k;
-	col				*current;
-	node			*t;
+	t_col				*current;
+	t_node			*t;
 
 	current = arr[0].next;
 	if (current == arr)

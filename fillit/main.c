@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 19:22:25 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/25 19:22:28 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/29 20:38:15 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int		main(int ac, char **av)
 	int		n;
 	//int     figures[] = {4369, 15, 71, 54, 51, 99, 547, 39, 4369, 15, 71, 54, 51, 99, 547, 39, 39};
 	int		*figures;
-	col		*col_arr;
-	node	**res;
+	t_col		*col_arr;
+	t_node	**res;
 
 	if (ac)
 		av[0][0] = '\0';

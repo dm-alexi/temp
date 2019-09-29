@@ -1,9 +1,9 @@
 #include "fillit.h"
 
-void    print_result(node **res, int n, int sq)
+void    print_result(t_node **res, int n, int sq)
 {
     char    *s;
-    node    *j;
+    t_node    *j;
     int     i;
     int     k;
 

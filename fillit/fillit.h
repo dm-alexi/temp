@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 21:11:50 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/15 18:34:39 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/29 20:38:06 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct	s_node
 	struct s_node	*l;
 	struct s_node	*r;
 	struct s_col	*column;
-}				node;
+}				t_node;
 
 typedef struct	s_col
 {
@@ -31,14 +31,14 @@ typedef struct	s_col
 	struct s_col	*next;
 	struct s_node	head;
 	int				order;
-}				col;
+}				t_col;
 
 int		**get_rows(int ord, int num, int type, int sq);
-node	*add_row(col *col_arr, int **row);
-node	**solve(col *arr, int n);
-void    print_result(node **res, int n, int sq);
+t_node	*add_row(t_col *col_arr, int **row);
+t_node	**solve(t_col *arr, int n);
+void    print_result(t_node **res, int n, int sq);
 int     *get_figures(char *s, int *n);
-void    del_columns(col *arr, int n);
-col     *make_matrix(int *figures, int n, int sq);
+void    del_columns(t_col *arr, int n);
+t_col     *make_matrix(int *figures, int n, int sq);
 
 #endif

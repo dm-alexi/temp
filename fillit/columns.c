@@ -14,7 +14,7 @@
 
 static t_col	*make_columns(int n, int sq)
 {
-	t_col		*arr;
+	t_col	*arr;
 	int		i;
 
 	if (!(arr = (t_col*)ft_memalloc(sizeof(t_col) * (sq * sq + n + 1))))
@@ -42,34 +42,34 @@ static t_col	*make_columns(int n, int sq)
 
 void        del_columns(t_col *arr, int n)
 {
-    int     i;
-    t_node    *t;
+    int		i;
+    t_node	*t;
 
-    i = 0;
-    while(++i <= n)
-    {
-        while(arr[i].head.d != &(arr[i].head))
-        {
-            t = arr[i].head.d;
-            arr[i].head.d = t->d;
-            free(t);
-        }
-    }
-    free(arr);
+	i = 0;
+	while(++i <= n)
+	{
+		while(arr[i].head.d != &(arr[i].head))
+		{
+			t = arr[i].head.d;
+			arr[i].head.d = t->d;
+			free(t);
+		}
+	}
+	free(arr);
 }
 
-t_col         *make_matrix(int *figures, int n, int sq)
+t_col		*make_matrix(int *figures, int n, int sq)
 {
-    int     i;
-    t_col     *arr;
+	int		i;
+	t_col	*arr;
 
-    arr = make_columns(n, sq);
-    i = 0;
-    while (i < n)
-    {
-        add_row(arr, get_rows(i + 1, n, figures[i], sq));
-        ++i;
-    }
-    return (arr);
+	arr = make_columns(n, sq);
+	i = 0;
+	while (i < n)
+	{
+		add_row(arr, get_rows(i + 1, n, figures[i], sq));
+		++i;
+	}
+	return (arr);
 }
 

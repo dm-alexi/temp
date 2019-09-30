@@ -27,7 +27,7 @@ static int	valid(int i, int type, int sq)
 		return (i % sq <= sq - 4);
 	if (type == 4369)
 		return (i / sq <= sq - 4);
-    if (type == 51)
+	if (type == 51)
 		return (i / sq <= sq - 2 && i % sq <= sq - 2);
 	if (type < 256)
 		return (i / sq <= sq - 2 && i % sq <= sq - 3);

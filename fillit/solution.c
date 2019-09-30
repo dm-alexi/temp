@@ -84,9 +84,9 @@ static void		uncover_all(t_node *c)
 
 t_node	        **solve(t_col *arr, int n)
 {
-	static t_node		*solution[26];
+	static t_node	*solution[26];
 	static int		k;
-	t_col				*current;
+	t_col			*current;
 	t_node			*t;
 
 	current = arr[0].next;

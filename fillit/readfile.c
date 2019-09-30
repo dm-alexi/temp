@@ -20,6 +20,8 @@ static int		moveupleft(int n)
 	275, 305, 306, 547, 561, 562, 785, 802, 4369};
 	int					i;
 
+	if (!n)
+        return (-1);
 	while (!(n & 15))
 		n >>= 4;
 	while (!(n & 4369))
@@ -33,18 +35,18 @@ static int		moveupleft(int n)
 
 static int     get_figure(int fd)
 {
-	char	s[21];
+	char	s[20];
 	int		r;
 	int		i;
 	int		res;
 
-	if ((r = read(fd, s, 21)) < 20)
+	if ((r = read(fd, s, 20)) < 20)
 		return (r ? -1 : 0);
 	res = 0;
 	i = 0;
 	while (i < r)
 	{
-		if (i % 5 == 4 || i == 20)
+		if (i % 5 == 4)
 		{
 			if (s[i] != '\n')
 				return (-1);
@@ -55,6 +57,8 @@ static int     get_figure(int fd)
 			return (-1);
 		++i;
 	}
+	if ((r = read(fd, s, 1)) == -1 || (r && *s != '\n'))
+        return (-1);
 	return (moveupleft(res));
 }
 
@@ -69,9 +73,9 @@ int				*get_figures(char *s, int *n)
 	if ((fd = open(s, 0)) < 0)
 		return (NULL);
 	*n = 0;
-	while ((k = get_figure(fd)) > 0)
+	while ((k = get_figure(fd)) > 0 && *n < 27)
 		res[(*n)++] = k;
-	if (k == -1 || !*n)
+	if (k == -1 || !*n || *n > 26)
 	{
 		free(res);
 		res = NULL;

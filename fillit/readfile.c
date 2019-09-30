@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/29 20:42:34 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/29 20:42:35 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/30 23:08:02 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int		moveupleft(int n)
 	return (-1);
 }
 
-static int     get_figure(int fd)
+static int		get_figure(int fd)
 {
 	char	s[21];
 	int		r;

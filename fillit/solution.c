@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 19:21:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/29 20:40:12 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/30 23:09:35 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void		uncover_all(t_node *c)
 	uncover(c->column);
 }
 
-t_node	        **solve(t_col *arr, int n)
+t_node			**solve(t_col *arr, int n)
 {
 	static t_node	*solution[26];
 	static int		k;

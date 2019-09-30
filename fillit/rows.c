@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rows.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 19:21:38 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/25 19:21:40 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/30 23:09:15 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	*arr_fill(int n, int num, int type, int sq)
 	while (degree < 13)
 	{
 		if (type & j)
-            res[i++] = n + degree % 4 + sq * (degree / 4) + num + 1;
+			res[i++] = n + degree % 4 + sq * (degree / 4) + num + 1;
 		++degree;
 		j <<= 1;
 	}
@@ -64,7 +64,7 @@ int			**get_rows(int ord, int num, int type, int sq)
 	int		**arr;
 
 	n = count_positions(type, sq);
-    if (!(arr = (int**)malloc(sizeof(int*) * n)))
+	if (!(arr = (int**)malloc(sizeof(int*) * n)))
 		exit(1);
 	k = 0;
 	i = 0;

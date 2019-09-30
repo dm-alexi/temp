@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 19:21:47 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/29 20:39:01 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/30 23:07:41 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,17 @@ static t_node		*add_node(t_col *column, t_node *t)
 	return (c);
 }
 
-static void		clear_rows(int **arr)
+static void			clear_rows(int **arr)
 {
-    int		**tmp;
+	int		**tmp;
 
-    tmp = arr;
-    while (*tmp)
+	tmp = arr;
+	while (*tmp)
 		free(*tmp++);
 	free(arr);
 }
 
-t_node			*add_row(t_col *col_arr, int **rows)
+t_node				*add_row(t_col *col_arr, int **rows)
 {
 	t_node	*start;
 	t_node	*t;

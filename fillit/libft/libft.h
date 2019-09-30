@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 22:14:21 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/15 22:15:43 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/09/30 23:03:51 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,6 @@ void			ft_lstadd_sorted(t_list **alst, t_list *new,
 					int (*compar)(const void*, const void*));
 void			ft_lstsort(t_list **alst,
 					int (*compar)(const void*, const void*));
-int             ft_isqrt(int nb);
+int				ft_isqrt(int nb);
 
 #endif

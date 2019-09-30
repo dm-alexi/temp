@@ -34,12 +34,9 @@ void	print_result(t_node **res, int n, int sq)
 		}
 		++i;
 	}
-	i = sq;
-	while (i <= (sq + 1) * sq)
-	{
+	i = -1;
+	while ((i += sq + 1) <= (sq + 1) * sq)
 		s[i] = '\n';
-		i += sq + 1;
-	}
 	s[(sq + 1) * sq] = '\0';
 	ft_putstr(s);
 }

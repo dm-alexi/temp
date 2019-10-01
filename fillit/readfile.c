@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/29 20:42:34 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/30 23:08:02 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/01 19:36:13 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int		moveupleft(int n)
 	int					i;
 
 	if (!n)
-        return (-1);
+		return (-1);
 	while (!(n & 15))
 		n >>= 4;
 	while (!(n & 4369))
@@ -57,8 +57,6 @@ static int		get_figure(int fd)
 			return (-1);
 		++i;
 	}
-	if ((r = read(fd, s, 1)) == -1 || (r && *s != '\n'))
-        return (-1);
 	return (moveupleft(res));
 }
 
@@ -67,15 +65,23 @@ int				*get_figures(char *s, int *n)
 	int		fd;
 	int		k;
 	int		*res;
+	int		lines;
+	char	c;
 
 	if (!(res = (int*)malloc(sizeof(int) * 26)))
 		exit(1);
 	if ((fd = open(s, 0)) < 0)
 		return (NULL);
 	*n = 0;
+	lines = 0;
 	while ((k = get_figure(fd)) > 0 && *n < 27)
+	{
 		res[(*n)++] = k;
-	if (k == -1 || !*n || *n > 26)
+		if (!((k = read(fd, &c, 1)) == 1 && c == '\n'))
+			break ;
+		++lines;
+	}
+	if (k || !*n || *n > 26 || lines == *n)
 	{
 		free(res);
 		res = NULL;

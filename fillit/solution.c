@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 19:21:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/30 23:09:35 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/01 20:41:55 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,12 @@ t_node			**solve(t_col *arr, int n)
 	{
 		solution[k++] = t;
 		cover_all(t);
-		if (solve(arr, n))
-			return (solution);
+		solve(arr, n);
 		uncover_all(t);
+		if (k == n)
+			break ;
 		--k;
 		t = t->d;
 	}
-	return (NULL);
+	return (k == n ? solution : NULL);
 }

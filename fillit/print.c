@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/29 20:42:25 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/29 20:42:30 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/01 20:20:00 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	print_result(t_node **res, int n, int sq)
 	if (!(s = (char*)malloc((sq + 1) * sq + 1)))
 		exit(1);
 	ft_memset(s, '.', (sq + 1) * sq);
-	i = 0;
-	while (i < n)
+	i = -1;
+	while (++i < n)
 	{
 		j = res[i]->r;
 		while (j != res[i])
@@ -32,11 +32,11 @@ void	print_result(t_node **res, int n, int sq)
 			s[k + k / sq] = 'A' + i;
 			j = j->r;
 		}
-		++i;
 	}
 	i = -1;
 	while ((i += sq + 1) <= (sq + 1) * sq)
 		s[i] = '\n';
 	s[(sq + 1) * sq] = '\0';
 	ft_putstr(s);
+	free(s);
 }

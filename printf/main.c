@@ -3,6 +3,6 @@
 
 int main()
 {
-    printf("%d", printf(NULL));
+    //printf("%d", printf(NULL));
     return 0;
 }

@@ -1,13 +1,16 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
+# include "libft/libft.h"
 
-typedef struct	s_conversion
+typedef struct	s_format
 {
     int		width;
     int		precision;
-    char	flags[4];
-    char	length[2];
+    char	flags;
+    char	length;
     char	specifier;
-}				t_conversion;
+}				t_format;
+
+int				ft_printf(const char *format, ...);
 
 #endif

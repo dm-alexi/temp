@@ -1,5 +1,6 @@
 #include <stdarg.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "ft_printf.h"
 
 void	set_flags(const char **s, t_format *format)
@@ -63,9 +64,20 @@ void	set_format(const char **s, t_format *format, va_list *va)
 
 void	print_formatted(const char **s, va_list *va, int *n)
 {
-	 t_format	format;
+	t_format	format;
+	char		*t;
 
-	 set_format(s, &format, va);
+	set_format(s, &format, va);
+	if (!format->specifier)
+	{
+		t = *s - 1;
+		while (*t != '%')
+			--t;
+		*n += *s - t;
+		write(1, t, *s - t);
+		return ;
+	}
+
 }
 
 int		ft_printf(const char *line, ...)

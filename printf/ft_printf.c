@@ -65,10 +65,10 @@ void	set_format(const char **s, t_format *format, va_list *va)
 void	print_formatted(const char **s, va_list *va, int *n)
 {
 	t_format	format;
-	char		*t;
+	const char	*t;
 
 	set_format(s, &format, va);
-	if (!format->specifier)
+	if (!format.specifier)
 	{
 		t = *s - 1;
 		while (*t != '%')
@@ -77,43 +77,31 @@ void	print_formatted(const char **s, va_list *va, int *n)
 		write(1, t, *s - t);
 		return ;
 	}
-
+	//ft_putstr()
 }
 
 int		ft_printf(const char *line, ...)
 {
 	int				n;
 	va_list			va;
+	const char		*s;
 
 	//if (!line)
 	//	return (-1);
 	n = 0;
 	va_start(va, line);
+	s = line;
 	while (*line)
 	{
-        if (*line == '%')
-		{
-			//offset = convert(format, &conv);
-			++line;
-			if (*line == '%')
-			{
-				ft_putchar('%');
-				++n;
-				++line;
-			}
-            else
-				print_formatted(&line, &va, &n);
-			//x = va_arg(va, int);
-            //n += print_formatted(format, &conv);
-            //format += offset;
-            //ft_putnbr(x);
-            //++format;
-		}
-		else
-		{
-			ft_putchar(*line++);
-			++n;
-		}
+        while (*s && *s != '%')
+			++s;
+		n += s - line;
+		write(1, line, s - line);
+		if (*s && *++s == '%' && ++n)
+			write(1, s++, 1);
+		else if (*s)
+			print_formatted(&s, &va, &n);
+		line = s;
 	}
 	va_end(va);
 	return (n);

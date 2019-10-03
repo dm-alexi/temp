@@ -1,4 +1,3 @@
-#include <stdarg.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include "ft_printf.h"
@@ -24,15 +23,16 @@ void	set_flags(const char **s, t_format *format)
 
 void	set_wp(const char **s, t_format *format, va_list *va)
 {
-	//default values?
+	format->width = -1;
+	format->precision = -1;
 	if (ft_isdigit(**s))
-		format->width = ft_strtol((char*)s, (char**)&s, 10);
+		format->width = ft_strtol((char*)*s, (char**)s, 10);
 	else if (**s == '*' && ++*s)
 		format->width = va_arg(*va, int);
     if (**s == '.' && ++*s)
 	{
 		if (ft_isdigit(**s))
-			format->precision = ft_strtol((char*)s, (char**)&s, 10);
+			format->precision = ft_strtol((char*)*s, (char**)s, 10);
 		else if (**s == '*' && ++*s)
 			format->precision = va_arg(*va, int);
 	}
@@ -77,7 +77,10 @@ void	print_formatted(const char **s, va_list *va, int *n)
 		write(1, t, *s - t);
 		return ;
 	}
-	//ft_putstr()
+	if (format.specifier == 's')
+		ft_printf_string(&format, va, n);
+	if (format.specifier == 'c')
+		ft_printf_char(&format, va, n);
 }
 
 int		ft_printf(const char *line, ...)

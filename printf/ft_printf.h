@@ -15,5 +15,6 @@ typedef struct	s_format
 int				ft_printf(const char *format, ...);
 void			ft_printf_string(t_format *format, va_list *va, int *n);
 void			ft_printf_char(t_format *format, va_list *va, int *n);
+void			ft_printf_integer(t_format *format, va_list *va, int *n);
 
 #endif

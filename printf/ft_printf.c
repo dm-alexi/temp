@@ -81,6 +81,11 @@ void	print_formatted(const char **s, va_list *va, int *n)
 		ft_printf_string(&format, va, n);
 	if (format.specifier == 'c')
 		ft_printf_char(&format, va, n);
+	if (format.specifier == 'd' || format.specifier == 'i')
+		ft_printf_integer(&format, va, n);
+	//if (format.specifier == 'u' || format.specifier == 'o' ||
+	//format.specifier == 'x' || format.specifier == 'X')
+	//	ft_printf_uinteger(&format, va, n);
 }
 
 int		ft_printf(const char *line, ...)

@@ -113,5 +113,6 @@ void			ft_lstsort(t_list **alst,
 					int (*compar)(const void*, const void*));
 int             ft_isqrt(int nb);
 char			*ft_lltoa(long long n, int base, int upcase);
+char			*ft_ulltoa(unsigned long long n, int base, int upcase);
 
 #endif

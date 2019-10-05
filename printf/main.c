@@ -22,6 +22,7 @@ int main()
     printf("\n%i\n", l);
     k = ft_printf("First %d Second %d", 500, -10);
     printf("\n%i\n", k);
+    //printf("%lu", sizeof(wchar_t));
 
     return 0;
 }

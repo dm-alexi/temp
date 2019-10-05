@@ -6,11 +6,12 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:22:02 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/05 16:22:26 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/05 19:27:22 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/types.h>
+#include <stddef.h>
 #include <stdint.h>
 #include <unistd.h>
 #include "ft_printf.h"

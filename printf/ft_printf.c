@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:14:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/05 16:14:54 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/05 20:16:45 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,10 @@ void	print_formatted(const char **s, va_list *va, int *n)
 		write(1, t, *s - t);
 		return ;
 	}
-	if (format.specifier == 's')
-		ft_printf_string(&format, va, n);
 	if (format.specifier == 'c')
 		ft_printf_char(&format, va, n);
+	if (format.specifier == 's')
+		ft_printf_string(&format, va, n);
 	if (format.specifier == 'd' || format.specifier == 'i')
 		ft_printf_integer(&format, va, n);
 	//if (format.specifier == 'u' || format.specifier == 'o' ||

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/05 16:14:16 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/10/05 16:14:54 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <unistd.h>
 #include "ft_printf.h"
@@ -29,7 +41,7 @@ void	set_wp(const char **s, t_format *format, va_list *va)
 		format->width = ft_strtol((char*)*s, (char**)s, 10);
 	else if (**s == '*' && ++*s)
 		format->width = va_arg(*va, int);
-    if (**s == '.' && ++*s)
+	if (**s == '.' && ++*s)
 	{
 		if (ft_isdigit(**s))
 			format->precision = ft_strtol((char*)*s, (char**)s, 10);
@@ -40,8 +52,8 @@ void	set_wp(const char **s, t_format *format, va_list *va)
 
 void	set_specifier(const char **s, t_format *format)
 {
-    format->length = 0;
-    if (ft_strnequ(*s, "hh", 2) && (*s += 2))
+	format->length = 0;
+	if (ft_strnequ(*s, "hh", 2) && (*s += 2))
 		format->length = 1;
 	else if (ft_strnequ(*s, "ll", 2) && (*s += 2))
 		format->length = 2;
@@ -49,7 +61,7 @@ void	set_specifier(const char **s, t_format *format)
 	|| **s == 'L')
 		format->length = *((*s)++);
 	format->specifier = 0;
-    if ((**s >= 'a' && **s <= 'g') || **s == 'i' || (**s >= 'n' && **s <= 'p')
+	if ((**s >= 'a' && **s <= 'g') || **s == 'i' || (**s >= 'n' && **s <= 'p')
 	|| **s == 's' || **s == 'u' || **s == 'x' || **s == 'A' || **s == 'E' ||
 	**s == 'F' || **s == 'G')
 		format->specifier = *((*s)++);
@@ -101,7 +113,7 @@ int		ft_printf(const char *line, ...)
 	s = line;
 	while (*line)
 	{
-        while (*s && *s != '%')
+		while (*s && *s != '%')
 			++s;
 		n += s - line;
 		write(1, line, s - line);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/05 16:19:30 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/10/05 16:21:48 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 # include <stdarg.h>
@@ -5,11 +17,11 @@
 
 typedef struct	s_format
 {
-    int		width;
-    int		precision;
-    char	flags;
-    char	length;
-    char	specifier;
+	int		width;
+	int		precision;
+	char	flags;
+	char	length;
+	char	specifier;
 }				t_format;
 
 int				ft_printf(const char *format, ...);

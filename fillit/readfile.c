@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readfile.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/29 20:42:34 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/01 19:36:13 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/05 18:40:01 by stristim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ int				*get_figures(char *s, int *n)
 	int		lines;
 	char	c;
 
-	if (!(res = (int*)malloc(sizeof(int) * 26)))
-		exit(1);
 	if ((fd = open(s, 0)) < 0)
 		return (NULL);
+	if (!(res = (int*)malloc(sizeof(int) * 26)))
+		exit(1);
 	*n = 0;
 	lines = 0;
 	while ((k = get_figure(fd)) > 0 && *n < 27)

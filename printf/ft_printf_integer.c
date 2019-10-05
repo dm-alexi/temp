@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_integer.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/05 16:22:02 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/10/05 16:22:26 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <sys/types.h>
 #include <stdint.h>
 #include <unistd.h>
@@ -42,7 +54,7 @@ static unsigned int		intmaxtoa(intmax_t n, char **s)
 	return (len);
 }
 
-void	ft_printf_integer(t_format *format, va_list *va, int *n)
+void					ft_printf_integer(t_format *format, va_list *va, int *n)
 {
 	char			*s;
 	intmax_t		integer;

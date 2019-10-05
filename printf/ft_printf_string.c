@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_string.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/05 16:15:06 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/10/05 16:15:31 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include "ft_printf.h"
 
@@ -14,7 +26,7 @@ void	ft_printf_char(t_format *format, va_list *va, int *n)
 
 	c = (char)va_arg(*va, int);
 	offset = (format->width > 1 ? format->width - 1 : 0);
-    if (!(format->flags & 1))
+	if (!(format->flags & 1))
 		ft_printf_strfill(1, ' ', offset);
 	write(1, &c, 1);
 	if ((format->flags & 1))

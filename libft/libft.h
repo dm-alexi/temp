@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 22:14:21 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/15 22:15:43 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/05 20:35:58 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,6 @@ void			ft_lstsort(t_list **alst,
 int             ft_isqrt(int nb);
 char			*ft_lltoa(long long n, int base, int upcase);
 char			*ft_ulltoa(unsigned long long n, int base, int upcase);
+size_t			ft_wcslen(const wchar_t *wcs);
 
 #endif

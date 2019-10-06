@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:14:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/05 20:16:45 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/06 15:39:54 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	set_flags(const char **s, t_format *format)
 
 void	set_wp(const char **s, t_format *format, va_list *va)
 {
-	format->width = -1;
-	format->precision = -1;
+	format->width = 0;
+	format->precision = 0;
 	if (ft_isdigit(**s))
 		format->width = ft_strtol((char*)*s, (char**)s, 10);
 	else if (**s == '*' && ++*s)
@@ -94,10 +94,10 @@ void	print_formatted(const char **s, va_list *va, int *n)
 	if (format.specifier == 's')
 		ft_printf_string(&format, va, n);
 	if (format.specifier == 'd' || format.specifier == 'i')
-		ft_printf_integer(&format, va, n);
+		ft_printf_int(&format, va, n);
 	//if (format.specifier == 'u' || format.specifier == 'o' ||
 	//format.specifier == 'x' || format.specifier == 'X')
-	//	ft_printf_uinteger(&format, va, n);
+	//	ft_printf_uint(&format, va, n);
 }
 
 int		ft_printf(const char *line, ...)
@@ -106,8 +106,6 @@ int		ft_printf(const char *line, ...)
 	va_list			va;
 	const char		*s;
 
-	//if (!line)
-	//	return (-1);
 	n = 0;
 	va_start(va, line);
 	s = line;

@@ -8,8 +8,8 @@ int main()
     int		l, k;
     char a = 'a', b = 'b';
     //wchar_t a = L'a', b = L'b';
-    l = printf("%%dsdf%+01.5vbn\n", 1335, 78);
-    k = ft_printf("%%dsdf%+01.5vbn\n", 1335, 78);
+    //l = printf("%%dsdf%+01.5vbn\n", 1335, 78);
+    //k = ft_printf("%%dsdf%+01.5vbn\n", 1335, 78);
     l = printf("I am the %s of the %s!", "King", "world");
     printf("\n%i\n", l);
     k = ft_printf("I am the %s of the %s!", "King", "world");
@@ -24,7 +24,9 @@ int main()
     printf("\n%i\n", l);
     k = ft_printf("First %d Second %d", 500, -10);
     printf("\n%i\n", k);
-    printf("%lu", sizeof(a));
-
+    l = printf("%04dt", 4);
+    printf("\n%i\n", l);
+    k = ft_printf("%04dt", 4);
+    printf("\n%i\n", k);
     return 0;
 }

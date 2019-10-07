@@ -21,14 +21,16 @@ void	set_flags(const char **s, t_format *format)
 	{
 		if (**s == '-')
 			format->flags |= 1;
-		if (**s == '+')
+		else if (**s == '+')
 			format->flags |= 2;
-		if (**s == ' ')
+		else if (**s == ' ')
 			format->flags |= 4;
-		if (**s == '#')
+		else if (**s == '#')
 			format->flags |= 8;
-		if (**s == '0')
+		else if (**s == '0')
 			format->flags |= 16;
+		else if (**s == '\'')
+			format->flags |= 32;
 		++*s;
 	}
 }
@@ -36,7 +38,7 @@ void	set_flags(const char **s, t_format *format)
 void	set_wp(const char **s, t_format *format, va_list *va)
 {
 	format->width = 0;
-	format->precision = 0;
+	format->precision = 6;
 	if (ft_isdigit(**s))
 		format->width = ft_strtol((char*)*s, (char**)s, 10);
 	else if (**s == '*' && ++*s)

@@ -24,9 +24,15 @@ int main()
     printf("\n%i\n", l);
     k = ft_printf("First %d Second %d", 500, -10);
     printf("\n%i\n", k);
-    l = printf("%04dt", 4);
+    l = printf("%Ldt", 4236789);
     printf("\n%i\n", l);
-    k = ft_printf("%04dt", 4);
+    k = ft_printf("%Ldt", 4236789);
     printf("\n%i\n", k);
+    float f = 392.6512342346;
+    long double d = 392.6512342346L;
+    printf("%.12f\n", f);
+    printf("%.12Lf\n", d);
+    printf("%f\n", 0.0);
+    printf("%d %d %d", sizeof(float), sizeof(double), sizeof(long double));
     return 0;
 }

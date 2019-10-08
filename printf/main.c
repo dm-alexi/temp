@@ -58,5 +58,8 @@ int main()
     printbin(&sign1, 8);
     printbin(&sign2, 8);
     printf("%d %d\n", get_exponent(dub), get_exponent(tmp));
+    dtoa(dub, NULL, 0);
+    dtoa(tmp, NULL, 0);
+    printf("%15.0f\n", 500/3.0);
     return 0;
 }

@@ -58,16 +58,15 @@ static unsigned int		intmaxtoa(intmax_t n, char **s, t_format *format)
 
 static intmax_t			get_integer(t_format *format, va_list *va)
 {
-	//handle L (int64_t ?)
 	if (!format->length)
 		return ((int)va_arg(*va, int));
-	if (format->length == 1)
+	if (format->length == 'H')
 		return ((char)va_arg(*va, int));
 	if (format->length == 'h')
 		return ((short)va_arg(*va, int));
 	if (format->length == 'l')
 		return ((long)va_arg(*va, long));
-	if (format->length == 2)
+	if (format->length == 'L')
 		return ((long long)va_arg(*va, long long));
 	if (format->length == 'j')
 		return ((intmax_t)va_arg(*va, intmax_t));

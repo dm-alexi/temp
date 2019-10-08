@@ -45,6 +45,7 @@ void	set_wp(const char **s, t_format *format, va_list *va)
 		format->width = va_arg(*va, int);
 	if (**s == '.' && ++*s)
 	{
+		format->precision = 0;
 		if (ft_isdigit(**s))
 			format->precision = ft_strtol((char*)*s, (char**)s, 10);
 		else if (**s == '*' && ++*s)
@@ -56,9 +57,9 @@ void	set_specifier(const char **s, t_format *format)
 {
 	format->length = 0;
 	if (ft_strnequ(*s, "hh", 2) && (*s += 2))
-		format->length = 1;
+		format->length = 'H';
 	else if (ft_strnequ(*s, "ll", 2) && (*s += 2))
-		format->length = 2;
+		format->length = 'L';
 	else if (**s == 'h' || **s == 'l' || **s == 'j' || **s == 'z' || **s == 't'
 	|| **s == 'L')
 		format->length = *((*s)++);

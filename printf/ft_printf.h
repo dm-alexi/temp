@@ -29,5 +29,6 @@ void			ft_printf_string(t_format *format, va_list *va, int *n);
 void			ft_printf_char(t_format *format, va_list *va, int *n);
 void			ft_printf_int(t_format *format, va_list *va, int *n);
 void			ft_printf_strfill(int fd, char c, int n);
+void            printbin(void *p, int n);
 
 #endif

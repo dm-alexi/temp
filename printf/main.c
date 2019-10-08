@@ -60,6 +60,7 @@ int main()
     printf("%d %d\n", get_exponent(dub), get_exponent(tmp));
     dtoa(dub, NULL, 0);
     dtoa(tmp, NULL, 0);
-    printf("%15.0f\n", 500/3.0);
+    printf("%.20f\n", 500/3.0);
+    printf("%lu", sizeof(long double));
     return 0;
 }

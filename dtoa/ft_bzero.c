@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bigint.h                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 21:07:15 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/09 22:53:20 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/09/05 21:13:24 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/09/07 11:25:28 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_BIGINT_H
-#define FT_BIGINT_H
+#include <stdlib.h>
 
-#include <stdint.h>
-#define MAX_BLOCKS 35
-
-typedef struct	s_bigInt
+void	ft_bzero(void *ptr, size_t num)
 {
-	uint32_t	len;
-	uint32_t	arr[MAX_BLOCKS];
-}				t_bigInt;
+	unsigned char	*s;
 
-void	bigint_sum(t_bigInt *res, const t_bigInt *a, const t_bigInt *b);
-
-#endif
+	s = ptr;
+	while (num--)
+		*s++ = '\0';
+}

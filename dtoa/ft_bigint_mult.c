@@ -25,7 +25,7 @@ void	bigint_mult_int(t_bigInt *res, const t_bigInt *a, const int32_t b)
 	{
 		product = (int64_t)a->arr[i] * b + carry;
 		res->arr[i++] = (uint32_t)product;
-		carry = product >> 32;
+		carry = (uint32_t)(product >> 32);
 	}
 	if (carry)
 	{
@@ -60,4 +60,71 @@ void	bigint_mult(t_bigInt *res, const t_bigInt *a, const t_bigInt *b)
 			++i;
 		}
 	}
+}
+
+void    bigint_mult2(t_bigInt *res, const t_bigInt *a)
+{
+	uint32_t	carry;
+	int			i;
+
+	i = 0;
+	carry = 0;
+	while (i < a->len)
+	{
+		res->arr[i] = (a->arr[i] << 1) | carry;
+		carry = a->arr[i] >> 31;
+		++i;
+	}
+	if (carry)
+	{
+		res->arr[i] = carry;
+		res->len = i + 1;
+	}
+	else
+		res->len = i;
+}
+
+void	bigint_mult2_inplace(t_bigInt *res)
+{
+	uint32_t	carry;
+	uint32_t	tmp;
+	int			i;
+
+	i = 0;
+	carry = 0;
+	while (i < res->len)
+	{
+		tmp = res->arr[i];
+		res->arr[i] = (tmp << 1) | carry;
+		carry = tmp >> 31;
+		++i;
+	}
+	if (carry)
+	{
+		res->arr[i] = carry;
+		++res->len;
+	}
+}
+
+void	bigint_mult10(t_bigInt *res, const t_bigInt *a)
+{
+	uint32_t	carry;
+	uint64_t	product;
+	int			i;
+
+	i = 0;
+	carry = 0;
+	while (i < a->len)
+	{
+		product = (uint64_t)a->arr[i] * 10u + carry;
+		res->arr[i] = (uint32_t)product;
+		carry = (uint32_t)(product >> 32);
+	}
+	if (carry)
+	{
+		res->arr[i] = carry;
+		res->len = i + 1;
+	}
+	else
+		res->len = i;
 }

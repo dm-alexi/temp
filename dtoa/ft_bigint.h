@@ -14,7 +14,7 @@
 #define FT_BIGINT_H
 
 #include <stdint.h>
-#define MAX_BLOCKS 35
+#define MAX_BLOCKS 1024
 
 typedef struct	s_bigInt
 {
@@ -23,5 +23,11 @@ typedef struct	s_bigInt
 }				t_bigInt;
 
 void	bigint_sum(t_bigInt *res, const t_bigInt *a, const t_bigInt *b);
+int		bigint_cmp(const t_bigInt *a, const t_bigInt *b);
+void	bigint_mult_int(t_bigInt *res, const t_bigInt *a, const int32_t b);
+void	bigint_mult(t_bigInt *res, const t_bigInt *a, const t_bigInt *b);
+void    bigint_mult2(t_bigInt *res, const t_bigInt *a);
+void	bigint_mult2_inplace(t_bigInt *res);
+void	bigint_mult10(t_bigInt *res, const t_bigInt *a);
 
 #endif

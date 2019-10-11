@@ -12,7 +12,7 @@
 
 #include "ft_bigint.h"
 
-int		bigint_cmp(const t_bigInt *a, const t_bigInt *b)
+int		ft_bigint_cmp(const t_bigInt *a, const t_bigInt *b)
 {
 	int		i;
 
@@ -23,19 +23,32 @@ int		bigint_cmp(const t_bigInt *a, const t_bigInt *b)
 	{
 		if (a->arr[i] != b->arr[i])
 			return (a->arr[i] - b->arr[i]);
-		++i;
+		--i;
 	}
 	return (0);
 }
 
-void	bigint_sum(t_bigInt *res, const t_bigInt *a, const t_bigInt *b)
+void	ft_bigint_copy(t_bigInt *dst, const t_bigInt *src)
+{
+	int		i;
+
+	i = 0;
+	while (i < src->len)
+	{
+		dst->arr[i] = src->arr[i];
+		++i;
+	}
+	dst->len = src->len;
+}
+
+void	ft_bigint_sum(t_bigInt *res, const t_bigInt *a, const t_bigInt *b)
 {
 	uint64_t	carry;
 	uint64_t	sum;
 	int			i;
 
 	if (a->len < b->len)
-		bigint_sum(res, b, a);
+		ft_bigint_sum(res, b, a);
 	else
 	{
 		carry = 0;

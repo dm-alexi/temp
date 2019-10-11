@@ -13,7 +13,7 @@
 #include "ft_bigint.h"
 #include "libft.h"
 
-void	bigint_mult_int(t_bigInt *res, const t_bigInt *a, const int32_t b)
+void	ft_bigint_mult_int(t_bigInt *res, const t_bigInt *a, const int32_t b)
 {
 	uint32_t	carry;
 	uint64_t	product;
@@ -21,6 +21,12 @@ void	bigint_mult_int(t_bigInt *res, const t_bigInt *a, const int32_t b)
 
 	i = 0;
 	carry = 0;
+	if (!b)
+	{
+		res->len = 1;
+		res->arr[0] = 0;
+		return ;
+	}
 	while (i < a->len)
 	{
 		product = (int64_t)a->arr[i] * b + carry;
@@ -36,33 +42,35 @@ void	bigint_mult_int(t_bigInt *res, const t_bigInt *a, const int32_t b)
 		res->len = i;
 }
 
-void	bigint_mult(t_bigInt *res, const t_bigInt *a, const t_bigInt *b)
+void	ft_bigint_mult(t_bigInt *res, const t_bigInt *a, const t_bigInt *b)
 {
 	int			i;
 	t_bigInt	tmp;
 
 	if (a->len > b->len)
-		bigint_mult(res, b, a);
+		ft_bigint_mult(res, b, a);
 	else
 	{
 		i = 0;
-		ft_bzero(res->arr, 4 * MAX_BLOCKS);
+		//ft_bzero(res->arr, 4 * MAX_BLOCKS);
+		res->arr[0] = 0;
+		res->len = 1;
 		while (i < a->len)
 		{
 			if (a->arr[i])
 			{
-				bigint_mult_int(&tmp, b, a->arr[i]);
-				ft_memmove(&tmp.arr + i, &tmp.arr, tmp.len * 4);
-				ft_bzero(&tmp, i * 4);
+				ft_bigint_mult_int(&tmp, b, a->arr[i]);
+				ft_memmove(tmp.arr + i, tmp.arr, tmp.len * 4);
+				ft_bzero(tmp.arr, i * 4);
 				tmp.len += i;
-				bigint_sum(res, res, &tmp);
+				ft_bigint_sum(res, res, &tmp);
 			}
 			++i;
 		}
 	}
 }
 
-void    bigint_mult2(t_bigInt *res, const t_bigInt *a)
+void    ft_bigint_mult2(t_bigInt *res, const t_bigInt *a)
 {
 	uint32_t	carry;
 	int			i;
@@ -84,7 +92,7 @@ void    bigint_mult2(t_bigInt *res, const t_bigInt *a)
 		res->len = i;
 }
 
-void	bigint_mult2_inplace(t_bigInt *res)
+void	ft_bigint_mult2_inplace(t_bigInt *res)
 {
 	uint32_t	carry;
 	uint32_t	tmp;
@@ -106,9 +114,9 @@ void	bigint_mult2_inplace(t_bigInt *res)
 	}
 }
 
-void	bigint_mult10(t_bigInt *res, const t_bigInt *a)
+void	ft_bigint_mult10(t_bigInt *res, const t_bigInt *a)
 {
-	uint32_t	carry;
+	uint64_t	carry;
 	uint64_t	product;
 	int			i;
 
@@ -119,6 +127,7 @@ void	bigint_mult10(t_bigInt *res, const t_bigInt *a)
 		product = (uint64_t)a->arr[i] * 10u + carry;
 		res->arr[i] = (uint32_t)product;
 		carry = (uint32_t)(product >> 32);
+		++i;
 	}
 	if (carry)
 	{

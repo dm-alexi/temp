@@ -1,9 +1,21 @@
-#ifndef FT_BIGINT_H
-#define FT_BIGINT_H
-#include <stdint.h>
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_bigint.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/12 14:35:24 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/10/12 14:38:40 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#define MAX_BLOCKS 34000
+#ifndef FT_BIGINT_H
+# define FT_BIGINT_H
+# include <stdint.h>
+# include <stdio.h>
+# define MAX_BLOCKS 34000
+
 typedef struct	s_bigint
 {
 	int			len;

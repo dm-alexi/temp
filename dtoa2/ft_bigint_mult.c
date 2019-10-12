@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_bigint_mult.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/12 14:35:33 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/10/12 14:36:24 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_bigint.h"
 
 void	ft_bigint_mult_int(t_bigint *res, const t_bigint *a, const uint32_t b)
 {
-    int			i;
-    uint64_t	product;
-    uint64_t	carry;
+	int			i;
+	uint64_t	product;
+	uint64_t	carry;
 
-    i = 0;
-    carry = 0;
-    res->len = 1;
-    res->arr[0] = 0;
-    if (b)
+	i = 0;
+	carry = 0;
+	res->len = 1;
+	res->arr[0] = 0;
+	if (b)
 	{
 		while (i < a->len)
 		{
@@ -29,13 +41,13 @@ void	ft_bigint_mult_int(t_bigint *res, const t_bigint *a, const uint32_t b)
 
 void	ft_bigint_mult(t_bigint *res, const t_bigint *a, const t_bigint *b)
 {
-    int			i;
-    int			j;
-    t_bigint	tmp;
+	int			i;
+	int			j;
+	t_bigint	tmp;
 
-    if (a->len <= b->len)
-    {
-    	i = 0;
+	if (a->len <= b->len)
+	{
+		i = 0;
 		res->len = 1;
 		res->arr[0] = 0;
 		while (i < a->len)
@@ -50,7 +62,7 @@ void	ft_bigint_mult(t_bigint *res, const t_bigint *a, const t_bigint *b)
 			ft_bigint_sum(res, res, &tmp);
 			++i;
 		}
-    }
-    else
+	}
+	else
 		ft_bigint_mult(res, b, a);
 }

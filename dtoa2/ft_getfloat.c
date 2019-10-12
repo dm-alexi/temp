@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_getfloat.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/12 14:37:41 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/10/12 14:39:53 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_bigint.h"
 
 void	get_double(double value, int *sign, uint64_t *frac, int *exp)
@@ -14,6 +26,3 @@ void	get_double(double value, int *sign, uint64_t *frac, int *exp)
 		*frac >>= 1;
 	}
 }
-
-
-

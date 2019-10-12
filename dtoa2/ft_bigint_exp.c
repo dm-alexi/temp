@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_bigint_exp.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/12 14:34:18 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/10/12 14:39:44 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_bigint.h"
 
 static const uint32_t	g_power2[] = {1, 2, 4, 8, 16, 32, 64, 128, 256, 512,
 	1024, 2048, 4096, 8192, 16384, 32768};
-static const t_bigint 	g_power2_big[] =
+static const t_bigint	g_power2_big[] =
 {
 	{ 1, { 65536 } },
 	{ 2, { 294967296, 4 } },
@@ -102,13 +114,13 @@ static const t_bigint 	g_power2_big[] =
 			733782862, 462984244, 619415929, 90748135, 1 } }
 };
 static const uint32_t	g_power5[] = {1, 5, 25, 125, 625, 3125, 15625, 78125};
-static const t_bigint 	g_power5_big[] =
+static const t_bigint	g_power5_big[] =
 {
 	{ 1, { 390625 } },
 	{ 2, { 587890625, 152 } },
 	{ 3, { 962890625, 64365386, 23283 } },
 	{ 5, { 712890625, 434970855, 3726400, 242752217, 542101086 } },
-    {10, { 212890625, 863681793, 569604314, 377187926, 193021880, 454666389,
+	{10, { 212890625, 863681793, 569604314, 377187926, 193021880, 454666389,
 			305561419, 992184134, 705571876, 293873587 } },
 	{20, {	212890625, 471103668, 747746862, 37770580, 466936530, 989468319,
 			635969950, 939461496, 265605472, 34722882, 579715075, 31624270,
@@ -326,9 +338,9 @@ static const t_bigint 	g_power5_big[] =
 
 void					ft_bigint_pow2(t_bigint *res, int32_t exp)
 {
-    t_bigint	tmp;
-    t_bigint	*cur;
-    int			i;
+	t_bigint	tmp;
+	t_bigint	*cur;
+	int			i;
 
 	i = 0;
 	tmp.len = 1;
@@ -351,9 +363,9 @@ void					ft_bigint_pow2(t_bigint *res, int32_t exp)
 
 void					ft_bigint_pow5(t_bigint *res, int32_t exp)
 {
-    t_bigint	tmp;
-    t_bigint	*cur;
-    int			i;
+	t_bigint	tmp;
+	t_bigint	*cur;
+	int			i;
 
 	i = 0;
 	tmp.len = 1;

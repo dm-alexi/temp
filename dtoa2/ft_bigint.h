@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 14:35:24 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/12 14:38:40 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/12 18:23:21 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,15 @@ void			ft_bigint_sum(t_bigint *res, const t_bigint *a,
 				const t_bigint *b);
 void			ft_bigint_mult(t_bigint *res, const t_bigint *a,
 				const t_bigint *b);
+void	ft_bigint_mult_int(t_bigint *res, const t_bigint *a, const uint32_t b);
 void			ft_bigint_pow2(t_bigint *res, int32_t exp);
 void			ft_bigint_pow5(t_bigint *res, int32_t exp);
 void			get_double(double value, int *sign, uint64_t *frac, int *exp);
 void			print_bigint(t_bigint *a);
+void			ft_make_bigint(double value, t_bigint *res, int *exp10);
+void			ft_get_prev(double value, t_bigint *res, int *exp10);
+void			ft_get_next(double value, t_bigint *res, int *exp10);
+void	get_margins(double value, t_bigint *lm, t_bigint *hm, int *expm);
+void	ft_bigint_round(t_bigint *res, int *rexp, t_bigint *margin, int mexp);
 
 #endif

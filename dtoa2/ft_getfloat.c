@@ -40,11 +40,12 @@ void	ft_make_bigint(double value, t_bigint *res, int *exp10)
 	val = *(uint64_t*)&value;
 	exp = (int32_t)((val & 0x7fffffffffffffff) >> 52) - 1075;
 	val = (val & 0x000fffffffffffff) | 0x0010000000000000;
+	/*
 	while (!(val & 1L))
 	{
 		++exp;
 		val >>= 1;
-	}
+	}*/
 	*exp10 = 0;
 	if (exp < 0)
 	{
@@ -68,11 +69,6 @@ void	ft_get_prev(double value, t_bigint *res, int *exp10)
 	exp = (int32_t)((val & 0x7fffffffffffffff) >> 52) - 1075;
 	val = (val & 0x000fffffffffffff) | 0x0010000000000000;
 	--val;
-	while (!(val & 1L))
-	{
-		++exp;
-		val >>= 1;
-	}
 	*exp10 = 0;
 	if (exp < 0)
 	{
@@ -96,11 +92,6 @@ void	ft_get_next(double value, t_bigint *res, int *exp10)
 	exp = (int32_t)((val & 0x7fffffffffffffff) >> 52) - 1075;
 	val = (val & 0x000fffffffffffff) | 0x0010000000000000;
 	++val;
-	while (!(val & 1L))
-	{
-		++exp;
-		val >>= 1;
-	}
 	*exp10 = 0;
 	if (exp < 0)
 	{
@@ -154,7 +145,6 @@ void	ft_bigint_round(t_bigint *res, int *rexp, t_bigint *margin, int mexp)
 	int			i;
 	int			n;
 	uint32_t	carry;
-
 	while (mexp < *rexp)
 	{
 		ft_bigint_mult_int(&tmp, res, 10);
@@ -168,7 +158,7 @@ void	ft_bigint_round(t_bigint *res, int *rexp, t_bigint *margin, int mexp)
 	res->arr[i] -= res->arr[i] % g_pow10[n - 1];
 	if (res->arr[i] / g_pow10[n - 1] % 10 < 5)
 		res->arr[i] -= res->arr[i] % 10;
-	else 
+	else
 	{
 		res->arr[i] -= res->arr[i] % g_pow10[n];
 		res->arr[i] += g_pow10[n];

@@ -1,40 +1,64 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_dtoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/14 18:42:35 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/10/14 19:42:53 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include "ft_bigint.h"
 #include "libft.h"
 
-char	*ft_dtoa(double d)
+void	ft_set_null(char *s, int prec, char spec)
 {
-	return (NULL);
+	int		i;
+
+	s[0] = '0';
+	i = 1;
+	if (prec && (spec == 'f' || spec == 'F' || spec == 'e' || spec == 'E'))
+	{
+		s[i++] = '.';
+		ft_memset(s + 2, '0', prec);
+		i += prec;
+	}
+	if (spec == 'e' || spec == 'E')
+	{
+		s[i++] = spec;
+		s[i++] = '+';
+		s[i++] = '0';
+		s[i++] = '0';
+	}
+	s[i] = '\0';
 }
-
-void	ft_read_double(char *s, double d, int prec, int *exp10)
-{
-
-}
-
-char	*ft_dtoa_unf(double d, int prec, int *exp10)
+/*
+char	*ft_dtoa(double d, int prec, int *exp10, char spec)
 {
 	uint64_t	val;
-	uint32_t	exp;
 	char		*s;
 	int			i;
 
 	if (!(s = (char*)malloc(prec + 4)))
 		return (NULL);
 	val = *(uint64_t*)&d;
-	s[0] = (val & 0x8000000000000000 ? '-' : '+');
-    if (((val & 0x7ff0000000000000)) == 0x7ff0000000000000)
-		ft_strcpy(s + 1, (val & 0x000fffffffffffff) ? "nan" : "inf");
-	else if (!(val & 0x7fffffffffffffff))
+	i = 0;
+	if (val & 0x8000000000000000)
+		s[i++] = '-';
+	if (((val & 0x7ff0000000000000)) == 0x7ff0000000000000)
 	{
-		s[1] = '0';
-		if (prec > 0)
-			s[2] = '.';
-		ft_memset(s + 2, '0', prec);
-		s[prec > 0 ? prec + 3 : 2] = '\0';
+		if (val & 0x000fffffffffffff)
+			ft_strcpy(s + i, ft_isupper(spec) ? "NAN" : "nan");
+		else
+			ft_strcpy(s + i, ft_isupper(spec) ? "INF" : "inf");
 	}
+	else if (!(val & 0x7fffffffffffffff))
+		ft_set_null(s + i, prec, spec);
 	else
-		ft_read_double(s + 1, d, prec, exp10);
+		ft_dtoa_format(s + i, d, prec, exp10);
 	return (s);
 }
-
+*/

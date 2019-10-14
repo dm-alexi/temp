@@ -21,9 +21,12 @@ int main()
 	//printf(" * 10 ^ %d\n", exp10);
 	printf("%.55f \n", d);
 	t = (uint64_t*)&d;
-	//*t = 0xff8fffffffffffff;
-	//d = 12345.56789;
-	printf("%E", d);
+	//*t = 0x7ff0000000000000;
+	//*t = 0xffffffffffffffff;
+	//d = 123;
+	//d = 0;
+	*t = 0x8000000000000000;
+	printf("%.e", d);
 
     return 0;
 }

@@ -17,37 +17,34 @@
 #include "ft_printf.h"
 #include "libft/libft.h"
 
-static unsigned int		maxintlen(intmax_t n, t_format *format)
+static unsigned int		maxintlen(intmax_t n)
 {
 	unsigned int		len;
 
-	len = (n < 0) || format->flags & 6;
-	if (!n)
-		++len;
+	len = (n <= 0);
 	while (n && ++len)
 		n /= 10;
 	return (len);
 }
 
-static unsigned int		intmaxtoa(intmax_t n, char **s, t_format *format)
+static unsigned int		intmaxtoa(intmax_t n, char **s)
 {
 	unsigned int		len;
 	unsigned int		tmp;
 
-	len = maxintlen(n, format);
+	len = maxintlen(n);
 	if (!(*s = (char*)malloc(len + 1)))
 		return (0);
 	tmp = len;
 	(*s)[tmp] = '\0';
 	if (!n)
-		(*s)[((format->flags & 6) > 0)] = '0';
-	if (n < 0 && ((*s)[0] = '-'))
+		**s = '0';
+	if (n < 0)
 	{
+		**s = '-';
 		(*s)[--tmp] = -(n % 10) + '0';
 		n = -(n / 10);
 	}
-	else if (format->flags & 6)
-		(*s)[0] = format->flags & 2 ? '+' : ' ';
 	while (n)
 	{
 		(*s)[--tmp] = n % 10 + '0';
@@ -77,7 +74,7 @@ static intmax_t			get_integer(t_format *format, va_list *va)
 	return ((int)va_arg(*va, int));
 }
 
-void					ft_printf_int(t_format *format, va_list *va, int *n)
+int						ft_printf_int(t_format *format, va_list *va)
 {
 	char			*s;
 	intmax_t		integer;
@@ -85,7 +82,7 @@ void					ft_printf_int(t_format *format, va_list *va, int *n)
 	unsigned int	offset;
 
 	integer = get_integer(format, va);
-	len = intmaxtoa(integer, &s, format);
+	len = intmaxtoa(integer, &s);
 	offset = (format->width > len ? format->width - len : 0);
 	if (!(format->flags & 1))
 		ft_printf_strfill(1, format->flags & 16 ? '0' : ' ', offset);
@@ -93,5 +90,5 @@ void					ft_printf_int(t_format *format, va_list *va, int *n)
 	if (format->flags & 1)
 		ft_printf_strfill(1, ' ', offset);
 	free(s);
-	*n += offset + len;
+	return (offset + len);
 }

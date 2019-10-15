@@ -19,7 +19,7 @@ void	ft_printf_strfill(int fd, char c, int n)
 		write(fd, &c, 1);
 }
 
-void	ft_printf_char(t_format *format, va_list *va, int *n)
+int		ft_printf_char(t_format *format, va_list *va)
 {
 	char		c;
 	wchar_t		wc;
@@ -37,10 +37,10 @@ void	ft_printf_char(t_format *format, va_list *va, int *n)
 	write(1, format->length == 'l' ? (char*)&wc : &c, len);
 	if ((format->flags & 1))
 		ft_printf_strfill(1, ' ', offset);
-	*n += offset + 1;
+	return (offset + 1);
 }
 
-void	ft_printf_string(t_format *format, va_list *va, int *n)
+int		ft_printf_string(t_format *format, va_list *va)
 {
 	char		*s;
 	wchar_t		*ws;
@@ -61,5 +61,5 @@ void	ft_printf_string(t_format *format, va_list *va, int *n)
 		write(1, s, len);
 	if ((format->flags & 1))
 		ft_printf_strfill(1, ' ', offset);
-	*n += offset + len;
+	return (offset + len);
 }

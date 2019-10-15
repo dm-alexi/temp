@@ -17,7 +17,8 @@
 void	set_flags(const char **s, t_format *format)
 {
 	format->flags = 0;
-	while (**s == '-' || **s == '+' || **s == ' ' || **s == '#' || **s == '0')
+	while (**s == '-' || **s == '+' || **s == ' ' || **s == '#' || **s == '0'
+	|| **s == '\'')
 	{
 		if (**s == '-')
 			format->flags |= 1;
@@ -50,6 +51,8 @@ void	set_wp(const char **s, t_format *format, va_list *va)
 			format->precision = ft_strtol((char*)*s, (char**)s, 10);
 		else if (**s == '*' && ++*s)
 			format->precision = va_arg(*va, int);
+		if (format->precision < 0)
+			format->precision = -format->precision;
 	}
 }
 
@@ -77,10 +80,11 @@ void	set_format(const char **s, t_format *format, va_list *va)
 	set_specifier(s, format);
 }
 
-void	print_formatted(const char **s, va_list *va, int *n)
+int		print_formatted(const char **s, va_list *va, int n)
 {
 	t_format	format;
 	const char	*t;
+	int			count;
 
 	set_format(s, &format, va);
 	if (!format.specifier)
@@ -88,19 +92,19 @@ void	print_formatted(const char **s, va_list *va, int *n)
 		t = *s - 1;
 		while (*t != '%')
 			--t;
-		*n += *s - t;
-		write(1, t, *s - t);
-		return ;
+		count = *s - t;
+		write(1, t, count);
 	}
-	if (format.specifier == 'c')
-		ft_printf_char(&format, va, n);
-	if (format.specifier == 's')
-		ft_printf_string(&format, va, n);
-	if (format.specifier == 'd' || format.specifier == 'i')
-		ft_printf_int(&format, va, n);
+	else if (format.specifier == 'c')
+		count = ft_printf_char(&format, va);
+	else if (format.specifier == 's')
+		count = ft_printf_string(&format, va);
+	else if (format.specifier == 'd' || format.specifier == 'i')
+		count = ft_printf_int(&format, va);
 	//if (format.specifier == 'u' || format.specifier == 'o' ||
 	//format.specifier == 'x' || format.specifier == 'X')
 	//	ft_printf_uint(&format, va, n);
+	return (count);
 }
 
 int		ft_printf(const char *line, ...)
@@ -121,7 +125,7 @@ int		ft_printf(const char *line, ...)
 		if (*s && *++s == '%' && ++n)
 			write(1, s++, 1);
 		else if (*s)
-			print_formatted(&s, &va, &n);
+			print_formatted(&s, &va, n);
 		line = s;
 	}
 	va_end(va);

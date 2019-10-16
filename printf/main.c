@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdint.h>
 #include "ft_printf.h"
+
+#include <limits.h>
 
 int get_exponent(double d);
 
@@ -35,14 +38,21 @@ int main()
     double dub = 0.01171875;
     double tmp = -2;
     double nul = -0.0;
-    //ft_printf("%#X!\n", 56);
-    printf("%#p\n", &f + 30000000);
-	ft_printf("%#p!\n", &f + 30000000);
+   /* printf("!%p!\n", &f);
+	ft_printf("!%p!\n", &f);
+    printf("!%p!\n", NULL);
+	ft_printf("!%p!\n", NULL);
+    printf("%zu\n", sizeof(void*));
+    ft_printf("% #8x\n", 42);
+    printf("% #8x\n", 42);*/
+    printf("%#o", 0);
+    printf("\n");
+    ft_printf("%#o", 0);
  /*   printf("%.12f\n", f);
     printf("%.12Lf\n", d);
     printf("%f\n", 0.0);
     printf("%d %d %d\n", sizeof(float), sizeof(double), sizeof(long double));
-*/
+
     //unsigned char c = 128;
     unsigned char *t = (unsigned char*)&nul + 7;
     *t = *t & 0;
@@ -64,6 +74,6 @@ int main()
     dtoa(dub, NULL, 0);
     dtoa(tmp, NULL, 0);
     printf("%.20f\n", 500/3.0);
-    printf("%lu", sizeof(long double));
+    printf("%lu", sizeof(long double));*/
     return 0;
 }

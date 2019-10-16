@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_integer.c                                :+:      :+:    :+:   */
+/*   ft_printf_int.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:22:02 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/06 15:39:04 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/16 23:23:21 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int			intmaxlen(intmax_t n, char **s, t_format *format)
 	int		apostrophes;
 
 	sign = (n < 0 || (format->flags & 6));
-	len = (!n && format->precision);
+	len = !n && format->precision;
 	apostrophes = 0;
 	while (n && ++len)
 		n /= 10;
@@ -35,7 +35,7 @@ static int			intmaxlen(intmax_t n, char **s, t_format *format)
 	len += sign + apostrophes;
 	if (!(*s = (char*)malloc(len)))
 		return (-1);
-    ft_memset(*s, '0', len);
+	ft_memset(*s, '0', len);
 	return (len);
 }
 
@@ -68,8 +68,12 @@ static int			intmaxtoa(intmax_t n, char **s, t_format *format)
 
 static intmax_t		get_integer(t_format *format, va_list *va)
 {
-	if (!format->length || format->length == 'H' || format->length == 'h')
+	if (!format->length)
 		return ((int)va_arg(*va, int));
+	if (format->length == 'H')
+		return ((char)va_arg(*va, int));
+	if (format->length == 'h')
+		return ((short)va_arg(*va, int));
 	if (format->length == 'l')
 		return ((long)va_arg(*va, long));
 	if (format->length == 'L')

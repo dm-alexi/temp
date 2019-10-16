@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_uint.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/16 19:35:11 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/10/16 23:23:17 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <sys/types.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -5,18 +17,16 @@
 #include "ft_printf.h"
 #include "libft/libft.h"
 
-static int			uintmaxlen(intmax_t n, char **s, t_format *format, int b)
+static int			uintmaxlen(uintmax_t n, char **s, t_format *format, int b)
 {
 	int		len;
-	int		sign;
 	int		prefix;
 	int		apostrophes;
 
-	sign = (format->flags & 6);
 	len = (!n && format->precision);
 	apostrophes = 0;
 	prefix = 0;
-	if (n && (format->flags & 8) && ft_strchr("oxX", format->specifier))
+	if ((format->flags & 8) && ft_strchr("oxX", format->specifier))
 		prefix = format->specifier == 'o' ? 1 : 2;
 	while (n && ++len)
 		n /= b;
@@ -24,10 +34,10 @@ static int			uintmaxlen(intmax_t n, char **s, t_format *format, int b)
 		apostrophes = (len - 1) / 3;
 	if (len < format->precision)
 		len = format->precision;
-	len += sign + apostrophes + prefix;
+	len += apostrophes + prefix;
 	if (!(*s = (char*)malloc(len)))
 		return (-1);
-    ft_memset(*s, '0', len);
+	ft_memset(*s, '0', len);
 	return (len);
 }
 
@@ -42,13 +52,11 @@ static int			uintmaxtoa(uintmax_t n, char **s, t_format *format, int b)
 		return (len);
 	tmp = len;
 	count = 0;
-	if (format->flags & 6)
-		**s = (format->flags & 2) ? '+' : ' ';
 	if (b == 16 && (format->flags & 8))
-		(*s)[(format->flags & 6) ? 2 : 1] = format->specifier;
+		(*s)[1] = format->specifier;
 	while (n)
 	{
-		if ((digit = n % b) < 9)
+		if ((digit = n % b) < 10)
 			(*s)[--tmp] = digit + '0';
 		else
 			(*s)[--tmp] = digit - 10 + (format->specifier == 'x' ? 'a' : 'A');
@@ -61,8 +69,12 @@ static int			uintmaxtoa(uintmax_t n, char **s, t_format *format, int b)
 
 static uintmax_t	get_uinteger(t_format *format, va_list *va)
 {
-	if (!format->length || format->length == 'H' || format->length == 'h')
+	if (!format->length)
 		return ((unsigned int)va_arg(*va, unsigned int));
+	if (format->length == 'H')
+		return ((unsigned char)va_arg(*va, unsigned int));
+	if (format->length == 'h')
+		return ((unsigned short)va_arg(*va, unsigned int));
 	if (format->length == 'l')
 		return ((unsigned long)va_arg(*va, unsigned long));
 	if (format->length == 'L')

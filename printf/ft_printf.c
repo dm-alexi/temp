@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:14:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/06 15:39:54 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/16 22:59:15 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	set_specifier(const char **s, t_format *format)
 	else if (**s && ft_strchr("hljztL", **s))
 		format->length = *((*s)++);
 	format->specifier = 0;
-	if (**s && ft_strchr("cdefginpsuxXEFG", **s))
+	if (**s && ft_strchr("cdefginopsuxXEFG%", **s))
 		format->specifier = *((*s)++);
 }
 
@@ -83,7 +83,9 @@ int		print_formatted(const char **s, va_list *va, int n)
 
 	set_format(s, &format, va);
 	if (!format.specifier)
-		count = ft_printf_nospec(*s);
+		count = 0;
+	else if (format.specifier == '%')
+		count = ft_printf_percent(&format);
 	else if (format.specifier == 'c')
 		count = ft_printf_char(&format, va);
 	else if (format.specifier == 's')
@@ -100,6 +102,7 @@ int		print_formatted(const char **s, va_list *va, int n)
 int		ft_printf(const char *line, ...)
 {
 	int				n;
+	int				count;
 	va_list			va;
 	const char		*s;
 
@@ -112,10 +115,13 @@ int		ft_printf(const char *line, ...)
 			++s;
 		n += s - line;
 		write(1, line, s - line);
-		if (*s && *++s == '%' && ++n)
-			write(1, s++, 1);
-		else if (*s)
-			print_formatted(&s, &va, n);
+		if (*s)
+		{
+			++s;
+			if ((count = print_formatted(&s, &va, n)) < 0)
+				return (-1);
+			n += count;
+		}
 		line = s;
 	}
 	va_end(va);

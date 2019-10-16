@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_ptr.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/16 19:21:27 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/10/16 20:00:17 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stddef.h>
 #include <stdint.h>
 #include <unistd.h>
@@ -13,14 +25,14 @@ int		ft_printf_ptr(t_format *format, va_list *va)
 	char		*s;
 
 	p = (uintptr_t)va_arg(*va, void*);
-	len = format->precision < sizeof(void*) ? sizeof(void*) : format->precision; //fix here, unsigned vs signed
+	len = format->precision < (int)sizeof(void*) ? (int)sizeof(void*) :
+		format->precision;
 	if (!(s = (char*)malloc(len)))
 		return (-1);
-    tmp = len;
-    while (tmp)
+	tmp = len;
+	while (tmp)
 	{
-		offset = p % 16;
-		s[--tmp] = offset < 10 ? offset + '0' : offset - 10 + 'a';
+		s[--tmp] = p % 16 < 10 ? p % 16 + '0' : p % 16 - 10 + 'a';
 		p /= 16;
 	}
 	offset = (format->width > len ? format->width - len : 0);
@@ -32,4 +44,3 @@ int		ft_printf_ptr(t_format *format, va_list *va)
 	free(s);
 	return (tmp);
 }
-

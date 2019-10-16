@@ -35,6 +35,9 @@ int main()
     double dub = 0.01171875;
     double tmp = -2;
     double nul = -0.0;
+    //ft_printf("%#X!\n", 56);
+    printf("%#p\n", &f + 30000000);
+	ft_printf("%#p!\n", &f + 30000000);
  /*   printf("%.12f\n", f);
     printf("%.12Lf\n", d);
     printf("%f\n", 0.0);

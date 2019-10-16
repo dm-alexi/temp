@@ -17,8 +17,7 @@
 void	set_flags(const char **s, t_format *format)
 {
 	format->flags = 0;
-	while (**s == '-' || **s == '+' || **s == ' ' || **s == '#' || **s == '0'
-	|| **s == '\'')
+	while (**s && ft_strchr("-+ #0\'", **s))
 	{
 		if (**s == '-')
 			format->flags |= 1;
@@ -39,7 +38,7 @@ void	set_flags(const char **s, t_format *format)
 void	set_wp(const char **s, t_format *format, va_list *va)
 {
 	format->width = 0;
-	format->precision = 6;
+	format->precision = -1;
 	if (ft_isdigit(**s))
 		format->width = ft_strtol((char*)*s, (char**)s, 10);
 	else if (**s == '*' && ++*s)
@@ -63,13 +62,10 @@ void	set_specifier(const char **s, t_format *format)
 		format->length = 'H';
 	else if (ft_strnequ(*s, "ll", 2) && (*s += 2))
 		format->length = 'L';
-	else if (**s == 'h' || **s == 'l' || **s == 'j' || **s == 'z' || **s == 't'
-	|| **s == 'L')
+	else if (**s && ft_strchr("hljztL", **s))
 		format->length = *((*s)++);
 	format->specifier = 0;
-	if ((**s >= 'a' && **s <= 'g') || **s == 'i' || (**s >= 'n' && **s <= 'p')
-	|| **s == 's' || **s == 'u' || **s == 'x' || **s == 'A' || **s == 'E' ||
-	**s == 'F' || **s == 'G')
+	if (**s && ft_strchr("cdefginpsuxXEFG", **s))
 		format->specifier = *((*s)++);
 }
 
@@ -83,27 +79,21 @@ void	set_format(const char **s, t_format *format, va_list *va)
 int		print_formatted(const char **s, va_list *va, int n)
 {
 	t_format	format;
-	const char	*t;
 	int			count;
 
 	set_format(s, &format, va);
 	if (!format.specifier)
-	{
-		t = *s - 1;
-		while (*t != '%')
-			--t;
-		count = *s - t;
-		write(1, t, count);
-	}
+		count = ft_printf_nospec(*s);
 	else if (format.specifier == 'c')
 		count = ft_printf_char(&format, va);
 	else if (format.specifier == 's')
 		count = ft_printf_string(&format, va);
 	else if (format.specifier == 'd' || format.specifier == 'i')
 		count = ft_printf_int(&format, va);
-	//if (format.specifier == 'u' || format.specifier == 'o' ||
-	//format.specifier == 'x' || format.specifier == 'X')
-	//	ft_printf_uint(&format, va, n);
+	else if (ft_strchr("uoxX", format.specifier))
+		count = ft_printf_uint(&format, va);
+	else if (format.specifier == 'p')
+		count = ft_printf_ptr(&format, va);
 	return (count);
 }
 

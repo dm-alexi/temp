@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:14:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/16 22:59:15 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/17 20:18:10 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,11 @@ void	set_wp(const char **s, t_format *format, va_list *va)
 	format->precision = -1;
 	if (ft_isdigit(**s))
 		format->width = ft_strtol((char*)*s, (char**)s, 10);
-	else if (**s == '*' && ++*s)
-		format->width = va_arg(*va, int);
+	else if (**s == '*' && ++*s && (format->width = va_arg(*va, int)) < 0)
+	{
+		format->width = -format->width;
+		format->flags |= 1;
+	}
 	if (**s == '.' && ++*s)
 	{
 		format->precision = 0;

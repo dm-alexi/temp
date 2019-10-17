@@ -37,13 +37,15 @@ int main()
     long double d = 392.6512342346L;
     double dub = 0.01171875;
     double tmp = -2;
-    double nul = -0.0;
+    double nul = -0.0;/*
     printf("%5d! %05d!\n", -42, -42);
     ft_printf("%5d! %05d!\n", -42, -42);
     printf("%+5d! %+05d!\n", 42, 42);
     ft_printf("%+5d! %+05d!\n", 42, 42);
     printf("% +7.5d! %+07.5d!\n", 42, 42);
-    ft_printf("% +7.5d! %+07.5d!\n", 42, 42);
+    ft_printf("% +7.5d! %+07.5d!\n", 42, 42);*/
+    ft_printf("{%*3d}", 5, 0);
+    printf("{%*3d}", 5, 0);
    /* printf("!%p!\n", &f);
 	ft_printf("!%p!\n", &f);
     printf("!%p!\n", NULL);

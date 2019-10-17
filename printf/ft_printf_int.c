@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:22:02 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/16 23:23:21 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/17 20:38:00 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ static int			intmaxlen(intmax_t n, char **s, t_format *format)
 		len = format->width;
 	if (!(*s = (char*)malloc(len)))
 		return (-1);
-	ft_memset(*s, (format->flags & 16) && format->precision < 0
-	? '0' : ' ', len);
+	ft_memset(*s, (format->flags & 16) && format->precision < 0 ? '0' :
+		' ', len);
+	if (!n && format->precision < 0)
+		format->precision = 1;
 	return (len);
 }
 
@@ -53,17 +55,16 @@ static int			intmaxtoa(intmax_t n, char **s, t_format *format)
 		return (len);
 	tmp = len;
 	sign = n < 0 ? '-' : 0;
-	count = 0;
-	if (n < 0 && ++count && ((*s)[--tmp] = -(n % 10) + '0'))
-		n = -(n / 10);
-	else if (format->flags & 6)
+	if (!sign && format->flags & 6)
 		sign = (format->flags & 2) ? '+' : ' ';
-	while (n || --format->precision > 1)
+	count = 0;
+	while (n || format->precision > 0)
 	{
-		(*s)[--tmp] = n % 10 + '0';
+		(*s)[--tmp] = n >= 0 ? n % 10 + '0' : -(n % 10) + '0';
 		if (n && (format->flags & 32) && !(++count % 3))
 			(*s)[--tmp] = '\'';
-		n /= 10;
+		n = n >= 0 ? n / 10 : -(n / 10);
+		--format->precision;
 	}
 	if (sign)
 		(*s)[(*s)[--tmp] == ' ' ? tmp : 0] = sign;

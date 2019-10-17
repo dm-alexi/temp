@@ -33,9 +33,12 @@ static int			intmaxlen(intmax_t n, char **s, t_format *format)
 	if (len < format->precision)
 		len = format->precision;
 	len += sign + apostrophes;
+	if (!(format->flags & 1) && len < format->width)
+		len = format->width;
 	if (!(*s = (char*)malloc(len)))
 		return (-1);
-	ft_memset(*s, '0', len);
+	ft_memset(*s, (format->flags & 16) && format->precision < 0
+	? '0' : ' ', len);
 	return (len);
 }
 
@@ -44,25 +47,26 @@ static int			intmaxtoa(intmax_t n, char **s, t_format *format)
 	int		len;
 	int		tmp;
 	int		count;
+	char	sign;
 
 	if ((len = intmaxlen(n, s, format)) <= 0)
 		return (len);
 	tmp = len;
+	sign = n < 0 ? '-' : 0;
 	count = 0;
-	if (n < 0 && ++count && (**s = '-'))
-	{
-		(*s)[--tmp] = -(n % 10) + '0';
+	if (n < 0 && ++count && ((*s)[--tmp] = -(n % 10) + '0'))
 		n = -(n / 10);
-	}
 	else if (format->flags & 6)
-		**s = (format->flags & 2) ? '+' : ' ';
-	while (n)
+		sign = (format->flags & 2) ? '+' : ' ';
+	while (n || --format->precision > 1)
 	{
 		(*s)[--tmp] = n % 10 + '0';
-		n /= 10;
-		if ((format->flags & 32) && !(++count % 3))
+		if (n && (format->flags & 32) && !(++count % 3))
 			(*s)[--tmp] = '\'';
+		n /= 10;
 	}
+	if (sign)
+		(*s)[(*s)[--tmp] == ' ' ? tmp : 0] = sign;
 	return (len);
 }
 
@@ -100,10 +104,8 @@ int					ft_printf_int(t_format *format, va_list *va)
 		return (-1);
 	offset = (format->width > len ? format->width - len : 0);
 	len_total = len + offset;
-	if ((!(format->flags & 1) &&
-	ft_printf_strfill(1, format->flags & 16 ? '0' : ' ', offset) < offset) ||
-	write(1, s, len) < len ||
-	((format->flags & 1) && ft_printf_strfill(1, ' ', offset) < offset))
+	if (write(1, s, len) < len ||
+	((format->flags & 1) && ft_printf_pad(1, ' ', offset) < offset))
 		len_total = -1;
 	free(s);
 	return (len_total);

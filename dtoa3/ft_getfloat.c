@@ -6,14 +6,15 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 14:37:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/14 18:53:39 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/12 21:04:48 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "ft_bigint.h"
 
 static const int	g_pow10[] = {1, 10, 100, 1000, 10000, 100000, 1000000,
-	10000000};
+	10000000, 100000000};
 
 void	get_double(double value, int *sign, uint64_t *frac, int *exp)
 {
@@ -70,19 +71,27 @@ static int	intlen(int n)
 	return (i);
 }
 
-void	ft_bigint_round(char *s, t_bigint *res, int *exp10, int prec)
+//check rounding on unix
+char	*ft_bigint2str(t_bigint *a)
 {
-	int		i;
-	int		j;
-	int		k;
-	int		len;
+	char		*s;
+	int			j;
+	int			i;
+	uint32_t	t;
 
-    i = 0;
-    j = res->len - 1;
-    k = intlen(res->arr[res->len - 1]);
-    len = (res->len - 1) * 9 + k;
-    while (i <= prec && j >= 0)
+	if (!(s = (char*)malloc(9 * a->len)))
+		return (NULL);
+	i = a->len - 1;
+	while (i >= 0)
 	{
-
+		t = a->arr[i--];
+		j = 8;
+		while (j > 0)
+		{
+			*s++ = t / g_pow10[j] + '0';
+			t %= g_pow10[j--];
+		}
+		*s++ = t + '0';
 	}
+    return (s - 9 * a->len);
 }

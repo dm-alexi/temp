@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include <float.h>
 #include "ft_bigint.h"
@@ -10,6 +11,7 @@ int main()
 	int exp;
 	int exp10, mexp10;
 	double d = 0.0000000000004;
+	double dub = 9.99956;
 	uint64_t *t;
 
 	t_bigint tmp, tmp2, pow, res;
@@ -26,7 +28,9 @@ int main()
 	//d = 123;
 	//d = 0;
 	*t = 0x8000000000000000;
-	printf("%.e", d);
+	printf("%.e\n", d);
+	printf("%f %.4f\n", dub, dub);
+	write(1, ft_bigint2str(&res), res.len * 9);
 
     return 0;
 }

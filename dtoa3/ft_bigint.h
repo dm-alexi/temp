@@ -35,9 +35,7 @@ void			ft_bigint_pow5(t_bigint *res, int32_t exp);
 void			get_double(double value, int *sign, uint64_t *frac, int *exp);
 void			print_bigint(t_bigint *a);
 void			ft_make_bigint(double value, t_bigint *res, int *exp10);
-void			ft_get_prev(double value, t_bigint *res, int *exp10);
-void			ft_get_next(double value, t_bigint *res, int *exp10);
-void	get_margins(double value, t_bigint *lm, t_bigint *hm, int *expm);
-//void	ft_bigint_round(t_bigint *res, int *exp, int n);
+char	*ft_bigint2str(t_bigint *a);
+
 
 #endif

@@ -106,9 +106,9 @@ int					ft_printf_uint(t_format *format, va_list *va)
 	offset = (format->width > len ? format->width - len : 0);
 	base = len + offset;
 	if ((!(format->flags & 1) &&
-	ft_printf_strfill(1, format->flags & 16 ? '0' : ' ', offset) < offset) ||
+	ft_printf_pad(1, format->flags & 16 ? '0' : ' ', offset) < offset) ||
 	write(1, s, len) < len ||
-	((format->flags & 1) && ft_printf_strfill(1, ' ', offset) < offset))
+	((format->flags & 1) && ft_printf_pad(1, ' ', offset) < offset))
 		base = -1;
 	free(s);
 	return (base);

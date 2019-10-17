@@ -50,8 +50,6 @@ void	set_wp(const char **s, t_format *format, va_list *va)
 			format->precision = ft_strtol((char*)*s, (char**)s, 10);
 		else if (**s == '*' && ++*s)
 			format->precision = va_arg(*va, int);
-		if (format->precision < 0)
-			format->precision = -format->precision;
 	}
 }
 
@@ -65,7 +63,7 @@ void	set_specifier(const char **s, t_format *format)
 	else if (**s && ft_strchr("hljztL", **s))
 		format->length = *((*s)++);
 	format->specifier = 0;
-	if (**s && ft_strchr("cdefginopsuxXEFG%", **s))
+	if (**s && ft_strchr("cdefginopsuxEFGX%", **s))
 		format->specifier = *((*s)++);
 }
 

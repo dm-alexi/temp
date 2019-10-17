@@ -25,7 +25,7 @@ typedef struct	s_format
 }				t_format;
 
 int				ft_printf(const char *format, ...);
-int				ft_printf_strfill(int fd, char c, int n);
+int				ft_printf_pad(int fd, char c, int n);
 int				ft_printf_percent(t_format *format);
 int				ft_printf_string(t_format *format, va_list *va);
 int				ft_printf_char(t_format *format, va_list *va);

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 19:35:11 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/17 23:34:59 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/17 23:47:24 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,10 @@ static int			base16toa(uintmax_t n, char **s, t_format *format)
 		n /= 16;
 		--format->precision;
 	}
-	if ((format->flags & 8))
+	if ((format->flags & 8) && **s == '0')
 		(*s)[1] = format->specifier;
+	else if (format->flags & 8)
+		ft_strncpy(*s + tmp - 2, format->specifier == 'x' ? "0x" : "0X", 2);
 	return (len);
 }
 

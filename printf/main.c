@@ -44,8 +44,8 @@ int main()
     ft_printf("%+5d! %+05d!\n", 42, 42);
     printf("% +7.5d! %+07.5d!\n", 42, 42);
     ft_printf("% +7.5d! %+07.5d!\n", 42, 42);*/
-    ft_printf("{%*3d}", 5, 0);
-    printf("{%*3d}", 5, 0);
+    ft_printf("%#6o\n", 2500);
+    printf("%#6o", 2500);
    /* printf("!%p!\n", &f);
 	ft_printf("!%p!\n", &f);
     printf("!%p!\n", NULL);

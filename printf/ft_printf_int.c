@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:22:02 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/17 20:38:00 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/17 23:35:17 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ static int			intmaxlen(intmax_t n, char **s, t_format *format)
 		len = format->width;
 	if (!(*s = (char*)malloc(len)))
 		return (-1);
-	ft_memset(*s, (format->flags & 16) && format->precision < 0 ? '0' :
-		' ', len);
+	ft_memset(*s, (format->flags & 16) ? '0' : ' ', len);
 	if (!n && format->precision < 0)
 		format->precision = 1;
 	return (len);
@@ -100,6 +99,8 @@ int					ft_printf_int(t_format *format, va_list *va)
 	int			offset;
 	int			len_total;
 
+	if ((format->flags & 16) && format->precision >= 0)
+		format->flags &= ~16;
 	integer = get_integer(format, va);
 	if ((len = intmaxtoa(integer, &s, format)) < 0)
 		return (-1);

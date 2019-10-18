@@ -117,6 +117,7 @@ static uintmax_t	get_uinteger(t_format *format, va_list *va)
 		return ((uintmax_t)va_arg(*va, uintmax_t));
 	if (format->length == 'z')
 		return ((size_t)va_arg(*va, size_t));
+	//check uintptr_t (see man)
 	if (format->length == 't')
 		return ((ptrdiff_t)va_arg(*va, ptrdiff_t));
 	return ((unsigned int)va_arg(*va, unsigned int));

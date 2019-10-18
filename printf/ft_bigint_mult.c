@@ -12,7 +12,8 @@
 
 #include "ft_bigint.h"
 
-void	ft_bigint_mult_int(t_bigint *res, const t_bigint *a, const uint32_t b)
+static void		ft_bigint_mult_int(t_bigint *res, const t_bigint *a,
+	const uint32_t b)
 {
 	int			i;
 	uint64_t	product;
@@ -39,7 +40,8 @@ void	ft_bigint_mult_int(t_bigint *res, const t_bigint *a, const uint32_t b)
 	}
 }
 
-void	ft_bigint_mult(t_bigint *res, const t_bigint *a, const t_bigint *b)
+void			ft_bigint_mult(t_bigint *res, const t_bigint *a,
+	const t_bigint *b)
 {
 	int			i;
 	int			j;

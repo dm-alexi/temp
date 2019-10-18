@@ -39,7 +39,10 @@ int main()
     double tmp = -2;
     double nul = -0.0;
 
-
+    printf("%.f!\n", nul);
+	printf("%f\n%Lf\n", dub, (long double)dub);
+	printf("%f\n%Lf\n", nul, (long double)nul);
+	printf("%f\n%Lf\n", tmp, (long double)tmp);
 /*
     //unsigned char c = 128;
     unsigned char *t = (unsigned char*)&nul + 7;

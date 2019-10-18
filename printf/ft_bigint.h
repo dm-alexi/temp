@@ -29,13 +29,12 @@ void			ft_bigint_sum(t_bigint *res, const t_bigint *a,
 				const t_bigint *b);
 void			ft_bigint_mult(t_bigint *res, const t_bigint *a,
 				const t_bigint *b);
-void	ft_bigint_mult_int(t_bigint *res, const t_bigint *a, const uint32_t b);
 void			ft_bigint_pow2(t_bigint *res, int32_t exp);
 void			ft_bigint_pow5(t_bigint *res, int32_t exp);
-void			get_double(double value, int *sign, uint64_t *frac, int *exp);
+//void			get_double(double value, int *sign, uint64_t *frac, int *exp);
 void			print_bigint(t_bigint *a);
 void			ft_make_bigint(double value, t_bigint *res, int *exp10);
-char	*ft_bigint2str(t_bigint *a);
+char			*ft_bigint2str(t_bigint *a);
 
 
 #endif

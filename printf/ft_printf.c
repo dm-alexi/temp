@@ -80,24 +80,25 @@ void	set_format(const char **s, t_format *format, va_list *va)
 int		print_formatted(const char **s, va_list *va, int n)
 {
 	t_format	format;
-	int			count;
 
 	set_format(s, &format, va);
 	if (!format.specifier)
-		count = 0;
-	else if (format.specifier == '%')
-		count = ft_printf_percent(&format);
-	else if (format.specifier == 'c')
-		count = ft_printf_char(&format, va);
-	else if (format.specifier == 's')
-		count = ft_printf_string(&format, va);
-	else if (format.specifier == 'd' || format.specifier == 'i')
-		count = ft_printf_int(&format, va);
-	else if (ft_strchr("uoxX", format.specifier))
-		count = ft_printf_uint(&format, va);
-	else if (format.specifier == 'p')
-		count = ft_printf_ptr(&format, va);
-	return (count);
+		return (0);
+	if (format.specifier == '%')
+		return (ft_printf_percent(&format));
+	if (format.specifier == 'c')
+		return (ft_printf_char(&format, va));
+	if (format.specifier == 's')
+		return (ft_printf_string(&format, va));
+	if (format.specifier == 'd' || format.specifier == 'i')
+		return (ft_printf_int(&format, va));
+	if (ft_strchr("uoxX", format.specifier))
+		return (ft_printf_uint(&format, va));
+	if (format.specifier == 'p')
+		return (ft_printf_ptr(&format, va));
+	if (ft_strchr("efgEFG", format.specifier))
+		return (ft_printf_float(&format, va));
+	return (0);
 }
 
 int		ft_printf(const char *line, ...)

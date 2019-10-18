@@ -37,31 +37,10 @@ int main()
     long double d = 392.6512342346L;
     double dub = 0.01171875;
     double tmp = -2;
-    double nul = -0.0;/*
-    printf("%5d! %05d!\n", -42, -42);
-    ft_printf("%5d! %05d!\n", -42, -42);
-    printf("%+5d! %+05d!\n", 42, 42);
-    ft_printf("%+5d! %+05d!\n", 42, 42);
-    printf("% +7.5d! %+07.5d!\n", 42, 42);
-    ft_printf("% +7.5d! %+07.5d!\n", 42, 42);*/
-    ft_printf("%#8x\n", 42);
-    printf("%#8x", 42);
-   /* printf("!%p!\n", &f);
-	ft_printf("!%p!\n", &f);
-    printf("!%p!\n", NULL);
-	ft_printf("!%p!\n", NULL);
-    printf("%zu\n", sizeof(void*));
-    ft_printf("% #8x\n", 42);
-    printf("% #8x\n", 42);
-    printf("%#o", 0);
-    printf("\n");
-    ft_printf("%#o", 0);*/
-    //printf("%05%\n");
- /*   printf("%.12f\n", f);
-    printf("%.12Lf\n", d);
-    printf("%f\n", 0.0);
-    printf("%d %d %d\n", sizeof(float), sizeof(double), sizeof(long double));
+    double nul = -0.0;
 
+
+/*
     //unsigned char c = 128;
     unsigned char *t = (unsigned char*)&nul + 7;
     *t = *t & 0;

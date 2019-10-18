@@ -32,6 +32,7 @@ int				ft_printf_char(t_format *format, va_list *va);
 int				ft_printf_int(t_format *format, va_list *va);
 int				ft_printf_uint(t_format *format, va_list *va);
 int				ft_printf_ptr(t_format *format, va_list *va);
+int				ft_printf_float(t_format *format, va_list *va);
 void			printbin(void *p, int n);
 int				dtoa(double value, char *s, int prec);
 

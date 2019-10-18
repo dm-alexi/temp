@@ -15,23 +15,13 @@
 #include <stdint.h>
 #include <unistd.h>
 #include "ft_printf.h"
+#include "ft_bigint.h"
 #include "libft/libft.h"
 
-static unsigned int		*ftoa(double d, char **s)
-{
-	int		    arr[37];
-    int         order;
-    int64_t     significand;
-
-    significand = 1;
-    //order =
-    return 0;
-}
-
-void	ft_printf_float(t_format *format, va_list *va, int *n)
+int		ft_printf_float(t_format *format, va_list *va)
 {
     double		d;
 
 	d = (double)va_arg(*va, double);
-
+	return (0);
 }

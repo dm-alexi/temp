@@ -27,9 +27,11 @@ static int			uintmaxlen(uintmax_t n, char **s, t_format *format, int b)
 	while (n && ++len)
 		n /= b;
 	if ((format->flags & 8) && b == 8)
-		format->precision = format->precision <= len ? len + 1 : format->precision;
+		format->precision = format->precision <= len ?
+		len + 1 : format->precision;
 	if ((format->flags & 8) && b == 16)
-		format->precision = format->precision <= len - 1 ? len + 2 : format->precision;
+		format->precision = format->precision <= len - 1 ?
+		len + 2 : format->precision;
 	if ((format->flags & 32) && b == 10 && len > 3)
 		apostrophes = (len - 1) / 3;
 	if (len < format->precision)
@@ -88,10 +90,14 @@ static int			base16toa(uintmax_t n, char **s, t_format *format)
 		n /= 16;
 		--format->precision;
 	}
+	/*
 	if ((format->flags & 8) && **s == '0')
 		(*s)[1] = format->specifier;
 	else if (format->flags & 8)
 		ft_strncpy(*s + tmp, format->specifier == 'x' ? "0x" : "0X", 2);
+		*/
+	if (format->flags & 8)
+		(*s)[**s == '0' ? 1 : tmp + 1] = format->specifier;
 	return (len);
 }
 
@@ -127,6 +133,8 @@ int					ft_printf_uint(t_format *format, va_list *va)
 	if ((format->flags & 16) && format->precision >= 0)
 		format->flags &= ~16;
 	uinteger = get_uinteger(format, va);
+	if (!uinteger)
+		format->flags &= ~8;
 	if (format->specifier == 'u' || format->specifier == 'o')
 		len = uintmaxtoa(uinteger, &s, format);
 	else

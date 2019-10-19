@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 19:35:11 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/19 20:51:13 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/19 21:31:46 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,8 +130,6 @@ int					ft_printf_uint(t_format *format, va_list *va)
 	uinteger = get_uinteger(format, va);
 	if (!uinteger && (format->specifier == 'x' || format->specifier == 'X'))
 		format->flags &= ~8;
-	if (format->specifier == 'p' && (format->length = 'l'))
-		format->flags |= 8;
 	if (format->specifier == 'u' || format->specifier == 'o')
 		len = uintmaxtoa(uinteger, &s, format);
 	else

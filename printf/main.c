@@ -38,6 +38,7 @@ int main()
     double dub = 0.01171875;
     double tmp = -2;
     double nul = -0.0;
+    int i;
 
     ft_printf("@moulitest: %#.o %#.0o\n", 0, 0);
     printf("@moulitest: %#.o %#.0o\n", 0, 0);
@@ -47,7 +48,9 @@ int main()
     printf("%#o\n", 0);
     ft_printf("%o\n", 0);
     printf("%o\n", 0);
-    
+    ft_printf("%.5p\n", 0);
+    printf("%.5p\n", 0);
+    //printf("%05p", 0);
 /*
     //unsigned char c = 128;
     unsigned char *t = (unsigned char*)&nul + 7;

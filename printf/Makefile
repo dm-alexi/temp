@@ -3,7 +3,7 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 LIBFT = libft/libft.a
 HEAD = fillit.h
-SRC = ft_printf.c ft_printf_string.c ft_printf_int.c ft_printf_uint.c ft_printf_ptr.c
+SRC = ft_printf.c ft_printf_string.c ft_printf_int.c ft_printf_uint.c ft_printf_ptr.c ft_printf_float.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

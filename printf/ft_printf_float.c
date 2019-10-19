@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:22:02 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/06 15:39:04 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/19 19:49:18 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "ft_printf.h"
 #include "ft_bigint.h"
 #include "libft/libft.h"
-
+/*
 static int	ft_printf_zero(t_format *format, char sign, char **s)
 {
     int		len;
@@ -43,18 +43,19 @@ static int	ft_printf_zero(t_format *format, char sign, char **s)
 		(*s)[**s == '0' ? 0 : tmp - 1] = sign;
 	return (len);
 }
-
-
+*/
 int		ft_printf_float(t_format *format, va_list *va)
 {
-    double	d;
-    char	*s;
-    char	sign;
-    int		len;
-    int		offset;
+	long double		d;
+	char			*s;
+	char			sign;
+	int				len;
+	int				offset;
 
-	//fix it with long double
-	d = (double)va_arg(*va, double);
+	if (format->length == 'L')
+		d = va_arg(*va, long double);
+	else
+		d = (long double)va_arg(*va, double);
 	if ((format->flags & 16) && format->precision >= 0)
 		format->flags &= ~16;
 	if (format->precision < 0)

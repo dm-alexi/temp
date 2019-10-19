@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 19:35:11 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/17 23:50:14 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/19 20:51:13 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int			uintmaxlen(uintmax_t n, char **s, t_format *format, int b)
 	int		len;
 	int		apostrophes;
 
-	len = (!n && format->precision);
+	len = (!n && (format->precision));
 	apostrophes = 0;
 	while (n && ++len)
 		n /= b;
@@ -57,7 +57,7 @@ static int			uintmaxtoa(uintmax_t n, char **s, t_format *format)
 		return (len);
 	tmp = len;
 	count = 0;
-	if (!n && format->precision)
+	if (!n && (format->precision))
 		(*s)[--tmp] = '0';
 	while (n || format->precision > 0)
 	{
@@ -86,16 +86,10 @@ static int			base16toa(uintmax_t n, char **s, t_format *format)
 		if ((digit = n % 16) < 10)
 			(*s)[--tmp] = digit + '0';
 		else
-			(*s)[--tmp] = digit - 10 + (format->specifier == 'x' ? 'a' : 'A');
+			(*s)[--tmp] = digit - 10 + (format->specifier == 'X' ? 'A' : 'a');
 		n /= 16;
 		--format->precision;
 	}
-	/*
-	if ((format->flags & 8) && **s == '0')
-		(*s)[1] = format->specifier;
-	else if (format->flags & 8)
-		ft_strncpy(*s + tmp, format->specifier == 'x' ? "0x" : "0X", 2);
-		*/
 	if (format->flags & 8)
 		(*s)[**s == '0' ? 1 : tmp + 1] = format->specifier;
 	return (len);
@@ -117,9 +111,9 @@ static uintmax_t	get_uinteger(t_format *format, va_list *va)
 		return ((uintmax_t)va_arg(*va, uintmax_t));
 	if (format->length == 'z')
 		return ((size_t)va_arg(*va, size_t));
-	//check uintptr_t (see man)
+	//check uintptr_t (see man) - fixed... kinda
 	if (format->length == 't')
-		return ((ptrdiff_t)va_arg(*va, ptrdiff_t));
+		return ((uintptr_t)va_arg(*va, uintptr_t));
 	return ((unsigned int)va_arg(*va, unsigned int));
 }
 
@@ -134,8 +128,10 @@ int					ft_printf_uint(t_format *format, va_list *va)
 	if ((format->flags & 16) && format->precision >= 0)
 		format->flags &= ~16;
 	uinteger = get_uinteger(format, va);
-	if (!uinteger)
+	if (!uinteger && (format->specifier == 'x' || format->specifier == 'X'))
 		format->flags &= ~8;
+	if (format->specifier == 'p' && (format->length = 'l'))
+		format->flags |= 8;
 	if (format->specifier == 'u' || format->specifier == 'o')
 		len = uintmaxtoa(uinteger, &s, format);
 	else

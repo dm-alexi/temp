@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:14:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/17 20:18:10 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/19 20:21:48 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,10 @@ int		print_formatted(const char **s, va_list *va, int n)
 		return (ft_printf_string(&format, va));
 	if (format.specifier == 'd' || format.specifier == 'i')
 		return (ft_printf_int(&format, va));
-	if (ft_strchr("uoxX", format.specifier))
+	if (ft_strchr("uoxXp", format.specifier))
 		return (ft_printf_uint(&format, va));
-	if (format.specifier == 'p')
-		return (ft_printf_ptr(&format, va));
+	//if (format.specifier == 'p')
+	//	return (ft_printf_ptr(&format, va));
 	if (ft_strchr("efgEFG", format.specifier))
 		return (ft_printf_float(&format, va));
 	return (0);

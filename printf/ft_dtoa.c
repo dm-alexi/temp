@@ -6,13 +6,13 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 18:42:35 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/14 19:42:53 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/19 20:02:22 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "ft_bigint.h"
-#include "libft.h"
+#include "ft_printf.h"
 
 void	ft_set_null(char *s, int prec, char spec)
 {

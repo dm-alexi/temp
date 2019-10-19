@@ -39,10 +39,15 @@ int main()
     double tmp = -2;
     double nul = -0.0;
 
-    printf("%.f!\n", nul);
-	printf("%f\n%Lf\n", dub, (long double)dub);
-	printf("%f\n%Lf\n", nul, (long double)nul);
-	printf("%f\n%Lf\n", tmp, (long double)tmp);
+    ft_printf("@moulitest: %#.o %#.0o\n", 0, 0);
+    printf("@moulitest: %#.o %#.0o\n", 0, 0);
+    ft_printf("@moulitest: %.x %.0x\n", 0, 0);
+    printf("@moulitest: %.x %.0x\n", 0, 0);
+    ft_printf("%#o\n", 0);
+    printf("%#o\n", 0);
+    ft_printf("%o\n", 0);
+    printf("%o\n", 0);
+    
 /*
     //unsigned char c = 128;
     unsigned char *t = (unsigned char*)&nul + 7;

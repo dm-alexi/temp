@@ -35,8 +35,8 @@ int main()
     printf("\n%i\n", k);*/
     float f = 392.6512342346;
     long double d = 392.6512342346L;
-    double dub = 0.01171875;
-    double tmp = -2;
+    long double dub = 0.01171875;
+    long double tmp = -1;
     double nul = -0.0;
     int i;
 
@@ -51,6 +51,11 @@ int main()
     ft_printf("%.5p\n", 0);
     printf("%.5p\n", 0);
     //printf("%05p", 0);
+
+    printbin(&dub, 12);
+    double dd = dub;
+    printbin(&dd, 8);
+    printbin(&tmp, sizeof(long double));
 /*
     //unsigned char c = 128;
     unsigned char *t = (unsigned char*)&nul + 7;

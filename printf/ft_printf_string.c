@@ -41,16 +41,16 @@ int				ft_printf_char(t_format *format, va_list *va)
 	unsigned char	c;
 	int				offset;
 
-/*	if (format->length == 'l' || format->specifier == 'C')
+/*	if (format->length == 'l' || format->type == 'C')
 		return (ft_printf_wchar(format, va);*/
 	c = (unsigned char)va_arg(*va, int);
 	if (format->width <= 1)
 		return (write(1, &c, 1) == 1 ? 1 : -1);
 	offset = format->width - 1;
-	if ((!(format->flags & 1) &&
-	ft_printf_pad(1, format->flags & 16 ? '0' : ' ', offset) < offset) ||
+	if ((!format->minus &&
+	ft_printf_pad(1, format->zero ? '0' : ' ', offset) < offset) ||
 	write(1, &c, 1) < 1 ||
-	((format->flags & 1) && ft_printf_pad(1, ' ', offset) < offset))
+	(format->minus && ft_printf_pad(1, ' ', offset) < offset))
 		return (-1);
 	return (offset + 1);
 }
@@ -65,13 +65,13 @@ static int		ft_printf_wstring(t_format *format, va_list *va)
 	if (!(ws = (wchar_t*)va_arg(*va, wchar_t*)))
 		ws = L"(null)";
 	len = ft_wcslen(ws);
-	if (format->precision >= 0 && len > format->precision)
-		len = format->precision;
+	if (format->prec >= 0 && len > format->prec)
+		len = format->prec;
 	offset = (format->width > len ? format->width - len : 0);
-	if ((!(format->flags & 1) &&
-	ft_printf_pad(1, format->flags & 16 ? '0' : ' ', offset) < offset) ||
+	if ((!format->minus &&
+	ft_printf_pad(1, format->zero ? '0' : ' ', offset) < offset) ||
 	(write(1, ws, len * sizeof(wchar_t)) < len * sizeof(wchar_t)) ||
-	((format->flags & 1) && ft_printf_pad(1, ' ', offset) < offset))
+	(format->minus && ft_printf_pad(1, ' ', offset) < offset))
 		return (-1);
 	return (offset + len);
 }
@@ -82,20 +82,20 @@ int				ft_printf_string(t_format *format, va_list *va)
 	int			len;
 	int			offset;
 /*
-	if (format->length == 'l' || format->specifier == 'S')
+	if (format->length == 'l' || format->type == 'S')
 		return (ft_printf_wstring(format, va));*/
 	if (!(s = (char*)va_arg(*va, char*)))
 		s = "(null)";
 	len = ft_strlen(s);
-	if (format->precision >= 0 && len > format->precision)
-		len = format->precision;
+	if (format->prec >= 0 && len > format->prec)
+		len = format->prec;
 	if (format->width <= len)
 		return (write(1, s, len) == len ? len : -1);
 	offset = format->width - len;
-	if ((!(format->flags & 1) &&
-	ft_printf_pad(1, format->flags & 16 ? '0' : ' ', offset) < offset) ||
+	if ((!format->minus &&
+	ft_printf_pad(1, format->zero ? '0' : ' ', offset) < offset) ||
 	(write(1, s, len) < len) ||
-	((format->flags & 1) && ft_printf_pad(1, ' ', offset) < offset))
+	(format->minus && ft_printf_pad(1, ' ', offset) < offset))
 		return (-1);
 	return (offset + len);
 }
@@ -107,10 +107,10 @@ int		ft_printf_percent(t_format *format)
 	if (format->width <= 1)
 		return (write(1, "%", 1) == 1 ? 1 : -1);
 	offset = format->width - 1;
-	if ((!(format->flags & 1) &&
-	ft_printf_pad(1, format->flags & 16 ? '0' : ' ', offset) < offset) ||
+	if ((!format->minus &&
+	ft_printf_pad(1, format->zero ? '0' : ' ', offset) < offset) ||
 	write(1, "%", 1) < 1 ||
-	((format->flags & 1) && ft_printf_pad(1, ' ', offset) < offset))
+	(format->minus && ft_printf_pad(1, ' ', offset) < offset))
 		return (-1);
 	return (offset + 1);
 }

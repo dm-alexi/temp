@@ -22,26 +22,24 @@ static int			uintmaxlen(uintmax_t n, char **s, t_format *format, int b)
 	int		len;
 	int		apostrophes;
 
-	len = (!n && (format->precision));
+	len = (!n && format->prec);
 	apostrophes = 0;
 	while (n && ++len)
 		n /= b;
-	if ((format->flags & 8) && b == 8)
-		format->precision = format->precision <= len ?
-		len + 1 : format->precision;
-	if ((format->flags & 8) && b == 16)
-		format->precision = format->precision <= len - 1 ?
-		len + 2 : format->precision;
-	if ((format->flags & 32) && b == 10 && len > 3)
+	if (format->sharp && b == 8)
+		format->prec = format->prec<= len ? len + 1 : format->prec;
+	if (format->sharp && b == 16)
+		format->prec = format->prec <= len - 1 ? len + 2 : format->prec;
+	if (format->apost && b == 10 && len > 3)
 		apostrophes = (len - 1) / 3;
-	if (len < format->precision)
-		len = format->precision;
+	if (len < format->prec)
+		len = format->prec;
 	len += apostrophes;
-	if (!(format->flags & 1) && len < format->width)
+	if (!format->minus && len < format->width)
 		len = format->width;
 	if (!(*s = (char*)malloc(len)))
 		return (-1);
-	ft_memset(*s, ((format->flags & 16) ? '0' : ' '), len);
+	ft_memset(*s, (format->zero ? '0' : ' '), len);
 	return (len);
 }
 
@@ -52,19 +50,19 @@ static int			uintmaxtoa(uintmax_t n, char **s, t_format *format)
 	int		count;
 	int		base;
 
-	base = format->specifier == 'u' ? 10 : 8;
+	base = format->type == 'u' ? 10 : 8;
 	if ((len = uintmaxlen(n, s, format, base)) <= 0)
 		return (len);
 	tmp = len;
 	count = 0;
-	if (!n && (format->precision))
+	if (!n && format->prec)
 		(*s)[--tmp] = '0';
-	while (n || format->precision > 0)
+	while (n || format->prec > 0)
 	{
 		(*s)[--tmp] = n % base + '0';
 		n /= base;
-		--format->precision;
-		if ((format->flags & 32) && base == 10 && !(++count % 3))
+		--format->prec;
+		if (format->apost && base == 10 && !(++count % 3))
 			(*s)[--tmp] = '\'';
 	}
 	return (len);
@@ -79,19 +77,19 @@ static int			base16toa(uintmax_t n, char **s, t_format *format)
 	if ((len = uintmaxlen(n, s, format, 16)) <= 0)
 		return (len);
 	tmp = len;
-	if (!n && format->precision)
+	if (!n && format->prec)
 		(*s)[--tmp] = '0';
-	while (n || format->precision > 0)
+	while (n || format->prec > 0)
 	{
 		if ((digit = n % 16) < 10)
 			(*s)[--tmp] = digit + '0';
 		else
-			(*s)[--tmp] = digit - 10 + (format->specifier == 'X' ? 'A' : 'a');
+			(*s)[--tmp] = digit - 10 + (format->type == 'X' ? 'A' : 'a');
 		n /= 16;
-		--format->precision;
+		--format->prec;
 	}
-	if (format->flags & 8)
-		(*s)[**s == '0' ? 1 : tmp + 1] = format->specifier;
+	if (format->sharp)
+		(*s)[**s == '0' ? 1 : tmp + 1] = format->type;
 	return (len);
 }
 
@@ -125,12 +123,12 @@ int					ft_printf_uint(t_format *format, va_list *va)
 	int			total_len;
 	int			offset;
 
-	if ((format->flags & 16) && format->precision >= 0)
-		format->flags &= ~16;
+	if (format->zero && format->prec >= 0)
+		format->zero = 0;
 	uinteger = get_uinteger(format, va);
-	if (!uinteger && (format->specifier == 'x' || format->specifier == 'X'))
-		format->flags &= ~8;
-	if (format->specifier == 'u' || format->specifier == 'o')
+	if (!uinteger && (format->type == 'x' || format->type == 'X'))
+		format->sharp = 0;
+	if (format->type == 'u' || format->type == 'o')
 		len = uintmaxtoa(uinteger, &s, format);
 	else
 		len = base16toa(uinteger, &s, format);
@@ -139,7 +137,7 @@ int					ft_printf_uint(t_format *format, va_list *va)
 	offset = (format->width > len ? format->width - len : 0);
 	total_len = len + offset;
 	if (write(1, s, len) < len ||
-	((format->flags & 1) && ft_printf_pad(1, ' ', offset) < offset))
+	(format->minus && ft_printf_pad(1, ' ', offset) < offset))
 		total_len = -1;
 	free(s);
 	return (total_len);

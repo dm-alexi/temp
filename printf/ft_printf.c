@@ -16,21 +16,21 @@
 
 void	set_flags(const char **s, t_format *format)
 {
-	format->flags = 0;
+	ft_bzero(format, sizeof(t_format));
 	while (**s && ft_strchr("-+ #0\'", **s))
 	{
 		if (**s == '-')
-			format->flags |= 1;
+			format->minus = 1;
 		else if (**s == '+')
-			format->flags |= 2;
+			format->plus = 1;
 		else if (**s == ' ')
-			format->flags |= 4;
+			format->space = 1;
 		else if (**s == '#')
-			format->flags |= 8;
+			format->sharp = 1;
 		else if (**s == '0')
-			format->flags |= 16;
+			format->zero = 1;
 		else if (**s == '\'')
-			format->flags |= 32;
+			format->apost = 1;
 		++*s;
 	}
 }
@@ -38,21 +38,23 @@ void	set_flags(const char **s, t_format *format)
 void	set_wp(const char **s, t_format *format, va_list *va)
 {
 	format->width = 0;
-	format->precision = -1;
+	format->prec = -1;
 	if (ft_isdigit(**s))
 		format->width = ft_strtol((char*)*s, (char**)s, 10);
 	else if (**s == '*' && ++*s && (format->width = va_arg(*va, int)) < 0)
 	{
 		format->width = -format->width;
-		format->flags |= 1;
+		format->minus = 1;
 	}
 	if (**s == '.' && ++*s)
 	{
-		format->precision = 0;
+		format->prec = 0;
 		if (ft_isdigit(**s))
-			format->precision = ft_strtol((char*)*s, (char**)s, 10);
+			format->prec = ft_strtol((char*)*s, (char**)s, 10);
 		else if (**s == '*' && ++*s)
-			format->precision = va_arg(*va, int);
+			format->prec = va_arg(*va, int);
+		if (format->prec < 0)
+			format->prec = -1;
 	}
 }
 
@@ -65,9 +67,9 @@ void	set_specifier(const char **s, t_format *format)
 		format->length = 'L';
 	else if (**s && ft_strchr("hljztL", **s))
 		format->length = *((*s)++);
-	format->specifier = 0;
+	format->type = 0;
 	if (**s && ft_strchr("cdefginopsuxEFGX%", **s))
-		format->specifier = *((*s)++);
+		format->type = *((*s)++);
 }
 
 void	set_format(const char **s, t_format *format, va_list *va)
@@ -82,21 +84,21 @@ int		print_formatted(const char **s, va_list *va, int n)
 	t_format	format;
 
 	set_format(s, &format, va);
-	if (!format.specifier)
+	if (!format.type)
 		return (0);
-	if (format.specifier == '%')
+	if (format.type == '%')
 		return (ft_printf_percent(&format));
-	if (format.specifier == 'c')
+	if (format.type == 'c')
 		return (ft_printf_char(&format, va));
-	if (format.specifier == 's')
+	if (format.type == 's')
 		return (ft_printf_string(&format, va));
-	if (format.specifier == 'd' || format.specifier == 'i')
+	if (format.type == 'd' || format.type == 'i')
 		return (ft_printf_int(&format, va));
-	if (ft_strchr("uoxX", format.specifier))
+	if (ft_strchr("uoxX", format.type))
 		return (ft_printf_uint(&format, va));
-	if (format.specifier == 'p')
+	if (format.type == 'p')
 		return (ft_printf_ptr(&format, va));
-	if (ft_strchr("efgEFG", format.specifier))
+	if (ft_strchr("efgEFG", format.type))
 		return (ft_printf_float(&format, va));
 	return (0);
 }

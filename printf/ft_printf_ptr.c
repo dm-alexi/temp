@@ -20,18 +20,18 @@ static int		ptrlen(uintptr_t p, char **s, t_format *format)
 {
 	int		len;
 
-	len = 2 + (!p && format->precision);
+	len = 2 + (!p && format->prec);
 	while (p && ++len)
 		p /= 16;
-	if (len < format->precision)
-		len = format->precision;
-	if (format->precision < len)
-		format->precision = len;
-	if (!(format->flags & 1) && len < format->width)
+	if (len < format->prec)
+		len = format->prec;
+	if (format->prec < len)
+		format->prec = len;
+	if (!format->minus && len < format->width)
 		len = format->width;
 	if (!(*s = (char*)malloc(len)))
 		return (-1);
-	ft_memset(*s, ((format->flags & 16) ? '0' : ' '), len);
+	ft_memset(*s, (format->zero ? '0' : ' '), len);
 	return (len);
 }
 
@@ -47,17 +47,17 @@ int				ft_printf_ptr(t_format *format, va_list *va)
 	if ((len = ptrlen(p, &s, format)) < 0)
 		return (-1);
 	tmp = len;
-	while (p || format->precision > 0)
+	while (p || format->prec > 0)
 	{
 		s[--tmp] = p % 16 < 10 ? p % 16 + '0' : p % 16 - 10 + 'a';
 		p /= 16;
-		--format->precision;
+		--format->prec;
 	}
 	s[*s == '0' ? 1 : tmp + 1] = 'x';
 	offset = (format->width > len ? format->width - len : 0);
 	tmp = len + offset;
 	if (write(1, s, len) < len ||
-	((format->flags & 1) && ft_printf_pad(1, ' ', offset) < offset))
+	(format->minus && ft_printf_pad(1, ' ', offset) < offset))
 		tmp = -1;
 	free(s);
 	return (tmp);

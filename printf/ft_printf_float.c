@@ -56,10 +56,10 @@ int		ft_printf_float(t_format *format, va_list *va)
 		d = va_arg(*va, long double);
 	else
 		d = (long double)va_arg(*va, double);
-	if ((format->flags & 16) && format->precision >= 0)
-		format->flags &= ~16;
-	if (format->precision < 0)
-		format->precision = 6;
+	if (format->zero && format->prec >= 0)
+		format->sharp = 0;
+	if (format->prec < 0)
+		format->prec = 6;
 	sign = 0;
 	//get sign
 	//check NaN Inf zero

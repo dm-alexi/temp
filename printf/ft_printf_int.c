@@ -23,23 +23,23 @@ static int			intmaxlen(intmax_t n, char **s, t_format *format)
 	int		sign;
 	int		apostrophes;
 
-	sign = (n < 0 || (format->flags & 6));
-	len = !n && format->precision;
+	sign = (n < 0 || (format->plus || format->space));
+	len = !n && format->prec;
 	apostrophes = 0;
 	while (n && ++len)
 		n /= 10;
-	if ((format->flags & 32) && len > 3)
+	if (format->apost && len > 3)
 		apostrophes = (len - 1) / 3;
-	if (len < format->precision)
-		len = format->precision;
+	if (len < format->prec)
+		len = format->prec;
 	len += sign + apostrophes;
-	if (!(format->flags & 1) && len < format->width)
+	if (!format->minus && len < format->width)
 		len = format->width;
 	if (!(*s = (char*)malloc(len)))
 		return (-1);
-	ft_memset(*s, (format->flags & 16) ? '0' : ' ', len);
-	if (!n && format->precision < 0)
-		format->precision = 1;
+	ft_memset(*s, format->zero ? '0' : ' ', len);
+	if (!n && format->prec < 0)
+		format->prec = 1;
 	return (len);
 }
 
@@ -54,16 +54,16 @@ static int			intmaxtoa(intmax_t n, char **s, t_format *format)
 		return (len);
 	tmp = len;
 	sign = n < 0 ? '-' : 0;
-	if (!sign && format->flags & 6)
-		sign = (format->flags & 2) ? '+' : ' ';
+	if (!sign && (format->plus || format->space))
+		sign = format->plus ? '+' : ' ';
 	count = 0;
-	while (n || format->precision > 0)
+	while (n || format->prec > 0)
 	{
 		(*s)[--tmp] = n >= 0 ? n % 10 + '0' : -(n % 10) + '0';
-		if (n && (format->flags & 32) && !(++count % 3))
+		if (n && format->apost && !(++count % 3))
 			(*s)[--tmp] = '\'';
 		n = n >= 0 ? n / 10 : -(n / 10);
-		--format->precision;
+		--format->prec;
 	}
 	if (sign)
 		(*s)[(*s)[--tmp] == ' ' ? tmp : 0] = sign;
@@ -99,15 +99,15 @@ int					ft_printf_int(t_format *format, va_list *va)
 	int			offset;
 	int			len_total;
 
-	if ((format->flags & 16) && format->precision >= 0)
-		format->flags &= ~16;
+	if (format->zero && format->prec >= 0)
+		format->zero = 0;
 	integer = get_integer(format, va);
 	if ((len = intmaxtoa(integer, &s, format)) < 0)
 		return (-1);
 	offset = (format->width > len ? format->width - len : 0);
 	len_total = len + offset;
 	if (write(1, s, len) < len ||
-	((format->flags & 1) && ft_printf_pad(1, ' ', offset) < offset))
+	(format->minus && ft_printf_pad(1, ' ', offset) < offset))
 		len_total = -1;
 	free(s);
 	return (len_total);

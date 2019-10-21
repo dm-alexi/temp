@@ -18,11 +18,19 @@
 #include "ft_bigint.h"
 #include "libft/libft.h"
 
-int floatzero(t_format *format, char **s, int sign)
+int	float_zero_e(t_format *format, char **s, int sign)
 {
 	int		len;
-	int		tmp;
 
+	return (len);
+}
+
+int float_zero(t_format *format, char **s, int sign)
+{
+	int		len;
+
+	if (format->type == 'G' || format->type == 'g')
+		format->prec = format->sharp ? format->prec - 1 : 0;
 	if (format->prec)
 		format->sharp = 1;
 	len = 1 + (sign || format->plus || format->space) +
@@ -32,21 +40,21 @@ int floatzero(t_format *format, char **s, int sign)
 	if (!(*s = (char*)malloc(format->width)))
 		return (-1);
     ft_memset(*s, !format->minus && format->zero ? '0' : ' ', format->width);
-    tmp = format->minus ? len : format->width;
+    len = format->minus ? len : format->width;
     while (format->prec-- > 0)
-		(*s)[--tmp] = '0';
+		(*s)[--len] = '0';
 	if (format->sharp)
-		(*s)[--tmp] = '.';
-	(*s)[--tmp] = '0';
-	tmp = **s == '0' ? 0 : tmp - 1;
+		(*s)[--len] = '.';
+	(*s)[--len] = '0';
+	len = **s == '0' ? 0 : len - 1;
 	if (sign)
-		(*s)[tmp] = '-';
+		(*s)[len] = '-';
 	else if (format->plus || format->space)
-		(*s)[tmp] = format->plus ? '+' : ' ';
+		(*s)[len] = format->plus ? '+' : ' ';
 	return (format->width);
 }
 
-int floatspecial(t_format *format, char **s, int sign, uint64_t val)
+int float_special(t_format *format, char **s, int sign, uint64_t val)
 {
 	int		len;
 	char	*mes;
@@ -84,9 +92,10 @@ int	floatlen(long double d, t_format *format, char **s)
 	//printbin(&exp, 4);
 	//printf("%d\n", sign);
 	if (!exp && !val)
-		return (floatzero(format, s, sign));
+		return ((format->type == 'e' || format->type == 'E') ?
+			float_zero_e(format, s, sign) : float_zero(format, s, sign));
 	if (exp == 0x00007fff)
-		return (floatspecial(format, s, sign, val));
+		return (float_special(format, s, sign, val));
 
 
 	return (0);

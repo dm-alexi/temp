@@ -39,8 +39,8 @@ int				ft_printf_int(t_format *format, va_list *va);
 int				ft_printf_uint(t_format *format, va_list *va);
 int				ft_printf_ptr(t_format *format, va_list *va);
 int				ft_printf_float(t_format *format, va_list *va);
-int				ft_printf_f(t_format *format, t_bigint &t, int exp, char **s));
-int				ft_printf_e(t_format *format, t_bigint &t, int exp, char **s));
+int				ft_printf_f(t_format *format, t_bigint *t, int exp, char **s);
+int				ft_printf_e(t_format *format, t_bigint *t, int exp, char **s);
 void			printbin(void *p, int n);
 int				dtoa(double value, char *s, int prec);
 

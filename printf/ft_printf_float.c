@@ -83,26 +83,25 @@ int	floatlen(long double d, t_format *format, char **s)
 {
     uint64_t	val;
     uint32_t	exp;
+    int			exp10;
     int			sign;
     t_bigint	t;
-    int			len;
+
 
     val = *((uint64_t*)&d);
     exp = (uint32_t)(*((uint64_t*)&d + 1)) & 0x00007fff;
     sign = (*((uint64_t*)&d + 1) & 0x00008000) > 0;
-	//printbin(&val, 8);
-	//printbin(&exp, 4);
-	//printf("%d\n", sign);
 	if (!val)
 		return ((format->type == 'e' || format->type == 'E') ?
 			float_zero_e(format, s, sign) : float_zero(format, s, sign));
 	if (exp == 0x00007fff)
 		return (float_special(format, s, sign, val));
-    ft_make_bigint(&t, exp - 16446, val, &exp);
+    ft_make_bigint(&t, (int)exp - 16446, val, &exp10);
     if (format->type == 'f' || format->type == 'F')
-		return (ft_printf_f(format, &t, exp, s));
-	if (format->type == 'e' || format->type == 'E')
-		return (ft_printf_e(format, &t, exp, s));
+		str = ft_printf_b2f(format, &t, exp, &sign);
+		//return (ft_printf_f(format, &t, exp, s));
+	/*if (format->type == 'e' || format->type == 'E')
+		return (ft_printf_e(format, &t, exp, s));*/
 
 	return (0);
 }

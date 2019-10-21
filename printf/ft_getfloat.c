@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include "ft_bigint.h"
 
-void	ft_make_bigint(t_bigint *res, int exp, uint64_t	val, uint32_t *exp10)
+void	ft_make_bigint(t_bigint *res, int exp, uint64_t	val, int *exp10)
 {
 	t_bigint	pow;
 	t_bigint	tmp;

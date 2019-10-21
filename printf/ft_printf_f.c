@@ -1,37 +1,46 @@
 #include <stdlib.h>
+#include "libft/libft.h"
 #include "ft_bigint.h"
+#include "ft_printf.h"
 
 static const int	g_pow10[] = {1, 10, 100, 1000, 10000, 100000, 1000000,
 	10000000, 100000000};
 
-char	*ft_bigint2str(t_bigint *a)
+int		ft_bigint2str(t_bigint *a, int exp, char *s)
 {
-	char		*s;
+	int			len;
+	char		*t;
 	int			j;
 	int			i;
-	uint32_t	t;
+	uint32_t	n;
 
-	if (!(s = (char*)malloc(9 * a->len)))
-		return (NULL);
+	len = (a->len * 9 > -exp ? a->len * 9 : -exp) + 1;
+	if (!(s = (char*)ft_memalloc(len)))
+		return (-1);
 	i = a->len - 1;
+	t = s + 1 + (a->len * 9 > -exp ? 0 : -exp - a->len * 9);
 	while (i >= 0)
 	{
-		t = a->arr[i--];
+		n = a->arr[i--];
 		j = 8;
 		while (j > 0)
 		{
-			*s++ = t / g_pow10[j] + '0';
-			t %= g_pow10[j--];
+			*t++ = n / g_pow10[j];
+			n %= g_pow10[j--];
 		}
-		*s++ = t + '0';
+		*t++ = n;
 	}
-    return (s - 9 * a->len);
+    return (len);
 }
 
-int		ft_printf_f(t_format *format, t_bigint &t, int exp, char **s)
+char	*ft_printf_b2f(t_format *format, t_bigint *t, int exp, int *sign)
 {
 	char	*str;
+	int		len;
+	int		i;
 
-    str = ft_bigint2str(t);
-
+    if ((len = ft_bigint2str(t, exp, str)) < 0)
+		return (NULL);
+	i = len + exp;
+//rounding here!
 }

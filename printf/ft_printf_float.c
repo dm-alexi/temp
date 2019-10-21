@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:22:02 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/19 19:49:18 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/21 18:48:49 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 #include "ft_bigint.h"
 #include "libft/libft.h"
 
-int	float_zero_e(t_format *format, char **s, int sign)
+int		float_zero_e(t_format *format, char **s, int sign)
 {
 	int		len;
 
 	return (len);
 }
 
-int float_zero(t_format *format, char **s, int sign)
+int		float_zero(t_format *format, char **s, int sign)
 {
 	int		len;
 
@@ -39,9 +39,9 @@ int float_zero(t_format *format, char **s, int sign)
 		format->width = len;
 	if (!(*s = (char*)malloc(format->width)))
 		return (-1);
-    ft_memset(*s, !format->minus && format->zero ? '0' : ' ', format->width);
-    len = format->minus ? len : format->width;
-    while (format->prec-- > 0)
+	ft_memset(*s, !format->minus && format->zero ? '0' : ' ', format->width);
+	len = format->minus ? len : format->width;
+	while (format->prec-- > 0)
 		(*s)[--len] = '0';
 	if (format->sharp)
 		(*s)[--len] = '.';
@@ -54,7 +54,7 @@ int float_zero(t_format *format, char **s, int sign)
 	return (format->width);
 }
 
-int float_special(t_format *format, char **s, int sign, uint64_t val)
+int		float_special(t_format *format, char **s, int sign, uint64_t val)
 {
 	int		len;
 	char	*mes;
@@ -79,25 +79,24 @@ int float_special(t_format *format, char **s, int sign, uint64_t val)
 	return (format->width);
 }
 
-int	floatlen(long double d, t_format *format, char **s)
+int		floatlen(long double d, t_format *format, char **s)
 {
-    uint64_t	val;
-    uint32_t	exp;
-    int			exp10;
-    int			sign;
-    t_bigint	t;
+	uint64_t	val;
+	uint32_t	exp;
+	int			exp10;
+	int			sign;
+	t_bigint	t;
 
-
-    val = *((uint64_t*)&d);
-    exp = (uint32_t)(*((uint64_t*)&d + 1)) & 0x00007fff;
-    sign = (*((uint64_t*)&d + 1) & 0x00008000) > 0;
+	val = *((uint64_t*)&d);
+	exp = (uint32_t)(*((uint64_t*)&d + 1)) & 0x00007fff;
+	sign = (*((uint64_t*)&d + 1) & 0x00008000) > 0;
 	if (!val)
 		return ((format->type == 'e' || format->type == 'E') ?
 			float_zero_e(format, s, sign) : float_zero(format, s, sign));
 	if (exp == 0x00007fff)
 		return (float_special(format, s, sign, val));
-    ft_make_bigint(&t, (int)exp - 16446, val, &exp10);
-    if (format->type == 'f' || format->type == 'F')
+	ft_make_bigint(&t, (int)exp - 16446, val, &exp10);
+	if (format->type == 'f' || format->type == 'F')
 		str = ft_printf_b2f(format, &t, exp, &sign);
 		//return (ft_printf_f(format, &t, exp, s));
 	/*if (format->type == 'e' || format->type == 'E')

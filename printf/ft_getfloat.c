@@ -6,14 +6,14 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 14:37:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/12 21:04:48 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/21 18:46:31 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "ft_bigint.h"
 
-void	ft_make_bigint(t_bigint *res, int exp, uint64_t	val, int *exp10)
+void	ft_make_bigint(t_bigint *res, int exp, uint64_t val, int *exp10)
 {
 	t_bigint	pow;
 	t_bigint	tmp;

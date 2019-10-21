@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_f.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/21 18:46:55 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/10/21 18:47:20 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include "libft/libft.h"
 #include "ft_bigint.h"
@@ -30,7 +42,7 @@ int		ft_bigint2str(t_bigint *a, int exp, char *s)
 		}
 		*t++ = n;
 	}
-    return (len);
+	return (len);
 }
 
 char	*ft_printf_b2f(t_format *format, t_bigint *t, int exp, int *sign)
@@ -39,7 +51,7 @@ char	*ft_printf_b2f(t_format *format, t_bigint *t, int exp, int *sign)
 	int		len;
 	int		i;
 
-    if ((len = ft_bigint2str(t, exp, str)) < 0)
+	if ((len = ft_bigint2str(t, exp, str)) < 0)
 		return (NULL);
 	i = len + exp;
 //rounding here!

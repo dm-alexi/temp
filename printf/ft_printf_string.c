@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:15:06 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/16 23:03:34 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/21 18:49:17 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int				ft_printf_string(t_format *format, va_list *va)
 	char		*s;
 	int			len;
 	int			offset;
+
 /*
 	if (format->length == 'l' || format->type == 'S')
 		return (ft_printf_wstring(format, va));*/

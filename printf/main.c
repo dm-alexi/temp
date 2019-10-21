@@ -68,11 +68,10 @@ int main()
     *exp = 0x00007fff;
     printbin(man, 8);
     printbin(exp, 4);
-    printf("%.10g!\n", 0.0);
-	printf("%#.10g!\n", 0.0);
-	ft_printf("%.10g!\n", 0.0);
-	ft_printf("%#.10g!\n", 0.0);
-	//printf("%-015f!\n", 0.325);
+    printf("%.30Lf!\n", d);
+    ft_printf("%Lf!\n", d);
+	//ft_printf("%.10g!\n", l);
+
 
 
     return 0;

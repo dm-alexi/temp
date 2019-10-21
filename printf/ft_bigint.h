@@ -33,7 +33,7 @@ void			ft_bigint_pow2(t_bigint *res, int32_t exp);
 void			ft_bigint_pow5(t_bigint *res, int32_t exp);
 //void			get_double(double value, int *sign, uint64_t *frac, int *exp);
 void			print_bigint(t_bigint *a);
-void			ft_make_bigint(double value, t_bigint *res, int *exp10);
+void			ft_make_bigint(t_bigint *res, int exp, uint64_t val, uint32_t *exp10);
 char			*ft_bigint2str(t_bigint *a);
 
 

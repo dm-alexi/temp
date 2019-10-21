@@ -6,6 +6,8 @@
 
 #include <limits.h>
 
+int	floatlen(long double d, t_format *format, char **s);
+
 int get_exponent(double d);
 
 int main()
@@ -39,7 +41,7 @@ int main()
     long double tmp = -1;
     double nul = -0.0;
     int i;
-
+/*
     ft_printf("@moulitest: %#.o %#.0o\n", 0, 0);
     printf("@moulitest: %#.o %#.0o\n", 0, 0);
     ft_printf("@moulitest: %.x %.0x\n", 0, 0);
@@ -51,33 +53,26 @@ int main()
     ft_printf("%.5p\n", 0);
     printf("%.5p\n", 0);
     //printf("%05p", 0);
+*/
+    //printbin(&dub, 16);
+    //printbin(&nul, 12);
+    //floatlen(nul, NULL, NULL);
 
-    printbin(&dub, 12);
-    double dd = dub;
-    printbin(&dd, 8);
-    printbin(&tmp, sizeof(long double));
-/*
-    //unsigned char c = 128;
-    unsigned char *t = (unsigned char*)&nul + 7;
-    *t = *t & 0;
-    int ui = (((*(uint64_t*)&dub) << 1) >> 53), ui2 = (((*(uint64_t*)&tmp) << 1 ) >> 53);
-    //printbin(&c, 1);
-    printbin(&dub, 8);
-    printbin(&tmp, 8);
-    //printbin(&nul, 8);
-    //printf("%f", nul);
-    printbin(&ui, sizeof(int));
-    printbin(&ui2, sizeof(int));
-    printf("%d %d\n", ui - 1023, ui2 - 1023);
-    int64_t sign1 = ((*((int64_t*)&dub)) << 11) >> 11;
-    int64_t sign2 = ((*((int64_t*)&tmp)) << 11) >> 11;
-    printf("%lld %lld\n", sign1, sign2);
-    printbin(&sign1, 8);
-    printbin(&sign2, 8);
-    printf("%d %d\n", get_exponent(dub), get_exponent(tmp));
-    dtoa(dub, NULL, 0);
-    dtoa(tmp, NULL, 0);
-    printf("%.20f\n", 500/3.0);
-    printf("%lu", sizeof(long double));*/
+    long double l = dub;
+    uint64_t	*man = (uint64_t*)&l;
+    uint32_t	*exp = (uint32_t*)(((uint64_t*)&l) + 1);
+    //printf("%Lf\n", l);
+    //*man = 0xffffffffffffffff;
+    //*man = 0;
+    *man = 0x8000000000000000;
+    *exp = 0x00007fff;
+    printbin(man, 8);
+    printbin(exp, 4);
+	printf("%0+5Lf!\n", l);
+	ft_printf("%0+5Lf!\n", l);
+	ft_printf("%.25f!", 0.0);
+	//printf("%-015f!\n", 0.325);
+
+
     return 0;
 }

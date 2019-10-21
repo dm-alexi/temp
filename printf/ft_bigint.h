@@ -14,7 +14,7 @@
 # define FT_BIGINT_H
 # include <stdint.h>
 # include <stdio.h>
-# define MAX_BLOCKS 34000
+# define MAX_BLOCKS 1024
 
 typedef struct	s_bigint
 {

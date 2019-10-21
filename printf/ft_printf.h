@@ -18,10 +18,15 @@
 typedef struct	s_format
 {
 	int		width;
-	int		precision;
-	char	flags;
+	int		prec;
 	char	length;
-	char	specifier;
+	char	type;
+	char	minus;
+	char	plus;
+	char	space;
+	char	sharp;
+	char	zero;
+	char	apost;
 }				t_format;
 
 int				ft_printf(const char *format, ...);

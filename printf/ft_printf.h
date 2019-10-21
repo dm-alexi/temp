@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:19:30 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/21 18:49:32 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/21 22:42:02 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ int				ft_printf_f(t_format *format, t_bigint *t, int exp, char **s);
 int				ft_printf_e(t_format *format, t_bigint *t, int exp, char **s);
 void			printbin(void *p, int n);
 int				dtoa(double value, char *s, int prec);
+char		*ft_printf_b2f(t_format *format, t_bigint *t, int exp, int *sign);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 14:35:24 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/21 18:47:30 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/21 19:23:47 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ void			ft_bigint_mult(t_bigint *res, const t_bigint *a,
 				const t_bigint *b);
 void			ft_bigint_pow2(t_bigint *res, int32_t exp);
 void			ft_bigint_pow5(t_bigint *res, int32_t exp);
-//void			get_double(double value, int *sign, uint64_t *frac, int *exp);
 void			print_bigint(t_bigint *a);
 void			ft_make_bigint(t_bigint *res, int exp, uint64_t val, int *exp10);
-char			*ft_bigint2str(t_bigint *a);
-
 
 #endif

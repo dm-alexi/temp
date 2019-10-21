@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:22:02 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/21 18:48:49 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/21 23:38:32 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <unistd.h>
 #include "ft_printf.h"
 #include "ft_bigint.h"
-#include "libft/libft.h"
 
 int		float_zero_e(t_format *format, char **s, int sign)
 {
@@ -91,13 +90,13 @@ int		floatlen(long double d, t_format *format, char **s)
 	exp = (uint32_t)(*((uint64_t*)&d + 1)) & 0x00007fff;
 	sign = (*((uint64_t*)&d + 1) & 0x00008000) > 0;
 	if (!val)
-		return ((format->type == 'e' || format->type == 'E') ?
-			float_zero_e(format, s, sign) : float_zero(format, s, sign));
+		return ((format->type == 'e' || format->type == 'E')
+		? float_zero_e(format, s, sign) : float_zero(format, s, sign));
 	if (exp == 0x00007fff)
 		return (float_special(format, s, sign, val));
 	ft_make_bigint(&t, (int)exp - 16446, val, &exp10);
 	if (format->type == 'f' || format->type == 'F')
-		str = ft_printf_b2f(format, &t, exp, &sign);
+		ft_printf_b2f(format, &t, exp10, &sign);
 		//return (ft_printf_f(format, &t, exp, s));
 	/*if (format->type == 'e' || format->type == 'E')
 		return (ft_printf_e(format, &t, exp, s));*/
@@ -117,8 +116,8 @@ int		ft_printf_float(t_format *format, va_list *va)
 		format->prec = 6;
 	if ((len = floatlen(d, format, &s)) < 0)
 		return (-1);
-	if (write(1, s, len) < len)
-		len = -1;
-	free(s);
+	//if (write(1, s, len) < len)
+	//	len = -1;
+	//free(s);
 	return (len);
 }

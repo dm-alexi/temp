@@ -68,8 +68,13 @@ int main()
     *exp = 0x00007fff;
     printbin(man, 8);
     printbin(exp, 4);
-    printf("%.30Lf!\n", d);
-    ft_printf("%Lf!\n", d);
+    double r = 0.325;
+    printf("%.2f!\n", r);
+    ft_printf("%.2f!\n", r);
+    //printf("%.30Le!\n", d);
+    //printf("%.30Lg!\n", d);
+    //printf("%.1Lf!\n", d);
+    //ft_printf("%.1Lf!\n", d);
 	//ft_printf("%.10g!\n", l);
 
 

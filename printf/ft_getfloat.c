@@ -26,7 +26,7 @@ void		ft_make_bigint(t_bigint *res, int exp, uint64_t val, int *exp10)
 	*exp10 = 0;
 	if (exp < 0)
 	{
-		*exp10 = exp;
+		*exp10 = -exp;
 		ft_bigint_pow5(&pow, -exp);
 	}
 	else

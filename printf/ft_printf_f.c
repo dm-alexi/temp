@@ -29,7 +29,7 @@ static int	intlen(uint32_t n)
 	return (i);
 }
 
-int			ft_getrawstring(t_bigint *t, char *s, int len)
+void			ft_getrawstring(t_bigint *t, char *s, int len)
 {
 	int			i;
 	int			j;
@@ -52,8 +52,6 @@ int			ft_getrawstring(t_bigint *t, char *s, int len)
 			n %= g_pow10[j--];
 		}
 	}
-	//*s -= len;
-	return (len);
 }
 
 //rounding "half to even" or "half up" ???
@@ -109,36 +107,30 @@ int ft_apply_ep(char **s, int exp, int len, int prec)
 	return (total);
 }
 
-int			ft_printf_f(t_format *format, int exp, char *str, char **s)
+int			ft_printf_f(t_format *format, int len, char *str, char **s)
 {
-	int		len;
 	int		total;
 	int		i;
 	int		j;
 
-	if ((len = ft_apply_ep(&str, exp, len, format->prec)) < 0)
-		return (-1);
 	i = 0;
 	while (i < len)
 		str[i++] += '0';
-	write(1, str, len);
 	total = len + (format->prec > 0 || format->sharp) +
 		(format->apost ? (len - format->prec - 1) / 3 : 0);
-	//write(1, str, len);
-	/*
 	if (!((*s) = (char*)malloc(total)))
 		return (-1);
 	j = len - format->prec;
 	ft_memcpy(*s + total - format->prec, str + j, format->prec);
 	if (format->prec > 0 || format->sharp)
-		*s[total - format->prec - 1] = '.';
+		(*s)[total - format->prec - 1] = '.';
 	i = total - format->prec - 1 - (format->prec > 0 || format->sharp);
 	while (--j >= 0)
 	{
 		(*s)[i--] = str[j];
-		if (!((len - format->prec - j) % 3))
+		if (format->apost && !((len - format->prec - j) % 3))
 			(*s)[i--] = '\'';
-	}*/
+	}
 	return (total);
 }
 
@@ -152,18 +144,18 @@ int			ft_printf_efg(t_format *format, t_bigint *t, int exp, char **s)
 	len = (t->len - 1) * 9 + intlen(t->arr[t->len - 1]);
 	if (!(str = (char*)malloc(len)))
 		return (-1);
-	if (ft_getrawstring(t, str, len) < 0)
-		return (-1);
-	if ((len = ft_apply_ep(&str, exp, len, format->prec)) < 0)
-		return (-1);
+	ft_getrawstring(t, str, len);
+	if ((format->type == 'f' || format->type == 'F') &&
+		(((len = ft_apply_ep(&str, exp, len, format->prec)) < 0) ||
+			(len = ft_printf_f(format, len, str, s)) < 0))
+				len = -1;
+	/*
 	i = 0;
 	while (i < len)
 		str[i++] += '0';
 	write(1, str, len);
-		/*
-	if (format->type == 'f' || format->type == 'F')
-		len = ft_printf_f(format, exp, str, s);*/
-	//write(1, *s, len);
+*/
+	write(1, *s, len);
 	free(str);
 	return (len);
 }

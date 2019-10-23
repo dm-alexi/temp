@@ -20,10 +20,25 @@
 int		float_zero_e(t_format *format, char **s)
 {
 	int		len;
+	int		tmp;
 
-    len = 4 + (format->sign != 0) + (format->sharp ? format->prec + 1 : 0);
-
-	return (len);
+	len = 6 + (format->sign != 0) + (format->sharp ? format->prec + 1 : 0);
+	if (len > format->width)
+		format->width = len;
+	if (!(*s = (char*)malloc(format->width)))
+		return (-1);
+	ft_memset(*s, format->fill, format->width);
+	tmp = (format->sign != 0) + (format->rpad ? 0 : format->width - len);
+	if (format->sign)
+		(*s)[**s == '0' || format->rpad ? 0 : tmp - 1] = format->sign;
+	(*s)[tmp++] = '0';
+	if (format->sharp)
+		(*s)[tmp++] = '.';
+	while (format->prec-- > 0)
+		(*s)[tmp++] = '0';
+	(*s)[tmp++] = format->type;
+	ft_memcpy(*s + tmp, "+000", 4);
+	return (format->width);
 }
 
 int		float_zero_fg(t_format *format, char **s)

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 14:37:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/21 23:02:42 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/23 18:38:52 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 /*
 ** Makes t_bigint from val; returns -exp10 (positive!)
 */
+
 int		ft_make_bigint(t_bigint *res, int exp, uint64_t val)
 {
 	t_bigint	pow;

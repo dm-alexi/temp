@@ -63,11 +63,10 @@ int main()
     printbin(man, 8);
     printbin(exp, 4);
     double r = 1578954.999;
-    printf("%.1F!\n", r);
-	ft_printf("%.1F!\n", r);
-	printf("%F!\n", 345793673.0);
-	ft_printf("%F!\n", 345793673.0);
-
+    ft_printf("%#o!\n", 0);
+    printf("%#o!\n", 0);
+    ft_printf("{%#.5x}", 1);
+    printf("{%#.5x}", 1);
     //printf("%.30Le!\n", d);
     //printf("%.30Lg!\n", d);
     //printf("%.1Lf!\n", d);

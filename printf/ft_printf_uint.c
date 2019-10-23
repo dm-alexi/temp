@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 19:35:11 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/19 21:31:46 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/23 19:07:40 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int			uintmaxlen(uintmax_t n, char **s, t_format *format, int b)
 	while (n && ++len)
 		n /= b;
 	if (format->sharp && b == 8)
-		format->prec = format->prec<= len ? len + 1 : format->prec;
+		format->prec = format->prec <= len ? len + 1 : format->prec;
 	if (format->sharp && b == 16)
 		format->prec = format->prec <= len - 1 ? len + 2 : format->prec;
 	if (format->apost && b == 10 && len > 3)

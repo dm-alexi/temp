@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 19:21:27 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/19 22:03:17 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/23 19:03:40 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static int		ptrlen(uintptr_t p, char **s, t_format *format)
 	len = 2 + (!p && format->prec);
 	while (p && ++len)
 		p /= 16;
-	if (len < format->prec)
-		len = format->prec;
+	if (len < format->prec + 2)
+		len = format->prec + 2;
 	if (format->prec < len)
 		format->prec = len;
 	if (!format->rpad && len < format->width)

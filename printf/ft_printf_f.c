@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 18:46:55 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/21 23:37:25 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/23 18:40:32 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	rounding(char *s, int len, int hollow)
 	while (i > 0 && s[i] == 10)
 	{
 		s[i--] = 0;
-        ++s[i];
+		++s[i];
 	}
 	if (s[0] == 10)
 	{
@@ -83,9 +83,9 @@ int	rounding(char *s, int len, int hollow)
 	return (len - hollow);
 }
 
-int ft_apply_ep(char **s, int exp, int len, int prec)
+int		ft_apply_ep(char **s, int exp, int len, int prec)
 {
-	char 	*str;
+	char	*str;
 	int		total;
 
 	total = exp + 1 > len ? exp + 1 : len;
@@ -116,10 +116,10 @@ int		add_sign_width(t_format *format, int len, char **s)
 		return (len);
 	if (!(tmp = (char*)malloc(total)))
 		return (-1);
-    ft_memset(tmp, format->fill, total);
-    ft_memcpy(tmp + (format->rpad ?
+	ft_memset(tmp, format->fill, total);
+	ft_memcpy(tmp + (format->rpad ?
 		(format->sign != 0) : total - len), *s, len);
-    if (format->sign)
+	if (format->sign)
 		tmp[*tmp == '0' || format->rpad ? 0 : total - len - 1] = format->sign;
 	free(*s);
 	*s = tmp;
@@ -158,15 +158,14 @@ int			ft_printf_efg(t_format *format, t_bigint *t, int exp, char **s)
 	char	*str;
 	int		len;
 
-
 	len = (t->len - 1) * 9 + intlen(t->arr[t->len - 1]);
 	if (!(str = (char*)malloc(len)))
 		return (-1);
 	ft_getrawstring(t, str, len);
 	if ((format->type == 'f' || format->type == 'F') &&
-		(((len = ft_apply_ep(&str, exp, len, format->prec)) < 0) ||
-			(len = ft_printf_f(format, len, str, s)) < 0))
-				len = -1;
+	(((len = ft_apply_ep(&str, exp, len, format->prec)) < 0) ||
+	(len = ft_printf_f(format, len, str, s)) < 0))
+		len = -1;
 	free(str);
 	return (len);
 }

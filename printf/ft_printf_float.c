@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:22:02 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/23 20:19:40 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/23 21:13:37 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		float_zero_e(t_format *format, char **s)
 	int		len;
 	int		tmp;
 
-	len = 6 + (format->sign != 0) + (format->sharp ? format->prec + 1 : 0);
+	len = 5 + (format->sign != 0) + (format->sharp ? format->prec + 1 : 0);
 	if (len > format->width)
 		format->width = len;
 	if (!(*s = (char*)malloc(format->width)))
@@ -37,7 +37,7 @@ int		float_zero_e(t_format *format, char **s)
 	while (format->prec-- > 0)
 		(*s)[tmp++] = '0';
 	(*s)[tmp++] = format->type;
-	ft_memcpy(*s + tmp, "+000", 4);
+	ft_memcpy(*s + tmp, "+00", 3);
 	return (format->width);
 }
 

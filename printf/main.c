@@ -56,8 +56,8 @@ int main()
     long double l = LDBL_MIN;
     uint64_t	*man = (uint64_t*)&l;
     uint32_t	*exp = (uint32_t*)(((uint64_t*)&l) + 1);
-    printf("%Lf\n", l);
-    ft_printf("%Lf\n", l);
+    //printf("%Lf\n", l);
+    //ft_printf("%Lf\n", l);
     //*man = 0xffffffffffffffff;
     //*man = 0;
     //*man = 0x8000000000000000;

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 22:01:10 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/23 22:50:23 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/23 23:35:37 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	xlen(uintmax_t n, char **s, t_format *format)
 	int		pref;
 
 	pref = (n && format->sharp ? 2 : 0);
-	len = 0;
+	len = (!n && format->prec);
 	while (n && ++len)
 		n /= 16;
 	if (len < format->prec)

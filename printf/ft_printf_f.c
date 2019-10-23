@@ -54,27 +54,24 @@ void			ft_getrawstring(t_bigint *t, char *s, int len)
 	}
 }
 
-//rounding "half to even" or "half up" ???
-// need to fix it with what I know now
 int	rounding(char *s, int len, int hollow)
 {
 	int		i;
-	int		k;
 
-	k = 0;
-	i = len - 1;
-	while (k++ < hollow)
+	if (s[i = len - hollow] > 5)
+		++s[len - 1 - hollow];
+	else if (s[i] == 5)
 	{
-		//if (s[i] > 5 || (s[i] == 5 && (s[i - 1] % 2)))
-		if (s[i] >= 5)
-			++s[i - 1];
-		--i;
+		while (++i < len && !s[i])
+			;
+		if (i < len || s[len - 1 - hollow] % 2)
+			++s[len - 1 - hollow];
 	}
+	i = len - 1 - hollow;
 	while (i > 0 && s[i] == 10)
 	{
-		s[i] = 0;
-        ++s[i - 1];
-        --i;
+		s[i--] = 0;
+        ++s[i];
 	}
 	if (s[0] == 10)
 	{

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 18:46:55 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/23 18:40:32 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/23 19:37:22 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int		ft_apply_ep(char **s, int exp, int len, int prec)
 	{
 		if (!(str = ft_memalloc(total)))
 			return (-1);
-		ft_strncpy(str + (exp + 1 > len ? exp + 1 - len : 0), *s, len);
+		ft_memcpy(str + (exp + 1 > len ? exp + 1 - len : 0), *s, len);
 		free(*s);
 		*s = str;
 	}

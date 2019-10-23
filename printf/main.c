@@ -60,13 +60,17 @@ int main()
     //*man = 0;
     *man = 0x8000000000000000;
     *exp = 0x00007fff;
-    printbin(man, 8);
-    printbin(exp, 4);
+    //printbin(man, 8);
+    //printbin(exp, 4);
     double r = 1578954.999;
-    ft_printf("%#o!\n", 0);
+    /*ft_printf("%#o!\n", 0);
     printf("%#o!\n", 0);
     ft_printf("{%#.5x}", 1);
-    printf("{%#.5x}", 1);
+    printf("{%#.5x}", 1);*/
+    ft_printf("%f!\n", 0.87650894255);
+    printf("%f!\n", 0.87650894255);
+    ft_printf("%.10f!\n", 0.87650894255);
+    printf("%.10f!\n", 0.87650894255);
     //printf("%.30Le!\n", d);
     //printf("%.30Lg!\n", d);
     //printf("%.1Lf!\n", d);

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 14:35:24 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/21 19:23:47 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/23 19:25:42 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # include <stdint.h>
 # include <stdio.h>
 # define MAX_BLOCKS 1024
-# define MAX_LEN 4960
 
 typedef struct	s_bigint
 {

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 19:35:11 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/23 19:07:40 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/23 22:35:07 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int			uintmaxtoa(uintmax_t n, char **s, t_format *format)
 		return (len);
 	tmp = len;
 	count = 0;
-	if (!n && format->prec)
+	if (!n && format->prec--)
 		(*s)[--tmp] = '0';
 	while (n || format->prec > 0)
 	{
@@ -77,7 +77,7 @@ static int			base16toa(uintmax_t n, char **s, t_format *format)
 	if ((len = uintmaxlen(n, s, format, 16)) <= 0)
 		return (len);
 	tmp = len;
-	if (!n && format->prec)
+	if (!n && format->prec--)
 		(*s)[--tmp] = '0';
 	while (n || format->prec > 0)
 	{
@@ -109,7 +109,6 @@ static uintmax_t	get_uinteger(t_format *format, va_list *va)
 		return ((uintmax_t)va_arg(*va, uintmax_t));
 	if (format->length == 'z')
 		return ((size_t)va_arg(*va, size_t));
-	//check uintptr_t (see man) - fixed... kinda
 	if (format->length == 't')
 		return ((uintptr_t)va_arg(*va, uintptr_t));
 	return ((unsigned int)va_arg(*va, unsigned int));
@@ -126,19 +125,29 @@ int					ft_printf_uint(t_format *format, va_list *va)
 	uinteger = get_uinteger(format, va);
 	if (format->prec >= 0)
 		format->fill = ' ';
+	if (format->type == 'u')
+		len = ft_utoa(uinteger, &s, format);
+	else if (format->type == 'o')
+		len = ft_otoa(uinteger, &s, format);
+	else
+		len = ft_xtoa(uinteger, &s, format);
 	if (!uinteger && (format->type == 'x' || format->type == 'X'))
 		format->sharp = 0;
+	/*
 	if (format->type == 'u' || format->type == 'o')
 		len = uintmaxtoa(uinteger, &s, format);
 	else
-		len = base16toa(uinteger, &s, format);
+		len = base16toa(uinteger, &s, format);*/
 	if (len < 0)
 		return (-1);
+		/*
 	offset = (format->width > len ? format->width - len : 0);
 	total_len = len + offset;
 	if (write(1, s, len) < len ||
 	(format->rpad && ft_printf_pad(1, format->fill, offset) < offset))
-		total_len = -1;
+		total_len = -1;*/
+	if (write(1, s, len) < len)
+		len = -1;
 	free(s);
-	return (total_len);
+	return (len);
 }

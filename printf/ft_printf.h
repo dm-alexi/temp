@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:19:30 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/23 18:41:40 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/23 22:36:41 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,8 @@ void			printbin(void *p, int n);
 int				dtoa(double value, char *s, int prec);
 int				ft_printf_efg(t_format *format, t_bigint *t, int exp, char **s);
 int				ft_printf_n(va_list *va, int n);
+int			ft_utoa(uintmax_t n, char **s, t_format *format);
+int			ft_otoa(uintmax_t n, char **s, t_format *format);
+int			ft_xtoa(uintmax_t n, char **s, t_format *format);
 
 #endif

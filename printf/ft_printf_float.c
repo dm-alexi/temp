@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:22:02 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/23 20:11:54 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/23 20:19:40 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		float_zero_fg(t_format *format, char **s)
 		format->prec = format->sharp ? format->prec - 1 : 0;
 	if (format->prec)
 		format->sharp = 1;
-	len = 1 + (format->sign != 0) +	(format->sharp ? format->prec + 1 : 0);
+	len = 1 + (format->sign != 0) + (format->sharp ? format->prec + 1 : 0);
 	if (len > format->width)
 		format->width = len;
 	if (!(*s = (char*)malloc(format->width)))
@@ -101,9 +101,10 @@ int		floatlen(long double d, t_format *format, char **s)
 	exp = (uint32_t)(*((uint64_t*)&d + 1)) & 0x00007fff;
 	if ((*((uint64_t*)&d + 1) & 0x00008000) > 0)
 		format->sign = '-';
+	if (!val && (format->type == 'e' || format->type == 'E'))
+		return (float_zero_e(format, s));
 	if (!val)
-		return ((format->type == 'e' || format->type == 'E')
-		? float_zero_e(format, s) : float_zero_fg(format, s));
+		return (float_zero_fg(format, s));
 	if (exp == 0x00007fff)
 		return (float_special(format, s, val));
 	exp10 = ft_make_bigint(&t, (int)exp - 16446, val);

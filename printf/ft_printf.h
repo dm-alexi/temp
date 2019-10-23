@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:19:30 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/23 22:36:41 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/23 23:42:03 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,12 @@ int				ft_printf_int(t_format *format, va_list *va);
 int				ft_printf_uint(t_format *format, va_list *va);
 int				ft_printf_ptr(t_format *format, va_list *va);
 int				ft_printf_float(t_format *format, va_list *va);
-//int				ft_printf_f(t_format *format, t_bigint *t, int exp, char **s);
-//int				ft_printf_e(t_format *format, t_bigint *t, int exp, char **s);
 void			printbin(void *p, int n);
 int				dtoa(double value, char *s, int prec);
 int				ft_printf_efg(t_format *format, t_bigint *t, int exp, char **s);
 int				ft_printf_n(va_list *va, int n);
-int			ft_utoa(uintmax_t n, char **s, t_format *format);
-int			ft_otoa(uintmax_t n, char **s, t_format *format);
-int			ft_xtoa(uintmax_t n, char **s, t_format *format);
+int				ft_utoa(uintmax_t n, char **s, t_format *format);
+int				ft_otoa(uintmax_t n, char **s, t_format *format);
+int				ft_xtoa(uintmax_t n, char **s, t_format *format);
 
 #endif

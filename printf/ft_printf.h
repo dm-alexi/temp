@@ -43,5 +43,6 @@ int				ft_printf_float(t_format *format, va_list *va);
 void			printbin(void *p, int n);
 int				dtoa(double value, char *s, int prec);
 int				ft_printf_efg(t_format *format, t_bigint *t, int exp, char **s);
+int				ft_printf_n(va_list *va, int n);
 
 #endif

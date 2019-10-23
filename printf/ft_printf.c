@@ -68,6 +68,7 @@ void	set_specifier(const char **s, t_format *format)
 		format->length = 'L';
 	else if (**s && ft_strchr("hljztL", **s))
 		format->length = *((*s)++);
+
 	if (**s && ft_strchr("cdefginopsuxEFGX%", **s))
 		format->type = *((*s)++);
 }
@@ -100,6 +101,8 @@ int		print_formatted(const char **s, va_list *va, int n)
 		return (ft_printf_ptr(&format, va));
 	if (ft_strchr("efgEFG", format.type))
 		return (ft_printf_float(&format, va));
+	if (format.type == 'n')
+		return (ft_printf_n(va, n));
 	return (0);
 }
 

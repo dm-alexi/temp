@@ -21,6 +21,8 @@ int		float_zero_e(t_format *format, char **s)
 {
 	int		len;
 
+    len = 4 + (format->sign != 0) + (format->sharp ? format->prec + 1 : 0);
+
 	return (len);
 }
 
@@ -28,7 +30,7 @@ int		float_zero_fg(t_format *format, char **s)
 {
 	int		len;
 
-	if (format->type == 'G' || format->type == 'g')
+	if ((format->type == 'G' || format->type == 'g') && format->prec)
 		format->prec = format->sharp ? format->prec - 1 : 0;
 	if (format->prec)
 		format->sharp = 1;
@@ -127,7 +129,7 @@ int		ft_printf_float(t_format *format, va_list *va)
 		va_arg(*va, long double) : (long double)va_arg(*va, double);
 	if (format->prec < 0)
 		format->prec = 6;
-	if (format->prec > 0)
+	if (format->prec > 0 && format->type != 'g' && format->type != 'G')
 		format->sharp = 1;
 	s = NULL;
 	if ((len = floatlen(d, format, &s)) < 0)

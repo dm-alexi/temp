@@ -4,12 +4,6 @@
 #include <stdint.h>
 #include "ft_printf.h"
 
-#include <limits.h>
-
-int	floatlen(long double d, t_format *format, char **s);
-
-int get_exponent(double d);
-
 int main()
 {
    /* int		l, k;
@@ -41,7 +35,7 @@ int main()
     long double tmp = -1;
     double nul = -0.0;
     int i;
-
+/*
     ft_printf("@moulitest: %#.o %#.0o\n", 0, 0);
     printf("@moulitest: %#.o %#.0o\n", 0, 0);
     ft_printf("@moulitest: %.x %.0x\n", 0, 0);
@@ -53,7 +47,7 @@ int main()
     ft_printf("%.5p\n", 0);
     printf("%.5p\n", 0);
     //printf("%05p", 0);
-
+*/
     //printbin(&dub, 16);
     //printbin(&nul, 12);
     //floatlen(nul, NULL, NULL);
@@ -69,8 +63,11 @@ int main()
     printbin(man, 8);
     printbin(exp, 4);
     double r = 1578954.999;
-    printf("%.2f!\n", r);
-    ft_printf("%.2f!\n", r);
+    printf("%e!\n", 0.0);
+	ft_printf("%9e!\n", 0.0);
+	int test = 0;
+	ft_printf("abcd%d %n!\n", 1505, &test);
+	ft_printf("%d\n", test);
     //printf("%.30Le!\n", d);
     //printf("%.30Lg!\n", d);
     //printf("%.1Lf!\n", d);

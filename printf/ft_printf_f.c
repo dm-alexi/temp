@@ -135,8 +135,7 @@ int			ft_printf_efg(t_format *format, t_bigint *t, int exp, char **s)
 {
 	char	*str;
 	int		len;
-	int		total;
-	int		i;
+
 
 	len = (t->len - 1) * 9 + intlen(t->arr[t->len - 1]);
 	if (!(str = (char*)malloc(len)))

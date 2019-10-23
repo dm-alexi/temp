@@ -89,28 +89,6 @@ int		float_special(t_format *format, char **s, uint64_t val)
 	return (format->width);
 }
 
-int		add_sign_width(t_format *format, int len, char **s)
-{
-	char	*tmp;
-	int		total;
-
-	total = len + (format->sign != 0);
-	if (format->width > total)
-		total = format->width;
-	if (total == len)
-		return (len);
-	if (!(tmp = (char*)malloc(total)))
-		return (-1);
-    ft_memset(tmp, format->fill, total);
-    ft_memcpy(tmp + (format->rpad ?
-		(format->sign != 0) : total - len), *s, len);
-    if (format->sign)
-		tmp[*tmp == '0' || format->rpad ? 0 : total - len - 1] = format->sign;
-	free(*s);
-	*s = tmp;
-	return (total);
-}
-
 int		floatlen(long double d, t_format *format, char **s)
 {
 	uint64_t	val;
@@ -129,9 +107,7 @@ int		floatlen(long double d, t_format *format, char **s)
 	if (exp == 0x00007fff)
 		return (float_special(format, s, val));
 	exp10 = ft_make_bigint(&t, (int)exp - 16446, val);
-	if ((len = ft_printf_efg(format, &t, exp10, s)) >= 0)
-		len = add_sign_width(format, len, s);
-	return (len);
+	return (ft_printf_efg(format, &t, exp10, s));
 }
 
 int		ft_printf_float(t_format *format, va_list *va)

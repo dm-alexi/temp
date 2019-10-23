@@ -104,6 +104,28 @@ int ft_apply_ep(char **s, int exp, int len, int prec)
 	return (total);
 }
 
+int		add_sign_width(t_format *format, int len, char **s)
+{
+	char	*tmp;
+	int		total;
+
+	total = len + (format->sign != 0);
+	if (format->width > total)
+		total = format->width;
+	if (total == len)
+		return (len);
+	if (!(tmp = (char*)malloc(total)))
+		return (-1);
+    ft_memset(tmp, format->fill, total);
+    ft_memcpy(tmp + (format->rpad ?
+		(format->sign != 0) : total - len), *s, len);
+    if (format->sign)
+		tmp[*tmp == '0' || format->rpad ? 0 : total - len - 1] = format->sign;
+	free(*s);
+	*s = tmp;
+	return (total);
+}
+
 int			ft_printf_f(t_format *format, int len, char *str, char **s)
 {
 	int		total;
@@ -128,7 +150,7 @@ int			ft_printf_f(t_format *format, int len, char *str, char **s)
 		if (format->apost && !((len - format->prec - j) % 3))
 			(*s)[i--] = '\'';
 	}
-	return (total);
+	return (add_sign_width(format, total, s));
 }
 
 int			ft_printf_efg(t_format *format, t_bigint *t, int exp, char **s)

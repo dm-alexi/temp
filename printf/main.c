@@ -63,11 +63,11 @@ int main()
     printbin(man, 8);
     printbin(exp, 4);
     double r = 1578954.999;
-    printf("%e!\n", 0.0);
-	ft_printf("%9e!\n", 0.0);
-	int test = 0;
-	ft_printf("abcd%d %n!\n", 1505, &test);
-	ft_printf("%d\n", test);
+    printf("%.1F!\n", r);
+	ft_printf("%.1F!\n", r);
+	printf("%F!\n", 345793673.0);
+	ft_printf("%F!\n", 345793673.0);
+
     //printf("%.30Le!\n", d);
     //printf("%.30Lg!\n", d);
     //printf("%.1Lf!\n", d);

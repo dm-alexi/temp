@@ -13,7 +13,10 @@
 #include <stdlib.h>
 #include "ft_bigint.h"
 
-void		ft_make_bigint(t_bigint *res, int exp, uint64_t val, int *exp10)
+/*
+** Makes t_bigint from val; returns -exp10 (positive!)
+*/
+int		ft_make_bigint(t_bigint *res, int exp, uint64_t val)
 {
 	t_bigint	pow;
 	t_bigint	tmp;
@@ -23,14 +26,11 @@ void		ft_make_bigint(t_bigint *res, int exp, uint64_t val, int *exp10)
 		++exp;
 		val >>= 1;
 	}
-	*exp10 = 0;
 	if (exp < 0)
-	{
-		*exp10 = exp;
 		ft_bigint_pow5(&pow, -exp);
-	}
 	else
 		ft_bigint_pow2(&pow, exp);
 	ft_bigint_get(&tmp, val);
 	ft_bigint_mult(res, &tmp, &pow);
+	return (exp < 0 ? -exp : 0);
 }

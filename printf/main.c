@@ -12,7 +12,7 @@ int get_exponent(double d);
 
 int main()
 {
-/*    int		l, k;
+   /* int		l, k;
     char a = 'a', b = 'b';
     //wchar_t a = L'a', b = L'b';
     //l = printf("%%dsdf%+01.5vbn\n", 1335, 78);
@@ -41,7 +41,7 @@ int main()
     long double tmp = -1;
     double nul = -0.0;
     int i;
-/*
+
     ft_printf("@moulitest: %#.o %#.0o\n", 0, 0);
     printf("@moulitest: %#.o %#.0o\n", 0, 0);
     ft_printf("@moulitest: %.x %.0x\n", 0, 0);
@@ -53,7 +53,7 @@ int main()
     ft_printf("%.5p\n", 0);
     printf("%.5p\n", 0);
     //printf("%05p", 0);
-*/
+
     //printbin(&dub, 16);
     //printbin(&nul, 12);
     //floatlen(nul, NULL, NULL);
@@ -68,7 +68,7 @@ int main()
     *exp = 0x00007fff;
     printbin(man, 8);
     printbin(exp, 4);
-    double r = 0.325;
+    double r = 1578954.999;
     printf("%.2f!\n", r);
     ft_printf("%.2f!\n", r);
     //printf("%.30Le!\n", d);

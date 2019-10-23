@@ -20,10 +20,8 @@
 static int			intmaxlen(intmax_t n, char **s, t_format *format)
 {
 	int		len;
-	int		sign;
 	int		apostrophes;
 
-	sign = (n < 0 || (format->plus || format->space));
 	len = !n && format->prec;
 	apostrophes = 0;
 	while (n && ++len)
@@ -32,12 +30,12 @@ static int			intmaxlen(intmax_t n, char **s, t_format *format)
 		apostrophes = (len - 1) / 3;
 	if (len < format->prec)
 		len = format->prec;
-	len += sign + apostrophes;
-	if (!format->minus && len < format->width)
+	len += (format->sign != 0) + apostrophes;
+	if (!format->rpad && len < format->width)
 		len = format->width;
 	if (!(*s = (char*)malloc(len)))
 		return (-1);
-	ft_memset(*s, format->zero ? '0' : ' ', len);
+	ft_memset(*s, format->fill, len);
 	if (!n && format->prec < 0)
 		format->prec = 1;
 	return (len);
@@ -48,14 +46,10 @@ static int			intmaxtoa(intmax_t n, char **s, t_format *format)
 	int		len;
 	int		tmp;
 	int		count;
-	char	sign;
 
 	if ((len = intmaxlen(n, s, format)) <= 0)
 		return (len);
 	tmp = len;
-	sign = n < 0 ? '-' : 0;
-	if (!sign && (format->plus || format->space))
-		sign = format->plus ? '+' : ' ';
 	count = 0;
 	while (n || format->prec > 0)
 	{
@@ -65,8 +59,8 @@ static int			intmaxtoa(intmax_t n, char **s, t_format *format)
 		n = n >= 0 ? n / 10 : -(n / 10);
 		--format->prec;
 	}
-	if (sign)
-		(*s)[(*s)[--tmp] == ' ' ? tmp : 0] = sign;
+	if (format->sign)
+		(*s)[(*s)[--tmp] == ' ' ? tmp : 0] = format->sign;
 	return (len);
 }
 
@@ -99,15 +93,17 @@ int					ft_printf_int(t_format *format, va_list *va)
 	int			offset;
 	int			len_total;
 
-	if (format->zero && format->prec >= 0)
-		format->zero = 0;
 	integer = get_integer(format, va);
+	if (format->prec >= 0)
+		format->fill = ' ';
+	if (integer < 0)
+		format->sign = '-';
 	if ((len = intmaxtoa(integer, &s, format)) < 0)
 		return (-1);
 	offset = (format->width > len ? format->width - len : 0);
 	len_total = len + offset;
 	if (write(1, s, len) < len ||
-	(format->minus && ft_printf_pad(1, ' ', offset) < offset))
+	(format->rpad && ft_printf_pad(1, format->fill, offset) < offset))
 		len_total = -1;
 	free(s);
 	return (len_total);

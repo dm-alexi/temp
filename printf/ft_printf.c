@@ -20,15 +20,15 @@ void	set_flags(const char **s, t_format *format)
 	while (**s && ft_strchr("-+ #0\'", **s))
 	{
 		if (**s == '-')
-			format->minus = 1;
+			format->rpad = 1;
 		else if (**s == '+')
-			format->plus = 1;
-		else if (**s == ' ')
-			format->space = 1;
+			format->sign = '+';
+		else if (**s == ' ' && !format->sign)
+			format->sign = ' ';
 		else if (**s == '#')
 			format->sharp = 1;
 		else if (**s == '0')
-			format->zero = 1;
+			format->fill = '0';
 		else if (**s == '\'')
 			format->apost = 1;
 		++*s;
@@ -37,14 +37,13 @@ void	set_flags(const char **s, t_format *format)
 
 void	set_wp(const char **s, t_format *format, va_list *va)
 {
-	format->width = 0;
 	format->prec = -1;
 	if (ft_isdigit(**s))
 		format->width = ft_strtol((char*)*s, (char**)s, 10);
 	else if (**s == '*' && ++*s && (format->width = va_arg(*va, int)) < 0)
 	{
 		format->width = -format->width;
-		format->minus = 1;
+		format->rpad = 1;
 	}
 	if (**s == '.' && ++*s)
 	{
@@ -53,21 +52,22 @@ void	set_wp(const char **s, t_format *format, va_list *va)
 			format->prec = ft_strtol((char*)*s, (char**)s, 10);
 		else if (**s == '*' && ++*s)
 			format->prec = va_arg(*va, int);
+		//check is this is still necessary
 		if (format->prec < 0)
 			format->prec = -1;
 	}
+	if (format->rpad || !format->fill)
+		format->fill = ' ';
 }
 
 void	set_specifier(const char **s, t_format *format)
 {
-	format->length = 0;
 	if (ft_strnequ(*s, "hh", 2) && (*s += 2))
 		format->length = 'H';
 	else if (ft_strnequ(*s, "ll", 2) && (*s += 2))
 		format->length = 'L';
 	else if (**s && ft_strchr("hljztL", **s))
 		format->length = *((*s)++);
-	format->type = 0;
 	if (**s && ft_strchr("cdefginopsuxEFGX%", **s))
 		format->type = *((*s)++);
 }

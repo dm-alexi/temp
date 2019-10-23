@@ -17,14 +17,14 @@
 #include "ft_printf.h"
 #include "ft_bigint.h"
 
-int		float_zero_e(t_format *format, char **s, int sign)
+int		float_zero_e(t_format *format, char **s)
 {
 	int		len;
 
 	return (len);
 }
 
-int		float_zero(t_format *format, char **s, int sign)
+int		float_zero_fg(t_format *format, char **s)
 {
 	int		len;
 
@@ -32,28 +32,25 @@ int		float_zero(t_format *format, char **s, int sign)
 		format->prec = format->sharp ? format->prec - 1 : 0;
 	if (format->prec)
 		format->sharp = 1;
-	len = 1 + (sign || format->plus || format->space) +
-		(format->sharp ? format->prec + 1 : 0);
+	len = 1 + (format->sign != 0) +	(format->sharp ? format->prec + 1 : 0);
 	if (len > format->width)
 		format->width = len;
 	if (!(*s = (char*)malloc(format->width)))
 		return (-1);
-	ft_memset(*s, !format->minus && format->zero ? '0' : ' ', format->width);
-	len = format->minus ? len : format->width;
+	ft_memset(*s, format->fill, format->width);
+	len = format->rpad ? len : format->width;
 	while (format->prec-- > 0)
 		(*s)[--len] = '0';
 	if (format->sharp)
 		(*s)[--len] = '.';
 	(*s)[--len] = '0';
 	len = **s == '0' ? 0 : len - 1;
-	if (sign)
-		(*s)[len] = '-';
-	else if (format->plus || format->space)
-		(*s)[len] = format->plus ? '+' : ' ';
+	if (format->sign)
+		(*s)[len] = format->sign;
 	return (format->width);
 }
 
-int		float_special(t_format *format, char **s, int sign, uint64_t val)
+int		float_special(t_format *format, char **s, uint64_t val)
 {
 	int		len;
 	char	*mes;
@@ -62,47 +59,61 @@ int		float_special(t_format *format, char **s, int sign, uint64_t val)
 		mes = ft_isupper(format->type) ? "INF" : "inf";
 	else
 		mes = ft_isupper(format->type) ? "NAN" : "nan";
-	len = 3 + (val != 0x8000000000000000 &&
-		(sign || format->plus || format->space));
+	len = 3 + (val != 0x8000000000000000 && format->sign != 0);
 	if (format->width < len)
 		format->width = len;
 	if (!(*s = (char*)malloc(format->width)))
 		return (-1);
 	ft_memset(*s, ' ', format->width);
-	len = (format->minus ? len : format->width) - 3;
+	len = (format->rpad ? len : format->width) - 3;
 	ft_memcpy(*s + len, mes, 3);
-	if (sign)
-		(*s)[len - 1] = '-';
-	else if (format->plus)
-		(*s)[len - 1] = '+';
+	if (format->sign)
+		(*s)[len - 1] = format->sign;
 	return (format->width);
 }
+/*
+int		add_sign_width(t_format *format, int len, char **s)
+{
+	char	*tmp;
+	int		total;
+	char	pref;
 
+	total = len + (sign || format->plus || format->space);
+	if (format->width > total)
+		total = format->width;
+	if (total == len)
+		return (len);
+	if (!(tmp = (char*)malloc(total)))
+		return (-1);
+    ft_memset(tmp, !format->minus && format->zero ? '0' : ' ', total);
+    ft_memcpy(tmp + (sign || format->plus || format->space) +
+	(format->minus ? 0 : format-width - len), *s, len);
+
+	return (total);
+}
+*/
 int		floatlen(long double d, t_format *format, char **s)
 {
 	uint64_t	val;
 	uint32_t	exp;
 	int			exp10;
-	int			sign;
+	int			len;
 	t_bigint	t;
 
 	val = *((uint64_t*)&d);
 	exp = (uint32_t)(*((uint64_t*)&d + 1)) & 0x00007fff;
-	sign = (*((uint64_t*)&d + 1) & 0x00008000) > 0;
+	if ((*((uint64_t*)&d + 1) & 0x00008000) > 0)
+		format->sign = '-';
 	if (!val)
 		return ((format->type == 'e' || format->type == 'E')
-		? float_zero_e(format, s, sign) : float_zero(format, s, sign));
+		? float_zero_e(format, s) : float_zero_fg(format, s));
 	if (exp == 0x00007fff)
-		return (float_special(format, s, sign, val));
-	ft_make_bigint(&t, (int)exp - 16446, val, &exp10);
-	ft_printf_efg(format, &t, exp10, s);
-	//if (format->type == 'f' || format->type == 'F')
-	//	ft_printf_b2f(format, &t, exp10, &sign);
-		//return (ft_printf_f(format, &t, exp, s));
-	/*if (format->type == 'e' || format->type == 'E')
-		return (ft_printf_e(format, &t, exp, s));*/
-
-	return (0);
+		return (float_special(format, s, val));
+	exp10 = ft_make_bigint(&t, (int)exp - 16446, val);
+	len = ft_printf_efg(format, &t, exp10, s);
+	/*if ((exp10 = ft_printf_efg(format, &t, exp10, s)) >= 0)
+		exp10 = add_sign_width(format, exp10, s);*/
+	return (len);
 }
 
 int		ft_printf_float(t_format *format, va_list *va)
@@ -115,10 +126,13 @@ int		ft_printf_float(t_format *format, va_list *va)
 		va_arg(*va, long double) : (long double)va_arg(*va, double);
 	if (format->prec < 0)
 		format->prec = 6;
+	if (format->prec > 0)
+		format->sharp = 1;
+	s = NULL;
 	if ((len = floatlen(d, format, &s)) < 0)
 		return (-1);
-	//if (write(1, s, len) < len)
-	//	len = -1;
-	//free(s);
+	if (write(1, s, len) < len)
+		len = -1;
+	free(s);
 	return (len);
 }

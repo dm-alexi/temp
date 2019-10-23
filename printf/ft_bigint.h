@@ -33,6 +33,6 @@ void			ft_bigint_mult(t_bigint *res, const t_bigint *a,
 void			ft_bigint_pow2(t_bigint *res, int32_t exp);
 void			ft_bigint_pow5(t_bigint *res, int32_t exp);
 void			print_bigint(t_bigint *a);
-void			ft_make_bigint(t_bigint *res, int exp, uint64_t val, int *exp10);
+int				ft_make_bigint(t_bigint *res, int exp, uint64_t val);
 
 #endif

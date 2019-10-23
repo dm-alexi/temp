@@ -22,11 +22,10 @@ typedef struct	s_format
 	int		prec;
 	char	length;
 	char	type;
-	char	minus;
-	char	plus;
-	char	space;
+	char	sign;
+	char	rpad;
 	char	sharp;
-	char	zero;
+	char	fill;
 	char	apost;
 }				t_format;
 

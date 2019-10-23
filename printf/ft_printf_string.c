@@ -47,10 +47,10 @@ int				ft_printf_char(t_format *format, va_list *va)
 	if (format->width <= 1)
 		return (write(1, &c, 1) == 1 ? 1 : -1);
 	offset = format->width - 1;
-	if ((!format->minus &&
-	ft_printf_pad(1, format->zero ? '0' : ' ', offset) < offset) ||
+	if ((!format->rpad &&
+	ft_printf_pad(1, format->fill, offset) < offset) ||
 	write(1, &c, 1) < 1 ||
-	(format->minus && ft_printf_pad(1, ' ', offset) < offset))
+	(format->rpad && ft_printf_pad(1, format->fill, offset) < offset))
 		return (-1);
 	return (offset + 1);
 }
@@ -68,10 +68,9 @@ static int		ft_printf_wstring(t_format *format, va_list *va)
 	if (format->prec >= 0 && len > format->prec)
 		len = format->prec;
 	offset = (format->width > len ? format->width - len : 0);
-	if ((!format->minus &&
-	ft_printf_pad(1, format->zero ? '0' : ' ', offset) < offset) ||
+	if ((!format->rpad && ft_printf_pad(1, format->fill, offset) < offset) ||
 	(write(1, ws, len * sizeof(wchar_t)) < len * sizeof(wchar_t)) ||
-	(format->minus && ft_printf_pad(1, ' ', offset) < offset))
+	(format->rpad && ft_printf_pad(1, format->fill, offset) < offset))
 		return (-1);
 	return (offset + len);
 }
@@ -93,10 +92,9 @@ int				ft_printf_string(t_format *format, va_list *va)
 	if (format->width <= len)
 		return (write(1, s, len) == len ? len : -1);
 	offset = format->width - len;
-	if ((!format->minus &&
-	ft_printf_pad(1, format->zero ? '0' : ' ', offset) < offset) ||
+	if ((!format->rpad && ft_printf_pad(1, format->fill, offset) < offset) ||
 	(write(1, s, len) < len) ||
-	(format->minus && ft_printf_pad(1, ' ', offset) < offset))
+	(format->rpad && ft_printf_pad(1, format->fill, offset) < offset))
 		return (-1);
 	return (offset + len);
 }
@@ -108,10 +106,9 @@ int		ft_printf_percent(t_format *format)
 	if (format->width <= 1)
 		return (write(1, "%", 1) == 1 ? 1 : -1);
 	offset = format->width - 1;
-	if ((!format->minus &&
-	ft_printf_pad(1, format->zero ? '0' : ' ', offset) < offset) ||
+	if ((!format->rpad && ft_printf_pad(1, format->fill, offset) < offset) ||
 	write(1, "%", 1) < 1 ||
-	(format->minus && ft_printf_pad(1, ' ', offset) < offset))
+	(format->rpad && ft_printf_pad(1, format->fill, offset) < offset))
 		return (-1);
 	return (offset + 1);
 }

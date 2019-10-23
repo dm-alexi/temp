@@ -35,11 +35,11 @@ static int			uintmaxlen(uintmax_t n, char **s, t_format *format, int b)
 	if (len < format->prec)
 		len = format->prec;
 	len += apostrophes;
-	if (!format->minus && len < format->width)
+	if (!format->rpad && len < format->width)
 		len = format->width;
 	if (!(*s = (char*)malloc(len)))
 		return (-1);
-	ft_memset(*s, (format->zero ? '0' : ' '), len);
+	ft_memset(*s, format->fill, len);
 	return (len);
 }
 
@@ -123,9 +123,9 @@ int					ft_printf_uint(t_format *format, va_list *va)
 	int			total_len;
 	int			offset;
 
-	if (format->zero && format->prec >= 0)
-		format->zero = 0;
 	uinteger = get_uinteger(format, va);
+	if (format->prec >= 0)
+		format->fill = ' ';
 	if (!uinteger && (format->type == 'x' || format->type == 'X'))
 		format->sharp = 0;
 	if (format->type == 'u' || format->type == 'o')
@@ -137,7 +137,7 @@ int					ft_printf_uint(t_format *format, va_list *va)
 	offset = (format->width > len ? format->width - len : 0);
 	total_len = len + offset;
 	if (write(1, s, len) < len ||
-	(format->minus && ft_printf_pad(1, ' ', offset) < offset))
+	(format->rpad && ft_printf_pad(1, format->fill, offset) < offset))
 		total_len = -1;
 	free(s);
 	return (total_len);

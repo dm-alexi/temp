@@ -55,6 +55,7 @@ void			ft_getrawstring(t_bigint *t, char *s, int len)
 }
 
 //rounding "half to even" or "half up" ???
+// need to fix it with what I know now
 int	rounding(char *s, int len, int hollow)
 {
 	int		i;
@@ -89,7 +90,6 @@ int ft_apply_ep(char **s, int exp, int len, int prec)
 {
 	char 	*str;
 	int		total;
-	int		i;
 
 	total = exp + 1 > len ? exp + 1 : len;
 	if (prec > exp)
@@ -116,15 +116,15 @@ int			ft_printf_f(t_format *format, int len, char *str, char **s)
 	i = 0;
 	while (i < len)
 		str[i++] += '0';
-	total = len + (format->prec > 0 || format->sharp) +
+	total = len + format->sharp +
 		(format->apost ? (len - format->prec - 1) / 3 : 0);
 	if (!((*s) = (char*)malloc(total)))
 		return (-1);
 	j = len - format->prec;
 	ft_memcpy(*s + total - format->prec, str + j, format->prec);
-	if (format->prec > 0 || format->sharp)
+	if (format->sharp)
 		(*s)[total - format->prec - 1] = '.';
-	i = total - format->prec - 1 - (format->prec > 0 || format->sharp);
+	i = total - format->prec - 1 - format->sharp;
 	while (--j >= 0)
 	{
 		(*s)[i--] = str[j];
@@ -149,13 +149,6 @@ int			ft_printf_efg(t_format *format, t_bigint *t, int exp, char **s)
 		(((len = ft_apply_ep(&str, exp, len, format->prec)) < 0) ||
 			(len = ft_printf_f(format, len, str, s)) < 0))
 				len = -1;
-	/*
-	i = 0;
-	while (i < len)
-		str[i++] += '0';
-	write(1, str, len);
-*/
-	write(1, *s, len);
 	free(str);
 	return (len);
 }

@@ -27,11 +27,11 @@ static int		ptrlen(uintptr_t p, char **s, t_format *format)
 		len = format->prec;
 	if (format->prec < len)
 		format->prec = len;
-	if (!format->minus && len < format->width)
+	if (!format->rpad && len < format->width)
 		len = format->width;
 	if (!(*s = (char*)malloc(len)))
 		return (-1);
-	ft_memset(*s, (format->zero ? '0' : ' '), len);
+	ft_memset(*s, format->fill, len);
 	return (len);
 }
 
@@ -57,7 +57,7 @@ int				ft_printf_ptr(t_format *format, va_list *va)
 	offset = (format->width > len ? format->width - len : 0);
 	tmp = len + offset;
 	if (write(1, s, len) < len ||
-	(format->minus && ft_printf_pad(1, ' ', offset) < offset))
+	(format->rpad && ft_printf_pad(1, format->fill, offset) < offset))
 		tmp = -1;
 	free(s);
 	return (tmp);

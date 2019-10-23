@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 21:31:26 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/23 23:16:34 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/23 23:32:16 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 static int	olen(uintmax_t n, char **s, t_format *format)
 {
 	int		len;
-	int		tmp;
 
-	//if (!n)
-	//	format->sharp = 0;
+	if (!n && format->sharp && !format->prec)
+		format->prec = 1;
 	len = (!n && format->prec);
+	if (!n)
+		format->sharp = 0;
 	while (n && ++len)
 		n /= 8;
 	if (format->sharp && len >= format->prec)

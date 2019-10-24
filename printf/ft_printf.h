@@ -41,6 +41,7 @@ int				ft_printf_float(t_format *format, va_list *va);
 void			printbin(void *p, int n);
 int				ft_printf_efg(t_format *format, t_bigint *t, int exp, char **s);
 int				ft_printf_n(va_list *va, int n);
+int				ft_printf_r(t_format *format, va_list *va);
 int				ft_utoa(uintmax_t n, char **s, t_format *format);
 int				ft_otoa(uintmax_t n, char **s, t_format *format);
 int				ft_xtoa(uintmax_t n, char **s, t_format *format);

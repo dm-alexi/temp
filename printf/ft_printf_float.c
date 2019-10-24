@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:22:02 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/24 20:09:35 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/24 20:14:51 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int		float_special(t_format *format, char **s, uint64_t val)
 		mes = ft_isupper(format->type) ? "NAN" : "nan";
 		format->sign = 0;
 	}
-	len = 3 + (val != 0x8000000000000000 && format->sign != 0);
+	len = 3 + (format->sign != 0);
 	if (format->width < len)
 		format->width = len;
 	if (!(*s = (char*)malloc(format->width)))

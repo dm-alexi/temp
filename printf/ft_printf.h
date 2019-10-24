@@ -39,11 +39,13 @@ int				ft_printf_uint(t_format *format, va_list *va);
 int				ft_printf_ptr(t_format *format, va_list *va);
 int				ft_printf_float(t_format *format, va_list *va);
 void			printbin(void *p, int n);
-int				dtoa(double value, char *s, int prec);
 int				ft_printf_efg(t_format *format, t_bigint *t, int exp, char **s);
 int				ft_printf_n(va_list *va, int n);
 int				ft_utoa(uintmax_t n, char **s, t_format *format);
 int				ft_otoa(uintmax_t n, char **s, t_format *format);
 int				ft_xtoa(uintmax_t n, char **s, t_format *format);
+int				ft_round(char *s, int len, int hollow);
+int		ft_process_e(char **s, int exp, int len, t_format *format);
+int		ft_printf_e(t_format *format, int len, char *str, char **s);
 
 #endif

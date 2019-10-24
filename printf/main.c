@@ -36,19 +36,7 @@ int main()
     long double tmp = -1;
     double nul = -0.0;
     int i;
-/*
-    ft_printf("@moulitest: %#.o %#.0o\n", 0, 0);
-    printf("@moulitest: %#.o %#.0o\n", 0, 0);
-    ft_printf("@moulitest: %.x %.0x\n", 0, 0);
-    printf("@moulitest: %.x %.0x\n", 0, 0);
-    ft_printf("%#o\n", 0);
-    printf("%#o\n", 0);
-    ft_printf("%o\n", 0);
-    printf("%o\n", 0);
-    ft_printf("%.5p\n", 0);
-    printf("%.5p\n", 0);
-    //printf("%05p", 0);
-*/
+
     //printbin(&dub, 16);
     //printbin(&nul, 12);
     //floatlen(nul, NULL, NULL);
@@ -56,30 +44,25 @@ int main()
     long double l = LDBL_MIN;
     uint64_t	*man = (uint64_t*)&l;
     uint32_t	*exp = (uint32_t*)(((uint64_t*)&l) + 1);
-    //ft_printf("%#o\n", 0);
-    //printf("%#o\n", 0);
-    ft_printf("%#.5o\n", 5263);
-    printf("%#o", 0);
+
     //printf("%Lf\n", l);
     //ft_printf("%Lf\n", l);
     //*man = 0xffffffffffffffff;
     //*man = 0;
-    //*man = 0x8000000000000000;
-    //*exp = 0x00007fff;
+    *man = 0x8000000000000000;
+    *exp = 0x00007fff;
     //printbin(man, 8);
     //printbin(exp, 2);
     double r = 1578954.999;
-    /*ft_printf("%#o!\n", 0);
-    printf("%#o!\n", 0);
-    ft_printf("{%#.5x}", 1);
-    printf("{%#.5x}", 1);*/
-    //printf("%.30Le!\n", d);
-    //printf("%.30Lg!\n", d);
-    //printf("%.1Lf!\n", d);
+    //d = 9.999;
+    ft_printf("%.2LE!\n", d);
+    ft_printf("%.2Lg!\n", d);
+    ft_printf("%.2Lf!\n", d);
+    printf("---\n");
+    printf("%.2LE!\n", d);
+    printf("%.2Lg!\n", d);
+    printf("%.2Lf!\n", d);
     //ft_printf("%.1Lf!\n", d);
 	//ft_printf("%.10g!\n", l);
-
-
-
     return 0;
 }

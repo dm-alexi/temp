@@ -67,6 +67,7 @@ int		float_zero_fg(t_format *format, char **s)
 	return (format->width);
 }
 
+//check sign & space
 int		float_special(t_format *format, char **s, uint64_t val)
 {
 	int		len;
@@ -94,7 +95,6 @@ int		floatlen(long double d, t_format *format, char **s)
 	uint64_t	val;
 	uint32_t	exp;
 	int			exp10;
-	int			len;
 	t_bigint	t;
 
 	val = *((uint64_t*)&d);

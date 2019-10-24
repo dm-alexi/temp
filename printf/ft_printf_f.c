@@ -13,7 +13,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "libft/libft.h"
-#include "ft_bigint.h"
 #include "ft_printf.h"
 
 static const int	g_pow10[] = {1, 10, 100, 1000, 10000, 100000, 1000000,
@@ -54,7 +53,7 @@ void			ft_getrawstring(t_bigint *t, char *s, int len)
 	}
 }
 
-int	rounding(char *s, int len, int hollow)
+int	ft_round(char *s, int len, int hollow)
 {
 	int		i;
 
@@ -83,7 +82,7 @@ int	rounding(char *s, int len, int hollow)
 	return (len - hollow);
 }
 
-int		ft_apply_ep(char **s, int exp, int len, int prec)
+int		ft_process_f(char **s, int exp, int len, int prec)
 {
 	char	*str;
 	int		total;
@@ -100,7 +99,7 @@ int		ft_apply_ep(char **s, int exp, int len, int prec)
 		*s = str;
 	}
 	if (prec < exp)
-		total = rounding(*s, total, exp - prec);
+		total = ft_round(*s, total, exp - prec);
 	return (total);
 }
 
@@ -163,8 +162,12 @@ int			ft_printf_efg(t_format *format, t_bigint *t, int exp, char **s)
 		return (-1);
 	ft_getrawstring(t, str, len);
 	if ((format->type == 'f' || format->type == 'F') &&
-	(((len = ft_apply_ep(&str, exp, len, format->prec)) < 0) ||
+	(((len = ft_process_f(&str, exp, len, format->prec)) < 0) ||
 	(len = ft_printf_f(format, len, str, s)) < 0))
+		len = -1;
+	else if ((format->type == 'e' || format->type == 'E') &&
+	(((len = ft_process_e(&str, -exp, len, format)) < 0) ||
+	(len = ft_printf_e(format, len, str, s)) < 0))
 		len = -1;
 	free(str);
 	return (len);

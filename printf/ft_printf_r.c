@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_r.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/24 19:49:53 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/10/24 19:50:17 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include "ft_printf.h"
 
@@ -17,7 +29,7 @@ static void		put_char(char **dst, char *src)
 	}
 }
 
-static int		getline(t_format *format, char **s)
+static int		get_rline(t_format *format, char **s)
 {
 	char	*tmp;
 	char	*str;
@@ -50,7 +62,7 @@ int				ft_printf_r(t_format *format, va_list *va)
 
 	if (!(s = (char*)va_arg(*va, char*)))
 		s = "(null)";
-	if ((len = getline(format, &s)) < 0)
+	if ((len = get_rline(format, &s)) < 0)
 		return (-1);
 	if (write(1, s, len) < len)
 		len = -1;

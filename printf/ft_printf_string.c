@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:15:06 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/21 18:49:17 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/24 19:53:34 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int			ft_printf_pad(int fd, char c, int n)
 }
 
 //handle C and lc
-int				ft_printf_char(t_format *format, va_list *va)
+int			ft_printf_char(t_format *format, va_list *va)
 {
 	unsigned char	c;
 	int				offset;
@@ -56,7 +56,7 @@ int				ft_printf_char(t_format *format, va_list *va)
 }
 
 //check it
-static int		ft_printf_wstring(t_format *format, va_list *va)
+static int	ft_printf_wstring(t_format *format, va_list *va)
 {
 	wchar_t		*ws;
 	int			len;
@@ -75,7 +75,7 @@ static int		ft_printf_wstring(t_format *format, va_list *va)
 	return (offset + len);
 }
 
-int				ft_printf_string(t_format *format, va_list *va)
+int			ft_printf_string(t_format *format, va_list *va)
 {
 	char		*s;
 	int			len;
@@ -99,7 +99,7 @@ int				ft_printf_string(t_format *format, va_list *va)
 	return (offset + len);
 }
 
-int		ft_printf_percent(t_format *format)
+int			ft_printf_percent(t_format *format)
 {
 	int			offset;
 

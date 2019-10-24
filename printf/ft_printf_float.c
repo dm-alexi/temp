@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:22:02 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/24 20:14:51 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/24 20:17:32 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int		float_zero_fg(t_format *format, char **s)
 	return (format->width);
 }
 
-//check sign & space
 int		float_special(t_format *format, char **s, uint64_t val)
 {
 	int		len;

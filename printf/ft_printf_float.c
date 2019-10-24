@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:22:02 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/24 20:17:32 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/24 22:23:07 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ int		ft_printf_float(t_format *format, va_list *va)
 		format->prec = 6;
 	if (format->prec > 0 && format->type != 'g' && format->type != 'G')
 		format->sharp = 1;
+	if (!format->prec && (format->type == 'g' || format->type == 'G'))
+		format->prec = 1;
 	s = NULL;
 	if ((len = floatlen(d, format, &s)) < 0)
 		return (-1);

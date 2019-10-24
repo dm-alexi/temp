@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 18:46:55 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/23 19:37:22 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/24 22:26:05 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,54 @@ int			ft_printf_f(t_format *format, int len, char *str, char **s)
 	return (add_sign_width(format, total, s));
 }
 
+int		ft_process_gf(char **s, int exp, int len, t_format *format)
+{
+	char	*str;
+	int		total;
+
+	total = exp + 1 > len ? exp + 1 : len;
+	if (format->prec > exp)
+		total += format->prec - exp;
+	if (total > len)
+	{
+		if (!(str = ft_memalloc(total)))
+			return (-1);
+		ft_memcpy(str + (exp + 1 > len ? exp + 1 - len : 0), *s, len);
+		free(*s);
+		*s = str;
+	}
+	if (format->prec < exp)
+		total = ft_round(*s, total, exp - format->prec);
+	return (total);
+}
+
+int			ft_printf_gf(t_format *format, int len, char *str, char **s)
+{
+	int		total;
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < len)
+		str[i++] += '0';
+	total = len + format->sharp +
+		(format->apost ? (len - format->prec - 1) / 3 : 0);
+	if (!((*s) = (char*)malloc(total)))
+		return (-1);
+	j = len - format->prec;
+	ft_memcpy(*s + total - format->prec, str + j, format->prec);
+	if (format->sharp)
+		(*s)[total - format->prec - 1] = '.';
+	i = total - format->prec - 1 - format->sharp;
+	while (--j >= 0)
+	{
+		(*s)[i--] = str[j];
+		if (format->apost && !((len - format->prec - j) % 3))
+			(*s)[i--] = '\'';
+	}
+	return (add_sign_width(format, total, s));
+}
+
 int			ft_printf_efg(t_format *format, t_bigint *t, int exp, char **s)
 {
 	char	*str;
@@ -168,6 +216,16 @@ int			ft_printf_efg(t_format *format, t_bigint *t, int exp, char **s)
 	else if ((format->type == 'e' || format->type == 'E') &&
 	(((len = ft_process_e(&str, -exp, len, format)) < 0) ||
 	(len = ft_printf_e(format, len, str, s)) < 0))
+		len = -1;
+	else if (((format->type == 'g' || format->type == 'G') &&
+	(-exp + len - 1 < -4 || -exp + len - 1 >= format->prec)) &&
+	(((len = ft_process_ge(&str, -exp, len, format)) < 0) ||
+	(len = ft_printf_ge(format, len, str, s)) < 0))
+		len = -1;
+	else if (((format->type == 'g' || format->type == 'G') &&
+	!(-exp + len - 1 < -4 || -exp + len - 1 >= format->prec)) &&
+	(((len = ft_process_gf(&str, exp, len, format)) < 0) ||
+	(len = ft_printf_gf(format, len, str, s)) < 0))
 		len = -1;
 	free(str);
 	return (len);

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:15:06 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/24 19:53:34 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/24 21:20:27 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,31 @@ int			ft_printf_pad(int fd, char c, int n)
 	return (i);
 }
 
+int			ft_printf_wchar(t_format *format, va_list *va)
+{
+	wchar_t		c;
+	int			offset;
+
+	c = (wchar_t)va_arg(*va, int);
+	if (format->width <= 1)
+		return (write(1, &c, 1) == 1 ? 1 : -1);
+	offset = format->width - 1;
+	if ((!format->rpad &&
+	ft_printf_pad(1, format->fill, offset) < offset) ||
+	write(1, &c, sizeof(wchar_t)) < sizeof(wchar_t) ||
+	(format->rpad && ft_printf_pad(1, format->fill, offset) < offset))
+		return (-1);
+	return (offset + 1);
+}
+
 //handle C and lc
 int			ft_printf_char(t_format *format, va_list *va)
 {
 	unsigned char	c;
 	int				offset;
 
-/*	if (format->length == 'l' || format->type == 'C')
-		return (ft_printf_wchar(format, va);*/
+	if (format->length == 'l' || format->type == 'C')
+		return (ft_printf_wchar(format, va));
 	c = (unsigned char)va_arg(*va, int);
 	if (format->width <= 1)
 		return (write(1, &c, 1) == 1 ? 1 : -1);
@@ -81,9 +98,8 @@ int			ft_printf_string(t_format *format, va_list *va)
 	int			len;
 	int			offset;
 
-/*
 	if (format->length == 'l' || format->type == 'S')
-		return (ft_printf_wstring(format, va));*/
+		return (ft_printf_wstring(format, va));
 	if (!(s = (char*)va_arg(*va, char*)))
 		s = "(null)";
 	len = ft_strlen(s);

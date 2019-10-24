@@ -14,7 +14,6 @@
 #include <stdint.h>
 #include <unistd.h>
 #include "ft_printf.h"
-#include "libft/libft.h"
 
 static int		ptrlen(uintptr_t p, char **s, t_format *format)
 {
@@ -27,11 +26,11 @@ static int		ptrlen(uintptr_t p, char **s, t_format *format)
 		len = format->prec + 2;
 	if (format->prec < len)
 		format->prec = len;
-	if (!format->rpad && len < format->width)
-		len = format->width;
-	if (!(*s = (char*)malloc(len)))
+	if (format->width < len)
+		format->width = len;
+	if (!(*s = (char*)malloc(format->width)))
 		return (-1);
-	ft_memset(*s, format->fill, len);
+	ft_memset(*s, format->fill, format->width);
 	return (len);
 }
 
@@ -40,25 +39,23 @@ int				ft_printf_ptr(t_format *format, va_list *va)
 	uintptr_t	p;
 	int			len;
 	int			tmp;
-	int			offset;
+	int			digit;
 	char		*s;
 
 	p = (uintptr_t)va_arg(*va, void*);
 	if ((len = ptrlen(p, &s, format)) < 0)
 		return (-1);
-	tmp = len;
+	tmp = format->rpad ? len : format->width;
 	while (p || format->prec > 0)
 	{
-		s[--tmp] = p % 16 < 10 ? p % 16 + '0' : p % 16 - 10 + 'a';
+		digit = p % 16;
+		s[--tmp] = digit + (digit < 10 ? '0' : 'a' - 10);
 		p /= 16;
-		--format->prec;
+		--(format->prec);
 	}
 	s[*s == '0' ? 1 : tmp + 1] = 'x';
-	offset = (format->width > len ? format->width - len : 0);
-	tmp = len + offset;
-	if (write(1, s, len) < len ||
-	(format->rpad && ft_printf_pad(1, format->fill, offset) < offset))
-		tmp = -1;
+	if (write(1, s, format->width) < format->width)
+		format->width = -1;
 	free(s);
-	return (tmp);
+	return (format->width);
 }

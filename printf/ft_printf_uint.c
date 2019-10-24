@@ -43,8 +43,6 @@ int					ft_printf_uint(t_format *format, va_list *va)
 	uintmax_t	uinteger;
 	char		*s;
 	int			len;
-	int			total_len;
-	int			offset;
 
 	uinteger = get_uinteger(format, va);
 	if (format->prec >= 0)
@@ -55,8 +53,6 @@ int					ft_printf_uint(t_format *format, va_list *va)
 		len = ft_otoa(uinteger, &s, format);
 	else
 		len = ft_xtoa(uinteger, &s, format);
-	if (!uinteger && (format->type == 'x' || format->type == 'X'))
-		format->sharp = 0;
 	if (len < 0)
 		return (-1);
 	if (write(1, s, len) < len)

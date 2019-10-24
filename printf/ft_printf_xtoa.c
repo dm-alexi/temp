@@ -15,15 +15,15 @@
 static int	xlen(uintmax_t n, char **s, t_format *format)
 {
 	int		len;
-	int		pref;
+	int		preflen;
 
-	pref = (n && format->sharp ? 2 : 0);
+	preflen = (format->sharp ? 2 : 0);
 	len = (!n && format->prec);
 	while (n && ++len)
 		n /= 16;
 	if (len < format->prec)
 		len = format->prec;
-	len += pref;
+	len += preflen;
 	if (format->width < len)
 		format->width = len;
 	if (!(*s = (char*)malloc(format->width)))
@@ -39,9 +39,9 @@ int			ft_xtoa(uintmax_t n, char **s, t_format *format)
 	int		digit;
 	char	*pref;
 
-	pref = NULL;
-	if (n && format->sharp)
-		pref = format->type == 'X' ? "0X" : "0x";
+	if (!n)
+		format->sharp = 0;
+	pref = format->type == 'X' ? "0X" : "0x";
 	if ((len = xlen(n, s, format)) < 0)
 		return (len);
 	tmp = format->rpad ? len : format->width;
@@ -56,7 +56,7 @@ int			ft_xtoa(uintmax_t n, char **s, t_format *format)
 		n /= 16;
 		--(format->prec);
 	}
-	if (pref)
+	if (format->sharp)
 		ft_memcpy(**s == '0' ? *s : *s + tmp - 2, pref, 2);
 	return (format->width);
 }

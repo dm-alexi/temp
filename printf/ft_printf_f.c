@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 18:46:55 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/24 22:26:05 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/25 22:50:40 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,23 +226,20 @@ int			ft_printf_efg(t_format *format, t_bigint *t, int exp, char **s)
 	if (!(str = (char*)malloc(len)))
 		return (-1);
 	ft_getrawstring(t, str, len);
-	if ((format->type == 'f' || format->type == 'F') &&
+	if (((format->type == 'f' || format->type == 'F') &&
 	(((len = ft_process_f(&str, exp, len, format->prec)) < 0) ||
-	(len = ft_printf_f(format, len, str, s)) < 0))
-		len = -1;
-	else if ((format->type == 'e' || format->type == 'E') &&
+	(len = ft_printf_f(format, len, str, s)) < 0)) ||
+	((format->type == 'e' || format->type == 'E') &&
 	(((len = ft_process_e(&str, -exp, len, format)) < 0) ||
-	(len = ft_printf_e(format, len, str, s)) < 0))
-		len = -1;
-	else if (((format->type == 'g' || format->type == 'G') &&
+	(len = ft_printf_e(format, len, str, s)) < 0)) ||
+	(((format->type == 'g' || format->type == 'G') &&
 	(-exp + len - 1 < -4 || -exp + len - 1 >= format->prec)) &&
 	(((len = ft_process_ge(&str, -exp, len, format)) < 0) ||
-	(len = ft_printf_e(format, len, str, s)) < 0))
-		len = -1;
-	else if (((format->type == 'g' || format->type == 'G') &&
+	(len = ft_printf_e(format, len, str, s)) < 0)) ||
+	(((format->type == 'g' || format->type == 'G') &&
 	!(-exp + len - 1 < -4 || -exp + len - 1 >= format->prec)) &&
 	(((len = ft_process_gf(&str, exp, len, format)) < 0) ||
-	(len = ft_printf_f(format, len, str, s)) < 0))
+	(len = ft_printf_f(format, len, str, s)) < 0)))
 		len = -1;
 	free(str);
 	return (len);

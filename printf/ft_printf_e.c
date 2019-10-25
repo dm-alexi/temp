@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 21:34:06 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/25 22:36:52 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/25 23:22:23 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,10 @@ int			ft_printf_e(t_format *format, int len, char *str, char **s)
 		return (-1);
 	ft_memset(*s, format->fill, format->width);
 	ft_memcpy(*s + (format->rpad ?
-		(format->sign != 0) : total - len), str, len);
+		(format->sign != 0) : format->width - len), str, len);
 	if (format->sign)
-		(*s)[**s == '0' || format->rpad ? 0 : total - len - 1] = format->sign;
+		(*s)[**s == '0' || format->rpad ? 0 : format->width - len - 1] =
+		format->sign;
 	return (format->width);
 }
 

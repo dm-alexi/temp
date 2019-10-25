@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:19:30 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/24 22:13:23 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/25 22:51:09 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,8 @@ int				ft_utoa(uintmax_t n, char **s, t_format *format);
 int				ft_otoa(uintmax_t n, char **s, t_format *format);
 int				ft_xtoa(uintmax_t n, char **s, t_format *format);
 int				ft_round(char *s, int len, int hollow);
-int		ft_process_e(char **s, int exp, int len, t_format *format);
-int		ft_printf_e(t_format *format, int len, char *str, char **s);
-int		ft_process_ge(char **s, int exp, int len, t_format *format);
-int			ft_printf_ge(t_format *format, int len, char *str, char **s);
+int				ft_process_e(char **s, int exp, int len, t_format *format);
+int				ft_printf_e(t_format *format, int len, char *str, char **s);
+int				ft_process_ge(char **s, int exp, int len, t_format *format);
 
 #endif

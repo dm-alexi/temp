@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:14:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/23 18:55:41 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/25 23:13:38 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ int		print_formatted(const char **s, va_list *va, int n)
 		return (0);
 	if (format.type == '%')
 		return (ft_printf_percent(&format));
-	if (format.type == 'c')
+	if (format.type == 'c' || format.type == 'C')
 		return (ft_printf_char(&format, va));
-	if (format.type == 's')
+	if (format.type == 's' || format.type == 'S')
 		return (ft_printf_string(&format, va));
 	if (format.type == 'd' || format.type == 'i')
 		return (ft_printf_int(&format, va));

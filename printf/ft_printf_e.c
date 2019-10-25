@@ -22,11 +22,17 @@ static int	explen(int exp)
 	return (i > 2 ? i : 2);
 }
 
+static int	cut_tail(char *s, int total)
+{
+	while (s[total] == 0)
+		--total;
+	return (total);
+}
+
 int			ft_process_e(char **s, int exp, int len, t_format *format)
 {
 	char	*str;
 	int		total;
-	int		i;
 
 	exp += len - 1;
 	if (((format->prec + 1 < len) &&
@@ -42,9 +48,9 @@ int			ft_process_e(char **s, int exp, int len, t_format *format)
 	str[format->prec + (format->sharp || format->prec) + 1] = format->type;
 	str[format->prec + (format->sharp || format->prec) + 2] = exp >= 0 ?
 		'+' : '-';
-	i = total;
+	len = total;
 	exp = exp >= 0 ? exp : -exp;
-	while (exp && (str[--i] = exp % 10 + '0'))
+	while (exp && (str[--len] = exp % 10 + '0'))
 		exp /= 10;
 	free(*s);
 	*s = str;
@@ -74,14 +80,7 @@ int			ft_printf_e(t_format *format, int len, char *str, char **s)
 	return (format->width);
 }
 
-static int	cut_tail(char *s, int total)
-{
-	while (s[total] == 0)
-		--total;
-	return (total);
-}
-
-int		ft_process_ge(char **s, int exp, int len, t_format *format)
+int			ft_process_ge(char **s, int exp, int len, t_format *format)
 {
 	char	*str;
 	int		total;

@@ -337,7 +337,64 @@ static const t_bigint	g_power5_big[] =
 			91 } }
 };
 
-void					ft_bigint_pow2(t_bigint *res, int32_t exp)
+static void				ft_bigint_mult_int(t_bigint *res, const t_bigint *a,
+	const uint32_t b)
+{
+	int			i;
+	uint64_t	product;
+	uint64_t	carry;
+
+	i = 0;
+	carry = 0;
+	res->len = 1;
+	res->arr[0] = 0;
+	if (b)
+	{
+		while (i < a->len)
+		{
+			product = carry + (uint64_t)a->arr[i] * b;
+			res->arr[i++] = product % 1000000000;
+			carry = product / 1000000000;
+		}
+		while (carry)
+		{
+			res->arr[i++] = carry % 1000000000;
+			carry /= 1000000000;
+		}
+		res->len = i;
+	}
+}
+
+static void				ft_bigint_mult(t_bigint *res, const t_bigint *a,
+	const t_bigint *b)
+{
+	int			i;
+	int			j;
+	t_bigint	tmp;
+
+	if (a->len <= b->len)
+	{
+		i = 0;
+		res->len = 1;
+		res->arr[0] = 0;
+		while (i < a->len)
+		{
+			ft_bigint_mult_int(&tmp, b, a->arr[i]);
+			j = tmp.len;
+			while (--j >= 0)
+				tmp.arr[j + i] = tmp.arr[j];
+			while (++j < i)
+				tmp.arr[j] = 0;
+			tmp.len += i;
+			ft_bigint_sum(res, res, &tmp);
+			++i;
+		}
+	}
+	else
+		ft_bigint_mult(res, b, a);
+}
+
+static void				ft_bigint_pow2(t_bigint *res, int32_t exp)
 {
 	t_bigint	tmp;
 	t_bigint	*cur;
@@ -362,7 +419,7 @@ void					ft_bigint_pow2(t_bigint *res, int32_t exp)
 		ft_bigint_copy(res, cur);
 }
 
-void					ft_bigint_pow5(t_bigint *res, int32_t exp)
+static void				ft_bigint_pow5(t_bigint *res, int32_t exp)
 {
 	t_bigint	tmp;
 	t_bigint	*cur;
@@ -385,4 +442,27 @@ void					ft_bigint_pow5(t_bigint *res, int32_t exp)
 	}
 	if (cur != res)
 		ft_bigint_copy(res, cur);
+}
+
+/*
+** Makes t_bigint from val; returns -exp10 (positive!)
+*/
+
+int						ft_bigint_make(t_bigint *res, int exp, uint64_t val)
+{
+	t_bigint	pow;
+	t_bigint	tmp;
+
+	while (!(val & 1L))
+	{
+		++exp;
+		val >>= 1;
+	}
+	if (exp < 0)
+		ft_bigint_pow5(&pow, -exp);
+	else
+		ft_bigint_pow2(&pow, exp);
+	ft_bigint_get(&tmp, val);
+	ft_bigint_mult(res, &tmp, &pow);
+	return (exp < 0 ? -exp : 0);
 }

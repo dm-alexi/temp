@@ -10,12 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <stddef.h>
-#include <stdint.h>
 #include <unistd.h>
 #include "ft_printf.h"
-#include "libft/libft.h"
 
 static int			intmaxlen(intmax_t n, char **s, t_format *format)
 {

@@ -10,14 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <stddef.h>
-#include <stdint.h>
 #include <unistd.h>
 #include "ft_printf.h"
-#include "ft_bigint.h"
 
-int		float_zero_e(t_format *format, char **s)
+static int	float_zero_e(t_format *format, char **s)
 {
 	int		len;
 	int		tmp;
@@ -41,7 +37,7 @@ int		float_zero_e(t_format *format, char **s)
 	return (format->width);
 }
 
-int		float_zero_fg(t_format *format, char **s)
+static int	float_zero_fg(t_format *format, char **s)
 {
 	int		len;
 
@@ -67,7 +63,7 @@ int		float_zero_fg(t_format *format, char **s)
 	return (format->width);
 }
 
-int		float_special(t_format *format, char **s, uint64_t val)
+static int	float_special(t_format *format, char **s, uint64_t val)
 {
 	int		len;
 	char	*mes;
@@ -92,7 +88,7 @@ int		float_special(t_format *format, char **s, uint64_t val)
 	return (format->width);
 }
 
-int		floatlen(long double d, t_format *format, char **s)
+static int	floatlen(long double d, t_format *format, char **s)
 {
 	uint64_t	val;
 	uint32_t	exp;
@@ -109,7 +105,7 @@ int		floatlen(long double d, t_format *format, char **s)
 		return (float_zero_fg(format, s));
 	if (exp == 0x00007fff)
 		return (float_special(format, s, val));
-	exp10 = ft_make_bigint(&t, (int)exp - 16446, val);
+	exp10 = ft_bigint_make(&t, (int)exp - 16446, val);
 	return (ft_printf_efg(format, &t, exp10, s));
 }
 

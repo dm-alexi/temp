@@ -1,6 +1,3 @@
-#include <sys/types.h>
-#include <stddef.h>
-#include <stdint.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,10 +22,3 @@ void printbin(void *p, int n)
     printf("%s\n", s);
     free(s);
 }
-
-int get_exponent(double d)
-{
-    return ((int)(((*(uint64_t*)&d) << 1) >> 53) - 1023);
-}
-
-//void setbin(void *p, char *s)

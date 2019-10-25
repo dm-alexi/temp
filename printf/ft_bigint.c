@@ -30,22 +30,6 @@ void	ft_bigint_get(t_bigint *res, uint64_t a)
 	}
 }
 
-int		ft_bigint_cmp(const t_bigint *a, const t_bigint *b)
-{
-	int		i;
-
-	if (a->len != b->len)
-		return (a->len - b->len);
-	i = a->len - 1;
-	while (i >= 0)
-	{
-		if (a->arr[i] != b->arr[i])
-			return (a->arr[i] - b->arr[i]);
-		--i;
-	}
-	return (0);
-}
-
 void	ft_bigint_copy(t_bigint *dst, const t_bigint *src)
 {
 	int		i;
@@ -86,12 +70,4 @@ void	ft_bigint_sum(t_bigint *res, const t_bigint *a, const t_bigint *b)
 	}
 	else
 		ft_bigint_sum(res, b, a);
-}
-
-void	print_bigint(t_bigint *a)
-{
-	int i = a->len - 1;
-	printf("%u", a->arr[i]);
-	while (--i >= 0)
-		printf("%09u", a->arr[i]);
 }

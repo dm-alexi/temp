@@ -10,12 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <stddef.h>
-#include <stdint.h>
 #include <unistd.h>
 #include "ft_printf.h"
-#include "libft/libft.h"
 
 static uintmax_t	get_uinteger(t_format *format, va_list *va)
 {

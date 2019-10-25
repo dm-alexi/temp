@@ -57,13 +57,13 @@ int main()
     //printbin(exp, 2);
     //ft_printf("%Lf\n", l);
     //printf("%Lf\n", l);
-    d = 1578954.999;
 
     d = LDBL_MIN;
     //ft_printf("%.5000Lf!\n", d);
     //printf("%.5000Lf!\n", d);
 	//d = 0.25234523450;
 	//d = 4.25;
+
     ft_printf("%LE!\n", d);
     ft_printf("%Lg!\n", d);
     ft_printf("%Lf!\n", d);
@@ -71,7 +71,7 @@ int main()
     printf("%LE!\n", d);
     printf("%Lg!\n", d);
     printf("%Lf!\n", d);
-    printf("---\n");
+    printf("---\n");/*
     d = 0.25234523450;
     ft_printf("%LE!\n", d);
     ft_printf("%Lg!\n", d);
@@ -80,7 +80,7 @@ int main()
     printf("%LE!\n", d);
     printf("%Lg!\n", d);
     printf("%Lf!\n", d);
-    printf("---\n");
+    printf("---\n");*/
 
     return 0;
 }

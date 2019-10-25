@@ -27,6 +27,7 @@ int		ft_make_bigint(t_bigint *res, int exp, uint64_t val)
 		++exp;
 		val >>= 1;
 	}
+	//printf("\n(%I64d %d)\n", val, exp);
 	if (exp < 0)
 		ft_bigint_pow5(&pow, -exp);
 	else

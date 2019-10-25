@@ -87,8 +87,7 @@ int		ft_process_ge(char **s, int exp, int len, t_format *format)
 	int		i;
 
 	exp += len - 1;
-	format->prec -= 1;
-	if (((format->prec + 1 < len) &&
+	if (((--(format->prec) + 1 < len) &&
 		(ft_round(*s, len, len - 1 - format->prec)) > format->prec + 1))
 		++exp;
 	len = format->prec + 1;

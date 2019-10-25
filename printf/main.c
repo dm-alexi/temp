@@ -58,7 +58,7 @@ int main()
     //ft_printf("%Lf\n", l);
     //printf("%Lf\n", l);
 
-    d = LDBL_MIN;
+    d = (double)INT_MIN;
     //ft_printf("%.5000Lf!\n", d);
     //printf("%.5000Lf!\n", d);
 	//d = 0.25234523450;

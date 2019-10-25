@@ -43,7 +43,7 @@ int main()
     //printbin(&nul, 12);
     //floatlen(nul, NULL, NULL);
 
-    long double l = -1.0 / 0.0;
+    long double l = LDBL_MIN;
     uint64_t	*man = (uint64_t*)&l;
     uint32_t	*exp = (uint32_t*)(((uint64_t*)&l) + 1);
 
@@ -53,11 +53,12 @@ int main()
     //*man = 0;
     //*man = 0x8000000000000000;
     //*exp = 0x00007fff;
-    //printbin(man, 8);
-    //printbin(exp, 2);
-    double r = 1578954.999;
+    printbin(man, 8);
+    printbin(exp, 2);
     //ft_printf("%Lf\n", l);
     //printf("%Lf\n", l);
+    d = 1578954.999;
+
     ft_printf("%LE!\n", d);
     ft_printf("%Lg!\n", d);
     ft_printf("%Lf!\n", d);
@@ -66,15 +67,19 @@ int main()
     printf("%Lg!\n", d);
     printf("%Lf!\n", d);
     printf("---\n");
-    d = 9.999;
-    ft_printf("%.2LE!\n", d);
-    ft_printf("%.2Lg!\n", d);
-    ft_printf("%.2Lf!\n", d);
+    d = 9.00099999;
+    ft_printf("%.7LE!\n", d);
+    ft_printf("%.7Lg!\n", d);
+    ft_printf("%.7Lf!\n", d);
     printf("---\n");
-    printf("%.2LE!\n", d);
-    printf("%.2Lg!\n", d);
-    printf("%.2Lf!\n", d);
+    printf("%.7LE!\n", d);
+    printf("%.7Lg!\n", d);
+    printf("%.7Lf!\n", d);
     printf("---\n");
+    d = LDBL_EPSILON;
+    //ft_printf("%.5000Lf!\n", d);
+    //printf("%.5000Lf!\n", d);
+
     ft_printf("%LE!\n", d);
     ft_printf("%Lg!\n", d);
     ft_printf("%Lf!\n", d);
@@ -83,16 +88,15 @@ int main()
     printf("%Lg!\n", d);
     printf("%Lf!\n", d);
     printf("---\n");
-    d = 1000.4;
-    ft_printf("%LE!\n", d);
-    ft_printf("%'Lg!\n", d);
-    ft_printf("%Lf!\n", d);
+    d = 125467.89;
+    ft_printf("%.12LE!\n", d);
+    ft_printf("%.12Lg!\n", d);
+    ft_printf("%.12Lf!\n", d);
     printf("---\n");
-    printf("%LE!\n", d);
-    printf("%Lg!\n", d);
-    printf("%Lf!\n", d);
+    printf("%.12LE!\n", d);
+    printf("%.12Lg!\n", d);
+    printf("%.12Lf!\n", d);
     printf("---\n");
-    //ft_printf("%.1Lf!\n", d);
-	//ft_printf("%.10g!\n", l);
+
     return 0;
 }

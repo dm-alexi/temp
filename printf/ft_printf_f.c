@@ -179,11 +179,11 @@ int		ft_process_gf(char **s, int exp, int len, t_format *format)
 	return (total);
 }
 
-int			cut_tail(char **s, int total)
+static int	cut_tail(char *s, int total)
 {
-	while ((*s)[total - 1] == '0')
+	while (s[total - 1] == '0')
 		--total;
-	if ((*s)[total - 1] == '.')
+	if (s[total - 1] == '.')
 		--total;
 	return (total);
 }
@@ -197,23 +197,23 @@ int			ft_printf_f(t_format *format, int len, char *str, char **s)
 	i = 0;
 	while (i < len)
 		str[i++] += '0';
-	total = len + (format->sharp || format->prec > 0) +
+	total = len + (format->sharp || format->prec) +
 		(format->apost ? (len - format->prec - 1) / 3 : 0);
 	if (!((*s) = (char*)malloc(total)))
 		return (-1);
 	j = len - format->prec;
 	ft_memcpy(*s + total - format->prec, str + j, format->prec);
-	if (format->sharp || format->prec > 0)
+	if (format->sharp || format->prec)
 		(*s)[total - format->prec - 1] = '.';
-	i = total - format->prec - 1 - (format->sharp || format->prec > 0);
+	i = total - format->prec - 1 - (format->sharp || format->prec);
 	while (--j >= 0)
 	{
 		(*s)[i--] = str[j];
 		if (format->apost && !((len - format->prec - j) % 3))
 			(*s)[i--] = '\'';
 	}
-	if (ft_toupper(format->type) == 'G' && format->prec > 0 && !format->sharp)
-		total = cut_tail(s, total);
+	if (ft_toupper(format->type) == 'G' && format->prec && !format->sharp)
+		total = cut_tail(*s, total);
 	return (add_sign_width(format, total, s));
 }
 
@@ -237,7 +237,7 @@ int			ft_printf_efg(t_format *format, t_bigint *t, int exp, char **s)
 	else if (((format->type == 'g' || format->type == 'G') &&
 	(-exp + len - 1 < -4 || -exp + len - 1 >= format->prec)) &&
 	(((len = ft_process_ge(&str, -exp, len, format)) < 0) ||
-	(len = ft_printf_ge(format, len, str, s)) < 0))
+	(len = ft_printf_e(format, len, str, s)) < 0))
 		len = -1;
 	else if (((format->type == 'g' || format->type == 'G') &&
 	!(-exp + len - 1 < -4 || -exp + len - 1 >= format->prec)) &&

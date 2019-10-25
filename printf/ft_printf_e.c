@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 21:34:06 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/25 23:22:23 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/25 23:59:57 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ int			ft_process_e(char **s, int exp, int len, t_format *format)
 	if (((format->prec + 1 < len) &&
 		(ft_round(*s, len, len - 1 - format->prec)) > format->prec + 1))
 		++exp;
-	i = len - 1 > format->prec ? format->prec : len - 1;
+	len = len - 1 > format->prec ? format->prec : len - 1;
 	total = format->prec + (format->sharp || format->prec) + 3 + explen(exp);
 	if (!(str = ft_memalloc(total)))
 		return (-1);
 	*str = **s;
 	str[1] = (format->sharp || format->prec) ? '.' : 0;
-	ft_memcpy(str + 1 + (format->sharp || format->prec), *s + 1, i);
+	ft_memcpy(str + 1 + (format->sharp || format->prec), *s + 1, len);
 	str[format->prec + (format->sharp || format->prec) + 1] = format->type;
 	str[format->prec + (format->sharp || format->prec) + 2] = exp >= 0 ?
 		'+' : '-';
@@ -76,7 +76,7 @@ int			ft_printf_e(t_format *format, int len, char *str, char **s)
 
 static int	cut_tail(char *s, int total)
 {
-	while (s[total - 1] == 0)
+	while (s[total] == 0)
 		--total;
 	return (total);
 }
@@ -85,26 +85,26 @@ int		ft_process_ge(char **s, int exp, int len, t_format *format)
 {
 	char	*str;
 	int		total;
-	int		i;
 
 	exp += len - 1;
 	if (((--(format->prec) + 1 < len) &&
 		(ft_round(*s, len, len - 1 - format->prec)) > format->prec + 1))
 		++exp;
-	i = len - 1 > format->prec ? format->prec : len - 1;
-	total = format->prec + (format->sharp || format->prec) + 3 + explen(exp);
+	len = len - 1 > format->prec ? format->prec : len - 1;
+	if (!format->sharp)
+		len = cut_tail(*s, len);
+	total = len + (format->sharp || len) + 3 + explen(exp);
 	if (!(str = ft_memalloc(total)))
 		return (-1);
 	*str = **s;
-	len = cut_tail(*s, len);
-	str[1] = (format->sharp || format->prec) ? '.' : 0;
-	ft_memcpy(str + 1 + (format->sharp || format->prec), *s + 1, i);
-	str[format->prec + (format->sharp || format->prec) + 1] = format->type - 2;
-	str[format->prec + (format->sharp || format->prec) + 2] = exp >= 0 ?
+	str[1] = (format->sharp || len) ? '.' : 0;
+	ft_memcpy(str + 1 + (format->sharp || len), *s + 1, len);
+	str[len + (format->sharp || len) + 1] = format->type - 2;
+	str[len + (format->sharp || len) + 2] = exp >= 0 ?
 		'+' : '-';
-	i = total;
+	len = total;
 	exp = exp >= 0 ? exp : -exp;
-	while (exp && (str[--i] = exp % 10 + '0'))
+	while (exp && (str[--len] = exp % 10 + '0'))
 		exp /= 10;
 	free(*s);
 	*s = str;

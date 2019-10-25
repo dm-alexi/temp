@@ -32,16 +32,16 @@ int			ft_process_e(char **s, int exp, int len, t_format *format)
 	if (((format->prec + 1 < len) &&
 		(ft_round(*s, len, len - 1 - format->prec)) > format->prec + 1))
 		++exp;
-	len = format->prec + 1;
-	total = len + format->sharp + 2 + explen(exp);
+	i = format->prec + 1;
+	total = i + format->sharp + 2 + explen(exp);
 	if (!(str = ft_memalloc(total)))
 		return (-1);
 	*str = **s;
 	if (format->sharp)
 		str[1] = '.';
 	ft_memcpy(str + 1 + format->sharp, *s + 1, len - 1);
-	str[len + format->sharp] = format->type;
-	str[len + format->sharp + 1] = exp >= 0 ? '+' : '-';
+	str[i + format->sharp] = format->type;
+	str[i + format->sharp + 1] = exp >= 0 ? '+' : '-';
 	i = total;
 	exp = exp >= 0 ? exp : -exp;
 	while (exp && (str[--i] = exp % 10 + '0'))

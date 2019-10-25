@@ -124,7 +124,7 @@ int		add_sign_width(t_format *format, int len, char **s)
 	*s = tmp;
 	return (total);
 }
-
+/*
 int			ft_printf_f(t_format *format, int len, char *str, char **s)
 {
 	int		total;
@@ -151,12 +151,14 @@ int			ft_printf_f(t_format *format, int len, char *str, char **s)
 	}
 	return (add_sign_width(format, total, s));
 }
-
+*/
 int		ft_process_gf(char **s, int exp, int len, t_format *format)
 {
 	char	*str;
 	int		total;
+	int		tmp;
 
+	format->prec -= len - exp;
 	total = exp + 1 > len ? exp + 1 : len;
 	if (format->prec > exp)
 		total += format->prec - exp;
@@ -169,11 +171,24 @@ int		ft_process_gf(char **s, int exp, int len, t_format *format)
 		*s = str;
 	}
 	if (format->prec < exp)
-		total = ft_round(*s, total, exp - format->prec);
+	{
+		tmp = ft_round(*s, total, exp - format->prec);
+		if ((total -= exp - format->prec) < tmp)
+			--(format->prec);
+	}
 	return (total);
 }
 
-int			ft_printf_gf(t_format *format, int len, char *str, char **s)
+int			cut_tail(char **s, int total)
+{
+	while ((*s)[total - 1] == '0')
+		--total;
+	if ((*s)[total - 1] == '.')
+		--total;
+	return (total);
+}
+
+int			ft_printf_f(t_format *format, int len, char *str, char **s)
 {
 	int		total;
 	int		i;
@@ -182,21 +197,23 @@ int			ft_printf_gf(t_format *format, int len, char *str, char **s)
 	i = 0;
 	while (i < len)
 		str[i++] += '0';
-	total = len + format->sharp +
+	total = len + (format->sharp || format->prec > 0) +
 		(format->apost ? (len - format->prec - 1) / 3 : 0);
 	if (!((*s) = (char*)malloc(total)))
 		return (-1);
 	j = len - format->prec;
 	ft_memcpy(*s + total - format->prec, str + j, format->prec);
-	if (format->sharp)
+	if (format->sharp || format->prec > 0)
 		(*s)[total - format->prec - 1] = '.';
-	i = total - format->prec - 1 - format->sharp;
+	i = total - format->prec - 1 - (format->sharp || format->prec > 0);
 	while (--j >= 0)
 	{
 		(*s)[i--] = str[j];
 		if (format->apost && !((len - format->prec - j) % 3))
 			(*s)[i--] = '\'';
 	}
+	if (ft_toupper(format->type) == 'G' && format->prec > 0 && !format->sharp)
+		total = cut_tail(s, total);
 	return (add_sign_width(format, total, s));
 }
 
@@ -225,7 +242,7 @@ int			ft_printf_efg(t_format *format, t_bigint *t, int exp, char **s)
 	else if (((format->type == 'g' || format->type == 'G') &&
 	!(-exp + len - 1 < -4 || -exp + len - 1 >= format->prec)) &&
 	(((len = ft_process_gf(&str, exp, len, format)) < 0) ||
-	(len = ft_printf_gf(format, len, str, s)) < 0))
+	(len = ft_printf_f(format, len, str, s)) < 0))
 		len = -1;
 	free(str);
 	return (len);

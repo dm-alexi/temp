@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 21:34:06 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/25 23:59:57 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/26 00:05:56 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,7 @@ int		ft_process_ge(char **s, int exp, int len, t_format *format)
 	str[1] = (format->sharp || len) ? '.' : 0;
 	ft_memcpy(str + 1 + (format->sharp || len), *s + 1, len);
 	str[len + (format->sharp || len) + 1] = format->type - 2;
-	str[len + (format->sharp || len) + 2] = exp >= 0 ?
-		'+' : '-';
+	str[len + (format->sharp || len) + 2] = exp >= 0 ? '+' : '-';
 	len = total;
 	exp = exp >= 0 ? exp : -exp;
 	while (exp && (str[--len] = exp % 10 + '0'))

@@ -6,6 +6,8 @@
 
 #include <limits.h>
 
+void	pw();
+
 int main()
 {
    /* int		m, k;
@@ -40,13 +42,10 @@ int main()
     //*man = 0;
     //*man = 0x8000000000000000;
     //*exp = 0x00007fff;
+    //printf("%llu %u\n", *man, *exp);
     //printbin(man, 8);
     //printbin(exp, 2);
-
-    int n = 0;
-    ft_printf("abc%ndef\n", 0);
-    ft_printf("%d\n", n);
-
-
+    pw();
+    //write(1, "\xe2\x82\xac", 3);
     return 0;
 }

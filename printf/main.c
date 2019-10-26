@@ -43,5 +43,10 @@ int main()
     //printbin(man, 8);
     //printbin(exp, 2);
 
+    int n = 0;
+    ft_printf("abc%ndef\n", 0);
+    ft_printf("%d\n", n);
+
+
     return 0;
 }

@@ -6,11 +6,12 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:22:02 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/17 23:36:47 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/26 14:24:00 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stddef.h>
 #include "ft_printf.h"
 
 static int			intmaxlen(intmax_t n, char **s, t_format *format)

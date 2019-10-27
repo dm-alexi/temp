@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 15:46:22 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/27 20:49:56 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/27 22:08:16 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int			ft_printf_wstring(t_format *format, va_list *va)
 	if ((!format->rpad && ft_printf_pad(1, format->fill, tmp) < tmp) ||
 	write(1, str, n) < n ||
 	(format->rpad && ft_printf_pad(1, format->fill, tmp) < tmp))
-		return (-1);
+		format->width = -1;
+	free(str);
 	return (format->width);
 }

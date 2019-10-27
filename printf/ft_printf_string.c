@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:15:06 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/27 17:52:04 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/27 22:01:29 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int			ft_printf_pad(int fd, char c, int n)
 	char	*s;
 	int		i;
 
+	if (n <= 0)
+		return (0);
 	if (!(s = (char*)malloc(n)))
 	{
 		i = 0;

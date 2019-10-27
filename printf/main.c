@@ -56,13 +56,6 @@ int main()
     //s = L"ABCD";
     ft_printf("%d\n", ft_printf("%.6ls", s));
     ft_printf("%d\n", ft_printf("%lc", s[0]));
-    printf("%24ls", L"(╯°□°)╯︵ ┻━┻ ︵ ╯(°□° ╯)");
-    printbin(s, 4);
-    printbin(s + 1, 4);
-    wchar_t c = L'€';
-    printbin(&c, 4);
-    printbin(L"€€€€", 16);
-    printf("%C", '\xe2\x82\xac');
-    printf("%ls", s);
+    ft_printf("%10.4b!\n", 2);
     return 0;
 }

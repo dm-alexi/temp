@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 19:35:11 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/23 23:43:58 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/27 18:15:14 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int					ft_printf_uint(t_format *format, va_list *va)
 		len = ft_utoa(uinteger, &s, format);
 	else if (format->type == 'o')
 		len = ft_otoa(uinteger, &s, format);
+	else if (format->type == 'b')
+		len = ft_btoa(uinteger, &s, format);
 	else
 		len = ft_xtoa(uinteger, &s, format);
 	if (len < 0)

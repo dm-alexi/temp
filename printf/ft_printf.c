@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:14:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/25 23:13:38 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/27 18:18:29 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	set_wp(const char **s, t_format *format, va_list *va)
 			format->prec = ft_strtol((char*)*s, (char**)s, 10);
 		else if (**s == '*' && ++*s)
 			format->prec = va_arg(*va, int);
-		//check is this is still necessary
 		if (format->prec < 0)
 			format->prec = -1;
 	}
@@ -71,7 +70,7 @@ void	set_specifier(const char **s, t_format *format)
 		format->length = 'L';
 	else if (**s && ft_strchr("hljztL", **s))
 		format->length = *((*s)++);
-	if (**s && ft_strchr("cdefginoprsuxEFGX%", **s))
+	if (**s && ft_strchr("bcdefginoprsuxEFGX%", **s))
 		format->type = *((*s)++);
 }
 
@@ -97,7 +96,7 @@ int		print_formatted(const char **s, va_list *va, int n)
 		return (ft_printf_string(&format, va));
 	if (format.type == 'd' || format.type == 'i')
 		return (ft_printf_int(&format, va));
-	if (ft_strchr("uoxX", format.type))
+	if (ft_strchr("buoxX", format.type))
 		return (ft_printf_uint(&format, va));
 	if (format.type == 'p')
 		return (ft_printf_ptr(&format, va));

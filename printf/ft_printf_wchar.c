@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 15:46:22 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/27 18:41:15 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/27 20:49:56 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int			ft_printf_wstring(t_format *format, va_list *va)
 	int			n;
 	int			tmp;
 
-	n = 6;
+	n = format->prec >= 0 && format->prec < 6 ? format->prec : 6;
 	if (!(s = (wchar_t*)va_arg(*va, wchar_t*)))
 		str = "(null)";
 	else
@@ -76,7 +76,8 @@ int			ft_printf_wstring(t_format *format, va_list *va)
 		if (!(str = (char*)malloc(ft_wcslen(s) * 4)))
 			return (-1);
 		n = 0;
-		while (*s && (n + (tmp = wchar2utf8(str + n, *s++))) <= format->prec)
+		while (*s && ((n + (tmp = wchar2utf8(str + n, *s++))) <= format->prec ||
+			format->prec < 0))
 			n += tmp;
 	}
 	if ((tmp = format->width - n) <= 0)

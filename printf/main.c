@@ -54,8 +54,11 @@ int main()
     s[3] = L'€';
     s[4] = 0;
     //s = L"ABCD";
-    ft_printf("%d\n", ft_printf("%.6ls", s));
-    ft_printf("%d\n", ft_printf("%lc", s[0]));
-    ft_printf("%10.4b!\n", 2);
+    ft_printf("%d\n", ft_printf("%ls", s));
+    wchar_t c = 0x10160;
+    s[0] = c;
+    printbin(&c, 4);
+    printbin(s, 4);
+    ft_printf("%ls", s);
     return 0;
 }

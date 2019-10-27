@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:14:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/27 18:40:16 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/27 20:53:47 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	set_specifier(const char **s, t_format *format)
 		format->length = 'L';
 	else if (**s && ft_strchr("hljztL", **s))
 		format->length = *((*s)++);
-	if (**s && ft_strchr("bcdefginoprsuxEFGX%", **s))
+	if (**s && ft_strchr("bcdefginoprsuxCEFGSX%", **s))
 		format->type = *((*s)++);
 }
 

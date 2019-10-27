@@ -6,32 +6,23 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:14:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/27 18:18:29 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/27 18:40:16 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "ft_printf.h"
 
-void	set_flags(const char **s, t_format *format)
+void	set_specifier(const char **s, t_format *format)
 {
-	ft_bzero(format, sizeof(t_format));
-	while (**s && ft_strchr("-+ #0\'", **s))
-	{
-		if (**s == '-')
-			format->rpad = 1;
-		else if (**s == '+')
-			format->sign = '+';
-		else if (**s == ' ' && !format->sign)
-			format->sign = ' ';
-		else if (**s == '#')
-			format->sharp = 1;
-		else if (**s == '0')
-			format->fill = '0';
-		else if (**s == '\'')
-			format->apost = 1;
-		++*s;
-	}
+	if (ft_strnequ(*s, "hh", 2) && (*s += 2))
+		format->length = 'H';
+	else if (ft_strnequ(*s, "ll", 2) && (*s += 2))
+		format->length = 'L';
+	else if (**s && ft_strchr("hljztL", **s))
+		format->length = *((*s)++);
+	if (**s && ft_strchr("bcdefginoprsuxEFGX%", **s))
+		format->type = *((*s)++);
 }
 
 void	set_wp(const char **s, t_format *format, va_list *va)
@@ -60,32 +51,36 @@ void	set_wp(const char **s, t_format *format, va_list *va)
 	}
 	if (format->rpad || !format->fill)
 		format->fill = ' ';
-}
-
-void	set_specifier(const char **s, t_format *format)
-{
-	if (ft_strnequ(*s, "hh", 2) && (*s += 2))
-		format->length = 'H';
-	else if (ft_strnequ(*s, "ll", 2) && (*s += 2))
-		format->length = 'L';
-	else if (**s && ft_strchr("hljztL", **s))
-		format->length = *((*s)++);
-	if (**s && ft_strchr("bcdefginoprsuxEFGX%", **s))
-		format->type = *((*s)++);
-}
-
-void	set_format(const char **s, t_format *format, va_list *va)
-{
-	set_flags(s, format);
-	set_wp(s, format, va);
 	set_specifier(s, format);
+}
+
+void	set_flags(const char **s, t_format *format, va_list *va)
+{
+	ft_bzero(format, sizeof(t_format));
+	while (**s && ft_strchr("-+ #0\'", **s))
+	{
+		if (**s == '-')
+			format->rpad = 1;
+		else if (**s == '+')
+			format->sign = '+';
+		else if (**s == ' ' && !format->sign)
+			format->sign = ' ';
+		else if (**s == '#')
+			format->sharp = 1;
+		else if (**s == '0')
+			format->fill = '0';
+		else if (**s == '\'')
+			format->apost = 1;
+		++*s;
+	}
+	set_wp(s, format, va);
 }
 
 int		print_formatted(const char **s, va_list *va, int n)
 {
 	t_format	format;
 
-	set_format(s, &format, va);
+	set_flags(s, &format, va);
 	if (!format.type)
 		return (0);
 	if (format.type == '%')

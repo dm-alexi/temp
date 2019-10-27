@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:19:30 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/25 22:51:09 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/27 15:40:50 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int				ft_printf_ptr(t_format *format, va_list *va);
 int				ft_printf_r(t_format *format, va_list *va);
 int				ft_printf_string(t_format *format, va_list *va);
 int				ft_printf_uint(t_format *format, va_list *va);
+int				ft_printf_wchar(t_format *format, va_list *va);
+int				ft_printf_wstring(t_format *format, va_list *va);
 int				ft_process_e(char **s, int exp, int len, t_format *format);
 int				ft_process_f(char **s, int exp, int len, int prec);
 int				ft_process_ge(char **s, int exp, int len, t_format *format);

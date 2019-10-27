@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:15:06 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/25 23:02:32 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/27 17:52:04 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int			ft_printf_char(t_format *format, va_list *va)
 	unsigned char	c;
 	int				offset;
 
+	if (format->type == 'C' || format->length == 'l')
+		return (ft_printf_wchar(format, va));
 	c = (unsigned char)va_arg(*va, int);
 	if (format->width <= 1)
 		return (write(1, &c, 1) == 1 ? 1 : -1);
@@ -49,7 +51,7 @@ int			ft_printf_char(t_format *format, va_list *va)
 	write(1, &c, 1) < 1 ||
 	(format->rpad && ft_printf_pad(1, format->fill, offset) < offset))
 		return (-1);
-	return (offset + 1);
+	return (format->width);
 }
 
 int			ft_printf_string(t_format *format, va_list *va)
@@ -58,6 +60,8 @@ int			ft_printf_string(t_format *format, va_list *va)
 	int			len;
 	int			offset;
 
+	if (format->type == 'S' || format->length == 'l')
+		return (ft_printf_wstring(format, va));
 	if (!(s = (char*)va_arg(*va, char*)))
 		s = "(null)";
 	len = ft_strlen(s);
@@ -70,7 +74,7 @@ int			ft_printf_string(t_format *format, va_list *va)
 	(write(1, s, len) < len) ||
 	(format->rpad && ft_printf_pad(1, format->fill, offset) < offset))
 		return (-1);
-	return (offset + len);
+	return (format->width);
 }
 
 int			ft_printf_percent(t_format *format)
@@ -84,5 +88,5 @@ int			ft_printf_percent(t_format *format)
 	write(1, "%", 1) < 1 ||
 	(format->rpad && ft_printf_pad(1, format->fill, offset) < offset))
 		return (-1);
-	return (offset + 1);
+	return (format->width);
 }

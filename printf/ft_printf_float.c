@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:22:02 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/24 22:23:07 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/27 15:18:28 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ static int	floatlen(long double d, t_format *format, char **s)
 	return (ft_printf_efg(format, &t, exp10, s));
 }
 
-int		ft_printf_float(t_format *format, va_list *va)
+int			ft_printf_float(t_format *format, va_list *va)
 {
 	long double		d;
 	char			*s;

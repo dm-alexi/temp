@@ -6,7 +6,8 @@
 
 #include <limits.h>
 
-void	pw();
+
+int wchar2utf8(char *const str, const wchar_t c);
 
 int main()
 {
@@ -45,7 +46,23 @@ int main()
     //printf("%llu %u\n", *man, *exp);
     //printbin(man, 8);
     //printbin(exp, 2);
-    pw();
-    //write(1, "\xe2\x82\xac", 3);
+
+    wchar_t s[5];
+    s[0] = L'€';
+    s[1] = L'€';
+    s[2] = L'€';
+    s[3] = L'€';
+    s[4] = 0;
+    //s = L"ABCD";
+    ft_printf("%d\n", ft_printf("%.6ls", s));
+    ft_printf("%d\n", ft_printf("%lc", s[0]));
+    printf("%24ls", L"(╯°□°)╯︵ ┻━┻ ︵ ╯(°□° ╯)");
+    printbin(s, 4);
+    printbin(s + 1, 4);
+    wchar_t c = L'€';
+    printbin(&c, 4);
+    printbin(L"€€€€", 16);
+    printf("%C", '\xe2\x82\xac');
+    printf("%ls", s);
     return 0;
 }

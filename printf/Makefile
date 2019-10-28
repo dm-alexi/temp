@@ -28,7 +28,8 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(HEAD)
 	make -C ./libft/
-	ar rc $(NAME) $(OBJ) libft/*.o
+	ar rc $(NAME) $(OBJ)
+	libtool -o $(NAME) $(NAME) $(LIBFT)
 
 %.o: %.c $(HEAD)
 	$(CC) $(FLAGS) -o $@ -c $<

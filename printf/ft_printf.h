@@ -54,7 +54,6 @@ int				ft_otoa(uintmax_t n, char **s, t_format *format);
 int				ft_utoa(uintmax_t n, char **s, t_format *format);
 int				ft_xtoa(uintmax_t n, char **s, t_format *format);
 int				ft_round(char *s, int len, int hollow);
-
-void			printbin(void *p, int n);
+void			ft_setformat(const char **s, t_format *format, va_list *va);
 
 #endif

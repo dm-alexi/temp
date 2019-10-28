@@ -91,8 +91,6 @@ int					ft_printf_int(t_format *format, va_list *va)
 	int			len_total;
 
 	integer = get_integer(format, va);
-	if (format->prec >= 0)
-		format->fill = ' ';
 	if (integer < 0)
 		format->sign = '-';
 	if ((len = intmaxtoa(integer, &s, format)) < 0)

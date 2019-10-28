@@ -13,74 +13,11 @@
 #include <unistd.h>
 #include "ft_printf.h"
 
-void	set_specifier(const char **s, t_format *format)
-{
-	if (ft_strnequ(*s, "hh", 2) && (*s += 2))
-		format->length = 'H';
-	else if (ft_strnequ(*s, "ll", 2) && (*s += 2))
-		format->length = 'L';
-	else if (**s && ft_strchr("hljztL", **s))
-		format->length = *((*s)++);
-	if (**s && ft_strchr("bcdefginoprsuxCEFGSX%", **s))
-		format->type = *((*s)++);
-}
-
-void	set_wp(const char **s, t_format *format, va_list *va)
-{
-	format->prec = -1;
-	if (ft_isdigit(**s))
-		format->width = ft_strtol((char*)*s, (char**)s, 10);
-	else if (**s == '*' && ++*s)
-		format->width = va_arg(*va, int);
-	if (ft_isdigit(**s))
-		format->width = ft_strtol((char*)*s, (char**)s, 10);
-	if (format->width < 0)
-	{
-		format->width = -format->width;
-		format->rpad = 1;
-	}
-	if (**s == '.' && ++*s)
-	{
-		format->prec = 0;
-		if (ft_isdigit(**s))
-			format->prec = ft_strtol((char*)*s, (char**)s, 10);
-		else if (**s == '*' && ++*s)
-			format->prec = va_arg(*va, int);
-		if (format->prec < 0)
-			format->prec = -1;
-	}
-	if (format->rpad || !format->fill)
-		format->fill = ' ';
-	set_specifier(s, format);
-}
-
-void	set_flags(const char **s, t_format *format, va_list *va)
-{
-	ft_bzero(format, sizeof(t_format));
-	while (**s && ft_strchr("-+ #0\'", **s))
-	{
-		if (**s == '-')
-			format->rpad = 1;
-		else if (**s == '+')
-			format->sign = '+';
-		else if (**s == ' ' && !format->sign)
-			format->sign = ' ';
-		else if (**s == '#')
-			format->sharp = 1;
-		else if (**s == '0')
-			format->fill = '0';
-		else if (**s == '\'')
-			format->apost = 1;
-		++*s;
-	}
-	set_wp(s, format, va);
-}
-
 int		print_formatted(const char **s, va_list *va, int n)
 {
 	t_format	format;
 
-	set_flags(s, &format, va);
+	ft_setformat(s, &format, va);
 	if (!format.type)
 		return (0);
 	if (format.type == '%')

@@ -41,8 +41,6 @@ int					ft_printf_uint(t_format *format, va_list *va)
 	int			len;
 
 	uinteger = get_uinteger(format, va);
-	if (format->prec >= 0)
-		format->fill = ' ';
 	if (format->type == 'u')
 		len = ft_utoa(uinteger, &s, format);
 	else if (format->type == 'o')

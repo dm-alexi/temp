@@ -34,7 +34,7 @@ static uintmax_t	get_uinteger(t_format *format, va_list *va)
 	return ((unsigned int)va_arg(*va, unsigned int));
 }
 
-int					ft_printf_uint(t_format *format, va_list *va)
+int					ft_printf_uint(t_format *format, va_list *va, int fd)
 {
 	uintmax_t	uinteger;
 	char		*s;
@@ -51,7 +51,7 @@ int					ft_printf_uint(t_format *format, va_list *va)
 		len = ft_xtoa(uinteger, &s, format);
 	if (len < 0)
 		return (-1);
-	if (write(1, s, len) < len)
+	if (write(fd, s, len) < len)
 		len = -1;
 	free(s);
 	return (len);

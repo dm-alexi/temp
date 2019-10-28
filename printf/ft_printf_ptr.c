@@ -32,7 +32,7 @@ static int		ptrlen(uintptr_t p, char **s, t_format *format)
 	return (len);
 }
 
-int				ft_printf_ptr(t_format *format, va_list *va)
+int				ft_printf_ptr(t_format *format, va_list *va, int fd)
 {
 	uintptr_t	p;
 	int			len;
@@ -52,7 +52,7 @@ int				ft_printf_ptr(t_format *format, va_list *va)
 		--(format->prec);
 	}
 	s[*s == '0' ? 1 : tmp + 1] = 'x';
-	if (write(1, s, format->width) < format->width)
+	if (write(fd, s, format->width) < format->width)
 		format->width = -1;
 	free(s);
 	return (format->width);

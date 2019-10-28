@@ -55,7 +55,7 @@ static int		get_rline(t_format *format, char **s)
 	return (format->width);
 }
 
-int				ft_printf_r(t_format *format, va_list *va)
+int				ft_printf_r(t_format *format, va_list *va, int fd)
 {
 	char	*s;
 	int		len;
@@ -64,7 +64,7 @@ int				ft_printf_r(t_format *format, va_list *va)
 		s = "(null)";
 	if ((len = get_rline(format, &s)) < 0)
 		return (-1);
-	if (write(1, s, len) < len)
+	if (write(fd, s, len) < len)
 		len = -1;
 	free(s);
 	return (len);

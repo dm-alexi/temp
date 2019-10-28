@@ -82,7 +82,7 @@ static intmax_t		get_integer(t_format *format, va_list *va)
 	return ((int)va_arg(*va, int));
 }
 
-int					ft_printf_int(t_format *format, va_list *va)
+int					ft_printf_int(t_format *format, va_list *va, int fd)
 {
 	char		*s;
 	intmax_t	integer;
@@ -97,8 +97,8 @@ int					ft_printf_int(t_format *format, va_list *va)
 		return (-1);
 	offset = (format->width > len ? format->width - len : 0);
 	len_total = len + offset;
-	if (write(1, s, len) < len ||
-	(format->rpad && ft_printf_pad(1, format->fill, offset) < offset))
+	if (write(fd, s, len) < len ||
+	(format->rpad && ft_printf_pad(fd, format->fill, offset) < offset))
 		len_total = -1;
 	free(s);
 	return (len_total);

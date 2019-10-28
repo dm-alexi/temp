@@ -109,7 +109,7 @@ static int	floatlen(long double d, t_format *format, char **s)
 	return (ft_printf_efg(format, &t, exp10, s));
 }
 
-int			ft_printf_float(t_format *format, va_list *va)
+int			ft_printf_float(t_format *format, va_list *va, int fd)
 {
 	long double		d;
 	char			*s;
@@ -126,7 +126,7 @@ int			ft_printf_float(t_format *format, va_list *va)
 	s = NULL;
 	if ((len = floatlen(d, format, &s)) < 0)
 		return (-1);
-	if (write(1, s, len) < len)
+	if (write(fd, s, len) < len)
 		len = -1;
 	free(s);
 	return (len);

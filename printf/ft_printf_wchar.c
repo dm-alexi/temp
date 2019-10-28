@@ -41,7 +41,7 @@ static int	wchar2utf8(char *str, const wchar_t c)
 	return (0);
 }
 
-int			ft_printf_wchar(t_format *format, va_list *va)
+int			ft_printf_wchar(t_format *format, va_list *va, int fd)
 {
 	wchar_t		c;
 	char		str[4];
@@ -51,17 +51,17 @@ int			ft_printf_wchar(t_format *format, va_list *va)
 	c = (wchar_t)va_arg(*va, int);
 	n = wchar2utf8(str, c);
 	if (format->width <= n)
-		return (write(1, str, n) == n ? n : -1);
+		return (write(fd, str, n) == n ? n : -1);
 	offset = format->width - n;
 	if ((!format->rpad &&
-	ft_printf_pad(1, format->fill, offset) < offset) ||
-	write(1, str, n) < n ||
-	(format->rpad && ft_printf_pad(1, format->fill, offset) < offset))
+	ft_printf_pad(fd, format->fill, offset) < offset) ||
+	write(fd, str, n) < n ||
+	(format->rpad && ft_printf_pad(fd, format->fill, offset) < offset))
 		return (-1);
 	return (format->width);
 }
 
-static int	printf_wstring_null(t_format *format)
+static int	printf_wstring_null(t_format *format, int fd)
 {
 	char	*s;
 
@@ -72,13 +72,13 @@ static int	printf_wstring_null(t_format *format)
 	if (format->width < 6)
 		ft_memset(s, format->fill, format->width);
 	ft_memcpy(s + (format->rpad ? 0 : format->width - 6), "(null)", 6);
-	if (write(1, s, format->width) < format->width)
+	if (write(fd, s, format->width) < format->width)
 		format->width = -1;
 	free(s);
 	return (format->width);
 }
 
-int			ft_printf_wstring(t_format *format, va_list *va)
+int			ft_printf_wstring(t_format *format, va_list *va, int fd)
 {
 	wchar_t		*s;
 	char		*str;
@@ -86,7 +86,7 @@ int			ft_printf_wstring(t_format *format, va_list *va)
 	int			tmp;
 
 	if (!(s = (wchar_t*)va_arg(*va, wchar_t*)))
-		return (printf_wstring_null(format));
+		return (printf_wstring_null(format, fd));
 	if (!(str = (char*)malloc(ft_wcslen(s) * 4)))
 		return (-1);
 	n = 0;
@@ -94,9 +94,9 @@ int			ft_printf_wstring(t_format *format, va_list *va)
 	format->prec < 0))
 		n += tmp;
 	tmp = format->width - n;
-	if ((!format->rpad && ft_printf_pad(1, format->fill, tmp) < tmp) ||
-	write(1, str, n) < n ||
-	(format->rpad && ft_printf_pad(1, format->fill, tmp) < tmp))
+	if ((!format->rpad && ft_printf_pad(fd, format->fill, tmp) < tmp) ||
+	write(fd, str, n) < n ||
+	(format->rpad && ft_printf_pad(fd, format->fill, tmp) < tmp))
 		format->width = -1;
 	free(str);
 	return (format->width);

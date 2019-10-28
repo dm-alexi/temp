@@ -19,6 +19,7 @@ SRC = ft_printf.c \
 	ft_printf_utoa.c \
 	ft_printf_wchar.c \
 	ft_printf_xtoa.c \
+	ft_setformat.c \
 	ft_bigint.c \
 	ft_bigint_exp.c
 OBJ = $(SRC:.c=.o)

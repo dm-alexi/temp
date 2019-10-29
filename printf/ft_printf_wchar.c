@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 15:46:22 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/27 22:08:16 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/28 19:06:40 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,23 +61,6 @@ int			ft_printf_wchar(t_format *format, va_list *va, int fd)
 	return (format->width);
 }
 
-static int	printf_wstring_null(t_format *format, int fd)
-{
-	char	*s;
-
-	if (format->width < 6)
-		format->width = 6;
-	if (!(s = (char *)malloc(format->width)))
-		return (-1);
-	if (format->width < 6)
-		ft_memset(s, format->fill, format->width);
-	ft_memcpy(s + (format->rpad ? 0 : format->width - 6), "(null)", 6);
-	if (write(fd, s, format->width) < format->width)
-		format->width = -1;
-	free(s);
-	return (format->width);
-}
-
 int			ft_printf_wstring(t_format *format, va_list *va, int fd)
 {
 	wchar_t		*s;
@@ -86,14 +69,16 @@ int			ft_printf_wstring(t_format *format, va_list *va, int fd)
 	int			tmp;
 
 	if (!(s = (wchar_t*)va_arg(*va, wchar_t*)))
-		return (printf_wstring_null(format, fd));
+		s = L"(null)";
 	if (!(str = (char*)malloc(ft_wcslen(s) * 4)))
 		return (-1);
 	n = 0;
 	while (*s && ((n + (tmp = wchar2utf8(str + n, *s++))) <= format->prec ||
 	format->prec < 0))
 		n += tmp;
-	tmp = format->width - n;
+	if (format->width < n)
+		format->width = n;
+	tmp = format->width > n ? format->width - n : 0;
 	if ((!format->rpad && ft_printf_pad(fd, format->fill, tmp) < tmp) ||
 	write(fd, str, n) < n ||
 	(format->rpad && ft_printf_pad(fd, format->fill, tmp) < tmp))

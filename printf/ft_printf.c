@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:14:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/27 20:53:47 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/10/28 18:37:20 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		print_formatted(const char **s, va_list *va, int n, int fd)
 	if (format.type == 'p')
 		return (ft_printf_ptr(&format, va, fd));
 	if (ft_strchr("efgEFG", format.type))
-		return (ft_printf_float(&format, va,fd ));
+		return (ft_printf_float(&format, va, fd));
 	if (format.type == 'r')
 		return (ft_printf_r(&format, va, fd));
 	if (format.type == 'n')

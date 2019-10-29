@@ -6,16 +6,17 @@ int		error(void)
 	return (1);
 }
 
-int		inc_flag(char c)
+int		mem_error(void)
 {
-	write(2, "Incorrect flag: -", 17);
-	write(2, &c, 1);
-	write(2, "\n", 1);
+	write(2, "Error: memory allocation failed.\n", 33);
 	return (1);
 }
 
-int		usage(void)
+int		inc_flag(char c)
 {
-	write(1, "usage: checker [-flags] [list]\n", 31);
-	return (0);
+	char	s[] = "Incorrect flag: - \n";
+
+	s[17] = c;
+	write(2, s, 18);
+	return (1);
 }

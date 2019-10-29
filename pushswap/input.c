@@ -1,3 +1,5 @@
+#include <fcntl.h>
+#include <limits.h>
 #include "pushswap.h"
 #include "libft/libft.h"
 
@@ -29,7 +31,26 @@ int		get_flags(int ac, char **av, t_flags *flags)
 	return (0);
 }
 
-int		get_args(t_flags *flags, int n, char **av, int *a)
+int		*get_args(int n, char **av)
 {
+	int		*a;
+	int		i;
+	int		j;
+	long	num;
 
+	if (!(a = (int*)malloc(sizeof(int) * n)))
+		exit(mem_error());
+	i = 0;
+	while (i < n)
+	{
+		num = ft_strtol(*(av + i), av + i, 10);
+		if (**(av + i) || num > INT_MAX || num < INT_MIN)
+			exit(error());
+		a[i++] = (int)num;
+		j = 0;
+		while (j < i - 1)
+			if (a[j++] == a[i - 1])
+				exit(error());
+	}
+	return (a);
 }

@@ -9,7 +9,9 @@ typedef struct	s_flags
 }				t_flags;
 
 int				error(void);
+int				mem_error(void);
 int				inc_flag(char c);
+int				*get_args(int n, char **av);
 int				get_flags(int ac, char **av, t_flags *flags);
 
 #endif

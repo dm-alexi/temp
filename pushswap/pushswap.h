@@ -8,9 +8,9 @@ typedef struct	s_flags
 	char	colored : 1;
 }				t_flags;
 
-int				error(void);
-int				mem_error(void);
-int				inc_flag(char c);
+void			error(void);
+void			a_error(const char *s);
+void			flag_error(char c);
 int				*get_args(int n, char **av);
 int				get_flags(int ac, char **av, t_flags *flags);
 

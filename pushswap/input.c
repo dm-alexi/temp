@@ -10,9 +10,8 @@ int		get_flags(int ac, char **av, t_flags *flags)
 
     i = 0;
     ft_bzero(flags, sizeof(t_flags));
-    while (++i < ac)
+    while (++i < ac && (s = av[i]))
 	{
-		s = av[i];
 		if (*s != '-' || ft_isdigit(*++s))
 			return (ac - i);
         while (*s && ft_strchr("cfv", *s))
@@ -21,12 +20,14 @@ int		get_flags(int ac, char **av, t_flags *flags)
 				flags->colored = 1;
 			else if (*s == 'v')
 				flags->debug = 1;
-			else
+			else if (i < ac - 1)
 				flags->filename = av[++i];
+			else
+				a_error("Error: file name missing\n");
 			++s;
 		}
 		if (*s)
-			exit(inc_flag(*s));
+			flag_error(*s);
 	}
 	return (0);
 }
@@ -39,18 +40,18 @@ int		*get_args(int n, char **av)
 	long	num;
 
 	if (!(a = (int*)malloc(sizeof(int) * n)))
-		exit(mem_error());
+		a_error("Error: memory allocation failed.\n");
 	i = 0;
 	while (i < n)
 	{
 		num = ft_strtol(*(av + i), av + i, 10);
 		if (**(av + i) || num > INT_MAX || num < INT_MIN)
-			exit(error());
+			error();
 		a[i++] = (int)num;
 		j = 0;
 		while (j < i - 1)
 			if (a[j++] == a[i - 1])
-				exit(error());
+				error();
 	}
 	return (a);
 }

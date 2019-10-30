@@ -1,22 +1,23 @@
 #include <unistd.h>
+#include "libft/libft.h"
 
-int		error(void)
+void	error(void)
 {
 	write(2, "Error\n", 6);
-	return (1);
+	exit(1);
 }
 
-int		mem_error(void)
+void	a_error(const char *s)
 {
-	write(2, "Error: memory allocation failed.\n", 33);
-	return (1);
+	write(2, s, ft_strlen(s));
+	exit(1);
 }
 
-int		inc_flag(char c)
+int		flag_error(char c)
 {
 	char	s[] = "Incorrect flag: - \n";
 
 	s[17] = c;
 	write(2, s, 18);
-	return (1);
+	exit(1);
 }

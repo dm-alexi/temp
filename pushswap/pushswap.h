@@ -20,6 +20,8 @@ void			a_error(const char *s);
 void			flag_error(char c);
 t_node			*get_args(int n, char **av);
 int				get_flags(int ac, char **av, t_flags *flags);
-t_node			*push(t_node **cur, int n);
+t_node			*new_node(int n);
+t_node			*add(t_node **cur, t_node *t);
+void			push(t_node **to, t_node **from);
 
 #endif

@@ -13,11 +13,9 @@ t_node	*new_node(int n)
     return (t);
 }
 
-t_node	*push(t_node **cur, int n)
+t_node	*add(t_node **cur, t_node *t)
 {
-	t_node	*t;
-
-	if (!(t = new_node(n)))
+	if (!t)
 		return (NULL);
 	if (*cur)
 	{
@@ -28,4 +26,40 @@ t_node	*push(t_node **cur, int n)
 	}
 	*cur = t;
 	return (t);
+}
+
+t_node	*pop(t_node **cur)
+{
+	t_node	*t;
+
+
+	if (!*cur)
+		return (NULL);
+	t = *cur;
+	if ((*cur)->d == *cur)
+		*cur = NULL;
+	else
+	{
+		*cur = (*cur)->d;
+		(*cur)->u = (*cur)->u->u;
+		(*cur)->u->d = (*cur);
+	}
+	return (t);
+}
+
+void	push(t_node **to, t_node **from)
+{
+	add(to, pop(from));
+}
+
+void	swap(t_node *a)
+{
+	int		n;
+
+	if (a)
+	{
+		n = a->num;
+		a->num = a->d->num;
+		a->d->num = n;
+	}
 }

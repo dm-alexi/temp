@@ -34,19 +34,17 @@ int		get_flags(int ac, char **av, t_flags *flags)
 
 t_node	*get_args(int n, char **av)
 {
-	int		i;
 	long	num;
 	t_node	*t;
 	t_node	*tmp;
 
-	i = 0;
 	t = NULL;
-	while (i < n)
+	while (n--)
 	{
-		num = ft_strtol(*(av + i), av + i, 10);
-		if (**(av + i) || num > INT_MAX || num < INT_MIN)
+		num = ft_strtol(*(av + n), av + n, 10);
+		if (**(av + n) || num > INT_MAX || num < INT_MIN)
 			error();
-		if (!push(&t, (int)num))
+		if (!add(&t, new_node((int)num)))
 			a_error("Error: memory allocation failed.\n");
 		tmp = t->u;
 		while (tmp != t)
@@ -55,7 +53,6 @@ t_node	*get_args(int n, char **av)
 				error();
 			tmp = tmp->u;
 		}
-		++i;
 	}
 	return (t);
 }

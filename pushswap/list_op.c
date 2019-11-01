@@ -52,14 +52,14 @@ void	push(t_node **to, t_node **from)
 	add(to, pop(from));
 }
 
-void	swap(t_node *a)
+void	swap(t_node *t)
 {
 	int		n;
 
-	if (a)
+	if (t && t->d != t)
 	{
-		n = a->num;
-		a->num = a->d->num;
-		a->d->num = n;
+		n = t->num;
+		t->num = t->d->num;
+		t->d->num = n;
 	}
 }

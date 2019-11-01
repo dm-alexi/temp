@@ -13,7 +13,15 @@ void	a_error(const char *s)
 	exit(1);
 }
 
-int		flag_error(char c)
+void	file_error(const char *s)
+{
+	write(2, "Invalid file name: ", 19);
+	write(2, s, ft_strlen(s));
+	write(2, "\n", 1);
+	exit(1);
+}
+
+void	flag_error(char c)
 {
 	char	s[] = "Incorrect flag: - \n";
 

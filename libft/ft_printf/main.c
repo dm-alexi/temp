@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include "ft_printf.h"
 #include <float.h>
-
+#include <fcntl.h>
 #include <limits.h>
 
 int main()
@@ -27,7 +27,6 @@ int main()
   ft_printf("%jd\n", 9223372036854775807);
   ft_printf("%zd\n", 4294967295);
   ft_printf("%\n");
-  ft_printf("%U\n", 4294967295);
   ft_printf("%u\n", 4294967295);
   ft_printf("%o\n", 40);
   ft_printf("%%#08x\n", 42);
@@ -63,7 +62,6 @@ int main()
   ft_dprintf(fd, "%jd\n", 9223372036854775807);
   ft_dprintf(fd, "%zd\n", 4294967295);
   ft_dprintf(fd, "%\n");
-  ft_dprintf(fd, "%U\n", 4294967295);
   ft_dprintf(fd, "%u\n", 4294967295);
   ft_dprintf(fd, "%o\n", 40);
   ft_dprintf(fd, "%%#08x\n", 42);
@@ -76,5 +74,7 @@ int main()
   ft_dprintf(fd, "%s%s%s\n", "test", "test", "test");
   ft_dprintf(fd, "%C\n", 15000);
 
+
+ ft_printf("%e", 153487.89);
     return 0;
 }

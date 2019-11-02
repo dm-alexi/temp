@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:19:30 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/27 18:09:36 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/11/02 17:39:58 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FT_PRINTF_H
 # include <stdarg.h>
 # include "ft_bigint.h"
-# include "libft/libft.h"
+# include "../libft.h"
 
 typedef struct	s_format
 {
@@ -29,8 +29,6 @@ typedef struct	s_format
 	char	apost;
 }				t_format;
 
-int				ft_printf(const char *format, ...);
-int				ft_dprintf(int fd, const char *line, ...);
 int				ft_printf_char(t_format *format, va_list *va, int fd);
 int				ft_printf_e(t_format *format, int len, char *str, char **s);
 int				ft_printf_efg(t_format *format, t_bigint *t, int exp, char **s);

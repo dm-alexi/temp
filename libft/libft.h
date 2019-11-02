@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 22:14:21 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/14 19:46:25 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/11/02 17:20:29 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct	s_s
 }				t_list;
 
 /*
-				**libc functions
+				** libc functions
 */
 
 void			*ft_memset(void *ptr, int val, size_t num);
@@ -55,7 +55,7 @@ int				ft_toupper(int c);
 int				ft_tolower(int c);
 
 /*
-				**additional functions
+				** additional functions
 */
 
 void			*ft_memalloc(size_t size);
@@ -84,7 +84,7 @@ void			ft_putendl_fd(char const *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
 
 /*
-				**list processing functions
+				** list processing functions
 */
 
 t_list			*ft_lstnew(void const *content, size_t content_size);
@@ -95,7 +95,7 @@ void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
 /*
-				**other useful functions
+				** other useful functions
 */
 
 int				ft_isspace(int c);
@@ -117,5 +117,12 @@ int				ft_isqrt(int nb);
 char			*ft_lltoa(long long n, int base, int upcase);
 char			*ft_ulltoa(unsigned long long n, int base, int upcase);
 size_t			ft_wcslen(const wchar_t *wcs);
+
+/*
+				** ft_printf
+*/
+
+int				ft_printf(const char *format, ...);
+int				ft_dprintf(int fd, const char *line, ...);
 
 #endif

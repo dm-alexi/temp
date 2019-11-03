@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include "libft/libft.h"
 #include "pushswap.h"
 
 int		sorted(t_node *a)
@@ -12,8 +13,11 @@ int		sorted(t_node *a)
 	{
 		t = a->d;
 		while (t != a)
+		{
 			if (t->num <= t->u->num)
 				return (0);
+			t = t->d;
+		}
 	}
 	return (1);
 }
@@ -50,10 +54,8 @@ int 	main(int ac, char **av)
 	{
 		a = get_args(n, av + ac - n);
 		show_stack(a);
-		printf("%s\n", flags.filename);
         if ((fd = (flags.filename ? open(flags.filename, O_RDONLY) : 0)) < 0)
 			file_error(flags.filename);
-		printf("%s\n", flags.filename);
 		b = NULL;
 		while ((n = get_com(fd, &a, &b)))
 			;

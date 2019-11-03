@@ -41,7 +41,6 @@ int				get_com(int fd, t_node **a, t_node **b)
 		a_error("Input error.\n");
 	if (!r)
 		return (0);
-	ft_printf("--%s--\n", s);
 	len = ft_strlen(s);
 	if (len == 2 && s[0] == 's')
 		i_swap(a, b, s[1]);

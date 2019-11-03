@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 22:14:21 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/02 17:20:29 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/11/03 16:56:37 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,10 @@ char			*ft_ulltoa(unsigned long long n, int base, int upcase);
 size_t			ft_wcslen(const wchar_t *wcs);
 
 /*
-				** ft_printf
+				** projects
 */
 
+int				get_next_line(const int fd, char **line);
 int				ft_printf(const char *format, ...);
 int				ft_dprintf(int fd, const char *line, ...);
 

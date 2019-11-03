@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <fcntl.h>
 #include "pushswap.h"
 
@@ -49,12 +50,13 @@ int 	main(int ac, char **av)
 	{
 		a = get_args(n, av + ac - n);
 		show_stack(a);
+		printf("%s\n", flags.filename);
         if ((fd = (flags.filename ? open(flags.filename, O_RDONLY) : 0)) < 0)
 			file_error(flags.filename);
+		printf("%s\n", flags.filename);
 		b = NULL;
 		while ((n = get_com(fd, &a, &b)))
-			if (n == -1)
-				error();
+			;
         write(1, sorted(a) && !b ? "OK\n" : "KO\n", 3);
         show_stack(a);
         clear_lists(a, b);

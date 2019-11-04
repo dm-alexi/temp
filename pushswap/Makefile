@@ -4,25 +4,28 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 LIBFT = libft/libft.a
 HEAD = pushswap.h
-SRC1 = checker.c error.c input.c list_op.c pushswap.c
-OBJ1 = $(SRC1:.c=.o)
+SRC = checker.c check.c error.c input.c list_op.c pushswap.c
+OBJ = $(SRC1:.c=.o)
 
-all: $(CHECKER)
+all: $(CHECKER) $(PUSHSWAP)
 
-$(CHECKER): $(OBJ1)
+$(CHECKER): $(OBJ) checker.o
 	make -C ./libft/
-	$(CC) $(FLAGS) -o $(CHECKER) $(OBJ1) $(LIBFT)
+	$(CC) $(FLAGS) -o $(CHECKER) $(OBJ) checker.c $(LIBFT)
+
+$(PUSHSWAP): $(OBJ) push_swap.o
+	make -C ./libft/
+	$(CC) $(FLAGS) -o $(PUSHSWAP) $(OBJ) push_swap.c $(LIBFT)
 
 %.o: %.c $(HEAD)
 	$(CC) $(FLAGS) -o $@ -c $<
 
 clean:
-	rm -f $(OBJ1)
+	rm -f $(OBJ)
 	make clean -C ./libft/
 
 fclean: clean
-	rm -f $(CHECKER)
-	rm -f $(PUSHSWAP)
+	rm -f $(CHECKER) $(PUSHSWAP)
 	rm -f $(LIBFT)
 
 re: fclean all

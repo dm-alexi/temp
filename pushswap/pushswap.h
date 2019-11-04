@@ -23,8 +23,10 @@ t_node			*get_args(int n, char **av);
 int				get_flags(int ac, char **av, t_flags *flags);
 t_node			*new_node(int n);
 t_node			*add(t_node **cur, t_node *t);
-void			push(t_node **to, t_node **from);
+t_node			*pop(t_node **cur);
 void			swap(t_node *t);
 int				get_com(int fd, t_node **a, t_node **b);
+void			clear_lists(t_node *a, t_node *b);
+int				sorted(t_node *a);
 
 #endif

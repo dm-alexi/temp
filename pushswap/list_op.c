@@ -47,11 +47,6 @@ t_node	*pop(t_node **cur)
 	return (t);
 }
 
-void	push(t_node **to, t_node **from)
-{
-	add(to, pop(from));
-}
-
 void	swap(t_node *t)
 {
 	int		n;
@@ -62,4 +57,16 @@ void	swap(t_node *t)
 		t->num = t->d->num;
 		t->d->num = n;
 	}
+}
+
+void	clear_lists(t_node *a, t_node *b)
+{
+	t_node	*t;
+
+	if ((t = a))
+		while ((t = t->d) != a->d)
+			free(t->u);
+	if ((t = b))
+		while ((t = t->d) != b->d)
+			free(t->u);
 }

@@ -14,9 +14,9 @@ static void		i_swap(t_node **a, t_node **b, char c)
 static void		i_push(t_node **a, t_node **b, char c)
 {
 	if (c == 'a')
-		push(a, b);
+		add(a, pop(b));
 	else if (c == 'b')
-		push(b, a);
+		add(b, pop(a));
 	else
 		error();
 }

@@ -5,36 +5,6 @@
 #include "libft/libft.h"
 #include "pushswap.h"
 
-int		sorted(t_node *a)
-{
-	t_node	*t;
-
-	if (a)
-	{
-		t = a->d;
-		while (t != a)
-		{
-			if (t->num <= t->u->num)
-				return (0);
-			t = t->d;
-		}
-	}
-	return (1);
-}
-
-void	clear_lists(t_node *a, t_node *b)
-{
-	t_node	*t;
-
-	if ((t = a))
-		while ((t = t->d) != a->d)
-			free(t->u);
-	if ((t = b))
-		while ((t = t->d) != b->d)
-			free(t->u);
-
-}
-
 void	show_stack(t_node *a)
 {
 	printf("%d\n", a->num);

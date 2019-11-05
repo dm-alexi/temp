@@ -34,19 +34,20 @@ static t_list	*rsort(t_node *a, int n)
 static t_list	*sort_3(t_node *a)
 {
 	t_list	*t;
+	t = NULL;
 
 	if (a->num < a->d->num && a->num < a->d->d->num)
 	{
-		add_next(&t, "sa", 3);
-		add_next(&(t->next), "ra", 3);
+		add_prev(&t, "sa", 3);
+		add_prev(&t, "ra", 3);
 	}
 	else if (a->num > a->d->num && a->num > a->d->d->num)
 	{
-		add_next(&t, "sa", 3);
-		add_next(&(t->next), "rra", 4);
+		add_prev(&t, "sa", 3);
+		add_prev(&t, "rra", 4);
 	}
 	else
-		add_next(&t, "sa", 3);
+		add_prev(&t, "sa", 3);
 	return (t);
 }
 

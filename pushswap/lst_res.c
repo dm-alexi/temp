@@ -1,14 +1,13 @@
 #include <unistd.h>
 #include "pushswap.h"
 
-void	add_next(t_list **last, char *s, size_t size)
+void	add_prev(t_list **last, char *s, size_t size)
 {
 	t_list	*t;
 
 	if (!(t = ft_lstnew(s, size)))
 		a_error("Error: memory allocation failed.\n");
-	if (*last)
-		(*last)->next = t;
+	t->next = *last;
 	*last = t;
 }
 

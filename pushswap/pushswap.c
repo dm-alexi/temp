@@ -24,6 +24,7 @@ int 	main(int ac, char **av)
 	{
 		a = get_args(n, av + ac - n, &n);
 		show_stack(a);
+		printf("-----\n");
         if ((fd = (flags.filename ? open(flags.filename, O_WRONLY | O_CREAT) : 1)) < 0)
 			file_error(flags.filename);
 		b = NULL;

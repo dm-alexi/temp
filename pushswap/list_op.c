@@ -24,6 +24,11 @@ t_node	*add(t_node **cur, t_node *t)
 		(*cur)->u->d = t;
 		(*cur)->u = t;
 	}
+	else
+	{
+		t->u = t;
+		t->d = t;
+	}
 	*cur = t;
 	return (t);
 }

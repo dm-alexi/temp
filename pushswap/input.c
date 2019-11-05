@@ -32,6 +32,7 @@ int		get_flags(int ac, char **av, t_flags *flags)
 	return (0);
 }
 
+//implement string input
 t_node	*get_args(int n, char **av)
 {
 	long	num;

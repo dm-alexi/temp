@@ -28,5 +28,7 @@ void			swap(t_node *t);
 int				get_com(int fd, t_node **a, t_node **b);
 void			clear_lists(t_node *a, t_node *b);
 int				sorted(t_node *a);
+int			rsorted(t_node *a, int rev);
+char	*sort(t_node **a, t_node **b, int n);
 
 #endif

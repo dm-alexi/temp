@@ -1,19 +1,25 @@
 #include "libft/libft.h"
 #include "pushswap.h"
 
-static char *generate(const char *s, int n)
+static t_list	*generate(const char *s, int n)
 {
-	char	*str;
+	t_list	*t;
+	t_list	*tmp;
+	int		len;
 
-	if (!(str = (char*)malloc(ft_strlen(s) * n + 1)))
+	len = ft_strlen(s) + 1;
+	if (!(t = ft_lstnew(s, len)))
 		a_error("Error: memory allocation failed.\n");
-	*str = '\0';
-	while (n--)
-		ft_strcat(str, s);
-	return (str);
+	while (--n)
+	{
+		if (!(tmp = ft_lstnew(s, len)))
+			a_error("Error: memory allocation failed.\n");
+		ft_lstadd(&t, tmp);
+	}
+	return (t);
 }
 
-static char *rsort(t_node *a, int n)
+static t_list	*rsort(t_node *a, int n)
 {
     t_node	*t;
     int		i;
@@ -22,33 +28,40 @@ static char *rsort(t_node *a, int n)
     i = 0;
     while (++i && t->num > t->u->num)
 		t = t->d;
-	if (i <= n / 2)
-		return (generate("ra\n", i));
-	else
-		return (generate("rra\n", n - i));
+	return (i <= n / 2 ? generate("ra", i) : generate("rra", n - i));
 }
 
-static char	*sort_3(t_node *a)
+static t_list	*sort_3(t_node *a)
 {
+	t_list	*t;
+
 	if (a->num < a->d->num && a->num < a->d->d->num)
-		return(ft_strdup("sa\nra\n"));
-	if (a->num > a->d->num && a->num > a->d->d->num)
-		return(ft_strdup("sa\nrra\n"));
-	return (ft_strdup("sa\n"));
+	{
+		add_next(&t, "sa", 3);
+		add_next(&(t->next), "ra", 3);
+	}
+	else if (a->num > a->d->num && a->num > a->d->d->num)
+	{
+		add_next(&t, "sa", 3);
+		add_next(&(t->next), "rra", 4);
+	}
+	else
+		add_next(&t, "sa", 3);
+	return (t);
 }
 
-char	*sort(t_node **a, t_node **b, int n)
+t_list	*sort(t_node **a, t_node **b, int n)
 {
-    char	*s;
+    t_list	*t;
 
     //check return statement
     if (sorted(*a))
-		s = NULL;
+		t = NULL;
 	else if (rsorted(*a, 0))
-		s = rsort(*a, n);
+		t = rsort(*a, n);
     else if (n == 3)
-		s = sort_3(*a);
+		t = sort_3(*a);
 	else
-		s = ft_strdup("can't sort");
-	return (s);
+		t = merge_sort(a, b, n);
+	return (t);
 }

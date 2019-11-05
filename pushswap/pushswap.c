@@ -24,11 +24,11 @@ int 	main(int ac, char **av)
 	{
 		a = get_args(n, av + ac - n, &n);
 		show_stack(a);
-        if ((fd = (flags.filename ? open(flags.filename, O_RDONLY) : 0)) < 0)
+        if ((fd = (flags.filename ? open(flags.filename, O_WRONLY | O_CREAT) : 1)) < 0)
 			file_error(flags.filename);
 		b = NULL;
 		//printf("--%d--\n", n);
-        printf("%s", sort(&a, &b, n));
+        print_list(fd, sort(&a, &b, n));
         clear_lists(a, b);
 	}
     return 0;

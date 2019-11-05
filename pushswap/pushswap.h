@@ -19,7 +19,7 @@ void			error(void);
 void			a_error(const char *s);
 void			flag_error(char c);
 void			file_error(const char *s);
-t_node			*get_args(int n, char **av);
+t_node			*get_args(int argnum, char **av, int *n);
 int				get_flags(int ac, char **av, t_flags *flags);
 t_node			*new_node(int n);
 t_node			*add(t_node **cur, t_node *t);

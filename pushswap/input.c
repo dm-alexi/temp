@@ -48,16 +48,29 @@ static t_node	*pushback(t_node **cur, t_node *t)
 	return (*cur);
 }
 
-t_node	*get_args(int n, char **av)
+static void		dup_search(t_node *t)
+{
+	t_node	*tmp;
+
+	tmp = t;
+	while (tmp != t->u)
+	{
+		if (tmp->num == t->u->num)
+			error();
+		tmp = tmp->d;
+	}
+}
+
+t_node	*get_args(int argnum, char **av, int *n)
 {
 	long	num;
 	t_node	*t;
-	t_node	*tmp;
 	int		i;
 
 	t = NULL;
 	i = 0;
-	while (i < n)
+	*n = 0;
+	while (i < argnum && ++*n)
 	{
 		num = ft_strtol(*(av + i), av + i, 10);
 		if (((*av[i] && *av[i] != ' ') || num > INT_MAX || num < INT_MIN))
@@ -66,13 +79,7 @@ t_node	*get_args(int n, char **av)
 			++i;
 		if (!pushback(&t, new_node((int)num)))
 			a_error("Error: memory allocation failed.\n");
-		tmp = t;
-		while (tmp != t->u)
-		{
-			if (tmp->num == t->u->num)
-				error();
-			tmp = tmp->d;
-		}
+		dup_search(t);
 	}
 	return (t);
 }

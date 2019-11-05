@@ -22,7 +22,7 @@ int 	main(int ac, char **av)
 
 	if (ac > 1 && (n = get_flags(ac, av, &flags)) > 0)
 	{
-		a = get_args(n, av + ac - n);
+		a = get_args(n, av + ac - n, &n);
 		show_stack(a);
         if ((fd = (flags.filename ? open(flags.filename, O_RDONLY) : 0)) < 0)
 			file_error(flags.filename);

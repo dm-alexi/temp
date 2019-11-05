@@ -34,5 +34,6 @@ t_list			*sort(t_node **a, t_node **b, int n);
 t_list			*merge_sort(t_node **a, t_node **b, int n);
 void			print_list(int fd, t_list *t);
 void			add_next(t_list **last, char *s, size_t t);
+char			*exec(t_node **a, t_node **b, char *s);
 
 #endif

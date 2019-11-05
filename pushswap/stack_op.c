@@ -31,6 +31,22 @@ static void		i_rot(t_node **a, t_node **b, char c, int rev)
 		*b = rev ? (*b)->u : (*b)->d;
 }
 
+char	*exec(t_node **a, t_node **b, char *s)
+{
+	int		len;
+
+	len = ft_strlen(s);
+	if (len == 2 && s[0] == 's')
+		i_swap(a, b, s[1]);
+	else if (len == 2 && s[0] == 'p')
+		i_push(a, b, s[1]);
+	else if (len == 2 && s[0] == 'r')
+		i_rot(a, b, s[1], 0);
+	else if (len == 3 && s[0] == 'r' && s[1] == 'r')
+		i_rot(a, b, s[2], 1);
+	return (s);
+}
+
 int				get_com(int fd, t_node **a, t_node **b)
 {
 	int		r;

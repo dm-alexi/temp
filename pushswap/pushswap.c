@@ -7,9 +7,14 @@
 
 void	show_stack(t_node *a)
 {
-	printf("%d\n", a->num);
-	for (t_node *t = a->d; t != a; t = t->d)
-		printf("%d\n", t->num);
+	if (a)
+	{
+		printf("%d\n", a->num);
+		for (t_node *t = a->d; t != a; t = t->d)
+			printf("%d\n", t->num);
+	}
+	else
+		printf("empty\n");
 }
 
 int 	main(int ac, char **av)

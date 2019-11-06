@@ -50,7 +50,7 @@ static t_list	*sort_3(t_node *a)
 		add_prev(&t, "sa", 3);
 	return (t);
 }
-
+/*
 t_list	*sort(t_node **a, t_node **b, int n)
 {
     t_list	*t;
@@ -63,6 +63,7 @@ t_list	*sort(t_node **a, t_node **b, int n)
     else if (n == 3)
 		t = sort_3(*a);
 	else
-		t = merge_sort(a, b, n);
+		t = merge_sort(t, n);
 	return (t);
 }
+*/

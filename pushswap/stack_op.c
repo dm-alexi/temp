@@ -1,53 +1,61 @@
 #include "pushswap.h"
 #include "libft/libft.h"
 
-static void		i_swap(t_node **a, t_node **b, char c)
+static void		i_swap(t_stack *t, char c)
 {
 	if (c != 'a' && c != 'b' && c != 's')
 		error();
 	if (c == 'a' || c == 's')
-		swap(*a);
+		swap(t->a);
 	if (c == 'b' || c == 's')
-		swap(*b);
+		swap(t->b);
 }
 
-static void		i_push(t_node **a, t_node **b, char c)
+static void		i_push(t_stack *t, char c)
 {
 	if (c == 'a')
-		add(a, pop(b));
+	{
+		add(&(t->a), pop(&(t->b)));
+		++t->a_count;
+		--t->b_count;
+	}
 	else if (c == 'b')
-		add(b, pop(a));
+	{
+		add(&(t->b), pop(&(t->a)));
+		++t->b_count;
+		--t->a_count;
+	}
 	else
 		error();
 }
 
-static void		i_rot(t_node **a, t_node **b, char c, int rev)
+static void		i_rot(t_stack *t, char c, int rev)
 {
 	if (c != 'a' && c != 'b' && c != 's')
 		error();
 	if (c == 'a' || c == 's')
-		*a = rev ? (*a)->u : (*a)->d;
+		t->a = rev ? t->a->u : t->a->d;
 	if (c == 'b' || c == 's')
-		*b = rev ? (*b)->u : (*b)->d;
+		t->b = rev ? t->b->u : t->b->d;
 }
 
-char	*exec(t_node **a, t_node **b, char *s)
+char	*exec(t_stack *t, char *s)
 {
 	int		len;
 
 	len = ft_strlen(s);
 	if (len == 2 && s[0] == 's')
-		i_swap(a, b, s[1]);
+		i_swap(t, s[1]);
 	else if (len == 2 && s[0] == 'p')
-		i_push(a, b, s[1]);
+		i_push(t, s[1]);
 	else if (len == 2 && s[0] == 'r')
-		i_rot(a, b, s[1], 0);
+		i_rot(t, s[1], 0);
 	else if (len == 3 && s[0] == 'r' && s[1] == 'r')
-		i_rot(a, b, s[2], 1);
+		i_rot(t, s[2], 1);
 	return (s);
 }
 
-int				get_com(int fd, t_node **a, t_node **b)
+int				get_com(int fd, t_stack *t)
 {
 	int		r;
 	int		len;
@@ -59,13 +67,13 @@ int				get_com(int fd, t_node **a, t_node **b)
 		return (0);
 	len = ft_strlen(s);
 	if (len == 2 && s[0] == 's')
-		i_swap(a, b, s[1]);
+		i_swap(t, s[1]);
 	else if (len == 2 && s[0] == 'p')
-		i_push(a, b, s[1]);
+		i_push(t, s[1]);
 	else if (len == 2 && s[0] == 'r')
-		i_rot(a, b, s[1], 0);
+		i_rot(t, s[1], 0);
 	else if (len == 3 && s[0] == 'r' && s[1] == 'r')
-		i_rot(a, b, s[2], 1);
+		i_rot(t, s[2], 1);
 	else
 		error();
 	free(s);

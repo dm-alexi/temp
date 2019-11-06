@@ -32,30 +32,30 @@ int		get_flags(int ac, char **av, t_flags *flags)
 	return (0);
 }
 
-static t_node	*pushback(t_node **cur, t_node *t)
+static t_node	*pushback(t_node **cur, t_node *a)
 {
-	if (!t)
+	if (!a)
 		return (NULL);
 	if (*cur)
 	{
-		t->u = (*cur)->u;
-		t->d = *cur;
-		(*cur)->u->d = t;
-		(*cur)->u = t;
+		a->u = (*cur)->u;
+		a->d = *cur;
+		(*cur)->u->d = a;
+		(*cur)->u = a;
 	}
 	else
-		*cur = t;
+		*cur = a;
 	return (*cur);
 }
 
-static void		dup_search(t_node *t)
+static void		dup_search(t_node *a)
 {
 	t_node	*tmp;
 
-	tmp = t;
-	while (tmp != t->u)
+	tmp = a;
+	while (tmp != a->u)
 	{
-		if (tmp->num == t->u->num)
+		if (tmp->num == a->u->num)
 			error();
 		tmp = tmp->d;
 	}
@@ -64,10 +64,10 @@ static void		dup_search(t_node *t)
 t_node	*get_args(int argnum, char **av, int *n)
 {
 	long	num;
-	t_node	*t;
+	t_node	*a;
 	int		i;
 
-	t = NULL;
+	a = NULL;
 	i = 0;
 	*n = 0;
 	while (i < argnum && ++*n)
@@ -77,9 +77,9 @@ t_node	*get_args(int argnum, char **av, int *n)
 			error();
 		if (!**(av + i))
 			++i;
-		if (!pushback(&t, new_node((int)num)))
+		if (!pushback(&a, new_node((int)num)))
 			a_error("Error: memory allocation failed.\n");
-		dup_search(t);
+		dup_search(a);
 	}
-	return (t);
+	return (a);
 }

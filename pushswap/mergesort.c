@@ -1,36 +1,30 @@
 #include "pushswap.h"
 #include "libft/libft.h"
 
-t_list	*initial_split(t_node **a, t_node **b, int n)
+t_list	*initial_split(t_stack *t)
 {
 	t_list	*last;
-	int		a_count;
 
 	last = NULL;
-	a_count = n;
-    while (a_count > 2)
+    while (t->a_count - t->b_count >= 4)
 	{
-		add_prev(&last, exec(a, b, "pb"), 2);
-		add_prev(&last, exec(a, b, "pb"), 2);
-        if ((*a)->num > (*a)->d->num)
-			add_prev(&last, exec(a, b, "sa"), 2);
-		if ((*b)->num < (*b)->d->num)
-			add_prev(&last, exec(a, b, "sb"), 2);
-		add_prev(&last, exec(a, b, "ra"), 2);
-		add_prev(&last, exec(a, b, "ra"), 2);
-		a_count -= 4;
-	}
-	if (a_count == 1 && (*a)->num > (*a)->d->num)
-		add_prev(&last, exec(a, b, "ra"), 2);
-	else if (a_count == 2 && (*a)->num > (*a)->d->num)
-		add_prev(&last, exec(a, b, "sa"), 2);
-	show_stack(*a);
-	ft_printf("---\n");
-	show_stack(*b);
-	ft_printf("=======\n");
+		add_prev(&last, exec(t, "pb"), 2);
+		add_prev(&last, exec(t, "pb"), 2);
+        if (t->a->num > t->a->d->num)
+			add_prev(&last, exec(t, "sa"), 2);
+		if (t->b->num < t->b->d->num)
+			add_prev(&last, exec(t, "sb"), 2);
+		add_prev(&last, exec(t, "ra"), 2);
+		add_prev(&last, exec(t, "ra"), 2);
+	}/*
+	if (t->a_count == 1 && t->a->num > t->a->d->num)
+		add_prev(&last, exec(t, "ra"), 2);
+	else if (t->a_count == 2 && t->a->num > t->a->d->num)
+		add_prev(&last, exec(t, "sa"), 2);
+	show_stack(t);*/
 	return (last);
 }
-
+/*
 t_list	*merge_a(t_node **a, t_node **b, int a_count, int b_count)
 {
     t_list	*t;
@@ -78,7 +72,7 @@ t_list	*merge_b(t_node **a, t_node **b, int a_count, int b_count)
 	}
 	return (t);
 }
-
+*/
 t_list	*merge(t_node **a, t_node **b)
 {
 	t_node	*t;
@@ -106,27 +100,9 @@ t_list	*merge(t_node **a, t_node **b)
 	return (tmp);
 }
 
-t_list	*connect(t_list *f, t_list *s)
+t_list	*merge_sort(t_stack *t)
 {
-	t_list	*t;
+	t_list *tmp = initial_split(t);
 
-	t = f;
-	while (t->next)
-		t = t->next;
-	t->next = s;
-	return (f);
-}
-
-t_list	*merge_sort(t_node **a, t_node **b, int n)
-{
-	t_list	*t;
-
-	t = initial_split(a, b, n);
-	t = connect(merge(a, b), t);
-	//if (rsortet(a))
-	show_stack(*a);
-	ft_printf("---\n");
-	show_stack(*b);
-
-	return (t);
+	return (tmp);
 }

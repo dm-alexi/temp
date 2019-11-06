@@ -64,14 +64,14 @@ void	swap(t_node *t)
 	}
 }
 
-void	clear_lists(t_node *a, t_node *b)
+void	clear_stacks(t_stack *t)
 {
-	t_node	*t;
+	t_node	*tmp;
 
-	if ((t = a))
-		while ((t = t->d) != a->d)
-			free(t->u);
-	if ((t = b))
-		while ((t = t->d) != b->d)
-			free(t->u);
+	if ((tmp = t->a))
+		while ((tmp = tmp->d) != t->a->d)
+			free(tmp->u);
+	if ((tmp = t->b))
+		while ((tmp = tmp->d) != t->b->d)
+			free(tmp->u);
 }

@@ -36,6 +36,93 @@ void	initial_split(t_stack *t)
 	show_stacks(t);
 }
 
+int		adjust_a(t_stack *t)
+{
+	int		n;
+	int		i;
+	t_node	*tmp;
+
+	if (t->a_count && t->b_count)
+	{
+		n = 0;
+		i = 0;
+		tmp = t->a;
+		while (!(tmp->num > t->b->num && tmp->u->num < t->b->num) && ++i)
+			tmp = tmp->d;
+		n = i;
+		if (i <= t->a_count / 2)
+		{
+			while (i--)
+				exec(t, "ra");
+			return (n);
+		}
+		while (i++ < t->a_count)
+			exec(t, "rra");
+		return (n - t->a_count);
+	}
+	return (0);
+}
+
+int		adjust_b(t_stack *t)
+{
+	int		n;
+	int		i;
+	t_node	*tmp;
+
+	if (t->a_count && t->b_count)
+	{
+		n = 0;
+		i = 0;
+		tmp = t->b;
+		while (!(tmp->num > t->a->num && tmp->u->num < t->a->num) && ++i)
+			tmp = tmp->d;
+		n = i;
+		if (i <= t->b_count / 2)
+		{
+			while (i--)
+				exec(t, "rb");
+			return (n);
+		}
+		while (i++ < t->b_count)
+			exec(t, "rrb");
+		return (n - t->b_count);
+	}
+	return (0);
+}
+
+void	merge_a(t_stack *t, int a_sorted, int b_sorted)
+{
+	int		n;
+	int		sum;
+
+	sum = a_sorted + b_sorted;
+	n = 0;
+	while (b_sorted--)
+	{
+		if (t->a->num > t->b->num && (n == 0 || t->a->u->num < t->b->num))
+			exec(t, "pa");
+
+	}
+	while (n++ < sum)
+		exec(t, "ra");
+}
+
+void	merge_b(t_stack *t, int a_sorted, int b_sorted)
+{
+	int		n;
+	int		sum;
+
+	sum = a_sorted + b_sorted;
+	n = 0;
+	while (a_sorted--)
+	{
+		n += adjust_b(t);
+		exec(t, "pb");
+	}
+	while (n++ < sum)
+		exec(t, "rb");
+}
+
 void	merge(t_stack *t)
 {
 	t_node	*tmp;
@@ -44,18 +131,36 @@ void	merge(t_stack *t)
 
 	tmp = t->a;
 	a_sorted = 1;
-	while (t->num < t->d->num && ++a_sorted)
-		t = t->d;
+	while (tmp->num < tmp->d->num && ++a_sorted)
+		tmp = tmp->d;
 	tmp = t->b;
 	b_sorted = 1;
-	while (t->num < t->d->num && ++b_sorted)
-		t = t->d;
+	while (tmp->num > tmp->d->num && ++b_sorted)
+		tmp = tmp->d;
+	ft_printf("sorted: %d %d\n", a_sorted, b_sorted);
+	if (t->a_count - a_sorted < t->b_count - b_sorted)
+		merge_a(t, a_sorted, b_sorted);
+	else
+		merge_b(t, a_sorted, b_sorted);
+	show_stacks(t);
+	ft_printf("-------\n");
+}
 
+void	final_merge(t_stack *t)
+{
+	while (t->b_count)
+	{
+		adjust_a(t);
+		exec(t, "pa");
+	}
 }
 
 void	merge_sort(t_stack *t)
 {
 	initial_split(t);
-	//if (rsorted(t->a, 0))
-	//	final_merge(t);
+	while (!rsorted(t->a, 0))
+		merge(t);
+	final_merge(t);
+	//if (!sorted(t->a))
+	//	rsort(t);
 }

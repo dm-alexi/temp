@@ -1,69 +1,48 @@
 #include "libft/libft.h"
 #include "pushswap.h"
 
-static t_list	*generate(const char *s, int n)
+static void rsort(t_stack *t)
 {
-	t_list	*t;
-	t_list	*tmp;
-	int		len;
-
-	len = ft_strlen(s) + 1;
-	if (!(t = ft_lstnew(s, len)))
-		a_error("Error: memory allocation failed.\n");
-	while (--n)
-	{
-		if (!(tmp = ft_lstnew(s, len)))
-			a_error("Error: memory allocation failed.\n");
-		ft_lstadd(&t, tmp);
-	}
-	return (t);
-}
-
-static t_list	*rsort(t_node *a, int n)
-{
-    t_node	*t;
+    t_node	*tmp;
     int		i;
 
-    t = a->d;
+    tmp = t->a->d;
     i = 0;
-    while (++i && t->num > t->u->num)
-		t = t->d;
-	return (i <= n / 2 ? generate("ra", i) : generate("rra", n - i));
+    while (++i && tmp->num > tmp->u->num)
+		tmp = tmp->d;
+	if (i <= t->a_count / 2)
+		while (i--)
+			exec(t, "ra");
+	else
+		while (i++ < t->a_count)
+			exec(t, "rra");
 }
 
-static t_list	*sort_3(t_node *a)
+static void	sort_3(t_stack *t)
 {
-	t_list	*t;
-	t = NULL;
-
-	if (a->num < a->d->num && a->num < a->d->d->num)
+	if (t->a->num < t->a->d->num && t->a->num < t->a->d->d->num)
 	{
-		add_prev(&t, "sa", 3);
-		add_prev(&t, "ra", 3);
+		exec(t, "sa");
+		exec(t, "ra");
 	}
-	else if (a->num > a->d->num && a->num > a->d->d->num)
+	else if (t->a->num > t->a->d->num && t->a->num > t->a->d->d->num)
 	{
-		add_prev(&t, "sa", 3);
-		add_prev(&t, "rra", 4);
+		exec(t, "sa");
+		exec(t, "rra");
 	}
 	else
-		add_prev(&t, "sa", 3);
-	return (t);
+		exec(t, "sa");
 }
-/*
-t_list	*sort(t_node **a, t_node **b, int n)
-{
-    t_list	*t;
 
-    //check return statement
-    if (sorted(*a))
-		t = NULL;
-	else if (rsorted(*a, 0))
-		t = rsort(*a, n);
-    else if (n == 3)
-		t = sort_3(*a);
-	else
-		t = merge_sort(t, n);
-	return (t);
+void	sort(t_stack *t)
+{
+    if (sorted(t->a))
+		return ;
+	else if (rsorted(t->a, 0))
+		rsort(t);
+    else if (t->a_count == 3)
+		sort_3(t);
+	/*else
+		t = merge_sort(t, n);*/
 }
-*/
+

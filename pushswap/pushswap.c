@@ -5,7 +5,22 @@
 #include "libft/libft.h"
 #include "pushswap.h"
 
-void	show_stack(t_stack *t)
+void	print_log(t_stack *t)
+{
+	t_list	*lst;
+
+	lst = t->start;
+	if (!lst)
+		ft_printf("No list!");
+	while (lst)
+	{
+		ft_printf("%s ", lst->content);
+		lst = lst->next;
+	}
+	ft_printf("\n");
+}
+
+void	show_stacks(t_stack *t)
 {
 	if (t->a)
 	{
@@ -38,9 +53,13 @@ int 	main(int ac, char **av)
 		ft_bzero(&t, sizeof(t));
 		t.a = get_args(n, av + ac - n, &n);
 		t.a_count = n;
-		show_stack(&t);
+		show_stacks(&t);
+		printf("--------\n");
         if ((fd = (flags.filename ? open(flags.filename, O_WRONLY | O_CREAT) : 1)) < 0)
 			file_error(flags.filename);
+		sort(&t);
+		print_log(&t);
+		show_stacks(&t);
         //print_list(fd, sort(&a, &b, n));
         //clear_lists(a, b);
 	}

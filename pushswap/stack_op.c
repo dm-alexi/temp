@@ -39,7 +39,7 @@ static void		i_rot(t_stack *t, char c, int rev)
 		t->b = rev ? t->b->u : t->b->d;
 }
 
-char	*exec(t_stack *t, char *s)
+void	exec(t_stack *t, char *s)
 {
 	int		len;
 
@@ -52,7 +52,18 @@ char	*exec(t_stack *t, char *s)
 		i_rot(t, s[1], 0);
 	else if (len == 3 && s[0] == 'r' && s[1] == 'r')
 		i_rot(t, s[2], 1);
-	return (s);
+	if (!t->fin)
+	{
+		if (!(t->fin = ft_lstnew(s, len + 1)))
+			a_error("Error: memory allocation failed.\n");
+		t->start = t->fin;
+	}
+	else
+	{
+		if (!(t->fin->next = ft_lstnew(s, len + 1)))
+			a_error("Error: memory allocation failed.\n");
+		t->fin = t->fin->next;
+	}
 }
 
 int				get_com(int fd, t_stack *t)

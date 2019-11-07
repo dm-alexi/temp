@@ -1,6 +1,6 @@
 #include "pushswap.h"
 #include "libft/libft.h"
-
+/*
 t_list	*initial_split(t_stack *t)
 {
 	t_list	*last;
@@ -21,9 +21,9 @@ t_list	*initial_split(t_stack *t)
 		add_prev(&last, exec(t, "ra"), 2);
 	else if (t->a_count == 2 && t->a->num > t->a->d->num)
 		add_prev(&last, exec(t, "sa"), 2);
-	show_stack(t);*/
+	show_stack(t);
 	return (last);
-}
+}*/
 /*
 t_list	*merge_a(t_node **a, t_node **b, int a_count, int b_count)
 {
@@ -99,10 +99,11 @@ t_list	*merge(t_node **a, t_node **b)
 
 	return (tmp);
 }
-
+/*
 t_list	*merge_sort(t_stack *t)
 {
 	t_list *tmp = initial_split(t);
 
 	return (tmp);
 }
+*/

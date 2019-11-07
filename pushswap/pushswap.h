@@ -22,7 +22,8 @@ typedef struct	s_stack
 	t_node	*b;
 	int		a_count;
 	int		b_count;
-	t_list	*lst;
+	t_list	*start;
+	t_list	*fin;
 }               t_stack;
 
 void			error(void);
@@ -39,11 +40,11 @@ int				get_com(int fd, t_stack *t);
 void	clear_stacks(t_stack *t);
 int				sorted(t_node *a);
 int				rsorted(t_node *a, int rev);
-t_list			*sort(t_node **a, t_node **b, int n);
+void	sort(t_stack *t);
 t_list	*merge_sort(t_stack *t);
 void			print_list(int fd, t_list *t);
 void			add_prev(t_list **last, char *s, size_t t);
-char	*exec(t_stack *t, char *s);
+void	exec(t_stack *t, char *s);
 
-void	show_stack(t_stack *t);
+void	show_stacks(t_stack *t);
 #endif

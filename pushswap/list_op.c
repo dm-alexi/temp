@@ -74,4 +74,5 @@ void	clear_stacks(t_stack *t)
 	if ((tmp = t->b))
 		while ((tmp = tmp->d) != t->b->d)
 			free(tmp->u);
+	//clear command list!
 }

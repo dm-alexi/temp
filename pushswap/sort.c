@@ -1,7 +1,7 @@
 #include "libft/libft.h"
 #include "pushswap.h"
 
-static void rsort(t_stack *t)
+void rsort(t_stack *t)
 {
     t_node	*tmp;
     int		i;
@@ -42,7 +42,7 @@ void	sort(t_stack *t)
 		rsort(t);
     else if (t->a_count == 3)
 		sort_3(t);
-	/*else
-		t = merge_sort(t, n);*/
+	else
+		merge_sort(t);
 }
 

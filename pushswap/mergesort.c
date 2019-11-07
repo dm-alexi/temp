@@ -1,109 +1,61 @@
 #include "pushswap.h"
 #include "libft/libft.h"
-/*
-t_list	*initial_split(t_stack *t)
-{
-	t_list	*last;
 
-	last = NULL;
+void	sort3top(t_stack *t)
+{
+    if (t->a->num > t->a->d->num && t->a->num > t->a->d->d->num)
+		exec(t, "sa");
+	if (t->a->num > t->a->d->num)
+		exec(t, "sa");
+	if (t->a->num < t->a->d->num && t->a->d->num < t->a->d->d->num)
+		return;
+	exec(t, "ra");
+	exec(t, "sa");
+	exec(t, "rra");
+	if (t->a->num > t->a->d->num)
+		exec(t, "sa");
+}
+
+void	initial_split(t_stack *t)
+{
     while (t->a_count - t->b_count >= 4)
 	{
-		add_prev(&last, exec(t, "pb"), 2);
-		add_prev(&last, exec(t, "pb"), 2);
+		exec(t, "pb");
+		exec(t, "pb");
         if (t->a->num > t->a->d->num)
-			add_prev(&last, exec(t, "sa"), 2);
+			exec(t, "sa");
 		if (t->b->num < t->b->d->num)
-			add_prev(&last, exec(t, "sb"), 2);
-		add_prev(&last, exec(t, "ra"), 2);
-		add_prev(&last, exec(t, "ra"), 2);
-	}/*
-	if (t->a_count == 1 && t->a->num > t->a->d->num)
-		add_prev(&last, exec(t, "ra"), 2);
-	else if (t->a_count == 2 && t->a->num > t->a->d->num)
-		add_prev(&last, exec(t, "sa"), 2);
-	show_stack(t);
-	return (last);
-}*/
-/*
-t_list	*merge_a(t_node **a, t_node **b, int a_count, int b_count)
-{
-    t_list	*t;
-    int		n;
-
-    t = NULL;
-    n = 0;
-    while (b_count--)
-	{
-		while ((*a)->num < (*b)->num && n < a_count)
-		{
-			add_prev(&t, exec(a, b, "ra"), 2);
-			++n;
-		}
-		while ((*a)->u->num > (*b)->num && n > 0)
-		{
-			add_prev(&t, exec(a, b, "rra"), 2);
-			--n;
-		}
-		add_prev(&t, exec(a, b, "pa"), 2);
+			exec(t, "sb");
+		exec(t, "ra");
+		exec(t, "ra");
 	}
-	return (t);
+	if (t->a_count - t->b_count == 1 || t->a_count - t->b_count == 3)
+		sort3top(t);
+	else if (t->a_count - t->b_count == 2 && t->a->num > t->a->d->num)
+		exec(t, "sa");
+	show_stacks(t);
 }
 
-t_list	*merge_b(t_node **a, t_node **b, int a_count, int b_count)
+void	merge(t_stack *t)
 {
-    t_list	*t;
-    int		n;
+	t_node	*tmp;
+	int		a_sorted;
+	int		b_sorted;
 
-    t = NULL;
-    n = 0;
-    while (a_count--)
-	{
-		while ((*a)->num > (*b)->num && n < b_count)
-		{
-			add_prev(&t, exec(a, b, "rb"), 2);
-			++n;
-		}
-		while ((*a)->num < (*b)->u->num && n > 0)
-		{
-			add_prev(&t, exec(a, b, "rrb"), 2);
-			--n;
-		}
-		add_prev(&t, exec(a, b, "pb"), 2);
-	}
-	return (t);
-}
-*/
-t_list	*merge(t_node **a, t_node **b)
-{
-	t_node	*t;
-	t_list	*tmp;
-	int		a_count;
-	int		b_count;
-
-	t = *a;
-	a_count = 1;
-	while (t->num < t->d->num)
-	{
-		++a_count;
+	tmp = t->a;
+	a_sorted = 1;
+	while (t->num < t->d->num && ++a_sorted)
 		t = t->d;
-	}
-	t = *b;
-	b_count = 1;
-	while (t->num > t->d->num)
-	{
-		++b_count;
+	tmp = t->b;
+	b_sorted = 1;
+	while (t->num < t->d->num && ++b_sorted)
 		t = t->d;
-	}
-	/*tmp = (a_count >= b_count) ? merge_a(a, b, a_count, b_count) :
-		merge_b(a, b, a_count, b_count);*/
 
-	return (tmp);
 }
-/*
-t_list	*merge_sort(t_stack *t)
+
+void	merge_sort(t_stack *t)
 {
-	t_list *tmp = initial_split(t);
-
-	return (tmp);
+	initial_split(t);
+	//if (rsorted(t->a, 0))
+	//	final_merge(t);
 }
-*/

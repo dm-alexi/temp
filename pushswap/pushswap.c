@@ -60,8 +60,7 @@ int 	main(int ac, char **av)
 		sort(&t);
 		print_log(&t);
 		show_stacks(&t);
-        //print_list(fd, sort(&a, &b, n));
-        //clear_lists(a, b);
+        clear_stacks(&t);
 	}
     return 0;
 }

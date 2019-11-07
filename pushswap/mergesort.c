@@ -47,7 +47,8 @@ int		adjust_a(t_stack *t)
 		n = 0;
 		i = 0;
 		tmp = t->a;
-		while (!(tmp->num > t->b->num && tmp->u->num < t->b->num) && ++i)
+		//while (!(tmp->num > t->b->num && (tmp->u->num < t->b->num || tmp->u->num > tmp->num)) && ++i)
+		while (tmp->num < t->b->num && tmp->u->num < t->b->num && tmp->num > tmp->u->num && ++i)
 			tmp = tmp->d;
 		n = i;
 		if (i <= t->a_count / 2)
@@ -62,7 +63,7 @@ int		adjust_a(t_stack *t)
 	}
 	return (0);
 }
-
+/*
 int		adjust_b(t_stack *t)
 {
 	int		n;
@@ -89,7 +90,7 @@ int		adjust_b(t_stack *t)
 	}
 	return (0);
 }
-
+*/
 void	merge_a(t_stack *t, int a_sorted, int b_sorted)
 {
 	int		n;
@@ -99,9 +100,17 @@ void	merge_a(t_stack *t, int a_sorted, int b_sorted)
 	n = 0;
 	while (b_sorted--)
 	{
-		if (t->a->num > t->b->num && (n == 0 || t->a->u->num < t->b->num))
-			exec(t, "pa");
-
+		while (t->a->num < t->b->num && n < a_sorted)
+		{
+			++n;
+			exec(t, "ra");
+		}
+		while (t->a->u->num > t->b->num && n > 0)
+		{
+			--n;
+			exec(t, "rra");
+		}
+		exec(t, "pa");
 	}
 	while (n++ < sum)
 		exec(t, "ra");
@@ -116,7 +125,16 @@ void	merge_b(t_stack *t, int a_sorted, int b_sorted)
 	n = 0;
 	while (a_sorted--)
 	{
-		n += adjust_b(t);
+		while (t->b->num > t->a->num && n < b_sorted)
+		{
+			++n;
+			exec(t, "rb");
+		}
+		while (t->b->u->num < t->a->num && n > 0)
+		{
+			--n;
+			exec(t, "rrb");
+		}
 		exec(t, "pb");
 	}
 	while (n++ < sum)
@@ -161,6 +179,7 @@ void	merge_sort(t_stack *t)
 	while (!rsorted(t->a, 0))
 		merge(t);
 	final_merge(t);
+	//show_stacks(t);
 	//if (!sorted(t->a))
 	//	rsort(t);
 }

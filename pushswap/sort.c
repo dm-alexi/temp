@@ -42,7 +42,7 @@ void roll_b(t_stack *t, int steps)
 			while (steps--)
 				exec(t, "rrb");
 		else
-			while (steps++ < t->a_count)
+			while (steps++ < t->b_count)
 				exec(t, "rb");
 	}
 }

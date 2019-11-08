@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include "libft/libft.h"
@@ -26,21 +24,21 @@ void	show_stacks(t_stack *t)
 {
 	if (t->a)
 	{
-		printf("%d\n", t->a->num);
+		ft_printf("%d\n", t->a->num);
 		for (t_node *tmp = t->a->d; tmp != t->a; tmp = tmp->d)
-			printf("%d\n", tmp->num);
+			ft_printf("%d\n", tmp->num);
 	}
 	else
-		printf("Stack A empty\n");
-	printf("-----\n");
+		ft_printf("Stack A empty\n");
+	ft_printf("-----\n");
 	if (t->b)
 	{
-		printf("%d\n", t->b->num);
+		ft_printf("%d\n", t->b->num);
 		for (t_node *tmp = t->b->d; tmp != t->b; tmp = tmp->d)
-			printf("%d\n", tmp->num);
+			ft_printf("%d\n", tmp->num);
 	}
 	else
-		printf("Stack B empty\n");
+		ft_printf("Stack B empty\n");
 }
 
 int 	main(int ac, char **av)
@@ -56,7 +54,7 @@ int 	main(int ac, char **av)
 		t.a = get_args(n, av + ac - n, &n);
 		t.a_count = n;
 		show_stacks(&t);
-		printf("--------\n");
+		ft_printf("--------\n");
         if ((fd = (flags.filename ? open(flags.filename, O_WRONLY | O_CREAT) : 1)) < 0)
 			file_error(flags.filename);
 		sort(&t);

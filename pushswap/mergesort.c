@@ -65,16 +65,27 @@ void	merge_a(t_stack *t, int a_sorted, int b_sorted)
 	int		n;
 	int		i;
 	int		sum;
+	t_node	*tmp;
 
 	sum = a_sorted + b_sorted;
 	n = 0;
 	while (b_sorted--)
 	{
 		i = 0;
-		while (t->a->num < t->b->num && n < a_sorted && ++n)
+		tmp = t->a;
+		while (tmp->num < t->b->num && n < a_sorted)
+		{
 			++i;
-		while (t->a->u->num > t->b->num && n > 0 && --n)
-			--i;
+			++n;
+			tmp = tmp->d;
+		}
+		if (!i)
+			while (tmp->u->num > t->b->num && n > 0)
+			{
+				--i;
+				--n;
+				tmp = tmp->u;
+			}
 		roll_a(t, i);
 		exec(t, "pa");
 	}
@@ -86,16 +97,27 @@ void	merge_b(t_stack *t, int a_sorted, int b_sorted)
 	int		n;
 	int		i;
 	int		sum;
+	t_node	*tmp;
 
 	sum = a_sorted + b_sorted;
 	n = 0;
 	while (a_sorted--)
 	{
 		i = 0;
-		while (t->b->num > t->a->num && n < b_sorted && ++n)
+		tmp = t->b;
+		while (tmp->num > t->a->num && n < b_sorted)
+		{
 			++i;
-		while (t->b->u->num < t->a->num && n > 0 && --n)
+			++n;
+			tmp = tmp->d;
+		}
+		if (!i)
+		while (tmp->u->num < t->a->num && n > 0)
+		{
 			--i;
+			--n;
+			tmp = tmp->u;
+		}
 		roll_b(t, i);
 		exec(t, "pb");
 	}

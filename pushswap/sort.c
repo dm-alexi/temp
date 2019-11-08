@@ -18,7 +18,7 @@ void rsort(t_stack *t)
 			exec(t, "rra");
 }
 
-static void	sort_3(t_stack *t)
+void	sort_3(t_stack *t)
 {
 	if (t->a->num < t->a->d->num && t->a->num < t->a->d->d->num)
 	{

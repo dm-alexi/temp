@@ -42,6 +42,7 @@ int				sorted(t_node *a);
 int				rsorted(t_node *a, int rev);
 void rsort(t_stack *t);
 void	sort(t_stack *t);
+void	sort_3(t_stack *t);
 void merge_sort(t_stack *t);
 void			print_list(int fd, t_list *t);
 void			add_prev(t_list **last, char *s, size_t t);

@@ -3,6 +3,11 @@
 
 void	sort3top(t_stack *t)
 {
+    if (t->a_count == 3)
+    {
+    	sort_3(t);
+    	return ;
+    }
     if (t->a->num > t->a->d->num && t->a->num > t->a->d->d->num)
 		exec(t, "sa");
 	if (t->a->num > t->a->d->num)
@@ -36,32 +41,28 @@ void	initial_split(t_stack *t)
 	show_stacks(t);
 }
 
-int		adjust_a(t_stack *t)
+void	adjust_a(t_stack *t)
 {
-	int		n;
 	int		i;
 	t_node	*tmp;
 
 	if (t->a_count && t->b_count)
 	{
-		n = 0;
 		i = 0;
 		tmp = t->a;
-		//while (!(tmp->num > t->b->num && (tmp->u->num < t->b->num || tmp->u->num > tmp->num)) && ++i)
-		while (tmp->num < t->b->num && tmp->u->num < t->b->num && tmp->num > tmp->u->num && ++i)
-			tmp = tmp->d;
-		n = i;
-		if (i <= t->a_count / 2)
+		while (!(tmp->num > t->b->num && tmp->u->num < t->b->num) && ++i)
 		{
+			tmp = tmp->d;
+			if (tmp->num < tmp->u->num && (t->b->num > tmp->u->num || t->b->num < tmp->num))
+				break ;
+		}
+		if (i <= t->a_count / 2)
 			while (i--)
 				exec(t, "ra");
-			return (n);
-		}
-		while (i++ < t->a_count)
-			exec(t, "rra");
-		return (n - t->a_count);
+		else
+			while (i++ < t->a_count)
+				exec(t, "rra");
 	}
-	return (0);
 }
 /*
 int		adjust_b(t_stack *t)
@@ -180,6 +181,6 @@ void	merge_sort(t_stack *t)
 		merge(t);
 	final_merge(t);
 	//show_stacks(t);
-	//if (!sorted(t->a))
-	//	rsort(t);
+	if (!sorted(t->a))
+		rsort(t);
 }

@@ -4,8 +4,8 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 LIBFT = libft/libft.a
 HEAD = pushswap.h
-SRC = check.c error.c input.c list_op.c stack_op.c
-OBJ = $(SRC1:.c=.o)
+SRC = check.c error.c input.c output.c list_op.c stack_op.c sort.c mergesort.c
+OBJ = $(SRC:.c=.o)
 
 all: $(CHECKER) $(PUSHSWAP)
 
@@ -21,7 +21,7 @@ $(PUSHSWAP): $(OBJ) pushswap.o
 	$(CC) $(FLAGS) -o $@ -c $<
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJ) checker.o pushswap.o
 	make clean -C ./libft/
 
 fclean: clean

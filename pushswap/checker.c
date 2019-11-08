@@ -2,36 +2,28 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include "libft/libft.h"
 #include "pushswap.h"
-
-void	show_stack(t_node *a)
-{
-	printf("%d\n", a->num);
-	for (t_node *t = a->d; t != a; t = t->d)
-		printf("%d\n", t->num);
-}
 
 int 	main(int ac, char **av)
 {
 	int			n;
 	int			fd;
 	t_flags		flags;
-	t_node		*a;
-	t_node		*b;
+	t_stack		t;
 
 	if (ac > 1 && (n = get_flags(ac, av, &flags)) > 0)
 	{
-		a = get_args(n, av + ac - n, &n);
-		show_stack(a);
+		ft_bzero(&t, sizeof(t));
+		t.a = get_args(n, av + ac - n, &n);
+		t.a_count = n;
+		show_stacks(&t);
         if ((fd = (flags.filename ? open(flags.filename, O_RDONLY) : 0)) < 0)
 			file_error(flags.filename);
-		b = NULL;
-		while ((n = get_com(fd, &a, &b)))
+		while ((n = get_com(fd, &t)))
 			;
-        write(1, sorted(a) && !b ? "OK\n" : "KO\n", 3);
-        show_stack(a);
-        clear_lists(a, b);
+        write(1, sorted(t.a) && !t.b_count ? "OK\n" : "KO\n", 3);
+        show_stacks(&t);
+        clear_stacks(&t);
 	}
     return 0;
 }

@@ -44,6 +44,8 @@ void rsort(t_stack *t);
 void	sort(t_stack *t);
 void	sort_3(t_stack *t);
 void merge_sort(t_stack *t);
+void roll_a(t_stack *t, int steps);
+void roll_b(t_stack *t, int steps);
 void			print_list(int fd, t_list *t);
 void			add_prev(t_list **last, char *s, size_t t);
 void	exec(t_stack *t, char *s);

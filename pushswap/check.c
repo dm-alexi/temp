@@ -22,6 +22,8 @@ int		rsorted(t_node *a, int rev)
 	t_node	*t;
 	int		count;
 
+	if (a->d == a || a->d->d == a)
+		return (1);
 	count = 0;
 	if (a && (t = a->d))
 		while (t != a)

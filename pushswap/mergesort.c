@@ -56,90 +56,50 @@ void	adjust_a(t_stack *t)
 			if (tmp->num < tmp->u->num && (t->b->num > tmp->u->num || t->b->num < tmp->num))
 				break ;
 		}
-		if (i <= t->a_count / 2)
-			while (i--)
-				exec(t, "ra");
-		else
-			while (i++ < t->a_count)
-				exec(t, "rra");
+		roll_a(t, i);
 	}
 }
-/*
-int		adjust_b(t_stack *t)
-{
-	int		n;
-	int		i;
-	t_node	*tmp;
 
-	if (t->a_count && t->b_count)
-	{
-		n = 0;
-		i = 0;
-		tmp = t->b;
-		while (!(tmp->num > t->a->num && tmp->u->num < t->a->num) && ++i)
-			tmp = tmp->d;
-		n = i;
-		if (i <= t->b_count / 2)
-		{
-			while (i--)
-				exec(t, "rb");
-			return (n);
-		}
-		while (i++ < t->b_count)
-			exec(t, "rrb");
-		return (n - t->b_count);
-	}
-	return (0);
-}
-*/
 void	merge_a(t_stack *t, int a_sorted, int b_sorted)
 {
 	int		n;
+	int		i;
 	int		sum;
 
 	sum = a_sorted + b_sorted;
 	n = 0;
 	while (b_sorted--)
 	{
-		while (t->a->num < t->b->num && n < a_sorted)
-		{
-			++n;
-			exec(t, "ra");
-		}
-		while (t->a->u->num > t->b->num && n > 0)
-		{
-			--n;
-			exec(t, "rra");
-		}
+		i = 0;
+		while (t->a->num < t->b->num && n < a_sorted && ++n)
+			++i;
+		while (t->a->u->num > t->b->num && n > 0 && --n)
+			--i;
+		roll_a(t, i);
 		exec(t, "pa");
 	}
-	while (n++ < sum)
-		exec(t, "ra");
+	roll_a(t, sum - n);
 }
 
 void	merge_b(t_stack *t, int a_sorted, int b_sorted)
 {
 	int		n;
+	int		i;
 	int		sum;
 
 	sum = a_sorted + b_sorted;
 	n = 0;
 	while (a_sorted--)
 	{
-		while (t->b->num > t->a->num && n < b_sorted)
-		{
-			++n;
-			exec(t, "rb");
-		}
-		while (t->b->u->num < t->a->num && n > 0)
-		{
-			--n;
-			exec(t, "rrb");
-		}
+		i = 0;
+		while (t->b->num > t->a->num && n < b_sorted && ++n)
+			++i;
+		while (t->b->u->num < t->a->num && n > 0 && --n)
+			--i;
+		roll_b(t, i);
 		exec(t, "pb");
 	}
-	while (n++ < sum)
-		exec(t, "rb");
+	roll_b(t, sum - n);
 }
 
 void	merge(t_stack *t)
@@ -177,10 +137,11 @@ void	final_merge(t_stack *t)
 void	merge_sort(t_stack *t)
 {
 	initial_split(t);
-	while (!rsorted(t->a, 0))
+	while (!rsorted(t->a, 0) && t->a_count > 3)
 		merge(t);
+	if (!rsorted(t->a, 0))
+		sort_3(t);
 	final_merge(t);
-	//show_stacks(t);
 	if (!sorted(t->a))
 		rsort(t);
 }

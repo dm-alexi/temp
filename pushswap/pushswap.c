@@ -19,13 +19,13 @@ int 	main(int ac, char **av)
 		ft_printf("--------\n");
         if ((fd = (flags.filename ? open(flags.filename, O_WRONLY | O_CREAT) : 1)) < 0)
 			file_error(flags.filename);
-		/*sort(&t);
+		sort(&t);
 		print_log(&t);
 		reduce(t.start);
 		print_log(&t);
 		show_stacks(&t);
-        clear_stacks(&t);*/
-		long_up(t.a, t.a_count);
+        clear_stacks(&t);
+		//long_up(t.a, t.a_count);
 	}
     return 0;
 }

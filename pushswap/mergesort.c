@@ -1,6 +1,22 @@
 #include "pushswap.h"
 #include "libft/libft.h"
 
+int		count_sorted(t_node *t, int rev)
+{
+	int		i;
+	t_node	*tmp;
+
+	tmp = t;
+	i = 1;
+	if (rev)
+		while (tmp->num > tmp->d->num && ++i)
+			tmp = tmp->d;
+	else
+		while (tmp->num < tmp->d->num && ++i)
+			tmp = tmp->d;
+	return (i);
+}
+
 void	sort3top(t_stack *t)
 {
 	if (t->a->num > t->a->d->num)
@@ -18,14 +34,25 @@ void	initial_split(t_stack *t)
 {
     while (t->a_count - t->b_count >= 4)
 	{
-		exec(t, "pb");
-		exec(t, "pb");
-        if (t->a->num > t->a->d->num)
-			exec(t, "sa");
-		if (t->b->num > t->b->d->num)
-			exec(t, "sb");
-		exec(t, "ra");
-		exec(t, "ra");
+		int a_sorted = count_sorted(t->a, 0);
+		int b_sorted = count_sorted(t->a, 1);
+		if (a_sorted > 2 && a_sorted >= b_sorted)
+			while (a_sorted--)
+				exec(t, "ra");
+		else if (b_sorted > 2 && b_sorted > a_sorted)
+			while (b_sorted--)
+				exec(t, "pb");
+		else
+		{
+			exec(t, "pb");
+			exec(t, "pb");
+			/*if (t->a->num > t->a->d->num)
+				exec(t, "sa");*/
+			if (t->b->num > t->b->d->num)
+				exec(t, "sb");
+		/*	exec(t, "ra");
+			exec(t, "ra");*/
+		}
 	}
 	if (t->a_count - t->b_count == 1 || t->a_count - t->b_count == 3)
 		sort3top(t);

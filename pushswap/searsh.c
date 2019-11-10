@@ -3,28 +3,31 @@
 //longest up
 int		*long_up(t_node *t, int n)
 {
-	t_node	*tmp;
-	int		*p;
-	int		*m;
-	int		*s;
-	int		l;
-
-	if (!(p = (int*)malloc(sizeof(int) * n)) ||
-	!(s = (int*)malloc(sizeof(int) * n)) ||
-	!(m = (int*)malloc(sizeof(int) * (n + 1))))
+	int		*arr;
+	int		i;
+	
+	if (!(arr = (int*)malloc(sizeof(int) * n)))
 		mem_error();
-	l = 0;
+	i = 0;
+	while (i < n)
+	{
+		arr[i++] = t->num;
+		t = t->d;
+	}
+
+}
+
+int		maxlen(int *uns, int *s, int n, int *res)
+{
+	int len = 0;;
+	int *res = (int*)malloc(sizeof(int) * n);
+	
 	for (int i = 0; i < n; ++i)
 	{
-		int lo = 1;
-		int hi = l;
-		while (lo < hi)
-		{
-			int mid = (lo + hi + 1) / 2;
-			if ()
-		}
+		for
 	}
 }
+
 
 /*
 P = array of length N

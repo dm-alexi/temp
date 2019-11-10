@@ -4,7 +4,7 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 LIBFT = libft/libft.a
 HEAD = pushswap.h
-SRC = check.c error.c input.c output.c list_op.c stack_op.c sort.c mergesort.c reduce.c quicksort.c
+SRC = check.c error.c input.c output.c list_op.c stack_op.c sort.c mergesort.c reduce.c quicksort.c isort.c search.c
 OBJ = $(SRC:.c=.o)
 
 all: $(CHECKER) $(PUSHSWAP)

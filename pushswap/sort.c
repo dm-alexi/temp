@@ -84,7 +84,7 @@ void	sort(t_stack *t)
     else if (t->a_count == 3)
 		sort_3(t);
 	else
-		//merge_sort(t);
-		quicksort_a(t, t->a_count);
+		merge_sort(t);
+		//quicksort_a(t, t->a_count);
 }
 

@@ -1,5 +1,18 @@
 #include "pushswap.h"
 
+void	sort3top_b(t_stack *t)
+{
+	if (t->b->num > t->b->d->num)
+		exec(t, "sb");
+	if (t->b->num < t->b->d->num && t->b->d->num < t->b->d->d->num)
+		return ;
+	exec(t, "rb");
+	exec(t, "sb");
+	exec(t, "rrb");
+	if (t->b->num > t->b->d->num)
+		exec(t, "sb");
+}
+
 void	isort_a(t_stack *t, int n)
 {
 	int 	i;

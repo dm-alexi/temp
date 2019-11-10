@@ -47,6 +47,8 @@ void	sort_3(t_stack *t);
 void	sort3top(t_stack *t);
 void	sort3top_b(t_stack *t);
 void merge_sort(t_stack *t);
+void	merge_a(t_stack *t, int a_sorted, int b_sorted);
+void	merge_b(t_stack *t, int a_sorted, int b_sorted);
 void roll_a(t_stack *t, int steps);
 void roll_b(t_stack *t, int steps);
 void			print_list(int fd, t_list *t);
@@ -61,4 +63,6 @@ void	isort_a(t_stack *t, int n);
 void	isort_b(t_stack *t, int n);
 void	quicksort_a(t_stack *t, int n);
 void	quicksort_b(t_stack *t, int n);
+
+int		*long_up(t_node *t, int n);
 #endif

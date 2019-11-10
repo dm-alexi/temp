@@ -28,8 +28,8 @@ int get_median(t_node *t, int n)
 	free(arr);
 	return (i);
 }
-
+/*
 void	quicksort(t_stack *t)
 {
 	
-}
+}*/

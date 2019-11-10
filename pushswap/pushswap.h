@@ -54,4 +54,6 @@ void	show_stacks(t_stack *t);
 void	print_log(t_stack *t);
 
 void	reduce(t_list *t);
+void	isort_a(t_stack *t, int n);
+void	isort_b(t_stack *t, int n);
 #endif

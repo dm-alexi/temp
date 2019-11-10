@@ -8,8 +8,6 @@ void	sort3top(t_stack *t)
     	sort_3(t);
     	return ;
     }
-    if (t->a->num > t->a->d->num && t->a->num > t->a->d->d->num)
-		exec(t, "sa");
 	if (t->a->num > t->a->d->num)
 		exec(t, "sa");
 	if (t->a->num < t->a->d->num && t->a->d->num < t->a->d->d->num)

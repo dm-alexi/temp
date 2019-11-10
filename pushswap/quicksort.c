@@ -31,5 +31,5 @@ int get_median(t_node *t, int n)
 
 void	quicksort(t_stack *t)
 {
-
+	
 }

@@ -164,9 +164,6 @@ void	final_merge(t_stack *t)
 
 void	merge_sort(t_stack *t)
 {
-	int		size;
-	
-	size = 2;
 	initial_split(t);
 	while (!rsorted(t->a, 0) && t->a_count > 3)
 		merge(t);

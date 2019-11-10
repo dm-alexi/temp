@@ -51,4 +51,5 @@ void			add_prev(t_list **last, char *s, size_t t);
 void	exec(t_stack *t, char *s);
 
 void	show_stacks(t_stack *t);
+void	print_log(t_stack *t);
 #endif

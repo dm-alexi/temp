@@ -3,23 +3,6 @@
 #include "libft/libft.h"
 #include "pushswap.h"
 
-void	print_log(t_stack *t)
-{
-	t_list	*lst;
-	int		n;
-
-	n = 0;
-	lst = t->start;
-	if (!lst)
-		ft_printf("No list!");
-	while (lst && ++n)
-	{
-		ft_printf("%s ", lst->content);
-		lst = lst->next;
-	}
-	ft_printf("\nCom len = %d\n", n);
-}
-
 int 	main(int ac, char **av)
 {
 	int			n;

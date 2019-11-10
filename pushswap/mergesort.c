@@ -152,6 +152,7 @@ void	merge(t_stack *t)
 	ft_printf("-------\n");
 }
 
+
 void	final_merge(t_stack *t)
 {
 	while (t->b_count)
@@ -163,11 +164,15 @@ void	final_merge(t_stack *t)
 
 void	merge_sort(t_stack *t)
 {
+	int		size;
+	
+	size = 2;
 	initial_split(t);
 	while (!rsorted(t->a, 0) && t->a_count > 3)
 		merge(t);
 	if (!rsorted(t->a, 0))
 		sort_3(t);
+	print_log(t);
 	final_merge(t);
 	if (!sorted(t->a))
 		rsort(t);

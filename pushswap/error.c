@@ -29,3 +29,9 @@ void	flag_error(char c)
 	write(2, s, 18);
 	exit(1);
 }
+
+void	mem_error(void)
+{
+	write(2, "Error: memory allocation failed.\n", 33);
+	exit(1);
+}

@@ -3,11 +3,11 @@
 
 void	sort3top(t_stack *t)
 {
-    if (t->a_count == 3)
+    /*if (t->a_count == 3)
     {
     	sort_3(t);
     	return ;
-    }
+    }*/
 	if (t->a->num > t->a->d->num)
 		exec(t, "sa");
 	if (t->a->num < t->a->d->num && t->a->d->num < t->a->d->d->num)

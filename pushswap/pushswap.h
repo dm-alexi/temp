@@ -52,4 +52,6 @@ void	exec(t_stack *t, char *s);
 
 void	show_stacks(t_stack *t);
 void	print_log(t_stack *t);
+
+void	reduce(t_list *t);
 #endif

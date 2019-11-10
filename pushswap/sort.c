@@ -56,13 +56,6 @@ void rsort(t_stack *t)
     i = 0;
     while (++i && tmp->num > tmp->u->num)
 		tmp = tmp->d;
-		/*
-	if (i <= t->a_count / 2)
-		while (i--)
-			exec(t, "ra");
-	else
-		while (i++ < t->a_count)
-			exec(t, "rra");*/
 	roll_a(t, i);
 }
 

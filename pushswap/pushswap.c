@@ -24,7 +24,6 @@ int 	main(int ac, char **av)
 		print_log(&t);
 		show_stacks(&t);
         clear_stacks(&t);
-		//long_up(t.a, t.a_count);
 	}
     return 0;
 }

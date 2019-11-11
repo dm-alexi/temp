@@ -144,6 +144,8 @@ void	reduce(t_list *t)
 {
 	t_list	*tmp;
 
+	if (!t)
+		return ;
 	tmp = t;
 	while (tmp->next)
 	{

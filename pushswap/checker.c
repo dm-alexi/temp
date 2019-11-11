@@ -5,13 +5,6 @@
 #include "libft/libft.h"
 #include "pushswap.h"
 
-void	show_stack(t_node *a)
-{
-	printf("%d\n", a->num);
-	for (t_node *t = a->d; t != a; t = t->d)
-		printf("%d\n", t->num);
-}
-
 int 	main(int ac, char **av)
 {
 	int			n;
@@ -27,10 +20,10 @@ int 	main(int ac, char **av)
         if ((fd = (flags.filename ? open(flags.filename, O_RDONLY) : 0)) < 0)
 			file_error(flags.filename);
 		b = NULL;
-		while ((n = get_com(fd, &a, &b)))
+		while ((n = get_com(fd, &t)))
 			;
         write(1, sorted(a) && !b ? "OK\n" : "KO\n", 3);
-        show_stack(a);
+        show_stacks(a);
         clear_lists(a, b);
 	}
     return 0;

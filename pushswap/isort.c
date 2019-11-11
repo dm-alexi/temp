@@ -12,7 +12,7 @@ void	sort3top_b(t_stack *t)
 	if (t->b->num > t->b->d->num)
 		exec(t, "sb");
 }
-
+/*
 void	isort_a(t_stack *t, int n)
 {
 	int		*arr;
@@ -29,7 +29,7 @@ void	isort_a(t_stack *t, int n)
 	}
 
 }
-
+*/
 /*
 void	isort_a(t_stack *t, int n)
 {

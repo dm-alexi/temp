@@ -10,6 +10,83 @@ int compar(const void *a, const void *b)
 	return (*x - *y);
 }
 
+void	sort3top_brev(t_stack *t)
+{
+	if (t->b->num < t->b->d->num)
+		exec(t, "sb");
+	if (t->b->num > t->b->d->num && t->b->d->num > t->b->d->d->num)
+		return ;
+	exec(t, "rb");
+	exec(t, "sb");
+	exec(t, "rrb");
+	if (t->b->num < t->b->d->num)
+		exec(t, "sb");
+}
+
+void 	qmerge_a(t_stack *t, int ac, int bc)
+{
+	int		n;
+	int		i;
+	t_node	*tmp;
+	int c = 0;
+
+	n = 0;
+	while (c < bc)
+	{
+		i = 0;
+		tmp = t->a;
+		while (tmp->num < t->b->num && n < ac + c)
+		{
+			++i;
+			++n;
+			tmp = tmp->d;
+		}
+		if (!i)
+			while (tmp->u->num > t->b->num && n > 0)
+			{
+				--i;
+				--n;
+				tmp = tmp->u;
+			}
+		roll_a(t, i);
+		exec(t, "pa");
+		++c;
+	}
+	roll_a(t, -n);
+}
+
+void 	qmerge_b(t_stack *t, int ac, int bc)
+{
+	int		n;
+	int		i;
+	t_node	*tmp;
+	int c = 0;
+
+	n = 0;
+	while (c < ac)
+	{
+		i = 0;
+		tmp = t->b;
+		while (tmp->num > t->a->num && n < bc + c)
+		{
+			++i;
+			++n;
+			tmp = tmp->d;
+		}
+		if (!i)
+			while (tmp->u->num < t->a->num && n > 0)
+			{
+				--i;
+				--n;
+				tmp = tmp->u;
+			}
+		roll_b(t, i);
+		exec(t, "pb");
+		++c;
+	}
+	roll_b(t, -n);
+}
+
 void sort_a_min(t_stack *t, int n)
 {
 	int		i = 0;
@@ -27,9 +104,28 @@ void sort_a_min(t_stack *t, int n)
 		}
 		if (n - i == 3)
 			sort3top(t);
-		merge_a(t, n - i, i);
-		while (t->a->num > t->a->u->num)
-			exec(t, "rra");
+		qmerge_a(t, n - i, i);
+	}
+}
+
+void sort_b_min(t_stack *t, int n)
+{
+	int		i = 0;
+
+	if (n == 2 && t->b->num < t->b->d->num)
+		exec(t, "sb");
+	else if (n == 3)
+		sort3top_brev(t);
+	else
+	{
+		while (count_sorted(t->b, 0) < n - i && n - i > 3)
+		{
+			exec(t, "pa");
+			++i;
+		}
+		if (n - i == 3)
+			sort3top_brev(t);
+		qmerge_b(t, i, n - i);
 	}
 }
 
@@ -64,9 +160,9 @@ void	quicksort_a(t_stack *t, int n)
 		exec(t, "sa");
 	else if (n == 3)
 		sort3top(t);
-	/*else if (n < 7)
-		sort_a_min(t, n);*/
-	else if (n >= 4)
+	else if (n < 16)
+		sort_a_min(t, n);
+	else if (n >= 16)
 	{
 		m = get_median(t->a, n);
 		i = 0;
@@ -83,19 +179,6 @@ void	quicksort_a(t_stack *t, int n)
 	}
 }
 
-void	sort3top_brev(t_stack *t)
-{
-	if (t->b->num < t->b->d->num)
-		exec(t, "sb");
-	if (t->b->num > t->b->d->num && t->b->d->num > t->b->d->d->num)
-		return ;
-	exec(t, "rb");
-	exec(t, "sb");
-	exec(t, "rrb");
-	if (t->b->num < t->b->d->num)
-		exec(t, "sb");
-}
-
 void	quicksort_b(t_stack *t, int n)
 {
 	int		m;
@@ -107,7 +190,9 @@ void	quicksort_b(t_stack *t, int n)
 		exec(t, "sb");
 	else if (n == 3)
 		sort3top_brev(t);
-	else if (n > 3)
+	/*else if (n < 16)
+		sort_b_min(t, n);*/
+	else if (n >= 7)
 	{
 		m = get_median(t->b, n);
 		i = 0;

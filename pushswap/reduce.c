@@ -172,4 +172,13 @@ void	reduce(t_list *t)
 	}
 	while (contract(t));
 	while (remove_dups(t));
+	tmp = t;
+	while (tmp->next)
+	{
+		remove_redundant_a(tmp->next, tmp);
+		if (tmp->next)
+			remove_redundant_b(tmp->next, tmp);
+		tmp = tmp->next;
+	}
+	while (contract(t));
 }

@@ -150,8 +150,8 @@ int get_median(t_node *t, int n)
 		t = t->d;
 	}
 	ft_qsort(arr, n, sizeof(int), compar);
-	i = arr[n / 2 - 1];
-	//ft_printf("median %d %d %d\n", arr[0], i, arr[n - 1]);
+	i = arr[n / 2];
+	ft_printf("median %d\n", i);
 	free(arr);
 	return (i);
 }
@@ -161,28 +161,31 @@ void	quicksort_a(t_stack *t, int n)
 	int		m;
 	int		i;
 
-	if (count_sorted(t->a, 0) >= n)
-		return ;
-	if (n == 2 && t->a->num > t->a->d->num)
-		exec(t, "sa");
-	else if (n == 3)
-		sort3top(t);
+	if (n <= 2)
+	{
+		if (n == 2 && t->a->num > t->a->d->num)
+			exec(t, "sa");
+		//while (n--)
+		//	exec(t, "pa");
+	}
+	//else if (n == 3)
+		//sort3top(t);
 	/*else if (n < 16)
 		sort_a_min(t, n);*/
-	else if (n >= 4)
+	else if (n > 2)
 	{
 		m = get_median(t->a, n);
 		i = 0;
 		while (i++ < n)
-			exec(t, t->a->num <= m ? "pb" : "ra");
-		i = (n + 1) / 2;
+			exec(t, t->a->num < m ? "pb" : "ra");
+		i = n / 2 + n % 2;
 		while (i--)
 			exec(t, "rra");
-		quicksort_a(t, (n + 1) / 2);
-		quicksort_b(t, n - (n + 1) / 2);
+		quicksort_a(t, n / 2 + n % 2);
+		quicksort_b(t, n / 2);
 		i = n / 2;
-		while (i--)
-			exec(t, "pa");
+		//while (i--)
+		//	exec(t, "pa");
 	}
 }
 
@@ -191,27 +194,30 @@ void	quicksort_b(t_stack *t, int n)
 	int		m;
 	int		i;
 
-	if (count_sorted(t->b, 1) >= n)
-		return ;
-	if (n == 2 && t->b->num < t->b->d->num)
-		exec(t, "sb");
-	else if (n == 3)
-		sort3top_brev(t);
+	if (n <= 2)
+	{
+		if (n == 2 && t->b->num < t->b->d->num)
+			exec(t, "sb");
+		while (n--)
+			exec(t, "pa");
+	}
+	//else if (n == 3)
+	//	sort3top_brev(t);
 	/*else if (n < 16)
 		sort_b_min(t, n);*/
-	else if (n >= 4)
+	else if (n > 2)
 	{
 		m = get_median(t->b, n);
 		i = 0;
 		while (i++ < n)
-			exec(t, t->b->num > m ? "pa" : "rb");
+			exec(t, t->b->num >= m ? "pa" : "rb");
 		i = n / 2;
 		while (i--)
 			exec(t, "rrb");
-		quicksort_b(t, (n / 2));
-		quicksort_a(t, (n + 1) / 2);
-		i = (n + 1) / 2;
-		while (i--)
-			exec(t, "pb");
+		quicksort_a(t, n / 2 + n % 2);
+		quicksort_b(t, n / 2);
+		i = n / 2 + n % 2;
+		//while (i--)
+		//	exec(t, "pb");
 	}
 }

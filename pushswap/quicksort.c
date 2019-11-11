@@ -25,7 +25,7 @@ int get_median(t_node *t, int n)
 	}
 	ft_qsort(arr, n, sizeof(int), compar);
 	i = arr[n / 2 - 1];
-	free(arr);
+		free(arr);
 	ft_printf("median %d\n", i);
 	return (i);
 }
@@ -87,13 +87,13 @@ void	quicksort_b(t_stack *t, int n)
 		ft_printf("Median = %d\n", m);
 		i = 0;
 		while (i++ < n)
-			exec(t, t->b->num >= m ? "pa" : "rb");
-		i = (n + 1) / 2;
+			exec(t, t->b->num > m ? "pa" : "rb");
+		i = n / 2;
 		while (i--)
 			exec(t, "rrb");
-		quicksort_b(t, (n + 1) / 2);
-		quicksort_a(t, n - (n + 1) / 2);
-		i = n / 2;
+		quicksort_b(t, (n / 2));
+		quicksort_a(t, (n + 1) / 2);
+		i = (n + 1) / 2;
 		while (i--)
 			exec(t, "pb");
 	}

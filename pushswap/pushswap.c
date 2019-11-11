@@ -18,6 +18,7 @@ int 	main(int ac, char **av)
 		show_stacks(&t);
         if ((fd = (flags.filename ? open(flags.filename, O_WRONLY | O_CREAT) : 1)) < 0)
 			file_error(flags.filename);
+		get_median(t.a, t.a_count);
 		sort(&t);
 		print_log(&t);
 		reduce(t.start);

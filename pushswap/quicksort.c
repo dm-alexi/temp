@@ -54,8 +54,6 @@ void	quicksort_a(t_stack *t, int n)
 		while (i--)
 			exec(t, "pa");
 	}
-	if (count_sorted(t->a, 0) < n)
-		ft_printf("a failed, n = %d\n", n);
 }
 
 void	sort3top_brev(t_stack *t)
@@ -97,6 +95,4 @@ void	quicksort_b(t_stack *t, int n)
 		while (i--)
 			exec(t, "pb");
 	}
-	if (count_sorted(t->b, 1) < n)
-		ft_printf("b failed, n = %d\n", n);
 }

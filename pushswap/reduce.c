@@ -95,8 +95,11 @@ void	remove_redundant_b(t_list *t, t_list *prev)
 	}
 }
 
-void	contract(t_list *t)
+int	contract(t_list *t)
 {
+	int 	i;
+
+	i = 0;
 	while (t && t->next)
 	{
 		if ((ft_strequ(t->content, "ra") && ft_strequ(t->next->content, "rb")) || (ft_strequ(t->content, "rb") && ft_strequ(t->next->content, "ra")) ||
@@ -104,23 +107,43 @@ void	contract(t_list *t)
 		{
 			del_next(t);
 			ft_memcpy(t->content + t->content_size - 2, "r", 1);
+			i = 1;
 		}
 		else if ((ft_strequ(t->content, "sa") && ft_strequ(t->next->content, "sb")) || (ft_strequ(t->content, "sb") && ft_strequ(t->next->content, "sa")))
 		{
 			del_next(t);
 			ft_memcpy(t->content + t->content_size - 2, "s", 1);
+			i = 1;
 		}
 		t = t->next;
 	}
+	return (i);
+}
+
+int	remove_dups(t_list *t)
+{
+	t_list	*tmp;
+	int i = 0;
+
+	while (t && (tmp = t->next) && tmp->next)
+	{
+		if ((ft_strequ(tmp->content, "pa") && (ft_strequ(tmp->next->content, "pb"))) ||
+			(ft_strequ(tmp->content, "pb") && (ft_strequ(tmp->next->content, "pa"))))
+		{
+			del_next(t);
+			del_next(t);
+			i = 1;
+		}
+		else
+			t = t->next;
+	}
+	return (i);
 }
 
 void	reduce(t_list *t)
 {
 	t_list	*tmp;
-	//char	*s;
 
-	//if (!(s = (char *)malloc(count_size(t) + 1)))
-	//	a_error("Error: memory allocation failed.\n");
 	tmp = t;
 	while (tmp->next)
 	{
@@ -129,5 +152,22 @@ void	reduce(t_list *t)
 			remove_redundant_b(tmp->next, tmp);
 		tmp = tmp->next;
 	}
-	contract(t);
+	tmp = t;
+	while (tmp->next)
+	{
+		remove_redundant_a(tmp->next, tmp);
+		if (tmp->next)
+			remove_redundant_b(tmp->next, tmp);
+		tmp = tmp->next;
+	}
+	tmp = t;
+	while (tmp->next)
+	{
+		remove_redundant_a(tmp->next, tmp);
+		if (tmp->next)
+			remove_redundant_b(tmp->next, tmp);
+		tmp = tmp->next;
+	}
+	while (contract(t));
+	while (remove_dups(t));
 }

@@ -15,6 +15,24 @@ void	sort3top_b(t_stack *t)
 
 void	isort_a(t_stack *t, int n)
 {
+	int		*arr;
+	t_node	*tmp = t->a;
+	int		i;
+
+	if (!(arr = (int*)malloc(sizeof(int) * n)))
+		a_error("Error: memory allocation failed.\n");
+	i = 0;
+	while (i < n)
+	{
+		arr[i++] = tmp->num;
+		tmp = tmp->d;
+	}
+
+}
+
+/*
+void	isort_a(t_stack *t, int n)
+{
 	int 	i;
 
 	if (n == 2 && t->a->num > t->a->d->num)
@@ -55,4 +73,4 @@ void	isort_b(t_stack *t, int n)
 		isort_a(t, i);
 		merge_b(t, i, n - i);
 	}
-}
+}*/

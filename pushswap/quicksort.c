@@ -161,6 +161,8 @@ void	quicksort_a(t_stack *t, int n)
 	int		m;
 	int		i;
 
+	if (count_sorted(t->a, 0) >= n)
+		return ;
 	if (n <= 2)
 	{
 		if (n == 2 && t->a->num > t->a->d->num)
@@ -194,7 +196,10 @@ void	quicksort_b(t_stack *t, int n)
 	int		m;
 	int		i;
 
-	if (n <= 3)
+	if (count_sorted(t->b, 1) >= n)
+		while (n--)
+			exec(t, "pa");
+	else if (n <= 3)
 	{
 		if (n == 2 && t->b->num < t->b->d->num)
 			exec(t, "sb");

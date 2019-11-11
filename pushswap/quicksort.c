@@ -106,6 +106,8 @@ void sort_a_min(t_stack *t, int n)
 			sort3top(t);
 		qmerge_a(t, n - i, i);
 	}
+	if (count_sorted(t->a, 0) < n)
+		ft_printf("min A failed at %d %d\n", n, n - i);
 }
 
 void sort_b_min(t_stack *t, int n)
@@ -118,7 +120,7 @@ void sort_b_min(t_stack *t, int n)
 		sort3top_brev(t);
 	else
 	{
-		while (count_sorted(t->b, 0) < n - i && n - i > 3)
+		while (count_sorted(t->b, 1) < n - i && n - i > 3)
 		{
 			exec(t, "pa");
 			++i;
@@ -126,6 +128,11 @@ void sort_b_min(t_stack *t, int n)
 		if (n - i == 3)
 			sort3top_brev(t);
 		qmerge_b(t, i, n - i);
+	}
+	if (count_sorted(t->b, 1) < n)
+	{
+		ft_printf("min B failed at %d %d\n", n, n - i);
+		show_stacks(t);
 	}
 }
 
@@ -144,8 +151,8 @@ int get_median(t_node *t, int n)
 	}
 	ft_qsort(arr, n, sizeof(int), compar);
 	i = arr[n / 2 - 1];
-		free(arr);
-	ft_printf("median %d\n", i);
+	//ft_printf("median %d %d %d\n", arr[0], i, arr[n - 1]);
+	free(arr);
 	return (i);
 }
 
@@ -160,9 +167,9 @@ void	quicksort_a(t_stack *t, int n)
 		exec(t, "sa");
 	else if (n == 3)
 		sort3top(t);
-	else if (n < 16)
-		sort_a_min(t, n);
-	else if (n >= 16)
+	/*else if (n < 16)
+		sort_a_min(t, n);*/
+	else if (n >= 4)
 	{
 		m = get_median(t->a, n);
 		i = 0;
@@ -192,7 +199,7 @@ void	quicksort_b(t_stack *t, int n)
 		sort3top_brev(t);
 	/*else if (n < 16)
 		sort_b_min(t, n);*/
-	else if (n >= 7)
+	else if (n >= 4)
 	{
 		m = get_median(t->b, n);
 		i = 0;

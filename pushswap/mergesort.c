@@ -37,8 +37,7 @@ void	initial_split(t_stack *t)
 		int a_sorted = count_sorted(t->a, 0);
 		int b_sorted = count_sorted(t->a, 1);
 		if (a_sorted > 2 && a_sorted >= b_sorted)
-			while (a_sorted--)
-				exec(t, "ra");
+			roll_a(t, a_sorted);
 		else if (b_sorted > 2 && b_sorted > a_sorted)
 			while (b_sorted--)
 				exec(t, "pb");
@@ -66,9 +65,9 @@ void	adjust_a(t_stack *t)
 	int		i;
 	t_node	*tmp;
 
+	i = 0;
 	if (t->a_count && t->b_count)
 	{
-		i = 0;
 		tmp = t->a;
 		while (!(tmp->num > t->b->num && tmp->u->num < t->b->num) && ++i)
 		{
@@ -80,6 +79,42 @@ void	adjust_a(t_stack *t)
 	}
 }
 
+int	moves_adjust_a(t_stack *t, int k)
+{
+	int		i;
+	t_node	*tmp;
+
+	i = 0;
+	if (t->a_count && t->b_count)
+	{
+		tmp = t->a;
+		while (!(tmp->num > k && tmp->u->num < k) && ++i)
+		{
+			tmp = tmp->d;
+			if (tmp->num < tmp->u->num && (k > tmp->u->num || k < tmp->num))
+				break ;
+		}
+	}
+	return (i <= t->a_count / 2 ? i : i - t->a_count);
+}
+/*
+void	moves_adjust_b(t_stack *t)
+{
+	int		i;
+	int		m;
+	t_node	*tmp;
+
+	i = 0;
+	if (t->a_count && t->b_count)
+	{
+		for (int j = 0; j < t->b_count; ++j)
+		{
+
+		}
+	}
+	return (i);
+}
+*/
 void	merge_a(t_stack *t, int a_sorted, int b_sorted)
 {
 	int		n;
@@ -151,18 +186,11 @@ void	merge_b(t_stack *t, int a_sorted, int b_sorted)
 
 void	merge(t_stack *t)
 {
-	t_node	*tmp;
 	int		a_sorted;
 	int		b_sorted;
 
-	tmp = t->a;
-	a_sorted = 1;
-	while (tmp->num < tmp->d->num && ++a_sorted)
-		tmp = tmp->d;
-	tmp = t->b;
-	b_sorted = 1;
-	while (tmp->num < tmp->d->num && ++b_sorted)
-		tmp = tmp->d;
+	a_sorted = count_sorted(t->a, 0);
+	b_sorted = count_sorted(t->b, 0);;
 	ft_printf("sorted: %d %d\n", a_sorted, b_sorted);
 	if (t->a_count - a_sorted < t->b_count - b_sorted)
 		merge_a(t, a_sorted, b_sorted);
@@ -177,6 +205,15 @@ void	final_merge(t_stack *t)
 {
 	while (t->b_count)
 	{
+	/*	int	m = moves_adjust_a(t, t->b->num);
+		int mu = moves_adjust_a(t, t->b->u->num);
+		int md = moves_adjust_a(t, t->b->d->num);
+		if (abs(mu) + 1 < abs(md) + 1 && abs(mu) + 1 < abs(m))
+			while (abs(moves_adjust_a(t, t->b->u->num)) + 1 < abs(moves_adjust_a(t, t->b->num)))
+				exec(t, "rb");
+		else if (abs(md) + 1 < abs(mu) + 1 && abs(md) + 1 < abs(m))
+			while (abs(moves_adjust_a(t, t->b->d->num)) + 1 < abs(moves_adjust_a(t, t->b->num)))
+					exec(t, "rrb");*/
 		adjust_a(t);
 		exec(t, "pa");
 	}

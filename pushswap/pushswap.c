@@ -16,7 +16,6 @@ int 	main(int ac, char **av)
 		t.a = get_args(n, av + ac - n, &n);
 		t.a_count = n;
 		show_stacks(&t);
-		ft_printf("--------\n");
         if ((fd = (flags.filename ? open(flags.filename, O_WRONLY | O_CREAT) : 1)) < 0)
 			file_error(flags.filename);
 		sort(&t);

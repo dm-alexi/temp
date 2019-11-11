@@ -19,6 +19,7 @@ void	show_stacks(t_stack *t)
 	}
 	else
 		ft_printf("Stack B empty\n");
+	ft_printf("--------\n");
 }
 
 void	print_log(t_stack *t)

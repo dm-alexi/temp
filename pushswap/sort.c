@@ -61,7 +61,11 @@ void rsort(t_stack *t)
 
 void	sort_3(t_stack *t)
 {
-	if (t->a->num < t->a->d->num && t->a->num < t->a->d->d->num)
+	if (sorted(t->a))
+		return ;
+	else if (rsorted(t->a, 0))
+		rsort(t);
+	else if (t->a->num < t->a->d->num && t->a->num < t->a->d->d->num)
 	{
 		exec(t, "sa");
 		exec(t, "ra");
@@ -75,6 +79,17 @@ void	sort_3(t_stack *t)
 		exec(t, "sa");
 }
 
+void	sort_min(t_stack *t)
+{
+	while (!rsorted(t->a, 0) && t->a_count > 3)
+		exec(t, "pb");
+	if (!rsorted(t->a, 0))
+		sort_3(t);
+	final_merge(t);
+	if (!sorted(t->a))
+		rsort(t);
+}
+
 void	sort(t_stack *t)
 {
     if (sorted(t->a))
@@ -83,8 +98,10 @@ void	sort(t_stack *t)
 		rsort(t);
     else if (t->a_count == 3)
 		sort_3(t);
+	else if (t->a_count <= 7)
+		sort_min(t);
 	else
-		merge_sort(t);
-		//quicksort_a(t, t->a_count);
+		//merge_sort(t);
+		quicksort_a(t, t->a_count);
 }
 

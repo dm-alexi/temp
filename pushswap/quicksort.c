@@ -24,8 +24,9 @@ int get_median(t_node *t, int n)
 		t = t->d;
 	}
 	ft_qsort(arr, n, sizeof(int), compar);
-	i = arr[n / 2];
+	i = arr[n / 2 - 1];
 	free(arr);
+	ft_printf("median %d\n", i);
 	return (i);
 }
 
@@ -33,7 +34,7 @@ void	quicksort_a(t_stack *t, int n)
 {
 	int		m;
 	int		i;
-	
+
 	if (n == 2 && t->a->num > t->a->d->num)
 		exec(t, "sa");
 	else if (n == 3)
@@ -43,7 +44,7 @@ void	quicksort_a(t_stack *t, int n)
 		m = get_median(t->a, n);
 		i = 0;
 		while (i++ < n)
-			exec(t, t->a->num < m ? "pb" : "ra");
+			exec(t, t->a->num <= m ? "pb" : "ra");
 		i = (n + 1) / 2;
 		while (i--)
 			exec(t, "rra");
@@ -53,6 +54,8 @@ void	quicksort_a(t_stack *t, int n)
 		while (i--)
 			exec(t, "pa");
 	}
+	if (count_sorted(t->a, 0) < n)
+		ft_printf("a failed, n = %d\n", n);
 }
 
 void	sort3top_brev(t_stack *t)
@@ -72,7 +75,7 @@ void	quicksort_b(t_stack *t, int n)
 {
 	int		m;
 	int		i;
-	
+
 	if (n == 2 && t->b->num < t->b->d->num)
 		exec(t, "sb");
 	else if (n == 3)
@@ -94,4 +97,6 @@ void	quicksort_b(t_stack *t, int n)
 		while (i--)
 			exec(t, "pb");
 	}
+	if (count_sorted(t->b, 1) < n)
+		ft_printf("b failed, n = %d\n", n);
 }

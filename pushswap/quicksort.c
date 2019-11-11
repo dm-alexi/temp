@@ -168,11 +168,11 @@ void	quicksort_a(t_stack *t, int n)
 		//while (n--)
 		//	exec(t, "pa");
 	}
-	//else if (n == 3)
-		//sort3top(t);
-	/*else if (n < 16)
-		sort_a_min(t, n);*/
-	else if (n > 2)
+	else if (n == 3)
+		sort3top(t);
+	else if (n < 32)
+		sort_a_min(t, n);
+	else if (n > 3)
 	{
 		m = get_median(t->a, n);
 		i = 0;
@@ -194,10 +194,12 @@ void	quicksort_b(t_stack *t, int n)
 	int		m;
 	int		i;
 
-	if (n <= 2)
+	if (n <= 3)
 	{
 		if (n == 2 && t->b->num < t->b->d->num)
 			exec(t, "sb");
+		else if (n == 3)
+			sort3top_brev(t);
 		while (n--)
 			exec(t, "pa");
 	}

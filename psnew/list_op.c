@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 21:37:22 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/12 21:56:25 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/11/12 22:46:02 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,21 @@ void	clear_stacks(t_stack *t)
 	t_node	*tmp;
 
 	if ((tmp = t->a))
-		while ((tmp = tmp->d) != t->a->d)
+	{
+		while (tmp->d != t->a)
+		{
+			tmp = tmp->d;
 			free(tmp->u);
+		}
+		free(tmp);
+	}
 	if ((tmp = t->b))
-		while ((tmp = tmp->d) != t->b->d)
+	{
+		while (tmp->d != t->b)
+		{
+			tmp = tmp->d;
 			free(tmp->u);
-	//clear command list!
+		}
+		free(tmp);
+	}
 }

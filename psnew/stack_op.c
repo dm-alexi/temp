@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 21:31:18 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/12 21:49:17 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/11/12 22:48:18 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ static void		i_rot(t_stack *t, char c, int rev)
 {
 	if (c != 'a' && c != 'b' && c != 'r')
 		error();
-	if (c == 'a' || c == 'r')
+	if ((c == 'a' || c == 'r') && t->a)
 		t->a = rev ? t->a->u : t->a->d;
-	if (c == 'b' || c == 'r')
+	if ((c == 'b' || c == 'r') && t->b)
 		t->b = rev ? t->b->u : t->b->d;
 }
 

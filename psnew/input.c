@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 21:41:18 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/12 21:55:21 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/11/12 22:34:15 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ t_node			*get_args(int argnum, char **av, int *n)
 		if (!**(av + i))
 			++i;
 		if (!pushback(&a, new_node((int)num)))
-			a_error("Error: memory allocation failed.\n");
+			mem_error();
 		dup_search(a);
 	}
 	return (a);

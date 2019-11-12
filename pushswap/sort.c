@@ -102,11 +102,6 @@ void	sort(t_stack *t)
 		sort_min(t);
 	else
 		//merge_sort(t);
-		{
-			quicksort_a(t, t->a_count);
-			/*final_merge(t);
-			if (!sorted(t->a))
-				rsort(t);*/
-		}
+		quicksort_a(t, t->a_count);
 }
 

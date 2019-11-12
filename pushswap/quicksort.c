@@ -163,31 +163,35 @@ void	quicksort_a(t_stack *t, int n)
 
 	if (count_sorted(t->a, 0) >= n)
 		return ;
-	if (n <= 2)
-	{
-		if (n == 2 && t->a->num > t->a->d->num)
-			exec(t, "sa");
-		//while (n--)
-		//	exec(t, "pa");
-	}
+	if (n == 2 && t->a->num > t->a->d->num)
+		exec(t, "sa");
 	else if (n == 3)
 		sort3top(t);
-	else if (n < 32)
+	else if (n < 6)
 		sort_a_min(t, n);
 	else if (n > 3)
 	{
 		m = get_median(t->a, n);
 		i = 0;
 		while (i++ < n)
+		{
 			exec(t, t->a->num < m ? "pb" : "ra");
+			/*if (t->a->num < m)
+				exec(t, "pb");
+			else if (t->a->u->num < m)
+			{
+				exec (t, "rra");
+				exec (t, "pb");
+			}
+			else
+				exec (t, "ra");*/
+		}
 		i = n / 2 + n % 2;
 		while (i--)
 			exec(t, "rra");
 		quicksort_a(t, n / 2 + n % 2);
 		quicksort_b(t, n / 2);
 		i = n / 2;
-		//while (i--)
-		//	exec(t, "pa");
 	}
 }
 
@@ -196,6 +200,8 @@ void	quicksort_b(t_stack *t, int n)
 	int		m;
 	int		i;
 
+	while (t->b->num == t->a->num + 1 && n--)
+		exec(t, "pa");
 	if (count_sorted(t->b, 1) >= n)
 		while (n--)
 			exec(t, "pa");
@@ -208,11 +214,13 @@ void	quicksort_b(t_stack *t, int n)
 		while (n--)
 			exec(t, "pa");
 	}
-	//else if (n == 3)
-	//	sort3top_brev(t);
-	/*else if (n < 16)
-		sort_b_min(t, n);*/
-	else if (n > 2)
+	else if (n < 6)
+	{
+		sort_b_min(t, n);
+		while (n--)
+			exec(t, "pa");
+	}
+	else if (n > 3)
 	{
 		m = get_median(t->b, n);
 		i = 0;
@@ -224,7 +232,5 @@ void	quicksort_b(t_stack *t, int n)
 		quicksort_a(t, n / 2 + n % 2);
 		quicksort_b(t, n / 2);
 		i = n / 2 + n % 2;
-		//while (i--)
-		//	exec(t, "pb");
 	}
 }

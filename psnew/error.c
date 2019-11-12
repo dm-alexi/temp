@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/12 21:54:19 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/11/12 21:54:22 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include "libft/libft.h"
 
@@ -23,7 +35,7 @@ void	file_error(const char *s)
 
 void	flag_error(char c)
 {
-	char	s[] = "Incorrect flag: - \n";
+	static char	s[] = "Incorrect flag: - \n";
 
 	s[17] = c;
 	write(2, s, 18);

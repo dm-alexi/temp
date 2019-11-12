@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 21:37:22 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/12 21:37:55 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/11/12 21:56:25 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ t_node	*new_node(int n)
 
 	if (!(t = (t_node*)malloc(sizeof(t_node))))
 		return (NULL);
-    t->num = n;
-    t->u = t;
-    t->d = t;
-    return (t);
+	t->num = n;
+	t->u = t;
+	t->d = t;
+	return (t);
 }
 
 t_node	*add(t_node **cur, t_node *t)
@@ -47,7 +47,6 @@ t_node	*add(t_node **cur, t_node *t)
 t_node	*pop(t_node **cur)
 {
 	t_node	*t;
-
 
 	if (!*cur)
 		return (NULL);

@@ -6,25 +6,25 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 21:41:18 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/12 21:41:21 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/11/12 21:55:21 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
 #include "pushswap.h"
 
-int		get_flags(int ac, char **av, t_flags *flags)
+int				get_flags(int ac, char **av, t_flags *flags)
 {
-    int		i;
-    char	*s;
+	int		i;
+	char	*s;
 
-    i = 0;
-    ft_bzero(flags, sizeof(t_flags));
-    while (++i < ac && (s = av[i]))
+	i = 0;
+	ft_bzero(flags, sizeof(t_flags));
+	while (++i < ac && (s = av[i]))
 	{
 		if (*s != '-' || ft_isdigit(*++s))
 			return (ac - i);
-        while (*s && ft_strchr("cfv", *s))
+		while (*s && ft_strchr("cfv", *s))
 		{
 			if (*s == 'c')
 				flags->colored = 1;

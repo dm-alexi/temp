@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 20:47:42 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/12 21:14:18 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/11/12 21:48:49 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ void	roll(t_stack *t, int a, int b)
 
 void	rsort(t_stack *t)
 {
-    t_node	*tmp;
-    int		i;
+	t_node	*tmp;
+	int		i;
 
-    tmp = t->a->d;
-    i = 0;
-    while (++i && tmp->num > tmp->u->num)
+	tmp = t->a->d;
+	i = 0;
+	while (++i && tmp->num > tmp->u->num)
 		tmp = tmp->d;
 	if (i > t->a_count / 2)
 		i = -(t->a_count - i);
@@ -70,13 +70,12 @@ void	sort_3(t_stack *t)
 
 void	sort(t_stack *t)
 {
-    if (sorted(t->a))
+	if (sorted(t->a))
 		return ;
 	else if (rsorted(t->a, 0))
 		rsort(t);
-    else if (t->a_count == 3)
+	else if (t->a_count == 3)
 		sort_3(t);
 	else
 		mainsort(t);
 }
-

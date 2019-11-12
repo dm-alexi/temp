@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dsort.c                                            :+:      :+:    :+:   */
+/*   mainsort.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 21:12:36 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/12 21:14:16 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/11/12 21:45:28 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 static void		adjust_ab(t_stack *t, int n)
 {
 	int		i;
-    int		j;
-    int		m1;
-    int		m2;
-    t_node	*tmp;
+	int		j;
+	int		m1;
+	int		m2;
+	t_node	*tmp;
 
-    i = 0;
-    j = 0;
-    tmp = t->a;
-    while (tmp->num != n && ++i)
+	i = 0;
+	j = 0;
+	tmp = t->a;
+	while (tmp->num != n && ++i)
 		tmp = tmp->d;
 	if (t->b_count > 1 && (tmp = t->b))
 		while (!(tmp->num < n && tmp->u->num > n) &&
@@ -44,15 +44,15 @@ static void		adjust_ab(t_stack *t, int n)
 static void		adjust_ba(t_stack *t, int n)
 {
 	int		i;
-    int		j;
-    int		m1;
-    int		m2;
-    t_node	*tmp;
+	int		j;
+	int		m1;
+	int		m2;
+	t_node	*tmp;
 
-    i = 0;
-    j = 0;
-    tmp = t->b;
-    while (tmp->num != n && ++j)
+	i = 0;
+	j = 0;
+	tmp = t->b;
+	while (tmp->num != n && ++j)
 		tmp = tmp->d;
 	if (t->a_count > 1 && (tmp = t->a))
 		while (!(tmp->num > n && tmp->u->num < n) &&
@@ -72,11 +72,11 @@ static void		adjust_ba(t_stack *t, int n)
 
 void			mainsort(t_stack *t)
 {
-    while (!rsorted(t->a, 0) && t->a_count > 3)
+	while (!rsorted(t->a, 0) && t->a_count > 3)
 	{
 		adjust_ab(t, find_closest(t, 0));
 		exec(t, "pb");
-	};
+	}
 	if (!rsorted(t->a, 0))
 		sort_3(t);
 	while (t->b_count)

@@ -35,10 +35,9 @@ void	file_error(const char *s)
 
 void	flag_error(char c)
 {
-	static char	s[] = "Incorrect flag: - \n";
-
-	s[17] = c;
-	write(2, s, 18);
+	write(2, "Incorrect flag: -", 17);
+	write(2, &c, 1);
+	write(2, "\n", 1);
 	exit(1);
 }
 

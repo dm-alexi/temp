@@ -17,6 +17,7 @@ void	del_next(t_list *t)
 {
 	t_list	*tmp;
 
+	//ft_printf("%s\n", t->next->content);
 	if (t && (tmp = t->next))
 	{
 		t->next = tmp->next;

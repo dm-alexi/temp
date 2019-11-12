@@ -1,7 +1,40 @@
-#include "libft/libft.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/12 20:47:42 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/11/12 21:14:18 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pushswap.h"
 
-void rsort(t_stack *t)
+void	roll(t_stack *t, int a, int b)
+{
+	if (a > 0 && b > 0)
+		while (a && b && a-- && b--)
+			exec(t, "rr");
+	else if (a < 0 && b < 0)
+		while (a && b && a++ && b++)
+			exec(t, "rrr");
+	if (a > 0)
+		while (a--)
+			exec(t, "ra");
+	else
+		while (a++)
+			exec(t, "rra");
+	if (b > 0)
+		while (b--)
+			exec(t, "rb");
+	else
+		while (b++)
+			exec(t, "rrb");
+}
+
+void	rsort(t_stack *t)
 {
     t_node	*tmp;
     int		i;
@@ -34,17 +67,6 @@ void	sort_3(t_stack *t)
 	else
 		exec(t, "sa");
 }
-/*
-void	sort_min(t_stack *t)
-{
-	while (!rsorted(t->a, 0) && t->a_count > 3)
-		exec(t, "pb");
-	if (!rsorted(t->a, 0))
-		sort_3(t);
-	final_merge(t);
-	if (!sorted(t->a))
-		rsort(t);
-}*/
 
 void	sort(t_stack *t)
 {
@@ -54,9 +76,7 @@ void	sort(t_stack *t)
 		rsort(t);
     else if (t->a_count == 3)
 		sort_3(t);
-	/*else if (t->a_count <= 7)
-		sort_min(t);*/
 	else
-		dsort(t);
+		mainsort(t);
 }
 

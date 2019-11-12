@@ -1,7 +1,17 @@
-#include <fcntl.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/12 21:41:18 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/11/12 21:41:21 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <limits.h>
 #include "pushswap.h"
-#include "libft/libft.h"
 
 int		get_flags(int ac, char **av, t_flags *flags)
 {
@@ -19,7 +29,7 @@ int		get_flags(int ac, char **av, t_flags *flags)
 			if (*s == 'c')
 				flags->colored = 1;
 			else if (*s == 'v')
-				flags->debug = 1;
+				flags->verbose = 1;
 			else if (i < ac - 1)
 				flags->filename = av[++i];
 			else
@@ -61,7 +71,7 @@ static void		dup_search(t_node *a)
 	}
 }
 
-t_node	*get_args(int argnum, char **av, int *n)
+t_node			*get_args(int argnum, char **av, int *n)
 {
 	long	num;
 	t_node	*a;

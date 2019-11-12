@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include "pushswap.h"
@@ -15,14 +16,13 @@ int 	main(int ac, char **av)
 		t.a = get_args(n, av + ac - n, &n);
 		t.a_count = n;
 		show_stacks(&t);
-        if ((fd = (flags.filename ? open(flags.filename, O_WRONLY | O_CREAT) : 1)) < 0)
+        if ((fd = (flags.filename ? open(flags.filename, O_RDONLY) : 0)) < 0)
 			file_error(flags.filename);
-		sort(&t);
-		print_log(&t);
-		show_stacks(&t);
+		while ((n = get_com(fd, &t)))
+			;
+        write(1, sorted(t.a) && !t.b_count ? "OK\n" : "KO\n", 3);
+        show_stacks(&t);
         clear_stacks(&t);
-		if (fd > 0)
-			close(fd);
 	}
     return 0;
 }

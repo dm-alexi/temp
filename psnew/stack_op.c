@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_op.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/12 21:31:18 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/11/12 21:36:37 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pushswap.h"
-#include "libft/libft.h"
 
 static void		i_swap(t_stack *t, char c)
 {
@@ -39,7 +50,7 @@ static void		i_rot(t_stack *t, char c, int rev)
 		t->b = rev ? t->b->u : t->b->d;
 }
 
-void	exec(t_stack *t, char *s)
+void			exec(t_stack *t, char *s)
 {
 	int		len;
 
@@ -55,13 +66,13 @@ void	exec(t_stack *t, char *s)
 	if (!t->fin)
 	{
 		if (!(t->fin = ft_lstnew(s, len + 1)))
-			a_error("Error: memory allocation failed.\n");
+			mem_error();
 		t->start = t->fin;
 	}
 	else
 	{
 		if (!(t->fin->next = ft_lstnew(s, len + 1)))
-			a_error("Error: memory allocation failed.\n");
+			mem_error();
 		t->fin = t->fin->next;
 	}
 }

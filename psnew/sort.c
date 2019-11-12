@@ -1,52 +1,6 @@
 #include "libft/libft.h"
 #include "pushswap.h"
 
-void roll_a(t_stack *t, int steps)
-{
-	if (steps > 0)
-	{
-		if (steps <= t->a_count / 2)
-			while (steps--)
-				exec(t, "ra");
-		else
-			while (steps++ < t->a_count)
-				exec(t, "rra");
-	}
-	else if (steps < 0)
-	{
-		steps = -steps;
-		if (steps <= t->a_count / 2)
-			while (steps--)
-				exec(t, "rra");
-		else
-			while (steps++ < t->a_count)
-				exec(t, "ra");
-	}
-}
-
-void roll_b(t_stack *t, int steps)
-{
-	if (steps > 0)
-	{
-		if (steps <= t->b_count / 2)
-			while (steps--)
-				exec(t, "rb");
-		else
-			while (steps++ < t->b_count)
-				exec(t, "rrb");
-	}
-	else if (steps < 0)
-	{
-		steps = -steps;
-		if (steps <= t->b_count / 2)
-			while (steps--)
-				exec(t, "rrb");
-		else
-			while (steps++ < t->b_count)
-				exec(t, "rb");
-	}
-}
-
 void rsort(t_stack *t)
 {
     t_node	*tmp;
@@ -56,7 +10,9 @@ void rsort(t_stack *t)
     i = 0;
     while (++i && tmp->num > tmp->u->num)
 		tmp = tmp->d;
-	roll_a(t, i);
+	if (i > t->a_count / 2)
+		i = -(t->a_count - i);
+	roll(t, i, 0);
 }
 
 void	sort_3(t_stack *t)

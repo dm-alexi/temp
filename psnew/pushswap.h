@@ -44,11 +44,8 @@ int				rsorted(t_node *a, int rev);
 void rsort(t_stack *t);
 void	sort(t_stack *t);
 void	sort_3(t_stack *t);
-void	sort3top(t_stack *t);
-void	sort3top_b(t_stack *t);
+void roll(t_stack *t, int a, int b);
 
-void roll_a(t_stack *t, int steps);
-void roll_b(t_stack *t, int steps);
 void			print_list(int fd, t_list *t);
 void			add_prev(t_list **last, char *s, size_t t);
 void	exec(t_stack *t, char *s);

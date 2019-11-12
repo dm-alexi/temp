@@ -15,8 +15,6 @@ int		adjust_count(t_stack *t, int n)
 		tmp = tmp->d;
 	if (t->b_count <= 1)
 		return (i <= t->a_count / 2 ? i : t->a_count - i);
-	//if ((tmp = t->b) && t->b_count == 1)
-	//	return ((i <= t->a_count / 2 ? i : t->a_count - i) + (t->b->num > n));
 	tmp = t->b;
 	while (!(tmp->num < n && tmp->u->num > n) &&
 	!(tmp->num > tmp->u->num && (n < tmp->u->num || n > tmp->num)) && ++j)
@@ -31,45 +29,23 @@ int		adjust_count(t_stack *t, int n)
 void roll(t_stack *t, int a, int b)
 {
 	if (a >= 0 && b >=0)
-	{
-		while (a && b)
-		{
+		while (a && b && a-- && b--)
 			exec(t, "rr");
-			--a;
-			--b;
-		}
-		while (a--)
-			exec(t, "ra");
-		while (b--)
-			exec(t, "rb");
-	}
 	else if (a <= 0 && b <=0)
-	{
-		while (a && b)
-		{
+		while (a && b && a++ && b++)
 			exec(t, "rrr");
-			++a;
-			++b;
-		}
-		while (a++)
-			exec(t, "rra");
-		while (b++)
-			exec(t, "rrb");
-	}
-	else if (a > 0)
-	{
+	if (a > 0)
 		while (a--)
 			exec(t, "ra");
-		while (b++)
-			exec(t, "rrb");
-	}
 	else
-	{
 		while (a++)
 			exec(t, "rra");
+	if (b > 0)
 		while (b--)
 			exec(t, "rb");
-	}
+	else
+		while (b++)
+			exec(t, "rrb");
 }
 
 void	adjust(t_stack *t, int n)

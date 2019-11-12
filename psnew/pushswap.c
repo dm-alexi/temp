@@ -20,8 +20,8 @@ int 	main(int ac, char **av)
 			file_error(flags.filename);
 		sort(&t);
 		print_log(&t);
-		//reduce(t.start);
-		//print_log(&t);
+		reduce(t.start);
+		print_log(&t);
 		show_stacks(&t);
         clear_stacks(&t);
 	}

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 21:10:28 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/13 21:32:53 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/11/13 22:56:21 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void			mainsort(t_stack *t);
 int				find_closest(t_stack *t, int rev);
 void			roll(t_stack *t, int a, int b);
 
-void			show_stacks(t_stack *t, t_flags *flags, char *lastcom);
+void			show_stacks(t_stack *t, t_flags *flags, enum e_command com);
 void			print_result(t_stack *t, int fd);
 
 void			clear_stacks(t_stack *t);

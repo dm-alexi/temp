@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 21:31:18 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/12 22:48:18 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/11/13 22:55:08 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int				get_com(int fd, t_stack *t, t_flags *flags)
 		error();
 	exec_silent(t, com);
 	if (flags->verbose)
-		show_stacks(t, flags, s);
+		show_stacks(t, flags, com);
 	free(s);
 	return (1);
 }

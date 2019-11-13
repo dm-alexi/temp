@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 21:45:55 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/13 23:55:09 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/11/14 00:01:14 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define WHITE "\x1b[0m"
 #define RED "\x1b[31m"
 #define GREEN "\x1b[32m"
+#define YELLOW "\x1b[33m"
 
 void	show_a(t_stack *t, t_flags *flags, enum e_command com)
 {

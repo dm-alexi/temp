@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 21:46:02 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/12 22:17:27 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/11/13 21:12:39 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,10 @@ int		main(int ac, char **av)
 		t.a = get_args(n, av + ac - n, &n);
 		t.a_count = n;
 		if ((fd = (flags.filename ?
-		open(flags.filename, O_WRONLY | O_CREAT) : 1)) < 0)
+		open(flags.filename, O_CREAT | O_WRONLY | O_TRUNC, 0666) : 1)) < 0)
 			file_error(flags.filename);
 		sort(&t);
-		print_log(&t);
-		show_stacks(&t);
+		//show_stacks(&t);
 		print_result(&t, fd);
 		clear_stacks(&t);
 		if (fd > 0)

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 20:44:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/13 21:16:19 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/11/13 21:21:27 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,9 @@ int				main(int ac, char **av)
 	O_CREAT | O_WRONLY | O_TRUNC, 0666))) < 0)
 		error("file open error.");
 	i = 0;
-	while (i < n)
+	while (i < n - 1)
 		ft_dprintf(fd, "%d ", arr[i++]);
+	ft_dprintf(fd, "%d", arr[n - 1]);
 	free(arr);
 	close(fd);
 	return (0);

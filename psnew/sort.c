@@ -16,22 +16,22 @@ void	roll(t_stack *t, int a, int b)
 {
 	if (a > 0 && b > 0)
 		while (a && b && a-- && b--)
-			exec(t, "rr");
+			exec(t, RR);
 	else if (a < 0 && b < 0)
 		while (a && b && a++ && b++)
-			exec(t, "rrr");
+			exec(t, RRR);
 	if (a > 0)
 		while (a--)
-			exec(t, "ra");
+			exec(t, RA);
 	else
 		while (a++)
-			exec(t, "rra");
+			exec(t, RRA);
 	if (b > 0)
 		while (b--)
-			exec(t, "rb");
+			exec(t, RB);
 	else
 		while (b++)
-			exec(t, "rrb");
+			exec(t, RRB);
 }
 
 void	rsort(t_stack *t)
@@ -56,16 +56,16 @@ void	sort_3(t_stack *t)
 		rsort(t);
 	else if (t->a->num < t->a->d->num && t->a->num < t->a->d->d->num)
 	{
-		exec(t, "sa");
-		exec(t, "ra");
+		exec(t, SA);
+		exec(t, RA);
 	}
 	else if (t->a->num > t->a->d->num && t->a->num > t->a->d->d->num)
 	{
-		exec(t, "sa");
-		exec(t, "rra");
+		exec(t, SA);
+		exec(t, RRA);
 	}
 	else
-		exec(t, "sa");
+		exec(t, SA);
 }
 
 void	sort(t_stack *t)

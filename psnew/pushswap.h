@@ -14,6 +14,11 @@
 # define PUSHSWAP_H
 # include "libft/libft.h"
 
+enum			e_command
+{
+	SA, SB, SS, PA, PB, RA, RB, RR, RRA, RRB, RRR
+};
+
 typedef struct	s_flags
 {
 	char	*filename;
@@ -52,7 +57,7 @@ t_node			*new_node(int n);
 t_node			*add(t_node **cur, t_node *t);
 t_node			*pop(t_node **cur);
 void			swap(t_node *t);
-void			exec(t_stack *t, char *s);
+void			exec(t_stack *t, enum e_command com);
 
 int				sorted(t_node *a);
 int				rsorted(t_node *a, int rev);

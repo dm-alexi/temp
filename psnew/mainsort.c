@@ -75,14 +75,14 @@ void			mainsort(t_stack *t)
 	while (!rsorted(t->a, 0) && t->a_count > 3)
 	{
 		adjust_ab(t, find_closest(t, 0));
-		exec(t, "pb");
+		exec(t, PB);
 	}
 	if (!rsorted(t->a, 0))
 		sort_3(t);
 	while (t->b_count)
 	{
 		adjust_ba(t, find_closest(t, 1));
-		exec(t, "pa");
+		exec(t, PA);
 	}
 	if (!sorted(t->a))
 		rsort(t);

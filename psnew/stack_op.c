@@ -12,66 +12,50 @@
 
 #include "pushswap.h"
 
-static void		i_swap(t_stack *t, char c)
+static void		exec_silent(t_stack *t, enum e_command com)
 {
-	if (c != 'a' && c != 'b' && c != 's')
-		error();
-	if (c == 'a' || c == 's')
+	if (com == SA || com == SS)
 		swap(t->a);
-	if (c == 'b' || c == 's')
-		swap(t->b);
-}
-
-static void		i_push(t_stack *t, char c)
-{
-	if (c == 'a')
+	if (com == SB || com == SS)
+		swap(t->a);
+	if (com == RA || com == RR)
+		t->a = t->a->d;
+	if (com == RB || com == RR)
+		t->b = t->b->d;
+	if (com == RRA || com == RRR)
+		t->a = t->a->u;
+	if (com == RRB || com == RRR)
+		t->b = t->b->u;
+	if (com == PA || com == PB)
+	if (com == PA)
 	{
 		add(&(t->a), pop(&(t->b)));
 		++t->a_count;
 		--t->b_count;
 	}
-	else if (c == 'b')
+	if (com == PB)
 	{
 		add(&(t->b), pop(&(t->a)));
 		++t->b_count;
 		--t->a_count;
 	}
-	else
-		error();
 }
 
-static void		i_rot(t_stack *t, char c, int rev)
+void			exec(t_stack *t, enum e_command com)
 {
-	if (c != 'a' && c != 'b' && c != 'r')
-		error();
-	if ((c == 'a' || c == 'r') && t->a)
-		t->a = rev ? t->a->u : t->a->d;
-	if ((c == 'b' || c == 'r') && t->b)
-		t->b = rev ? t->b->u : t->b->d;
-}
+	static const char	*arr[11] =
+	{"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra", "rrb", "rrr"};
 
-void			exec(t_stack *t, char *s)
-{
-	int		len;
-
-	len = ft_strlen(s);
-	if (len == 2 && s[0] == 's')
-		i_swap(t, s[1]);
-	else if (len == 2 && s[0] == 'p')
-		i_push(t, s[1]);
-	else if (len == 2 && s[0] == 'r')
-		i_rot(t, s[1], 0);
-	else if (len == 3 && s[0] == 'r' && s[1] == 'r')
-		i_rot(t, s[2], 1);
+	exec_silent(t, com);
 	if (!t->fin)
 	{
-		if (!(t->fin = ft_lstnew(s, len + 1)))
+		if (!(t->fin = ft_lstnew(arr[com], ft_strlen(arr[com]) + 1)))
 			mem_error();
 		t->start = t->fin;
 	}
 	else
 	{
-		if (!(t->fin->next = ft_lstnew(s, len + 1)))
+		if (!(t->fin->next = ft_lstnew(arr[com], ft_strlen(arr[com]) + 1)))
 			mem_error();
 		t->fin = t->fin->next;
 	}
@@ -79,25 +63,26 @@ void			exec(t_stack *t, char *s)
 
 int				get_com(int fd, t_stack *t)
 {
-	int		r;
-	int		len;
-	char	*s;
+	static const char	*arr[11] =
+	{"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra", "rrb", "rrr"};
+	enum e_command		com;
+	int					r;
+	char				*s;
 
 	if ((r = get_next_line(fd, &s)) < 0)
 		a_error("Input error.\n");
 	if (!r)
 		return (0);
-	len = ft_strlen(s);
-	if (len == 2 && s[0] == 's')
-		i_swap(t, s[1]);
-	else if (len == 2 && s[0] == 'p')
-		i_push(t, s[1]);
-	else if (len == 2 && s[0] == 'r')
-		i_rot(t, s[1], 0);
-	else if (len == 3 && s[0] == 'r' && s[1] == 'r')
-		i_rot(t, s[2], 1);
-	else
-		error();
+	com = SA;
+	while (com <= RRR)
+	{
+		if (ft_strequ(s, arr[com]))
+			return (com);
+		++com;
+	}
 	free(s);
+	if (com > RRR)
+		error();
+	exec_silent(t, com);
 	return (1);
 }

@@ -83,7 +83,9 @@ t_node			*get_args(int argnum, char **av, int *n)
 	while (i < argnum && ++*n)
 	{
 		num = ft_strtol(*(av + i), av + i, 10);
-		if (((*av[i] && *av[i] != ' ') || num > INT_MAX || num < INT_MIN))
+		while (ft_isspace(*av[i]))
+			++av[i];
+		if (((*av[i] && !ft_isdigit(*av[i])) || num > INT_MAX || num < INT_MIN))
 			error();
 		if (!**(av + i))
 			++i;

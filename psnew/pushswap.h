@@ -57,7 +57,7 @@ void			mem_error(void);
 
 t_node			*get_args(int argnum, char **av, int *n);
 int				get_flags(int ac, char **av, t_flags *flags);
-int				get_com(int fd, t_stack *t);
+int				get_com(int fd, t_stack *t, t_flags *flags);
 
 t_node			*new_node(int n);
 t_node			*add(t_node **cur, t_node *t);
@@ -74,8 +74,7 @@ void			mainsort(t_stack *t);
 int				find_closest(t_stack *t, int rev);
 void			roll(t_stack *t, int a, int b);
 
-void			show_stacks(t_stack *t);
-void			print_log(t_stack *t);
+void			show_stacks(t_stack *t, t_flags *flags, char *lastcom);
 void			print_result(t_stack *t, int fd);
 
 void			clear_stacks(t_stack *t);

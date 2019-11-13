@@ -10,13 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "pushswap.h"
 
-void	show_stacks(t_stack *t)
+void	show_stacks(t_stack *t, t_flags *flags, char *lastcom)
 {
 	t_node	*tmp;
 
+	if (lastcom && flags->filename)
+		ft_printf("%s\n", lastcom);
 	ft_printf("A: ");
 	if (t->a)
 	{
@@ -29,30 +30,11 @@ void	show_stacks(t_stack *t)
 	if (t->b)
 	{
 		ft_printf("%d ", t->b->num);
-		tmp = t->a->d;
+		tmp = t->b->d;
 		while (tmp != t->b && ft_printf("%d ", tmp->num))
 			tmp = tmp->d;
 	}
-	ft_printf("\n");
-}
-
-void	print_log(t_stack *t)
-{
-	static const char	*arr[11] =
-	{"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra", "rrb", "rrr"};
-	t_com				*lst;
-	int					n;
-
-	n = 0;
-	lst = t->start;
-	if (!lst)
-		ft_printf("No list!");
-	while (lst && ++n)
-	{
-		ft_printf("%s ", arr[lst->com]);
-		lst = lst->next;
-	}
-	ft_printf("\nSorted in %d instructions.\n", n);
+	ft_printf("\n\n");
 }
 
 void	print_result(t_stack *t, int fd)

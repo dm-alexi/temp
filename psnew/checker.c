@@ -26,10 +26,11 @@ int		main(int ac, char **av)
 		ft_bzero(&t, sizeof(t));
 		t.a = get_args(n, av + ac - n, &n);
 		t.a_count = n;
-		//show_stacks(&t);
+		if (flags.verbose)
+			show_stacks(&t, &flags, NULL);
 		if ((fd = (flags.filename ? open(flags.filename, O_RDONLY) : 0)) < 0)
 			file_error(flags.filename);
-		while (get_com(fd, &t))
+		while (get_com(fd, &t, &flags))
 			;
 		write(1, sorted(t.a) && !t.b_count ? "OK\n" : "KO\n", 3);
 		//show_stacks(&t);

@@ -61,7 +61,7 @@ void			exec(t_stack *t, enum e_command com)
 	}
 }
 
-int				get_com(int fd, t_stack *t)
+int				get_com(int fd, t_stack *t, t_flags *flags)
 {
 	static const char	*arr[11] =
 	{"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra", "rrb", "rrr"};
@@ -80,9 +80,11 @@ int				get_com(int fd, t_stack *t)
 			break ;
 		++com;
 	}
-	free(s);
 	if (com > RRR)
 		error();
 	exec_silent(t, com);
+	if (flags->verbose)
+		show_stacks(t, flags, s);
+	free(s);
 	return (1);
 }

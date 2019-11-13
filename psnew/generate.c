@@ -6,13 +6,12 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 20:44:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/13 21:13:18 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/11/13 21:16:19 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <fcntl.h>
-#include <stdio.h>
 #include <time.h>
 #include "libft/libft.h"
 
@@ -50,10 +49,10 @@ static void		shuffle(int *arr, int n)
 
 int				main(int ac, char **av)
 {
-    int		fd;
-    int		n;
-    int		i;
-    int		*arr;
+	int		fd;
+	int		n;
+	int		i;
+	int		*arr;
 
 	if (ac < 2 || ac > 3)
 		return (usage());
@@ -66,12 +65,12 @@ int				main(int ac, char **av)
 		arr[i] = i + 1;
 	shuffle(arr, n);
 	if ((fd = (open((ac == 3 ? av[2] : "arrnum"),
-		O_CREAT | O_WRONLY | O_TRUNC, 0666))) < 0)
+	O_CREAT | O_WRONLY | O_TRUNC, 0666))) < 0)
 		error("file open error.");
 	i = 0;
 	while (i < n)
 		ft_dprintf(fd, "%d ", arr[i++]);
 	free(arr);
 	close(fd);
-    return (0);
+	return (0);
 }

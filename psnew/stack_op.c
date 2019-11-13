@@ -26,7 +26,6 @@ static void		exec_silent(t_stack *t, enum e_command com)
 		t->a = t->a->u;
 	if (com == RRB || com == RRR)
 		t->b = t->b->u;
-	if (com == PA || com == PB)
 	if (com == PA)
 	{
 		add(&(t->a), pop(&(t->b)));
@@ -77,7 +76,7 @@ int				get_com(int fd, t_stack *t)
 	while (com <= RRR)
 	{
 		if (ft_strequ(s, arr[com]))
-			return (com);
+			break ;
 		++com;
 	}
 	free(s);

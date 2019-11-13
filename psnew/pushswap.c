@@ -30,8 +30,8 @@ int		main(int ac, char **av)
 		open(flags.filename, O_WRONLY | O_CREAT) : 1)) < 0)
 			file_error(flags.filename);
 		sort(&t);
-		print_log(&t);
-		show_stacks(&t);
+		//print_log(&t);
+		//show_stacks(&t);
 		print_result(&t, fd);
 		clear_stacks(&t);
 		if (fd > 0)

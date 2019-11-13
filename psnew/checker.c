@@ -29,7 +29,7 @@ int		main(int ac, char **av)
 		//show_stacks(&t);
 		if ((fd = (flags.filename ? open(flags.filename, O_RDONLY) : 0)) < 0)
 			file_error(flags.filename);
-		while ((n = get_com(fd, &t)))
+		while (get_com(fd, &t))
 			;
 		write(1, sorted(t.a) && !t.b_count ? "OK\n" : "KO\n", 3);
 		//show_stacks(&t);

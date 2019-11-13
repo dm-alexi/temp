@@ -41,8 +41,10 @@ void	show_stacks(t_stack *t)
 
 void	print_log(t_stack *t)
 {
-	t_list	*lst;
-	int		n;
+	static const char	*arr[11] =
+	{"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra", "rrb", "rrr"};
+	t_com				*lst;
+	int					n;
 
 	n = 0;
 	lst = t->start;
@@ -50,22 +52,22 @@ void	print_log(t_stack *t)
 		ft_printf("No list!");
 	while (lst && ++n)
 	{
-		ft_printf("%s ", lst->content);
+		ft_printf("%s ", arr[lst->com]);
 		lst = lst->next;
 	}
-	ft_printf("\nCom len = %d\n", n);
+	ft_printf("\nSorted in %d instructions.\n", n);
 }
 
 void	print_result(t_stack *t, int fd)
 {
-	t_list	*tmp;
+	static const char	*arr[11] =
+	{"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra", "rrb", "rrr"};
+	t_com				*tmp;
 
 	while (t->start)
 	{
 		tmp = t->start->next;
-		write(fd, t->start->content, t->start->content_size - 1);
-		write(fd, "\n", 1);
-		free(t->start->content);
+		ft_dprintf(fd, "%s\n", arr[t->start->com]);
 		free(t->start);
 		t->start = tmp;
 	}

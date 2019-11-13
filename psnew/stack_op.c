@@ -18,13 +18,13 @@ static void		exec_silent(t_stack *t, enum e_command com)
 		swap(t->a);
 	if (com == SB || com == SS)
 		swap(t->a);
-	if (com == RA || com == RR)
+	if ((com == RA || com == RR) && t->a)
 		t->a = t->a->d;
-	if (com == RB || com == RR)
+	if ((com == RB || com == RR) && t->b)
 		t->b = t->b->d;
-	if (com == RRA || com == RRR)
+	if ((com == RRA || com == RRR) && t->a)
 		t->a = t->a->u;
-	if (com == RRB || com == RRR)
+	if ((com == RRB || com == RRR) && t->b)
 		t->b = t->b->u;
 	if (com == PA)
 	{

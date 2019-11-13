@@ -33,14 +33,20 @@ typedef struct	s_node
 	struct s_node	*d;
 }				t_node;
 
+typedef struct	s_com
+{
+	enum e_command	com;
+	struct s_com	*next;
+}				t_com;
+
 typedef struct	s_stack
 {
 	t_node	*a;
 	t_node	*b;
 	int		a_count;
 	int		b_count;
-	t_list	*start;
-	t_list	*fin;
+	t_com	*start;
+	t_com	*fin;
 }				t_stack;
 
 void			error(void);

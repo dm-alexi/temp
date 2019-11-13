@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 21:10:28 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/13 22:56:21 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/11/13 23:16:29 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 enum			e_command
 {
-	SA, SB, SS, PA, PB, RA, RB, RR, RRA, RRB, RRR
+	SA, SB, SS, PA, PB, RA, RB, RR, RRA, RRB, RRR, NO_COM
 };
 
 typedef struct	s_flags

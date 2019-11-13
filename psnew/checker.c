@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 21:52:15 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/13 22:56:30 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/11/13 23:20:36 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ int		main(int ac, char **av)
 		t.a = get_args(n, av + ac - n, &n);
 		t.a_count = n;
 		if (flags.verbose)
-			show_stacks(&t, &flags, -1);
+			show_stacks(&t, &flags, NO_COM);
 		if ((fd = (flags.filename ? open(flags.filename, O_RDONLY) : 0)) < 0)
 			file_error(flags.filename);
 		while (get_com(fd, &t, &flags))
 			;
+		if (flags.verbose)
+			show_stacks(&t, &flags, NO_COM);
 		write(1, sorted(t.a) && !t.b_count ? "OK\n" : "KO\n", 3);
 		clear_stacks(&t);
 	}

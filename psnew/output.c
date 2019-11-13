@@ -17,26 +17,23 @@ void	show_stacks(t_stack *t)
 {
 	t_node	*tmp;
 
+	ft_printf("A: ");
 	if (t->a)
 	{
-		ft_printf("%d\n", t->a->num);
+		ft_printf("%d ", t->a->num);
 		tmp = t->a->d;
-		while (tmp != t->a && ft_printf("%d\n", tmp->num))
+		while (tmp != t->a && ft_printf("%d ", tmp->num))
 			tmp = tmp->d;
 	}
-	else
-		ft_printf("Stack A empty\n");
-	ft_printf("-----\n");
+	ft_printf("\nB: ");
 	if (t->b)
 	{
-		ft_printf("%d\n", t->b->num);
+		ft_printf("%d ", t->b->num);
 		tmp = t->a->d;
-		while (tmp != t->b && ft_printf("%d\n", tmp->num))
+		while (tmp != t->b && ft_printf("%d ", tmp->num))
 			tmp = tmp->d;
 	}
-	else
-		ft_printf("Stack B empty\n");
-	ft_printf("--------\n");
+	ft_printf("\n");
 }
 
 void	print_log(t_stack *t)

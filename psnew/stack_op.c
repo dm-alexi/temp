@@ -42,20 +42,21 @@ static void		exec_silent(t_stack *t, enum e_command com)
 
 void			exec(t_stack *t, enum e_command com)
 {
-	static const char	*arr[11] =
-	{"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra", "rrb", "rrr"};
-
 	exec_silent(t, com);
 	if (!t->fin)
 	{
-		if (!(t->fin = ft_lstnew(arr[com], ft_strlen(arr[com]) + 1)))
+		if (!(t->fin = (t_com*)malloc(sizeof(t_com))))
 			mem_error();
+		t->fin->com = com;
+		t->fin->next = NULL;
 		t->start = t->fin;
 	}
 	else
 	{
-		if (!(t->fin->next = ft_lstnew(arr[com], ft_strlen(arr[com]) + 1)))
+		if (!(t->fin->next = (t_com*)malloc(sizeof(t_com))))
 			mem_error();
+		t->fin->next->com = com;
+		t->fin->next->next = NULL;
 		t->fin = t->fin->next;
 	}
 }

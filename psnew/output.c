@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 21:45:55 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/14 00:01:14 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/11/14 19:23:57 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	show_a(t_stack *t, t_flags *flags, enum e_command com)
 		if (com == SA || com == SS)
 			ft_printf(flags->colored ? (GREEN ARROWS_LR WHITE) : ARROWS_LR);
 		if (((tmp = t->a->d) != t->a) && ft_printf(flags->colored && (com == SA
-		|| com == SS) ? (GREEN "%d " WHITE) : "%d ", tmp->num))
+		|| com == SS || ((com == RA || com == RR) && t->a_count == 2)) ?
+		(GREEN "%d " WHITE) : "%d ", tmp->num))
 			tmp = tmp->d;
 		while (tmp != t->a && tmp != t->a->u && ft_printf("%d ", tmp->num))
 			tmp = tmp->d;
@@ -51,7 +52,7 @@ void	show_b(t_stack *t, t_flags *flags, enum e_command com)
 	if (com == RB || com == RR)
 		ft_printf(flags->colored ? (GREEN ARROW_LEFT WHITE) : ARROW_LEFT);
 	if (com == PA)
-		ft_printf(flags->colored ? (GREEN ARROW_DOWN WHITE) : ARROW_UP);
+		ft_printf(flags->colored ? (GREEN ARROW_UP WHITE) : ARROW_UP);
 	if (t->b)
 	{
 		ft_printf(flags->colored && (com == PB || com == RRB || com == RRR ||
@@ -59,7 +60,8 @@ void	show_b(t_stack *t, t_flags *flags, enum e_command com)
 		if (com == SB || com == SS)
 			ft_printf(flags->colored ? (GREEN ARROWS_LR WHITE) : ARROWS_LR);
 		if (((tmp = t->b->d) != t->b) && ft_printf(flags->colored && (com == SB
-		|| com == SS) ? (GREEN "%d " WHITE) : "%d ", tmp->num))
+		|| com == SS || ((com == RB || com == RR)&& t->b_count == 2)) ?
+		(GREEN "%d " WHITE) : "%d ", tmp->num))
 			tmp = tmp->d;
 		while (tmp != t->b && tmp != t->b->u && ft_printf("%d ", tmp->num))
 			tmp = tmp->d;
@@ -73,9 +75,13 @@ void	show_b(t_stack *t, t_flags *flags, enum e_command com)
 
 void	show_stacks(t_stack *t, t_flags *flags, enum e_command com)
 {
-	ft_printf("A: ");
+	if (com == FINAL)
+		ft_printf(flags->colored ? (RED "FINAL\n" WHITE) : "FINAL\n");
+	ft_printf(flags->colored ? (YELLOW "A: " WHITE) : "A: ");
+	if (flags->colored && com == FINAL)
+		ft_printf(GREEN);
 	show_a(t, flags, com);
-	ft_printf("\nB: ");
+	ft_printf(flags->colored ? (YELLOW "\nB: " WHITE) : "\nB: ");
 	show_b(t, flags, com);
 	ft_printf("\n\n");
 }

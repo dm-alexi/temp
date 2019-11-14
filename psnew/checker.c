@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 21:52:15 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/13 23:20:36 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/11/14 19:18:23 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		main(int ac, char **av)
 		while (get_com(fd, &t, &flags))
 			;
 		if (flags.verbose)
-			show_stacks(&t, &flags, NO_COM);
+			show_stacks(&t, &flags, FINAL);
 		write(1, sorted(t.a) && !t.b_count ? "OK\n" : "KO\n", 3);
 		clear_stacks(&t);
 	}

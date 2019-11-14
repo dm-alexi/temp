@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 21:45:55 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/14 19:23:57 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/11/14 19:46:27 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,26 @@
 #define ARROW_RIGHT "\xE2\x86\x92 "
 #define ARROW_DOWN "\xE2\x86\x93 "
 #define ARROWS_LR "\xE2\x86\x94 "
+#define GREEN_ARROW_LEFT "\x1B[32m\xE2\x86\x90 \x1B[0m"
+#define GREEN_ARROW_UP "\x1B[32m\xE2\x86\x91 \x1B[0m"
+#define GREEN_ARROW_RIGHT "\x1B[32m\xE2\x86\x92 \x1B[0m"
+#define GREEN_ARROW_DOWN "\x1B[32m\xE2\x86\x93 \x1B[0m"
+#define GREEN_ARROWS_LR "\x1B[32m\xE2\x86\x94 \x1B[0m"
 
 void	show_a(t_stack *t, t_flags *flags, enum e_command com)
 {
 	t_node	*tmp;
 
 	if (com == RA || com == RR)
-		ft_printf(flags->colored ? (GREEN ARROW_LEFT WHITE) : ARROW_LEFT);
+		ft_printf(flags->colored ? GREEN_ARROW_LEFT : ARROW_LEFT);
 	if (com == PB)
-		ft_printf(flags->colored ? (GREEN ARROW_DOWN WHITE) : ARROW_DOWN);
+		ft_printf(flags->colored ? GREEN_ARROW_DOWN : ARROW_DOWN);
 	if (t->a)
 	{
 		ft_printf(flags->colored && (com == PA || com == RRA || com == RRR ||
 		com == SA || com == SS) ? (GREEN "%d " WHITE) : "%d ", t->a->num);
 		if (com == SA || com == SS)
-			ft_printf(flags->colored ? (GREEN ARROWS_LR WHITE) : ARROWS_LR);
+			ft_printf(flags->colored ? GREEN_ARROWS_LR : ARROWS_LR);
 		if (((tmp = t->a->d) != t->a) && ft_printf(flags->colored && (com == SA
 		|| com == SS || ((com == RA || com == RR) && t->a_count == 2)) ?
 		(GREEN "%d " WHITE) : "%d ", tmp->num))
@@ -41,7 +46,7 @@ void	show_a(t_stack *t, t_flags *flags, enum e_command com)
 			ft_printf(flags->colored && (com == RA || com == RR) ?
 			(GREEN "%d " WHITE) : "%d ", tmp->num);
 		if (com == RRA || com == RRR)
-			ft_printf(flags->colored ? (GREEN ARROW_RIGHT WHITE) : ARROW_RIGHT);
+			ft_printf(flags->colored ? GREEN_ARROW_RIGHT : ARROW_RIGHT);
 	}
 }
 
@@ -50,17 +55,17 @@ void	show_b(t_stack *t, t_flags *flags, enum e_command com)
 	t_node	*tmp;
 
 	if (com == RB || com == RR)
-		ft_printf(flags->colored ? (GREEN ARROW_LEFT WHITE) : ARROW_LEFT);
+		ft_printf(flags->colored ? GREEN_ARROW_LEFT : ARROW_LEFT);
 	if (com == PA)
-		ft_printf(flags->colored ? (GREEN ARROW_UP WHITE) : ARROW_UP);
+		ft_printf(flags->colored ? GREEN_ARROW_UP : ARROW_UP);
 	if (t->b)
 	{
 		ft_printf(flags->colored && (com == PB || com == RRB || com == RRR ||
 		com == SB || com == SS) ? (GREEN "%d " WHITE) : "%d ", t->b->num);
 		if (com == SB || com == SS)
-			ft_printf(flags->colored ? (GREEN ARROWS_LR WHITE) : ARROWS_LR);
+			ft_printf(flags->colored ? GREEN_ARROWS_LR : ARROWS_LR);
 		if (((tmp = t->b->d) != t->b) && ft_printf(flags->colored && (com == SB
-		|| com == SS || ((com == RB || com == RR)&& t->b_count == 2)) ?
+		|| com == SS || ((com == RB || com == RR) && t->b_count == 2)) ?
 		(GREEN "%d " WHITE) : "%d ", tmp->num))
 			tmp = tmp->d;
 		while (tmp != t->b && tmp != t->b->u && ft_printf("%d ", tmp->num))
@@ -69,7 +74,7 @@ void	show_b(t_stack *t, t_flags *flags, enum e_command com)
 			ft_printf(flags->colored && (com == RB || com == RR) ?
 			(GREEN "%d " WHITE) : "%d ", tmp->num);
 		if (com == RRB || com == RRR)
-			ft_printf(flags->colored ? (GREEN ARROW_RIGHT WHITE) : ARROW_RIGHT);
+			ft_printf(flags->colored ? GREEN_ARROW_RIGHT : ARROW_RIGHT);
 	}
 }
 

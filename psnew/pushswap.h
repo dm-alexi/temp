@@ -6,17 +6,17 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 21:10:28 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/14 19:12:26 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/11/14 19:43:16 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSHSWAP_H
 # define PUSHSWAP_H
 # include "libft/libft.h"
-# define WHITE "\x1b[0m"
-# define RED "\x1b[31m"
-# define GREEN "\x1b[32m"
-# define YELLOW "\x1b[33m"
+# define WHITE "\x1B[0m"
+# define RED "\x1B[31m"
+# define GREEN "\x1B[32m"
+# define YELLOW "\x1B[33m"
 
 enum			e_command
 {

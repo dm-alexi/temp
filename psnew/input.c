@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 21:41:18 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/12 22:34:15 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/11/14 21:56:45 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ t_node			*get_args(int argnum, char **av, int *n)
 		num = ft_strtol(*(av + i), av + i, 10);
 		while (ft_isspace(*av[i]))
 			++av[i];
-		if (((*av[i] && !ft_isdigit(*av[i])) || num > INT_MAX || num < INT_MIN))
+		if ((*av[i] && !(ft_isdigit(*av[i]) || ((*av[i] == '-' || *av[i] == '+')
+		&& ft_isdigit(*(av[i] + 1))))) || num > INT_MAX || num < INT_MIN)
 			error();
 		if (!**(av + i))
 			++i;

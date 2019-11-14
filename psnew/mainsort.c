@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 21:12:36 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/12 21:45:28 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/11/14 19:54:01 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void			mainsort(t_stack *t)
 		exec(t, PB);
 	}
 	if (!rsorted(t->a, 0))
-		sort_3(t);
+		exec(t, SA);
 	while (t->b_count)
 	{
 		adjust_ba(t, find_closest(t, 1));

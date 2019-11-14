@@ -11,11 +11,11 @@
 /* ************************************************************************** */
 
 #include "pushswap.h"
-#define ARROW_LEFT "\xE2\x86\x90"
-#define ARROW_UP "\xE2\x86\x91"
-#define ARROW_RIGHT "\xE2\x86\x92"
-#define ARROW_DOWN "\xE2\x86\x93"
-#define ARROWS_LR "\xE2\x86\x94"
+#define ARROW_LEFT "\xE2\x86\x90 "
+#define ARROW_UP "\xE2\x86\x91 "
+#define ARROW_RIGHT "\xE2\x86\x92 "
+#define ARROW_DOWN "\xE2\x86\x93 "
+#define ARROWS_LR "\xE2\x86\x94 "
 
 void	show_a(t_stack *t, t_flags *flags, enum e_command com)
 {

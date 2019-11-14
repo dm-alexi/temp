@@ -61,6 +61,34 @@ void			exec(t_stack *t, enum e_command com)
 	}
 }
 
+static void		reset_com(t_stack *t, enum e_command *com)
+{
+	if (t->a_count < 2)
+	{
+		if (*com == SA || *com == RA || *com == RRA ||
+		(*com == PB && !t->a_count))
+			*com = NO_COM;
+		else if (*com == RR)
+			*com = RB;
+		else if (*com == RRR)
+			*com = RRB;
+		else if (*com == SS)
+			*com = SB;
+	}
+	if (t->b_count < 2)
+	{
+		if (*com == SB || *com == RB || *com == RRB ||
+		(*com == PA && !t->b_count))
+			*com = NO_COM;
+		else if (*com == RR)
+			*com = RA;
+		else if (*com == RRR)
+			*com = RRA;
+		else if (*com == SS)
+			*com = SA;
+	}
+}
+
 int				get_com(int fd, t_stack *t, t_flags *flags)
 {
 	static const char	*arr[11] =
@@ -73,15 +101,15 @@ int				get_com(int fd, t_stack *t, t_flags *flags)
 		a_error("Input error.\n");
 	if (!r)
 		return (0);
-	com = SA;
-	while (com <= RRR)
-	{
+	com = SA - 1;
+	while (++com <= RRR)
 		if (ft_strequ(s, arr[com]))
 			break ;
-		++com;
-	}
 	if (com > RRR)
 		error();
+	if (flags->verbose)
+		ft_printf(flags->colored ? (RED "%s\n" WHITE) : "%s\n", arr[com]);
+	reset_com(t, &com);
 	exec_silent(t, com);
 	if (flags->verbose)
 		show_stacks(t, flags, com);

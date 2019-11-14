@@ -11,10 +11,6 @@
 /* ************************************************************************** */
 
 #include "pushswap.h"
-#define WHITE "\x1b[0m"
-#define RED "\x1b[31m"
-#define GREEN "\x1b[32m"
-#define YELLOW "\x1b[33m"
 #define ARROW_LEFT "\xE2\x86\x90"
 #define ARROW_UP "\xE2\x86\x91"
 #define ARROW_RIGHT "\xE2\x86\x92"
@@ -25,7 +21,7 @@ void	show_a(t_stack *t, t_flags *flags, enum e_command com)
 {
 	t_node	*tmp;
 
-	if ((com == RA || com == RR) && t->a_count > 1)
+	if (com == RA || com == RR)
 		ft_printf(flags->colored ? (GREEN ARROW_LEFT WHITE) : ARROW_LEFT);
 	if (com == PB)
 		ft_printf(flags->colored ? (GREEN ARROW_DOWN WHITE) : ARROW_DOWN);
@@ -33,7 +29,7 @@ void	show_a(t_stack *t, t_flags *flags, enum e_command com)
 	{
 		ft_printf(flags->colored && (com == PA || com == RRA || com == RRR ||
 		com == SA || com == SS) ? (GREEN "%d " WHITE) : "%d ", t->a->num);
-		if (t->b_count > 1 && (com == SA || com == SS))
+		if (com == SA || com == SS)
 			ft_printf(flags->colored ? (GREEN ARROWS_LR WHITE) : ARROWS_LR);
 		if (((tmp = t->a->d) != t->a) && ft_printf(flags->colored && (com == SA
 		|| com == SS) ? (GREEN "%d " WHITE) : "%d ", tmp->num))
@@ -41,8 +37,8 @@ void	show_a(t_stack *t, t_flags *flags, enum e_command com)
 		while (tmp != t->a && tmp != t->a->u && ft_printf("%d ", tmp->num))
 			tmp = tmp->d;
 		if (tmp != t->a)
-			ft_printf(flags->colored && (com == RA || com == RR) &&
-			t->a_count > 1 ? (GREEN "%d " WHITE) : "%d ", tmp->num);
+			ft_printf(flags->colored && (com == RA || com == RR) ?
+			(GREEN "%d " WHITE) : "%d ", tmp->num);
 		if (com == RRA || com == RRR)
 			ft_printf(flags->colored ? (GREEN ARROW_RIGHT WHITE) : ARROW_RIGHT);
 	}
@@ -52,7 +48,7 @@ void	show_b(t_stack *t, t_flags *flags, enum e_command com)
 {
 	t_node	*tmp;
 
-	if ((com == RB || com == RR) && t->a_count > 1)
+	if (com == RB || com == RR)
 		ft_printf(flags->colored ? (GREEN ARROW_LEFT WHITE) : ARROW_LEFT);
 	if (com == PA)
 		ft_printf(flags->colored ? (GREEN ARROW_DOWN WHITE) : ARROW_UP);
@@ -60,7 +56,7 @@ void	show_b(t_stack *t, t_flags *flags, enum e_command com)
 	{
 		ft_printf(flags->colored && (com == PB || com == RRB || com == RRR ||
 		com == SB || com == SS) ? (GREEN "%d " WHITE) : "%d ", t->b->num);
-		if (t->b_count > 1 && (com == SB || com == SS))
+		if (com == SB || com == SS)
 			ft_printf(flags->colored ? (GREEN ARROWS_LR WHITE) : ARROWS_LR);
 		if (((tmp = t->b->d) != t->b) && ft_printf(flags->colored && (com == SB
 		|| com == SS) ? (GREEN "%d " WHITE) : "%d ", tmp->num))
@@ -77,11 +73,6 @@ void	show_b(t_stack *t, t_flags *flags, enum e_command com)
 
 void	show_stacks(t_stack *t, t_flags *flags, enum e_command com)
 {
-	static const char	*arr[11] =
-	{"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra", "rrb", "rrr"};
-
-	if (com != NO_COM)
-		ft_printf(flags->colored ? (RED "%s\n" WHITE) : "%s\n", arr[com]);
 	ft_printf("A: ");
 	show_a(t, flags, com);
 	ft_printf("\nB: ");

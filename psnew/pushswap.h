@@ -13,6 +13,10 @@
 #ifndef PUSHSWAP_H
 # define PUSHSWAP_H
 # include "libft/libft.h"
+# define WHITE "\x1b[0m"
+# define RED "\x1b[31m"
+# define GREEN "\x1b[32m"
+# define YELLOW "\x1b[33m"
 
 enum			e_command
 {

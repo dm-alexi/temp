@@ -36,7 +36,7 @@ int				get_flags(int ac, char **av, t_flags *flags)
 				a_error("Error: file name missing\n");
 			++s;
 		}
-		if (*s)
+		if (*s || *(s - 1) == '-')
 			flag_error(*s);
 	}
 	return (0);
@@ -83,12 +83,13 @@ t_node			*get_args(int argnum, char **av, int *n)
 	while (i < argnum && ++*n)
 	{
 		num = ft_strtol(*(av + i), av + i, 10);
+		if (num > INT_MAX || num < INT_MIN || (!num && *(av[i] - 1) != '0'))
+			error();
 		while (ft_isspace(*av[i]))
 			++av[i];
-		if ((*av[i] && !(ft_isdigit(*av[i]) || ((*av[i] == '-' || *av[i] == '+')
-		&& ft_isdigit(*(av[i] + 1))))) || num > INT_MAX || num < INT_MIN)
+		if (*av[i] && !(ft_isdigit(*av[i]) || *av[i] == '-' || *av[i] == '+'))
 			error();
-		if (!**(av + i))
+		if (!*(av[i]))
 			++i;
 		if (!pushback(&a, new_node((int)num)))
 			mem_error();

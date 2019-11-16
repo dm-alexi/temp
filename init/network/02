@@ -1,13 +1,15 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    05                                                 :+:      :+:    :+:    #
+#    02                                                 :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/11/16 17:32:09 by sscarecr          #+#    #+#              #
-#    Updated: 2019/11/16 17:32:10 by sscarecr         ###   ########.fr        #
+#    Created: 2019/11/16 17:46:12 by sscarecr          #+#    #+#              #
+#    Updated: 2019/11/16 17:49:51 by sscarecr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-service ssh status
+//networksetup -listallhardwareports
+
+ifconfig en0 | grep broadcast | cut -d ' ' -f 6

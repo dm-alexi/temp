@@ -1,1 +1,1 @@
-du -b /var
+du -h -s /var/*

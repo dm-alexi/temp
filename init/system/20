@@ -1,2 +1,2 @@
-cut /etc/passwd | cut -d: -f 1
-getent passwd | cut -d: -f 1
+cat /etc/passwd | cut -d: -f1
+getent passwd | cut -d: -f1

@@ -6,10 +6,10 @@
 #    By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/20 18:36:00 by sscarecr          #+#    #+#              #
-#    Updated: 2019/11/20 18:36:01 by sscarecr         ###   ########.fr        #
+#    Updated: 2019/11/20 20:50:16 by sscarecr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#nslookup 192.168.29.117
+#nslookup 192.168.29.141
 
-117.29.168.192.in-addr.arpa	name = ox-s1.21-school.ru.
+141.29.168.192.in-addr.arpa	name = ox-w1.21-school.ru.

@@ -11,3 +11,6 @@
 # **************************************************************************** #
 
 systemctl list-units --type service --all
+service --status-all
+
+#daemons

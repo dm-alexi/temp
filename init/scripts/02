@@ -10,6 +10,5 @@
 #                                                                              #
 # **************************************************************************** #
 
-USER = $1
-pkill -u $USER
-userdel --remove-all-files $USER
+pkill -u $1
+userdel $1

@@ -1,0 +1,3 @@
+0  4    * * 1   root	sh ~/scripts/update_script.sh
+@reboot		root	sh ~/scripts/update_script.sh
+0  0    * * *   root	sh ~/scripts/cron_mod.sh

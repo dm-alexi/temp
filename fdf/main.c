@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <mlx.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include "fdf.h"
@@ -23,20 +22,6 @@ static int	usage(void)
 
 int			main(int ac, char **av)
 {
-    /*void *mlx;
-    void *win;
-
-    if (av[ac])
-        ft_printf("@");
-    if (!(mlx = mlx_init()))
-        {
-            ft_printf("sdfgds");
-            return (0);
-        };
-    win = mlx_new_window(mlx, 200, 300, "wind");
-    for (int i = 0; i < 100; ++i)
-        mlx_pixel_put(mlx, win, i, 100, 250);
-    mlx_loop(mlx);*/
 	int		fd;
 	t_map	*map;
 

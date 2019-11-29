@@ -11,18 +11,16 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-/*
-static void		free_arr(char **arr, int n)
-{
-	char	*tmp;
 
-	tmp = *arr;
-	for (int i = 0; i < n; ++i)
-		free(arr[i]);
-	//while (tmp)
-	//	free(tmp++);
+static void		free_arr(char **arr)
+{
+	char	**tmp;
+
+	tmp = arr;
+	while (*tmp)
+		free(*tmp++);
 	free(arr);
-}*/
+}
 
 static void		clear_list(t_list *t)
 {
@@ -43,7 +41,7 @@ static int		*get_line(t_list *t, int *n)
 	char	*tmp;
 	int		*res;
 	int		i;
-	
+
 	if (!t || !t->content)
 		error("invalid map");
 	arr = ft_strsplit(t->content, ' ');
@@ -60,7 +58,7 @@ static int		*get_line(t_list *t, int *n)
 			error("invalid map.");
 		++i;
 	}
-	//free_arr(arr, *n);
+	free_arr(arr);
 	return (res);
 }
 
@@ -68,7 +66,7 @@ static void		get_grid(t_list *t, t_map *map)
 {
 	int		i;
 	int		n;
-	
+
 	if (!(map->grid = (int**)malloc(sizeof(int*) * map->width)))
 		sys_error();
 	i = map->width - 1;

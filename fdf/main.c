@@ -15,13 +15,13 @@
 #include <unistd.h>
 #include "fdf.h"
 
-int		usage(void)
+static int	usage(void)
 {
 	ft_printf("usage: fdf filename\n");
 	return (0);
 }
 
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
     /*void *mlx;
     void *win;
@@ -56,7 +56,5 @@ int		main(int ac, char **av)
             ft_printf("\n");
     }
 	close(fd);
-    /*int *h =  malloc(4);
-    *h = 5;*/
     return (0);
 }

@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/28 23:32:18 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/29 19:34:30 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/11/29 19:44:17 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/11/29 20:46:43 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
-#include "libft/libft.h"
+#include <mlx.h>
+#include "fdf.h"
 
-void	sys_error(void)
+void    image_draw_line(char *image, t_point *a, t_point *b, int color)
 {
-	perror("Error");
-	exit(EXIT_FAILURE);
-}
+    int     i;
+    int     m;
+    
 
-void	error(char *s)
-{
-	write(2, "Error: ", 7);
-	write(2, s, ft_strlen(s));
-	exit(EXIT_FAILURE);
+    if (a->y == b->y)
+    {
+        i = a->x < b->x ? a->x : b->x;
+        m = a->x > b->x ? a->x : b->x;
+        while (i < m)
+           ((char*)image)[i++ * WIDTH + a->y] = color;
+    }
 }

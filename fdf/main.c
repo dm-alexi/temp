@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:08 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/28 23:40:21 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/11/29 19:21:54 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int			main(int ac, char **av)
             ft_printf("%d ", map->grid[i][j]);
             ft_printf("\n");
     }
+    window(av[ac - 1]);
 	close(fd);
     return (0);
 }

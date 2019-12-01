@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 22:14:21 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/03 16:56:37 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/01 16:31:39 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ int				ft_isqrt(int nb);
 char			*ft_lltoa(long long n, int base, int upcase);
 char			*ft_ulltoa(unsigned long long n, int base, int upcase);
 size_t			ft_wcslen(const wchar_t *wcs);
+int				ft_abs(int n);
 
 /*
 				** projects

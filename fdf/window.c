@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:19:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/29 21:04:15 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/01 17:15:12 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,21 @@ void	window(char *file)
 {
 	void	*mlx;
 	void	*win;
-	void	*img;
+	t_image	*image;
 
-	//if (!(mlx = mlx_init()) || !(win = mlx_new_window(mlx, WIDTH, HEIGHT, file)))
-	//!(img = mlx_new_image(mlx, WIDTH, HEIGHT)))
-	//	sys_error();
+	/*if (!(mlx = mlx_init()) || !(win = mlx_new_window(mlx, WIDTH, HEIGHT, file))
+	|| !(img = mlx_new_image(mlx, WIDTH, HEIGHT)))
+		sys_error();*/
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, WIDTH, HEIGHT, file);
-	img = mlx_new_image(mlx, WIDTH, HEIGHT);
-	/*for (int i = 0; i < 100; ++i)
-		mlx_pixel_put(mlx, win, i, 100, 250);*/
+	image = new_image(mlx, WIDTH, HEIGHT);
 	mlx_key_hook(win, &key_handle, NULL);
-	fill_image(img);
-	//t_point a = {100, 100, 0}, b = {500, 100, 0};
-	//image_draw_line(img, &a, &b, 250);
-	mlx_put_image_to_window(mlx, win, img, 0, 0);
+	//fill_image(img);
+	t_dot a = {100, 100}, b = {500, 400}, c = {200, 600}, d = {10, 400};
+	image_draw_line(image, &a, &b);
+	image_draw_line(image, &b, &c);
+	image_draw_line(image, &c, &d);
+	image_draw_line(image, &d, &a);
+	mlx_put_image_to_window(mlx, win, image->img, 0, 0);
 	mlx_loop(mlx);
 }

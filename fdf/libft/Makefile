@@ -7,7 +7,7 @@ SRC = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c ft_memchr.c f
 	ft_memalloc.c ft_memdel.c ft_strnew.c ft_strdel.c ft_strclr.c ft_striter.c ft_striteri.c ft_strmap.c ft_strmapi.c ft_strequ.c ft_strnequ.c ft_strsub.c ft_strjoin.c ft_strtrim.c \
 	ft_strsplit.c ft_itoa.c ft_putchar.c ft_putstr.c ft_putendl.c ft_putnbr.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c \
 	ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_isspace.c ft_isupper.c ft_islower.c ft_strtol.c ft_atol.c ft_realloc.c ft_memswap.c ft_isort.c ft_qsort.c ft_lstadd_sorted.c ft_lstsort.c \
-	ft_isqrt.c ft_lltoa.c ft_ulltoa.c ft_wcslen.c \
+	ft_isqrt.c ft_lltoa.c ft_ulltoa.c ft_wcslen.c ft_abs.c \
 	GNL/get_next_line.c \
 	ft_printf/ft_printf.c ft_printf/ft_printf_b.c ft_printf/ft_printf_e.c ft_printf/ft_printf_efg.c ft_printf/ft_printf_f.c ft_printf/ft_printf_float.c ft_printf/ft_printf_int.c \
 	ft_printf/ft_printf_n.c ft_printf/ft_printf_otoa.c ft_printf/ft_printf_ptr.c ft_printf/ft_printf_r.c ft_printf/ft_printf_string.c ft_printf/ft_printf_uint.c ft_printf/ft_printf_utoa.c \

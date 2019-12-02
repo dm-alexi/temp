@@ -6,7 +6,7 @@
 		<style>
 			h1 {text-align: center;}
 			table {margin-left: auto; margin-right: auto; border-collapse: collapse; border: solid;}
-            td {border: 1px solid; width: 5%; font-size: small; border-style: solid;}
+            td {border: 1px solid; width: 5%; height: 5%; font-size: small;}
             th {border: 1px solid;}
             .nonmetal {background-color: palegreen;}
             .noble {background-color:lightcyan;}
@@ -18,7 +18,7 @@
             .tmetal {background-color:salmon;}
             .lanthanide {background-color:plum}
             .actinide {background-color: palevioletred}
-            .weight {text-align: right;}
+            .weight {text-align: right; margin: 0px}
             .element {text-align: center; font-weight:bold; font-size: initial}
         </style>
 	</head>
@@ -32,14 +32,15 @@
             <tr>
                 <td class=element contenteditable="true">1</td>
                 <td class=nonmetal><p class=weight>1.008</p><p class=element>H</p>1</td>
-                <td colspan="16"></td>
+                <td style="border-right-style: hidden"></td>
+                <td colspan="10" rowspan="3"></td>
+                <td colspan="5" style="border-left-style: hidden"></td>
                 <td class=noble><p class=weight>4.0026</p><p class=element>He</p>2</td>
             </tr>
             <tr>
                 <td class=element>2</td>
                 <td class=ametal><p class=weight>6.94</p><p class=element>Li</p>3</td>
                 <td class=aemetal><p class=weight>9.0122</p><p class=element>Be</p>4</td>
-                <td colspan="10"></td>
                 <td class=metalloid><p class=weight>10.81</p><p class=element>B</p>5</td>
                 <td class=nonmetal><p class=weight>12.011</p><p class=element>C</p>6</td>
                 <td class=nonmetal><p class=weight>14.007</p><p class=element>N</p>7</td>
@@ -51,7 +52,6 @@
                 <td class=element>3</td>
                 <td class=ametal><p class=weight>22.990</p><p class=element>Na</p>11</td>
                 <td class=aemetal><p class=weight>24.305</p><p class=element>Mg</p>12</td>
-                <td colspan="10"></td>
                 <td class=ptmetal><p class=weight>26.982</p><p class=element>Al</p>13</td>
                 <td class=metalloid><p class=weight>28.085</p><p class=element>Si</p>14</td>
                 <td class=nonmetal><p class=weight>30.974</p><p class=element>P</p>15</td>

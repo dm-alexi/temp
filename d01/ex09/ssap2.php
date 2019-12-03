@@ -24,7 +24,7 @@ function cmp_single($a, $b)
 	if ($a == $b)
 		return 0;
 	if ((is_alpha($a) && is_alpha($b)) || (is_numeric($a) && is_numeric($b)))
-		return strcmp($a, $b);
+		return $a > $b ? 1 : -1;
 	if (is_alpha($a))
 		return -1;
 	if (is_alpha($b))
@@ -33,15 +33,15 @@ function cmp_single($a, $b)
 		return -1;
 	if (is_numeric($b))
 		return 1;
-	return strcmp($a, $b);
+	return $a > $b ? 1 : -1;
 }
 
 function cmp($a, $b)
 {
 	$a_arr = str_split(strtoupper($a));
 	$b_arr = str_split(strtoupper($b));
-	$na = strlen($a);
-	$nb = strlen($b);
+	$na = count($a_arr);
+	$nb = count($b_arr);
 	$n = $nb > $na ? $na : $nb;
 	for ($i = 0; $i < $n; ++$i)
 		if ($res = cmp_single($a_arr[$i], $b_arr[$i]))

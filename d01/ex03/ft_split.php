@@ -1,9 +1,9 @@
 <?php
 function ft_split($line)
 {
-	$arr = array();
 	if (!is_string($line))
 		return NULL;
+	$arr = array();
 	$line = trim($line);
 	while ($tmp = strstr($line, " ", true))
 	{

@@ -2,6 +2,8 @@
 function ft_split($line)
 {
 	$arr = array();
+	if (!is_string($line))
+		return NULL;
 	$line = trim($line);
 	while ($tmp = strstr($line, " ", true))
 	{

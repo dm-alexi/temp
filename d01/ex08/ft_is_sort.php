@@ -17,6 +17,8 @@ function sorted_down($arr)
 
 function ft_is_sort($arr)
 {
+	if (!is_array($arr))
+		return NULL;
 	return (sorted_up($arr) || sorted_down($arr));
 }
 ?>

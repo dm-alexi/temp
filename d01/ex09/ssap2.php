@@ -1,14 +1,33 @@
 #!/usr/bin/php
 <?php
+function ft_split($line)
+{
+	$arr = array();
+	$line = trim($line);
+	while ($tmp = strstr($line, " ", true))
+	{
+		array_push($arr, $tmp);
+		$line = trim(strstr($line, " "));
+	}
+	if ($line !== "")
+		array_push($arr, $line);
+	return $arr;
+}
+
+function is_alpha($a)
+{
+	return strstr("ABCDEFGHIJKLMNOPQRSTUVWXYZ", $a);
+}
+
 function cmp_single($a, $b)
 {
 	if ($a == $b)
 		return 0;
-	if ((preg_match('/[A-Z]/', $a) && preg_match('/[A-Z]/', $b)) || (is_numeric($a) && is_numeric($b)))
+	if ((is_alpha($a) && is_alpha($b)) || (is_numeric($a) && is_numeric($b)))
 		return strcmp($a, $b);
-	if (preg_match('/[A-Z]/', $a))
+	if (is_alpha($a))
 		return -1;
-	if (preg_match('/[A-Z]/', $b))
+	if (is_alpha($b))
 		return 1;
 	if (is_numeric($a))
 		return -1;
@@ -32,7 +51,7 @@ function cmp($a, $b)
 
 $arr = array();
 for ($i = 1; $i < $argc; ++$i)
-	$arr = array_merge($arr, preg_split("/\\s+/", trim($argv[$i])));
+	$arr = array_merge($arr, ft_split(trim($argv[$i])));
 usort($arr, "cmp");
 foreach ($arr as $val)
 	echo $val, "\n"

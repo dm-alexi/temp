@@ -12,6 +12,7 @@ function ft_split($line)
 	}
 	if ($line !== "")
 		array_push($arr, $line);
+	$arr = array_unique($arr);
 	sort($arr, SORT_STRING);
 	return $arr;
 }

@@ -6,7 +6,7 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 $str = curl_exec($ch);
 curl_close($ch);
-$dir = strstr($argv[1], "www");
+$dir = substr(strstr($argv[1], "//"), 2);
 if (!(file_exists($dir)))
 	mkdir($dir);
 preg_match_all("/<img.*?>/", $str, $arr);
@@ -16,9 +16,8 @@ foreach ($arr[0] as $val)
 	$link = preg_match("/^http/", $tmp[1]) ? $tmp[1] : $argv[1].$tmp[1];
 	if (!($ch = curl_init($link)))
 		continue;
-	echo $link."\n";
-	$filename = strrchr($link, "/");
-	$f = fopen($dir.$filename, "w");
+	$filename = $dir.strrchr($link, "/");
+	$f = fopen($filename, "w");
 	curl_setopt($ch, CURLOPT_FILE, $f);
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 	curl_setopt($ch, CURLOPT_TIMEOUT, 4000);
@@ -26,6 +25,6 @@ foreach ($arr[0] as $val)
 	fclose($f);
 	curl_close($ch);
 	if (!$success)
-		unlink($dir.$filename);
+		unlink($filename);
 }
 ?>

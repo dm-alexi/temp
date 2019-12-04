@@ -13,16 +13,16 @@ preg_match_all("/<img.*?>/", $str, $arr);
 foreach ($arr[0] as $val)
 {
 	preg_match("/src=\"(.*?)\"/", $val, $tmp);
-	print_r($tmp);
-	if (!($ch = curl_init($tmp[1])))
+	$link = preg_match("/^http/", $tmp[1]) ? $tmp[1] : $argv[1].$tmp[1];
+	if (!($ch = curl_init($link)))
 		continue;
-	$filename = strrchr($tmp[1], "/");
+	echo $link."\n";
+	$filename = strrchr($link, "/");
 	$f = fopen($dir.$filename, "w");
 	curl_setopt($ch, CURLOPT_FILE, $f);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 	curl_setopt($ch, CURLOPT_TIMEOUT, 4000);
-	//echo $dir.$filename."\n";
 	$success = curl_exec($ch);
-		//echo $filename." badlink\n";
 	fclose($f);
 	curl_close($ch);
 	if (!$success)

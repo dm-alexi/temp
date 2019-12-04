@@ -11,7 +11,6 @@ for ($i = 1; $i <= 12; ++$i)
 		break;
 if (strlen((string)$i) < 2)
 	$i = "0".$i;
-date_default_timezone_set("UTC");
+date_default_timezone_set('Europe/Paris');
 echo strtotime($arr[3]."-".$i."-".$arr[1]." ".$arr[4]), "\n";
-//echo strtotime("2013-11-12 12:02:21"), "\n";
 ?>

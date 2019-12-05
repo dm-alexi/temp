@@ -1,3 +1,4 @@
 <?php
-header("Location : http://".$_SERVER['PHP_SELF']);
+header("Content-Type: text/plain");
 ?>
+<html><body>Hello</body></html>

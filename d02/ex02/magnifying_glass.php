@@ -2,11 +2,17 @@
 <?php
 if ($argc < 2 || !($f = file_get_contents($argv[1])))
 	exit;
-$pattern1 = "/<([^>]*)title=\"(.*?)\"([^>]*)>/";
-$pattern2 = "/<([^>]*)title='(.*?)'([^>]*)>/";
-$pattern3 = "/<a([^>]*)>(.*?)</";
-$f = preg_replace_callback($pattern1, function($m) { return "<".$m[1]."title=\"".strtoupper($m[2])."\"".$m[3].">"; }, $f);
-$f = preg_replace_callback($pattern2, function($m) { return "<".$m[1]."title='".strtoupper($m[2])."'".$m[3].">"; }, $f);
-$f = preg_replace_callback($pattern3, function($m) { return "<a".$m[1].">".strtoupper($m[2])."<"; }, $f);
+$f = preg_replace_callback("/<a (.*?)\/a>/s", function($m)
+{
+	$m[1] = preg_replace_callback("/ title=([\"'])(.*?)\\1/s", function($m)
+	{
+		return " title=".$m[1].strtoupper($m[2]).$m[1];
+	}, $m[1]);
+	$m[1] = preg_replace_callback("/(>(.*?)<)/s", function($m)
+	{
+		return strtoupper($m[0]);
+	}, $m[1]);
+	return "<a ".$m[1]."/a>";
+}, $f);
 echo $f;
 ?>

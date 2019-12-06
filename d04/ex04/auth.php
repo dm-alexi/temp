@@ -2,7 +2,7 @@
 function auth($login, $passwd)
 {
 	$filename = "../private/passwd";
-	if (!($arr = unserialize(file_get_contents($filename))))
+	if (!file_exists($filename) || !($arr = unserialize(file_get_contents($filename))))
 		return false;
 	foreach ($arr as $val)
 		if ($val["login"] === $login)

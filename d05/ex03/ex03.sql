@@ -1,0 +1,1 @@
+SELECT 10 FROM user_card WHERE 

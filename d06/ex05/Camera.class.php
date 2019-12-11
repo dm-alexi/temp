@@ -53,4 +53,12 @@ class Camera
 	{
         return sprintf("Camera( \n+ Origine: %s\n+ tT:\n%s\n+ tR:\n%s\n+ tR->mult( tT ):\n%s\n+ Proj:\n%s\n)", $this->getOrigin(), $this->getTT(), $this->getTR(), $this->getTR()->mult($this->getTT()), $this->_projection);
     }
+
+    public function watchMesh($mesh)
+    {
+        $res = array();
+        foreach ($mesh as $key => $val)
+            $res[$key] = new Triangle($this->watchVertex($val->getA()), $this->watchVertex($val->getB()), $this->watchVertex($val->getC()));
+        return $res;
+    }
 }

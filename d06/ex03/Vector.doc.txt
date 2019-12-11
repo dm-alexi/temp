@@ -1,6 +1,6 @@
 
 <- Vector ----------------------------------------------------------------------
-The Vectoe class handles vectors.
+The Vector class handles vectors.
 
 An instance can be constructed from one or two Vertex instances:
 new Vertex( array( 'dest' => $vertex1, 'orig' => $vertex2 ) );

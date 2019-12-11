@@ -1,0 +1,19 @@
+
+<- Render ----------------------------------------------------------------------
+The Render class does rendering.
+
+An instance can be constructed with three mandatory parameters representing 
+width, height, and a file name correspondingly.
+
+The class provides the following methods :
+
+void renderVertex( Vertex $screenVertex ) : Displays a "screen" coordinates
+vertex in the generated image (a pixel basically).
+
+void renderTriangle( Triangle $triangle, $mode ) : Displays a "screen"
+coordinates triangle in the generated image according to the selected mode. 
+The mode must be one of the Class constants.
+
+void develop() : Save the png generated image on the hard drive using the 
+fileame given to the constructor.
+---------------------------------------------------------------------- Render ->

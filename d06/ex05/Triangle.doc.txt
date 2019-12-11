@@ -2,11 +2,8 @@
 <- Triangle ----------------------------------------------------------------------
 The Triangle class represents a triangle.
 
-An instance can be constructed from an array with three mandatory fields, 'A', 'B'
-and 'C', representing three vertices of the triangle (each must be an instance of
-class Vertex).
+An instance can be constructed with three mandatory parameters representing three 
+vertices of the triangle (each must be an instance of class Vertex).
 
-The class provides the following methods :
-
-
+The class doesn't provides public methods.
 ---------------------------------------------------------------------- Triangle ->

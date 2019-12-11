@@ -1,81 +1,56 @@
 <?php
+require_once 'Matrix.class.php';
 class Camera
 {
-        static $verbose = false;
-        private $_proj;
-        private $_tR;
-        private $_tT;
-        private $_origine;
-        private $_width;
-        private $_height;
-        private $_ratio;
-        public function __construct($array)
-        {
-            $this->_origine = $array['origin'];
-            $this->_tT = new Matrix(array('preset' => Matrix::TRANSLATION, 'vtc' => $this->_origine->opposite()));
-            $this->_tR = $this->_transpose($array['orientation']);
-            $this->_width = (float)$array['width'] / 2;
-            $this->_height = (float)$array['height'] / 2;
-            $this->_ratio = $this->_width / $this->_height;
-            $this->_proj = new Matrix(array(
-                'preset' => Matrix::PROJECTION,
-                'fov' => $array['fov'],
-                'ratio' => $this->_ratio,
-                'near' => $array['near'],
-                'far' => $array['far']
-            ));
-            if (Self::$verbose) {
-                echo "Camera instance constructed\n";
-            }
-        }
-        public function watchVertex(Vertex $worldVertex){
-            $vtx = $this->_proj->transformVertex($this->_tR->transformVertex($worldVertex));
-            $vtx->setX($vtx->getX() * $this->_ratio);
-            $vtx->setY($vtx->getY());
-            $vtx->setColor($worldVertex->getColor());
-            return ($vtx);
-        }
-        private function _transpose(Matrix $m){
-            $tmp[0] = $m->matrix[0];
-            $tmp[1] = $m->matrix[4];
-            $tmp[2] = $m->matrix[8];
-            $tmp[3] = $m->matrix[12];
-            $tmp[4] = $m->matrix[1];
-            $tmp[5] = $m->matrix[5];
-            $tmp[6] = $m->matrix[9];
-            $tmp[7] = $m->matrix[13];
-            $tmp[8] = $m->matrix[2];
-            $tmp[9] = $m->matrix[6];
-            $tmp[10] = $m->matrix[10];
-            $tmp[11] = $m->matrix[14];
-            $tmp[12] = $m->matrix[3];
-            $tmp[13] = $m->matrix[7];
-            $tmp[14] = $m->matrix[11];
-            $tmp[15] = $m->matrix[15];
-            $m->matrix = $tmp;
-            return ($m);
-        }
-        function __destruct()
-        {
-            if (Self::$verbose)
-                printf("Camera instance destructed\n");
-        }
-        function __toString()
-        {
-            $tmp = "Camera( \n";
-            $tmp .= "+ Origine: ".$this->_origine."\n";
-            $tmp .= "+ tT:\n".$this->_tT."\n";
-            $tmp .= "+ tR:\n".$this->_tR."\n";
-            $tmp .= "+ tR->mult( tT ):\n".$this->_tR->mult($this->_tT)."\n";
-            $tmp .= "+ Proj:\n".$this->_proj."\n)";
-            return ($tmp);
-        }
-        public static function doc()
-        {
-            $read = fopen("Camera.doc.txt", 'r');
-            echo "\n";
-            while ($read && !feof($read))
-                echo fgets($read);
-            echo "\n";
-        }
+    public static $verbose = false;
+	public static function doc()
+	{
+		return file_get_contents('Camera.doc.txt');
+    }
+
+    private $_origin;    
+    private $_tR;
+    private $_tT;
+    private $_width;
+    private $_height;
+    private $_ratio;
+    private $_projection;
+
+    public function getOrigin() { return $this->_origin; }
+    public function getTR() { return $this->_tR; }
+    public function getTT() { return $this->_tT; }
+    public function getRatio() { return $this->_ratio; }
+    public function getProjection() { return $this->_projection; }
+
+    public function __construct($args)
+    {
+        $this->_origin = $args['origin'];
+        $this->_tT = new Matrix(array('preset' => Matrix::TRANSLATION, 'vtc' => (new Vector(array('dest' => $this->getOrigin())))->opposite()));
+        $this->_ratio = isset($args['ratio']) ? $args['ratio'] : floatval($args['width']) / floatval($args['height']);
+        $this->_tR = new Matrix(array('transpose' => $args['orientation']));
+        $this->_projection = new Matrix(array('preset' => Matrix::PROJECTION, 'fov' => $args['fov'], 'ratio' => $this->_ratio, 'near' => $args['near'], 'far' => $args['far'] ));
+        if (Self::$verbose)
+            echo "Camera instance constructed\n";
+    }
+    
+    public function watchVertex(Vertex $worldVertex)
+    {
+        $vtx = $this->getProjection()->transformVertex($this->getTR()->transformVertex($worldVertex));
+        $vtx->setX($vtx->getX() * $this->getRatio());
+        $vtx->setY($vtx->getY());
+        $vtx->setColor($worldVertex->getColor());
+        return ($vtx);
+    }
+
+    public function __destruct()
+	{
+		if (self::$verbose)
+            printf("Camera instance destructed\n");
+        return;
+	}
+	
+    public function __toString()
+	{
+        return sprintf("Camera( \n+ Origine: %s\n+ tT:\n%s\n+ tR:\n%s\n+ tR->mult( tT ):\n%s\n+ Proj:\n%s\n)", $this->getOrigin(), $this->getTT(), $this->getTR(), $this->getTR()->mult($this->getTT()), $this->_projection);
+    }
 }

@@ -62,7 +62,18 @@ Class Matrix
 	                    $s += $args[0]->getMatrix()[$i * 4 + $k] *  $args[1]->getMatrix()[$k * 4 + $j];
 	                $this->_matrix[$i * 4 + $j] = $s;
 	            }
-	    }
+		}
+		else if (isset($args['copy']))
+		{
+			for ($i = 0; $i < 16; ++$i)
+				$this->_matrix[$i] = $args['copy']->getMatrix()[$i];
+		}
+		else if (isset($args['transpose']))
+		{
+			for ($i = 0; $i < 4; ++$i)
+				for ($j = 0; $j < 4; ++$j)
+					$this->_matrix[$i * 4 + $j] = $args['transpose']->getMatrix()[$j * 4 + $i];
+		}
 		return;
 	}
 

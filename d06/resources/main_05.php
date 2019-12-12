@@ -75,7 +75,6 @@ $cam = new Camera( array( 'origin' => new Vertex( array( 'x' => 15.0, 'y' => 15.
 
 $renderer = new Render( 640, 480, 'pic.png' );
 
-
 $origin = New Vertex( array( 'x' => 0.0, 'y' => 0.0, 'z' => 0.0 ) );
 $origin = $cam->watchVertex( $origin );
 
@@ -86,12 +85,11 @@ $repere = $cam->watchMesh( $repere );
 $renderer->renderMesh( $repere, Render::EDGE );
 $renderer->renderVertex( $origin );
 
-
 $cube = makeColoredCube( 0.0, 0.0, 0.0, 1.0 );
 $M = $T->mult( $RX )->mult( $RY )->mult( $S );
 $cube = $M->transformMesh( $cube );
 $cube = $cam->watchMesh( $cube );
-$renderer->renderMesh( $cube, Render::RASTERIZE );
+$renderer->renderMesh( $cube, Render::EDGE );
 
 
 $renderer->develop();

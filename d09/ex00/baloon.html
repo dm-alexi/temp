@@ -20,10 +20,14 @@
         </style>
 	</head>
 	<body>
-        <div id=balloon></div>
+        <div id=balloon onclick="resize()"></div>
         <script>
-            var elem = document.getElementById("balloon");
-            
+            function resize()
+            {
+                var elem = document.getElementById("balloon");
+                var size = elem.getAttribute("style");
+                elem.setAttribute();
+            }
         </script>
     </body>
 </html>

@@ -3,10 +3,9 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Balloon</title>
-		<style>
-			#balloon 
-            {
-                background-color: red;
+	</head>
+	<body>
+        <div id=balloon style="background-color: red;
                 height: 200px;
                 width: 200px;
                 border-radius: 50%;
@@ -15,18 +14,41 @@
                 bottom: 0;
                 left: 0;
                 right: 0;
-                margin: auto;
-            }
-        </style>
-	</head>
-	<body>
-        <div id=balloon onclick="resize()"></div>
+                margin: auto;" onclick="resize()" onmouseout="shrink()"></div>
         <script>
             function resize()
             {
                 var elem = document.getElementById("balloon");
-                var size = elem.getAttribute("style");
-                elem.setAttribute();
+                var n = parseInt(elem.style['height']) + 10;
+                if (n > 420)
+                    n = 200;
+                n = String(n) + 'px';
+                elem.style['height'] = n;
+                elem.style['width'] = n;
+                if (elem.style['background-color'] == 'red')
+                    elem.style['background-color'] = 'green';
+                else if (elem.style['background-color'] == 'green')
+                    elem.style['background-color'] = 'blue';
+                else if (elem.style['background-color'] == 'blue')
+                    elem.style['background-color'] = 'red';
+
+            }
+            function shrink()
+            {
+                var elem = document.getElementById("balloon");
+                var n = parseInt(elem.style['height']);
+                if (n > 200)
+                {
+                    n = String(n - 5) + 'px';
+                    elem.style['height'] = n;
+                    elem.style['width'] = n;
+                    if (elem.style['background-color'] == 'red')
+                        elem.style['background-color'] = 'blue';
+                    else if (elem.style['background-color'] == 'blue')
+                        elem.style['background-color'] = 'green';
+                    else if (elem.style['background-color'] == 'green')
+                        elem.style['background-color'] = 'red';
+                }
             }
         </script>
     </body>

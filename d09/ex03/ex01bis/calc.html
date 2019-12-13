@@ -8,6 +8,9 @@
         body, body { display: flex; }
         form { margin: auto; }
     </style>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
+    </script>
 </head>
 <body>
     <form>
@@ -27,36 +30,34 @@
         {
             alert("Please, use me...");
         }
-        $(document).ready(function ()
+        $(document).ready(function()
         {
-            setInterval(useme, 30000);
-        
-        function calculate()
-        {
-            var mes = "Error :("
-            var op1 = parseInt(document.getElementById("operand1").value);
-            var selector = document.getElementById("selector");
-            var act = selector.options[selector.selectedIndex].value;
-            var op2 = parseInt(document.getElementById("operand2").value);
-            if (!isNaN(op1) && op1 >=0 && !isNaN(op2) && op2 >= 0)
-            {
-                if (op2 == 0 && (act == '/' || act == '%'))
-                    mes = "It’s over 9000!";
-                else if (act == '+')
-                    mes = String(op1 + op2);
-                else if (act == '-')
-                    mes = String(op1 - op2);
-                else if (act == '*')
-                    mes = String(op1 * op2);
-                else if (act == '/')
-                    mes = String(op1 / op2);
-                else if (act == '%')
-                    mes = String(op1 % op2);
-            }
-            console.log(mes);
-            alert(mes);
-        }*/
+        	setInterval(useme, 30000);
+        	$('#try').click(function()
+        	{
+        		var mes = "Error :(";
+        		var op1 = parseInt($("#operand1").val());
+        		var op2 = parseInt($("#operand2").val());
+        		var act = $("#selector :selected").text();
+				if (!isNaN(op1) && op1 >=0 && !isNaN(op2) && op2 >= 0)
+           		{
+	                if (op2 == 0 && (act == '/' || act == '%'))
+	                    mes = "It’s over 9000!";
+	                else if (act == '+')
+	                    mes = String(op1 + op2);
+	                else if (act == '-')
+	                    mes = String(op1 - op2);
+	                else if (act == '*')
+	                    mes = String(op1 * op2);
+	                else if (act == '/')
+	                    mes = String(op1 / op2);
+	                else if (act == '%')
+	                    mes = String(op1 % op2);
+            	}
+           		console.log(mes);
+	            alert(mes);
+        	});
+        })
     </script>
 </body>
-
 </html>

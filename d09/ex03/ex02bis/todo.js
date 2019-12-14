@@ -17,41 +17,32 @@ function getCookie(cookie_name)
 function savelist() 
 {
     var arr = [];
-    var list = document.getElementById("ft_list");
-    for (var i = 0; i < list.children.length; ++i)
-        arr[i] = list.children[i].textContent;
+    $('#ft_list').children().each(function()
+    {
+        arr.push($(this).text());
+    });
     setCookie(JSON.stringify(arr));
 }
 
 function delEntry()
 {
-    if (confirm("Are you sure you want to delete: \"" + this.textContent.substr(2) + "\"?"))
+    if (confirm("Are you sure you want to delete: \"" + $(this).text().substr(2) + "\"?"))
         this.remove();
     savelist();
 }
 
-function addEntry()
+$(document).ready(function ()
 {
-    var entry = prompt("What should be done?");
-    if (entry != null && entry != "")
+    $('#bnew').click(function()
     {
-        var list = document.getElementById("ft_list");
-        var elem = document.createElement("div");
-        elem.onclick = delEntry;
-        elem.appendChild(document.createTextNode("- " + entry));
-        list.prepend(elem);
+        var entry = prompt("What should be done?");
+        $('<div>', { text: "- " + entry, click: delEntry }).prependTo('#ft_list');
         savelist();
-    }
-}
-window.onload = function()
-{
-    var list = document.getElementById("ft_list");
+    });
+    
     var lst = JSON.parse(getCookie("name"));
     for (var i = 0; i < lst.length; ++i)
     {
-        var elem = document.createElement("div");
-        elem.onclick = delEntry;
-        elem.appendChild(document.createTextNode(lst[i]));
-        list.append(elem);
+        $('<div>', { text: lst[i], click: delEntry }).appendTo('#ft_list');
     }
-}
+});

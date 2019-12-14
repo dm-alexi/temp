@@ -27,8 +27,10 @@ function savelist()
 function delEntry()
 {
     if (confirm("Are you sure you want to delete: \"" + $(this).text().substr(2) + "\"?"))
+    {
         this.remove();
-    savelist();
+        savelist();
+    }
 }
 
 $(document).ready(function ()
@@ -36,8 +38,11 @@ $(document).ready(function ()
     $('#bnew').click(function()
     {
         var entry = prompt("What should be done?");
-        $('<div>', { text: "- " + entry, click: delEntry }).prependTo('#ft_list');
-        savelist();
+        if (entry != null && entry != "")
+        {
+            $('<div>', { text: "- " + entry, click: delEntry }).prependTo('#ft_list');
+            savelist();
+        }
     });
     
     var lst = JSON.parse(getCookie("name"));

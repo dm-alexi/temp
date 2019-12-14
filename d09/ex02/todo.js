@@ -26,8 +26,10 @@ function savelist()
 function delEntry()
 {
     if (confirm("Are you sure you want to delete: \"" + this.textContent.substr(2) + "\"?"))
+    {   
         this.remove();
-    savelist();
+        savelist();
+    }
 }
 
 function addEntry()

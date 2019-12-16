@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/01 14:32:11 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/16 20:01:14 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,8 @@ t_map			*get_map(int fd)
 	t_list	*t;
 	int		r;
 
-	if (!(map = (t_map*)malloc(sizeof(t_map))))
+	if (!(map = (t_map*)ft_memalloc(sizeof(t_map))))
 		sys_error();
-	ft_bzero(map, sizeof(t_map));
 	t = NULL;
 	while ((r = get_next_line(fd, &line)) != 0 && ++map->width)
 	{

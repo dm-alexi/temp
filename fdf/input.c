@@ -6,11 +6,31 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/16 20:01:14 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/16 22:51:02 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static int		count_elem(char *s)
+{
+	int		n;
+
+	if (!s)
+		return (0);
+	n = 0;
+	while (*s == ' ')
+		++s;
+	while (*s)
+	{
+		while (*s && *s != ' ')
+			++s;
+		++n;
+		while (*s == ' ')
+			++s;
+	}
+	return (n);
+}
 
 static void		free_arr(char **arr)
 {
@@ -67,9 +87,9 @@ static void		get_grid(t_list *t, t_map *map)
 	int		i;
 	int		n;
 
-	if (!(map->grid = (int**)malloc(sizeof(int*) * map->width)))
+	if (!(map->grid = (t_vertex *)malloc(sizeof(t_vertex) * map->length)))
 		sys_error();
-	i = map->width - 1;
+	i = (map->rows - 1) * map->columns;
 	(map->grid)[i] = get_line(t, &(map->length));
 	t = t->next;
 	if (!map->length)
@@ -93,15 +113,16 @@ t_map			*get_map(int fd)
 	if (!(map = (t_map*)ft_memalloc(sizeof(t_map))))
 		sys_error();
 	t = NULL;
-	while ((r = get_next_line(fd, &line)) != 0 && ++map->width)
+	while ((r = get_next_line(fd, &line)) != 0 && ++map->rows)
 	{
 		if (r < 0)
 			sys_error();
 		ft_lstadd(&t, ft_lstnew(line, ft_strlen(line) + 1));
 		free(line);
 	}
-	if (!map->width)
+	if (!map->rows || !(map->columns = count_elem(t->content)))
 		error("invalid map.");
+	map->length = map->rows * map->columns;
 	get_grid(t, map);
 	clear_list(t);
 	return (map);

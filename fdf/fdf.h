@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:20 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/16 21:10:29 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/16 22:30:17 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,10 @@ typedef struct	s_image
 
 typedef struct	s_map
 {
-	int		length;
-	int		width;
-	int		height;
-	int		**grid;
-	t_vertex		*vertex;
-	
+	int			length;
+	int			columns;
+	int			rows;
+	t_vertex	*grid;
 }				t_map;
 
 void			sys_error(void);

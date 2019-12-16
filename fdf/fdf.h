@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:20 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/01 16:28:42 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/16 21:10:29 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,20 @@
 # define HEIGHT 1080
 # define STEP 10
 
-typedef struct	s_point
+typedef struct	s_vertex
 {
 	int		x;
 	int		y;
 	int		z;
+	double	w;
 	int		color;
-}				t_point;
+}				t_vertex;
 
 typedef struct	s_dot
 {
 	int		x;
 	int		y;
-	
+	int		color;
 }				t_dot;
 
 typedef struct	s_image
@@ -48,7 +49,7 @@ typedef struct	s_map
 	int		width;
 	int		height;
 	int		**grid;
-	t_point		*points;
+	t_vertex		*vertex;
 	
 }				t_map;
 

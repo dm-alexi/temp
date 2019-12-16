@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:44:17 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/01 18:55:31 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/16 21:05:59 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,8 @@ void    image_draw_line(t_image *image, t_dot *a, t_dot *b)
 	double	n;
 
 	if (a->x > b->x)
-		ft_memswap(a, b, sizeof(t_dot));
-	//a-> == b->y | a->x == b->x
-	if (b->x - a->x > ft_abs(b->y - a->y))
+		image_draw_line(image, b, a);
+	else if (b->x - a->x > ft_abs(b->y - a->y))
 	{
 		step = (double)(a->y - b->y) / (a->x - b->x);
 		m = a->x;
@@ -58,10 +57,10 @@ void    image_draw_line(t_image *image, t_dot *a, t_dot *b)
 			n += step;
 		}
 	}
+	else if (a->y > b->y)
+		image_draw_line(image, b, a);
 	else
 	{
-		if (a->y > b->y)
-			ft_memswap(a, b, sizeof(t_dot));
 		step = (double)(a->x - b->x) / (a->y - b->y);
 		m = a->y;
 		n = a->x;

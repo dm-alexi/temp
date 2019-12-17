@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:19:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/17 20:05:05 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/17 21:36:26 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	fill_image(void *img)
 	s[100*bpp / 8 + 10 * sl + 3] = 0;
 }
 
-void	window(char *file)
+void	window(char *file, t_map *map)
 {
 	void	*mlx;
 	void	*win;
@@ -42,12 +42,17 @@ void	window(char *file)
 	win = mlx_new_window(mlx, WIDTH, HEIGHT, file);
 	image = new_image(mlx, WIDTH, HEIGHT);
 	mlx_key_hook(win, &key_handle, NULL);
-	//fill_image(img);
-	t_dot a = {100, 100, 0xffffff}, b = {500, 400, 0xffffff}, c = {200, 600, 0xffffff}, d = {10, 400, 0xffffff};
-	image_draw_line(image, &a, &b);
-	image_draw_line(image, &b, &c);
-	image_draw_line(image, &c, &d);
-	image_draw_line(image, &d, &a);
+	t_vertex *shown = (t_vertex*)malloc(sizeof(t_vertex) * map->length);
+	double *m = (double*)malloc(sizeof(double) * 16);
+	//m /== projection(1.57, 1, 0.1, 20);
+	//m = identity();
+	m = scale(10);
+	//mult(scale(10), projection(1.57, 1, 0.1, 20), m);
+	for (int i = 0; i < map->length; ++i)
+	{
+		transform(map->grid + i, m, shown + i);
+		image_put_pixel(image, shown[i].x + 600, shown[i].y + 200, shown[i].z ? 0xff0000 : shown[i].color);
+	}
 	mlx_put_image_to_window(mlx, win, image->img, 0, 0);
 	mlx_loop(mlx);
 }

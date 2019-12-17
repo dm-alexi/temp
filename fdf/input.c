@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/16 22:51:02 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/17 20:07:50 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,6 @@ static int		count_elem(char *s)
 			++s;
 	}
 	return (n);
-}
-//todo: rewrite ft_lstdelone and ft_lstdel to get rid of this redundant function
-static void		clear_list(t_list *t)
-{
-	t_list	*tmp;
-
-	while (t)
-	{
-		tmp = t->next;
-		free(t->content);
-		free(t);
-		t = tmp;
-	}
 }
 
 static t_vertex	get_next_vertex(int y, int x, char **s)
@@ -113,6 +100,6 @@ t_map			*get_map(int fd)
 		error("invalid map.");
 	map->length = map->rows * map->columns;
 	get_grid(t, map);
-	clear_list(t);
+	ft_lstdel(&t, NULL);
 	return (map);
 }

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:08 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/16 22:18:41 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/17 20:07:46 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ int				main(int ac, char **av)
 	map = get_map(fd);
 	close(fd);
 	//show_map(map);
-/*
+
     for (int i = 0; i < map->rows; ++i)
         for (int j = 0; j < map->columns; ++j)
             ft_printf("%2d%s", map->grid[i * map->columns + j].z, j == map->columns - 1 ? "\n" : " ");
-*/
-//    window(av[ac - 1]);
+
+    //window(av[ac - 1]);
     return (0);
 }

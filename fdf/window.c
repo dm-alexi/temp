@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:19:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/01 17:15:12 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/17 20:05:05 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	window(char *file)
 	image = new_image(mlx, WIDTH, HEIGHT);
 	mlx_key_hook(win, &key_handle, NULL);
 	//fill_image(img);
-	t_dot a = {100, 100}, b = {500, 400}, c = {200, 600}, d = {10, 400};
+	t_dot a = {100, 100, 0xffffff}, b = {500, 400, 0xffffff}, c = {200, 600, 0xffffff}, d = {10, 400, 0xffffff};
 	image_draw_line(image, &a, &b);
 	image_draw_line(image, &b, &c);
 	image_draw_line(image, &c, &d);

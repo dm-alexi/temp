@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:19:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/17 21:36:26 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/17 22:05:45 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	window(char *file, t_map *map)
 	mlx_key_hook(win, &key_handle, NULL);
 	t_vertex *shown = (t_vertex*)malloc(sizeof(t_vertex) * map->length);
 	double *m = (double*)malloc(sizeof(double) * 16);
-	//m /== projection(1.57, 1, 0.1, 20);
+	//m = projection(1.57, 0.25, 0.1, 20);
 	//m = identity();
-	m = scale(10);
+	m = scale(20);
 	//mult(scale(10), projection(1.57, 1, 0.1, 20), m);
 	for (int i = 0; i < map->length; ++i)
 	{

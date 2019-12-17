@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/03 16:55:39 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/17 19:29:52 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 ** returns -1. If the end of file is reached and no data is read, returns 0.
 */
 
-int		fillbuf(const int fd, t_buf *buf)
+static int		fillbuf(const int fd, t_buf *buf)
 {
 	int		len;
 	char	*s;
@@ -55,7 +55,7 @@ int		fillbuf(const int fd, t_buf *buf)
 ** is empty and the end of file is reached, returns 0.
 */
 
-int		readbuf(const int fd, t_file *f, char **line)
+static int		readbuf(const int fd, t_file *f, char **line)
 {
 	char	*s;
 	t_buf	*tmp;
@@ -86,7 +86,7 @@ int		readbuf(const int fd, t_file *f, char **line)
 ** the array to a minimum size necessary.
 */
 
-void	delfile(int fd, t_file *f)
+static void		delfile(int fd, t_file *f)
 {
 	t_buf	*t;
 	t_buf	**tmp;
@@ -117,7 +117,7 @@ void	delfile(int fd, t_file *f)
 ** Upon successful execution returns 0, otherwise 1.
 */
 
-int		expand(const int fd, t_file *f)
+static int		expand(const int fd, t_file *f)
 {
 	size_t	size;
 	t_buf	**tmp;
@@ -131,7 +131,7 @@ int		expand(const int fd, t_file *f)
 	return (0);
 }
 
-int		get_next_line(const int fd, char **line)
+int				get_next_line(const int fd, char **line)
 {
 	static t_file	f;
 	int				r;

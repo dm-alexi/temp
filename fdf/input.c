@@ -31,17 +31,7 @@ static int		count_elem(char *s)
 	}
 	return (n);
 }
-
-static void		free_arr(char **arr)
-{
-	char	**tmp;
-
-	tmp = arr;
-	while (*tmp)
-		free(*tmp++);
-	free(arr);
-}
-
+//todo: rewrite ft_lstdelone and ft_lstdel to get rid of this redundant function
 static void		clear_list(t_list *t)
 {
 	t_list	*tmp;
@@ -55,51 +45,49 @@ static void		clear_list(t_list *t)
 	}
 }
 
-static int		*get_line(t_list *t, int *n)
+static t_vertex	get_next_vertex(int y, int x, char **s)
 {
-	char	**arr;
-	char	*tmp;
-	int		*res;
-	int		i;
+	t_vertex	v;
 
-	if (!t || !t->content)
-		error("invalid map");
-	arr = ft_strsplit(t->content, ' ');
-	*n = 0;
-	while (arr[*n])
-		++*n;
-	if (!(res = (int*)malloc(sizeof(int) * *n)))
-		sys_error();
-	i = 0;
-	while (i < *n)
-	{
-		res[i] = ft_strtol(arr[i], &tmp, 10);
-		if ((!res[i] && *(tmp - 1) != '0') || *tmp)
+    v.x = x;
+    v.y = y;
+    v.w = 1.0;
+    v.z = ft_strtol(*s, s, 10);
+    if ((!v.z && *(*s - 1) != '0') || (**s && **s != ',' && **s != ' '))
+		error("invalid map.");
+    if (*(*s++) == ',')
+    {
+    	v.color = ft_strtol(*s, s, 0);
+    	if ((!v.color && *(*s - 1) != '0') || (**s && **s != ' '))
 			error("invalid map.");
-		++i;
-	}
-	free_arr(arr);
-	return (res);
+    }
+    else
+        v.color = 0xffffff;
+	return (v);
 }
 
 static void		get_grid(t_list *t, t_map *map)
 {
 	int		i;
-	int		n;
+	int		j;
+	char	*s;
 
 	if (!(map->grid = (t_vertex *)malloc(sizeof(t_vertex) * map->length)))
 		sys_error();
-	i = (map->rows - 1) * map->columns;
-	(map->grid)[i] = get_line(t, &(map->length));
-	t = t->next;
-	if (!map->length)
-		error("invalid map.");
-	while (--i >= 0)
+	i = map->rows - 1;
+	while (i >= 0)
 	{
-		(map->grid)[i] = get_line(t, &n);
-		if (n != map->length)
+		j = 0;
+		s = t->content;
+		while (j < map->columns)
+		{
+			map->grid[i * map->columns + j] = get_next_vertex(i, j, &s);
+			++j;
+		}
+		if (count_elem(s))
 			error("invalid map.");
 		t = t->next;
+		--i;
 	}
 }
 
@@ -108,6 +96,7 @@ t_map			*get_map(int fd)
 	t_map	*map;
 	char	*line;
 	t_list	*t;
+	t_list	*tmp;
 	int		r;
 
 	if (!(map = (t_map*)ft_memalloc(sizeof(t_map))))
@@ -115,9 +104,9 @@ t_map			*get_map(int fd)
 	t = NULL;
 	while ((r = get_next_line(fd, &line)) != 0 && ++map->rows)
 	{
-		if (r < 0)
+		if (r < 0 || !(tmp = ft_lstnew(line, ft_strlen(line) + 1)))
 			sys_error();
-		ft_lstadd(&t, ft_lstnew(line, ft_strlen(line) + 1));
+		ft_lstadd(&t, tmp);
 		free(line);
 	}
 	if (!map->rows || !(map->columns = count_elem(t->content)))

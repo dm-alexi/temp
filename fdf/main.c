@@ -24,7 +24,7 @@ static int		usage(void)
 static void		check_file(char *filename)
 {
 	int		fd;
-	
+
 	if ((fd = open(filename, O_WRONLY)) < 0)
 	{
 		if (errno == EISDIR)
@@ -48,12 +48,13 @@ int				main(int ac, char **av)
 	if ((fd = open(av[ac - 1], O_RDONLY)) < 0)
 		sys_error();
 	map = get_map(fd);
+	close(fd);
 	//show_map(map);
-	/*
+/*
     for (int i = 0; i < map->rows; ++i)
         for (int j = 0; j < map->columns; ++j)
-            ft_printf("%d%s", map->grid[i][j], j == map->length - 1 ? "\n" : " ");*/
-    window(av[ac - 1]);
-	close(fd);
+            ft_printf("%2d%s", map->grid[i * map->columns + j].z, j == map->columns - 1 ? "\n" : " ");
+*/
+//    window(av[ac - 1]);
     return (0);
 }

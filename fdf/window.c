@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:19:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/17 22:05:45 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/18 22:15:37 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,25 @@ void	window(char *file, t_map *map)
 	double *m = (double*)malloc(sizeof(double) * 16);
 	//m = projection(1.57, 0.25, 0.1, 20);
 	//m = identity();
-	m = scale(20);
-	//mult(scale(10), projection(1.57, 1, 0.1, 20), m);
+	//m = scale(50);
+	mult(scale(50), projection(1.57, 1, 0.5, 20), m);
 	for (int i = 0; i < map->length; ++i)
 	{
 		transform(map->grid + i, m, shown + i);
-		image_put_pixel(image, shown[i].x + 600, shown[i].y + 200, shown[i].z ? 0xff0000 : shown[i].color);
+		//image_put_pixel(image, shown[i].x + 600, shown[i].y + 200, shown[i].z ? 0xff0000 : shown[i].color);
+		
 	}
+	for (int i = 0; i < map->length; ++i)
+	{
+		//transform(map->grid + i, m, shown + i);
+		//image_put_pixel(image, shown[i].x + 600, shown[i].y + 200, shown[i].z ? 0xff0000 : shown[i].color);
+		if (i % map->columns < map->columns - 1)
+			image_draw_line(image, shown + i, shown + i + 1);
+		if (i <= map->length - map->columns)
+			image_draw_line(image, shown + i, shown + i + map->columns);
+	}
+	//image_draw_line(image, shown, shown + 1);
+	//image_draw_line(image, shown + 1, shown + 2);
 	mlx_put_image_to_window(mlx, win, image->img, 0, 0);
 	mlx_loop(mlx);
 }

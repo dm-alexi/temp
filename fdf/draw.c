@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:44:17 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/17 20:21:08 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/18 22:13:41 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void    image_draw_line(t_image *image, t_vertex *a, t_vertex *b)
 		n = a->y;
 		while (m <= b->x)
 		{
-			image_put_pixel(image, m++, (int)n, 0xffffff);
+			image_put_pixel(image, m++, (int)n, 0xffffff - (a->z + b->z) * 1000);
 			n += step;
 		}
 	}
@@ -66,7 +66,7 @@ void    image_draw_line(t_image *image, t_vertex *a, t_vertex *b)
 		n = a->x;
 		while (m <= b->y)
 		{
-			image_put_pixel(image, (int)n, m++, 0xffffff);
+			image_put_pixel(image, (int)n, m++, 0xffffff - (a->z + b->z) * 1000);
 			n += step;
 		}
 	}

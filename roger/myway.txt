@@ -1,0 +1,145 @@
+--------------------------------------------
+VM Part
+--------------------------------------------
+1. Install Debian on VM, disk size 8000000000B.
+2. One partition 4200000000B.
+
+check:
+sudo apt install parted
+sudo parted -s /dev/sda unit GB print
+
+3. Update all packages:
+
+update_script.sh
+
+--------------------------------------------
+Network and Security Part
+--------------------------------------------
+1. Create a non-root user to connect to the machine and work.
+2. Use sudo, with this user, to be able to perform operation requiring special rights.
+
+adduser lemmy
+adduser lemmy sudo
+in /etc/sudoers: %sudo   ALL=(ALL:ALL) ALL
+
+check:
+groups lemmy
+
+3. We don’t want you to use the DHCP service of your machine. You’ve got to configure it to have a static IP and a Netmask in \30.
+VirtualBox: add host-only adapter
+
+add to /etc/network/interfaces:
+auto enp0s8
+iface enp0s8 inet static
+address 192.168.56.2
+netmask 255.255.255.252
+
+check:
+ip a
+ifconfig
+
+4. You have to change the default port of the SSH service by the one of your choice. SSH access HAS TO be done with publickeys. SSH root access SHOULD NOT be allowed directly, but with a user who can be root.
+
+generate key on Mac:
+ssh-keygen -t rsa
+ssh-copy-id -i lemmy@192.168.56.2
+
+in /etc/ssh/sshd_config:
+Port 4001
+PermitRootLogin no
+PasswordAuthentication no
+
+then restart ssh:
+service ssh restart
+
+5. You have to set the rules of your firewall on your server only with the services used outside the VM.
+
+sudo apt install ufw
+sudo ufw enable
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow 4001/tcp
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw reload
+
+check:
+sudo ufw status verbose
+
+6. You have to set a DOS (Denial Of Service Attack) protection on your open ports of your VM.
+
+sudo apt install libapache2-mod-evasive
+in /etc/apache2/mods-available/evasive.conf:
+<IfModule mod_evasive20.c>
+    DOSHashTableSize    3097
+    DOSPageCount        2
+    DOSSiteCount        50
+    DOSPageInterval     1
+    DOSSiteInterval     1
+    DOSBlockingPeriod   10
+
+    DOSEmailNotify     root@debian
+    DOSLogDir           "/var/log/mod_evasive"
+</IfModule>
+
+check:
+brew install slowhttptest
+slowhttptest -c 1000 -B -i 110 -r 200 -s 8192 -t FAKEVERB -u http://192.168.56.2/index.html -x 10 -p 3
+
+7. You have to set a protection against scans on your VM’s open ports.
+
+sudo apt install psad
+edit /etc/psad/psad.conf
+
+check:
+nmap -T4 -A -v 192.168.56.2
+
+8. Stop the services you don’t need for this project.
+
+stop everything but the following:
+ [ + ]  apache2
+ [ + ]  cron
+ [ + ]  dbus
+ [ + ]  kmod
+ [ + ]  networking
+ [ + ]  procps
+ [ + ]  psad
+ [ + ]  rsyslog
+ [ + ]  ssh
+ [ + ]  udev
+ [ + ]  ufw
+sudo systemctl stop <service>
+sudo systemctl disable <service>
+
+check:
+sudo service --status-all
+
+9. Create a script that updates all the sources of package, then your packages and which logs the whole in a file named /var/log/update_script.log. Create a scheduled task for this script once a week at 4AM and every time the machine reboots.
+10. Make a script to monitor changes of the /etc/crontab file and sends an email to root if it has been modified. Create a scheduled script task every day at midnight.
+add to /etc/crontab:
+0  4    * * 1   root	sh ~/scripts/update_script.sh
+@reboot		root	sh ~/scripts/update_script.sh
+0  0    * * *   root	sh ~/scripts/cron_mod.sh
+
+add scripts:
+update_script.sh
+cron_mod.sh
+
+--------------------------------------------
+Web Part
+--------------------------------------------
+sudo apt install apache2
+sudo apt install php (if necessary)
+
+
+
+///
+
+scp -P 3333 -rp mysite/* lbernard@192.168.1.2:/var/www/html/mysite/
+sed -i 's/.*EMAIL_ADDRESSES .*/EMAIL_ADDRESSES             root@roger-skyline-1;/' /etc/psad/psad.conf
+sed -i 's/.*HOSTNAME .*/HOSTNAME                    roger-skyline-1;/' /etc/psad/psad.conf
+sed -i 's/.*EMAIL_LIMIT .*/EMAIL_LIMIT                 5;/' /etc/psad/psad.conf
+sed -i 's/.*ENABLE_AUTO_IDS .*/ENABLE_AUTO_IDS             Y;/' /etc/psad/psad.conf
+sed -i 's/.*AUTO_BLOCK_TIMEOUT .*/AUTO_BLOCK_TIMEOUT          600;/' /etc/psad/psad.conf
+sed -i 's/.*AUTO_IDS_DANGER_LEVEL .*/AUTO_IDS_DANGER_LEVEL       1;/' /etc/psad/psad.conf
+sed -i 's+.*IGNORE_PORTS .*+IGNORE_PORTS                tcp/80, tcp/443, tcp/3333;+' /etc/psad/psad.conf

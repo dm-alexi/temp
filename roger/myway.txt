@@ -190,3 +190,6 @@ a2enmod headers
 a2ensite default-ssl
 a2enconf ssl-params
 sudo systemctl restart apache2
+
+githooks:
+http://ixrevo.me/wordpress-deployment-git/

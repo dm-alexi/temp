@@ -137,51 +137,53 @@ Web Part
 sudo apt install apache2
 sudo apt install php (if necessary)
 
+copy all files to /var/www/html/:
+scp -P 4001 -rp mysite/* lemmy@192.168.56.2:/var/www/html/
 
+SSL instruction here:
+https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-apache-in-debian-9
 
-///
-
-scp -P 3333 -rp mysite/* lbernard@192.168.1.2:/var/www/html/mysite/
-
-echo "настройка ssl"
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/apache-selfsigned.key -out /etc/ssl/certs/apache-selfsigned.crt
-echo 'SSLCipherSuite EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH' >> /etc/apache2/conf-available/ssl-params.conf
-echo 'SSLProtocol All -SSLv2 -SSLv3 -TLSv1 -TLSv1.1' >> /etc/apache2/conf-available/ssl-params.conf
-echo 'SSLHonorCipherOrder On' >> /etc/apache2/conf-available/ssl-params.conf
-echo '# Disable preloading HSTS for now.  You can use the commented out header line that includes' >> /etc/apache2/conf-available/ssl-params.conf
-echo '# the "preload" directive if you understand the implications.'>> /etc/apache2/conf-available/ssl-params.conf
-echo '# Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"' >> /etc/apache2/conf-available/ssl-params.conf
-echo 'Header always set X-Frame-Options DENY' >> /etc/apache2/conf-available/ssl-params.conf
-echo 'Header always set X-Content-Type-Options nosniff' >> /etc/apache2/conf-available/ssl-params.conf
-echo '# Requires Apache >= 2.4' >> /etc/apache2/conf-available/ssl-params.conf
-echo 'SSLCompression off' >> /etc/apache2/conf-available/ssl-params.conf
-echo 'SSLUseStapling on' >> /etc/apache2/conf-available/ssl-params.conf
-echo 'SSLStaplingCache "shmcb:logs/stapling-cache(150000)"' >> /etc/apache2/conf-available/ssl-params.conf
-echo '# Requires Apache >= 2.4.11' >> /etc/apache2/conf-available/ssl-params.conf
-echo 'SSLSessionTickets Off' >> /etc/apache2/conf-available/ssl-params.conf
-###
-cp /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf.bak
-rm /etc/apache2/sites-available/default-ssl.conf
-echo '<IfModule mod_ssl.c>' >> /etc/apache2/sites-available/default-ssl.conf
-echo '<VirtualHost _default_:443>' >> /etc/apache2/sites-available/default-ssl.conf
-echo 'ServerAdmin your_email@example.com' >> /etc/apache2/sites-available/default-ssl.conf
-echo 'ServerName server_domain_or_IP' >> /etc/apache2/sites-available/default-ssl.conf
-echo 'DocumentRoot /var/www/html' >> /etc/apache2/sites-available/default-ssl.conf
-echo 'ErrorLog ${APACHE_LOG_DIR}/error.log' >> /etc/apache2/sites-available/default-ssl.conf
-echo 'CustomLog ${APACHE_LOG_DIR}/access.log combined' >> /etc/apache2/sites-available/default-ssl.conf
-echo 'SSLEngine on' >> /etc/apache2/sites-available/default-ssl.conf
-echo 'SSLCertificateFile      /etc/ssl/certs/apache-selfsigned.crt' >> /etc/apache2/sites-available/default-ssl.conf
-echo 'SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key' >> /etc/apache2/sites-available/default-ssl.conf
-echo '<FilesMatch "\.(cgi|shtml|phtml|php)$">' >> /etc/apache2/sites-available/default-ssl.conf
-echo 'SSLOptions +StdEnvVars' >> /etc/apache2/sites-available/default-ssl.conf
-echo '</FilesMatch>' >> /etc/apache2/sites-available/default-ssl.conf
-echo '<Directory /usr/lib/cgi-bin>' >> /etc/apache2/sites-available/default-ssl.conf
-echo 'SSLOptions +StdEnvVars' >> /etc/apache2/sites-available/default-ssl.conf
-echo '</Directory>' >> /etc/apache2/sites-available/default-ssl.conf
-echo '</VirtualHost>' >> /etc/apache2/sites-available/default-ssl.conf
-echo '</IfModule>' >> /etc/apache2/sites-available/default-ssl.conf
-###
+
+in /etc/apache2/conf-available/ssl-params.conf:
+SSLCipherSuite EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH
+SSLProtocol All -SSLv2 -SSLv3 -TLSv1 -TLSv1.1
+SSLHonorCipherOrder On
+# Disable preloading HSTS for now.  You can use the commented out header line that includes
+# the "preload" directive if you understand the implications.
+# Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+Header always set X-Frame-Options DENY
+Header always set X-Content-Type-Options nosniff
+# Requires Apache >= 2.4
+SSLCompression off
+SSLUseStapling on
+SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
+# Requires Apache >= 2.4.11
+SSLSessionTickets Off
+
+in etc/apache2/sites-available/default-ssl.conf:
+<IfModule mod_ssl.c>
+<VirtualHost _default_:443>
+ServerAdmin root@localhost
+ServerName 192.168.56.2
+DocumentRoot /var/www/html
+ErrorLog ${APACHE_LOG_DIR}/error.log
+CustomLog ${APACHE_LOG_DIR}/access.log combined
+SSLEngine on
+SSLCertificateFile      /etc/ssl/certs/apache-selfsigned.crt
+SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key
+<FilesMatch "\.(cgi|shtml|phtml|php)$">
+SSLOptions +StdEnvVars
+</FilesMatch>
+<Directory /usr/lib/cgi-bin>
+SSLOptions +StdEnvVars
+</Directory>
+</VirtualHost>
+</IfModule>
+
+
 a2enmod ssl
 a2enmod headers
 a2ensite default-ssl
 a2enconf ssl-params
+sudo systemctl restart apache2

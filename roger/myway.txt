@@ -63,6 +63,9 @@ sudo ufw allow 80/tcp
 sudo ufw allow 443/tcp
 sudo ufw reload
 
+DOS protection:
+ufw limit 4001/tcp comment 'Rate limit for openssh server'
+
 check:
 sudo ufw status verbose
 

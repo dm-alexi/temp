@@ -41,12 +41,12 @@ static t_vertex	get_next_vertex(int y, int x, char **s)
     v.w = 1.0;
     v.z = ft_strtol(*s, s, 10);
     if ((!v.z && *(*s - 1) != '0') || (**s && **s != ',' && **s != ' '))
-		error("invalid map.");
+		error(INVALID);
     if (*(*s++) == ',')
     {
     	v.color = ft_strtol(*s, s, 0);
     	if ((!v.color && *(*s - 1) != '0') || (**s && **s != ' '))
-			error("invalid map.");
+			error(INVALID);
     }
     else
         v.color = 0xffffff;
@@ -72,7 +72,7 @@ static void		get_grid(t_list *t, t_map *map)
 			++j;
 		}
 		if (count_elem(s))
-			error("invalid map.");
+			error(INVALID);
 		t = t->next;
 		--i;
 	}
@@ -97,7 +97,7 @@ t_map			*get_map(int fd)
 		free(line);
 	}
 	if (!map->rows || !(map->columns = count_elem(t->content)))
-		error("invalid map.");
+		error(INVALID);
 	map->length = map->rows * map->columns;
 	get_grid(t, map);
 	ft_lstdel(&t, NULL);

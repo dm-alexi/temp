@@ -16,6 +16,7 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 # define STEP 10
+# define INVALID "Invalid map."
 
 typedef struct	s_vertex
 {

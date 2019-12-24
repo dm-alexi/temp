@@ -20,8 +20,8 @@ typedef struct	s_graph
 {
 	t_node	*nodes;
 	t_edge	*edges;
-	int		start;
-	int		finish;
+	t_node	*start;
+	t_node	*finish;
 }				t_graph;
 
 #endif

@@ -1,49 +1,26 @@
+#include <stdio.h>
 #include "lem-in.h"
-#define START 1
-#define FINISH 2
-#define NODE 4
-#define EDGE 8
+#define NODE 1
+#define EDGE 2
 
-//rewrite it all!
-
-static int	unknown(char *line)
-{
-	return !(ft_strequ(line, "##start") || ft_strequ(line, "##end"));
-}
-
-static int get_command(char **line)
-{
-    int		res;
-    int		tmp;
-
-    res = -1;
-    if (ft_strequ(*line, "##start"))
-		res = START;
-	else if (ft_strequ(*line, "##end"))
-		res = FINISH;
-	free(*line);
-	while ((tmp = get_next_line(STDIN_FILENO, line)) > 0 && **line == '#' &&
-		(!ft_strnequ(*line, "##", 2) || unknown(*line)))
-			free(*line);
-	if (tmp <= 0)
-		return (tmp);
-	if (ft_strnequ(*line, "##", 2))
-		return (get_command(line));
-	return (res | NODE);
-}
-
-static int	get_line(char **line)
+static int	get_line(char **line, t_command *com)
 {
 	int		tmp;
 	int		res;
 
-	while ((tmp = get_next_line(STDIN_FILENO, line)) > 0 && **line == '#' &&
-		(!ft_strnequ(*line, "##", 2) || unknown(*line)))
-			free(*line);
+	*com = UNKNOWN;
+	while ((tmp = get_next_line(STDIN_FILENO, line)) > 0 && **line == '#')
+	{
+		if (ft_strequ(*line, "##start"))
+			*com = START;
+		else if (ft_strequ(*line, "##end"))
+			*com = END;
+		else if (ft_strnequ(*line, "##", 2))
+			*com = UNKNOWN;
+		free(*line);
+	}
 	if (tmp <= 0)
 		return (tmp);
-	if (ft_strnequ(*line, "##", 2))
-		return (get_command(line));
 	return (ft_strchr(*line, ' ') ? NODE : EDGE);
 }
 
@@ -52,17 +29,19 @@ t_graph		*get_graph()
 	t_graph		*graph;
 	char		*line;
 	int			tmp;
+	t_command	com;
 
 	if (!(graph = (t_graph*)ft_memalloc(sizeof(t_graph))))
 		sys_error();
-	while ((tmp = get_line(&line)))
+	while ((tmp = get_line(&line, &com)))
 	{
 		if (tmp < 0)
 			sys_error();
-		if (tmp & NODE)
-			add_node(graph, tmp, line);
-		else if (tmp & EDGE)
-			add_edge(graph, tmp, line);
+		if (tmp == NODE)
+			add_node(graph, com, line);
+		else if (tmp == EDGE)
+			add_edge(graph, com, line);
+		free(line);
 	}
 	return (graph);
 }

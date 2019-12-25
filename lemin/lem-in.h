@@ -2,6 +2,11 @@
 # define LEMIN_H_INCLUDED
 # include "libft/libft.h"
 
+typedef enum	e_command
+{
+	UNKNOWN, START, END
+}				t_command;
+
 typedef struct	s_node
 {
 	char			*name;
@@ -24,4 +29,6 @@ typedef struct	s_graph
 	t_node	*finish;
 }				t_graph;
 
+void			sys_error(void);
+void			error(void);
 #endif

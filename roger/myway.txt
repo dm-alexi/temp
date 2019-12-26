@@ -58,6 +58,7 @@ sudo apt install ufw
 sudo ufw enable
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
+sudo ufw allow 22/tcp
 sudo ufw allow 4001/tcp
 sudo ufw allow 80/tcp
 sudo ufw allow 443/tcp
@@ -193,3 +194,32 @@ sudo systemctl restart apache2
 
 githooks:
 http://ixrevo.me/wordpress-deployment-git/
+
+on VM:
+mkdir repo.git
+cd repo.git
+git init --bare
+
+on Mac, in website folder:
+git init
+git add .
+git commit -m "initial commit"
+git remote add web ssh://lemmy@192.168.56.2:4001/..../repo.git
+git remote show web (to check)
+git push web master
+
+on VM, in repo.git/hooks/post-receive:
+#!/bin/bash
+#
+siteroot="/var/www/html"
+
+while read oldrev newrev ref
+do
+  branch=`echo $ref | cut -d/ -f3`
+
+  if [ "master" == "$branch" ]; then
+    git archive master | tar -x -C $siteroot
+  fi
+done
+
+if necessary, chown -R lemmy /var/www

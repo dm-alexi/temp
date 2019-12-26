@@ -3,6 +3,22 @@
 #define NODE 1
 #define EDGE 2
 
+static int	read_int(void)
+{
+	char	*line;
+	int		tmp;
+	int		n;
+
+	while ((tmp = get_next_line(STDIN_FILENO, &line)) > 0 && *line == '#')
+		free(line);
+    if (tmp < 0)
+		sys_error();
+	else if (!tmp || (n = ft_atoi(line)) <= 0)
+		error();
+	free(line);
+	return (n);
+}
+
 static int	get_line(char **line, t_command *com)
 {
 	int		tmp;
@@ -33,6 +49,7 @@ t_graph		*get_graph()
 
 	if (!(graph = (t_graph*)ft_memalloc(sizeof(t_graph))))
 		sys_error();
+	graph->antnum = read_int();
 	while ((tmp = get_line(&line, &com)))
 	{
 		if (tmp < 0)

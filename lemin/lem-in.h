@@ -23,6 +23,7 @@ typedef struct	s_edge
 
 typedef struct	s_graph
 {
+	int		antnum;
 	t_node	*nodes;
 	t_edge	*edges;
 	t_node	*start;

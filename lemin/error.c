@@ -23,5 +23,5 @@ void	sys_error(void)
 void	error(void)
 {
 	write(STDERR_FILENO, "ERROR\n", 6);
-	exit(EXIT_FAILURE);
+	exit(EXIT_SUCCESS);
 }

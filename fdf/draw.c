@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:44:17 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/18 22:13:41 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/27 21:56:37 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	image_put_pixel(t_image *image, int x, int y, int color)
 {
 	int		i;
-	
+
 	if (x < 0 || y < 0 || x >= image->width || y >= image->height)
 		return ;
 	i = x * image->bpp / 8 + y * image->width;
@@ -38,9 +38,9 @@ void	image_put_pixel(t_image *image, int x, int y, int color)
 	}
 }
 
-void    image_draw_line(t_image *image, t_vertex *a, t_vertex *b)
+void	image_draw_line(t_image *image, t_vertex *a, t_vertex *b)
 {
-    double	step;
+	double	step;
 	int		m;
 	double	n;
 

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:25:49 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/27 21:38:45 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/27 21:48:29 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int		read_int(void)
 
 	while ((tmp = get_next_line(STDIN_FILENO, &line)) > 0 && *line == '#')
 		free(line);
-    if (tmp <= 0)
+	if (tmp <= 0)
 		tmp ? sys_error() : error();
 	if (((n = ft_atoi(line))) <= 0)
 		error();
@@ -82,12 +82,12 @@ static void		get_nodes(t_graph *graph, char **line)
 		free(lst);
 		lst = tmp;
 	}
-    ft_qsort(graph->nodes, graph->node_num, sizeof(t_node*), compare);
+	ft_qsort(graph->nodes, graph->node_num, sizeof(t_node*), compare);
 }
 
 static void		get_edges(t_graph *graph, char **line)
 {
-	
+
 }
 
 t_graph			*get_graph(void)

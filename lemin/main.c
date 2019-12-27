@@ -6,13 +6,13 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:27:08 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/27 21:27:09 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/27 21:45:40 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lemin.h"
 
-int main()
+int		main(void)
 {
 	t_graph		*graph;
 

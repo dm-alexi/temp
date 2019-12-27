@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:08 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/17 20:20:18 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/27 21:51:59 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,7 @@ int				main(int ac, char **av)
 	int		fd;
 	t_map	*map;
 
-    int *h =  malloc(4);
-        *h = 5;
-
-    if (ac < 2)
+	if (ac < 2)
 		return (usage());
 	check_file(av[ac - 1]);
 	if ((fd = open(av[ac - 1], O_RDONLY)) < 0)
@@ -55,6 +52,6 @@ int				main(int ac, char **av)
         for (int j = 0; j < map->columns; ++j)
             ft_printf("%2d%s", map->grid[i * map->columns + j].z, j == map->columns - 1 ? "\n" : " ");
 */
-    window(av[ac - 1], map);
-    return (0);
+	window(av[ac - 1], map);
+	return (0);
 }

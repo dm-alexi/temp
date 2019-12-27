@@ -6,20 +6,22 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:27:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/27 21:27:17 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/27 21:47:49 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lemin.h"
 
 void	print_graph(t_graph *graph)
 {
-	int 	i;
+	int		i;
 
-	ft_printf("--------------------\nNumber of ants: %d\nNodes:\n", graph->ant_num);
+	ft_printf("--------------------\n");
+	ft_printf("Number of ants: %d\nNodes:\n", graph->ant_num);
 	i = -1;
-    while (++i < graph->node_num)
-		ft_printf("%s\t\t%d %d\n", graph->nodes[i]->name, graph->nodes[i]->x, graph->nodes[i]->y);
+	while (++i < graph->node_num)
+		ft_printf("%s\t\t%d %d\n", graph->nodes[i]->name,
+			graph->nodes[i]->x, graph->nodes[i]->y);
 	ft_printf("--------------------\n");
 }
 

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:19:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/18 22:15:37 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/27 21:55:28 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ void	fill_image(void *img)
 
 	s = mlx_get_data_addr(img, &bpp, &sl, &endian);
 	ft_printf("%d %d %d", bpp, sl, endian);
-	s[100*bpp / 8 + 10 * sl] = 122;
-	s[100*bpp / 8 + 10 * sl + 1] = 122;
-	s[100*bpp / 8 + 10 * sl + 2] = 122;
-	s[100*bpp / 8 + 10 * sl + 3] = 0;
+	s[100 * bpp / 8 + 10 * sl] = 122;
+	s[100 * bpp / 8 + 10 * sl + 1] = 122;
+	s[100 * bpp / 8 + 10 * sl + 2] = 122;
+	s[100 * bpp / 8 + 10 * sl + 3] = 0;
 }
 
 void	window(char *file, t_map *map)
 {
-	void	*mlx;
-	void	*win;
-	t_image	*image;
+	void		*mlx;
+	void		*win;
+	t_image		*image;
 
 	/*if (!(mlx = mlx_init()) || !(win = mlx_new_window(mlx, WIDTH, HEIGHT, file))
 	|| !(img = mlx_new_image(mlx, WIDTH, HEIGHT)))

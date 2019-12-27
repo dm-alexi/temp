@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/17 20:07:50 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/27 21:50:41 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,20 @@ static t_vertex	get_next_vertex(int y, int x, char **s)
 {
 	t_vertex	v;
 
-    v.x = x;
-    v.y = y;
-    v.w = 1.0;
-    v.z = ft_strtol(*s, s, 10);
-    if ((!v.z && *(*s - 1) != '0') || (**s && **s != ',' && **s != ' '))
+	v.x = x;
+	v.y = y;
+	v.w = 1.0;
+	v.z = ft_strtol(*s, s, 10);
+	if ((!v.z && *(*s - 1) != '0') || (**s && **s != ',' && **s != ' '))
 		error(INVALID);
-    if (*(*s++) == ',')
-    {
-    	v.color = ft_strtol(*s, s, 0);
-    	if ((!v.color && *(*s - 1) != '0') || (**s && **s != ' '))
+	if (*(*s++) == ',')
+	{
+		v.color = ft_strtol(*s, s, 0);
+		if ((!v.color && *(*s - 1) != '0') || (**s && **s != ' '))
 			error(INVALID);
-    }
-    else
-        v.color = 0xffffff;
+	}
+	else
+		v.color = 0xffffff;
 	return (v);
 }
 

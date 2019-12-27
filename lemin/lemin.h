@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem-in.h                                           :+:      :+:    :+:   */
+/*   lemin.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:27:04 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/27 21:27:06 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/27 21:44:54 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEMIN_H_INCLUDED
-# define LEMIN_H_INCLUDED
+#ifndef LEMIN_H
+# define LEMIN_H
 # include "libft/libft.h"
 
 typedef enum	e_command

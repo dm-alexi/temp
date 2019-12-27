@@ -2,7 +2,7 @@ NAME = lem-in
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
 LIBFT = libft/libft.a
-HEAD = lem-in.h
+HEAD = lemma	in.h
 SRC = main.c nodes.c print.c input.c error.c
 OBJ = $(SRC:.c=.o)
 

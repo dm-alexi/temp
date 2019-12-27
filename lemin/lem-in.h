@@ -36,7 +36,6 @@ void			sys_error(void);
 void			error(void);
 
 void			print_graph(t_graph *graph);
-void	include_nodes(t_graph *graph, t_list *lst);
 t_graph			*get_graph(void);
 t_list			*new_node(char *line, t_command com);
 #endif

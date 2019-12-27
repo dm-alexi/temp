@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bsearch.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 22:51:50 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/10 19:40:18 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/27 22:22:15 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*ft_bsearch(const void *key, const void *base, size_t num,
 
 	if (!key || !base || !num || !size || !compar)
 		return (NULL);
-	l = (const unsigned char*) base;
+	l = (const unsigned char*)base;
 	r = l + size * (num - 1);
 	while (l <= r)
 	{
@@ -34,5 +34,5 @@ void	*ft_bsearch(const void *key, const void *base, size_t num,
 		else
 			return ((void*)m);
 	}
-	return NULL;
+	return (NULL);
 }

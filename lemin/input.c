@@ -6,12 +6,12 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:25:49 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/27 21:48:29 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/27 22:45:41 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "lem-in.h"
+#include "lemin.h"
 #define NODE 1
 #define EDGE 2
 
@@ -60,6 +60,30 @@ static int		compare(const void *a, const void *b)
 	return (res);
 }
 
+t_node 			*node_bsearch(const char *key, const t_node *base, size_t num)
+{
+	int				k;
+	const t_node	*l;
+	const t_node	*r;
+	const t_node	*m;
+
+	if (!key || !base || !num)
+		return (NULL);
+	l = base;
+	r = l + num - 1;
+	while (l <= r)
+	{
+		m = l + (r - l) / 2;
+		if ((k = ft_strcmp(key, m->name)) < 0)
+			r = m - 1;
+		else if (k > 0)
+			l = m + 1;
+		else
+			return ((t_node*)m);
+	}
+	return (NULL);
+}
+
 static void		get_nodes(t_graph *graph, char **line)
 {
 	t_list		*lst;
@@ -87,7 +111,18 @@ static void		get_nodes(t_graph *graph, char **line)
 
 static void		get_edges(t_graph *graph, char **line)
 {
+	char	*s;
+	t_node	*tmp;
 
+	s = ft_strchr(*line, '-');
+	ft_printf(s + 1);
+	if ((tmp = node_bsearch(s + 1, graph->nodes[0], graph->node_num)))
+		print_node(tmp);
+	*s = '\0';
+	ft_printf(*line);
+	if ((tmp = node_bsearch(*line, graph->nodes[0], graph->node_num)))
+		print_node(tmp);
+	free(*line);
 }
 
 t_graph			*get_graph(void)

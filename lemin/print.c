@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:27:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/27 21:47:49 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/27 22:37:49 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ void	print_graph(t_graph *graph)
 	ft_printf("--------------------\n");
 }
 
-/*
+
 void print_node(const t_node *a)
 {
 	ft_printf("Name: %s, x = %d, y = %d\n", a->name, a->x, a->y);
 }
-*/

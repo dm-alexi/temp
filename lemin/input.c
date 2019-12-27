@@ -22,7 +22,6 @@ static int	read_int(void)
 static int	get_line(char **line, t_command *com)
 {
 	int		tmp;
-	int		res;
 
 	*com = UNKNOWN;
 	while ((tmp = get_next_line(STDIN_FILENO, line)) > 0 && **line == '#')
@@ -40,25 +39,22 @@ static int	get_line(char **line, t_command *com)
 	return (ft_strchr(*line, ' ') ? NODE : EDGE);
 }
 
-t_graph		*get_graph()
+t_graph		*get_graph(void)
 {
 	t_graph		*graph;
 	char		*line;
 	int			tmp;
 	t_command	com;
+	t_list		*lst;
 
 	if (!(graph = (t_graph*)ft_memalloc(sizeof(t_graph))))
 		sys_error();
-	graph->antnum = read_int();
-	while ((tmp = get_line(&line, &com)))
-	{
-		if (tmp < 0)
-			sys_error();
-		if (tmp == NODE)
-			add_node(graph, com, line);
-		else if (tmp == EDGE)
-			add_edge(graph, com, line);
-		free(line);
-	}
+	lst = NULL;
+	graph->ant_num = read_int();
+	while ((tmp = get_line(&line, &com)) == NODE && ++graph->node_num)
+		ft_lstadd(&lst, new_node(line, com));
+	if (tmp < 0)
+		sys_error();
+	include_nodes(graph, lst);
 	return (graph);
 }

@@ -10,7 +10,8 @@ typedef enum	e_command
 typedef struct	s_node
 {
 	char			*name;
-	struct s_edge	*edges;
+	struct s_node	*nodes;
+	int				distance;
 	int				x;
 	int				y;
 }				t_node;
@@ -23,8 +24,9 @@ typedef struct	s_edge
 
 typedef struct	s_graph
 {
-	int		antnum;
-	t_node	*nodes;
+	int		ant_num;
+	int		node_num;
+	t_node	**nodes;
 	t_edge	*edges;
 	t_node	*start;
 	t_node	*finish;
@@ -32,4 +34,9 @@ typedef struct	s_graph
 
 void			sys_error(void);
 void			error(void);
+
+void			print_graph(t_graph *graph);
+void	include_nodes(t_graph *graph, t_list *lst);
+t_graph			*get_graph(void);
+t_list			*new_node(char *line, t_command com);
 #endif

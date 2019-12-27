@@ -1,4 +1,16 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/27 21:25:49 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/12/27 21:38:45 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <unistd.h>
 #include "lem-in.h"
 #define NODE 1
 #define EDGE 2
@@ -11,9 +23,9 @@ static int		read_int(void)
 
 	while ((tmp = get_next_line(STDIN_FILENO, &line)) > 0 && *line == '#')
 		free(line);
-    if (tmp < 0)
-		sys_error();
-	else if (!tmp || (n = ft_atoi(line)) <= 0)
+    if (tmp <= 0)
+		tmp ? sys_error() : error();
+	if (((n = ft_atoi(line))) <= 0)
 		error();
 	free(line);
 	return (n);
@@ -75,7 +87,7 @@ static void		get_nodes(t_graph *graph, char **line)
 
 static void		get_edges(t_graph *graph, char **line)
 {
-
+	
 }
 
 t_graph			*get_graph(void)

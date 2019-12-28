@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:25:49 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/27 22:45:41 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/28 15:51:54 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ static int		compare(const void *a, const void *b)
 	return (res);
 }
 
-t_node 			*node_bsearch(const char *key, const t_node *base, size_t num)
+t_node 			*node_bsearch(const char *key, t_node **base, size_t num)
 {
 	int				k;
-	const t_node	*l;
-	const t_node	*r;
-	const t_node	*m;
+	t_node	**l;
+	t_node	**r;
+	t_node	**m;
 
 	if (!key || !base || !num)
 		return (NULL);
@@ -74,12 +74,12 @@ t_node 			*node_bsearch(const char *key, const t_node *base, size_t num)
 	while (l <= r)
 	{
 		m = l + (r - l) / 2;
-		if ((k = ft_strcmp(key, m->name)) < 0)
+		if ((k = ft_strcmp(key, (*m)->name)) < 0)
 			r = m - 1;
 		else if (k > 0)
 			l = m + 1;
 		else
-			return ((t_node*)m);
+			return (*m);
 	}
 	return (NULL);
 }
@@ -112,19 +112,35 @@ static void		get_nodes(t_graph *graph, char **line)
 static void		get_edges(t_graph *graph, char **line)
 {
 	char	*s;
+	t_node	*a;
+	t_node	*b;
+
+	if (!(s = ft_strchr(*line, '-')) || ft_strchr(s + 1, '-'))
+		error();
+	if (!(b = node_bsearch(s + 1, graph->nodes, graph->node_num)))
+		error();
+	*s = '\0';
+	if (!(a = node_bsearch(*line, graph->nodes, graph->node_num)))
+		error();
+	ft_lstadd(&(a->nodes), ft_lstnew(&b, sizeof(t_node**)));
+	ft_lstadd(&(b->nodes), ft_lstnew(&a, sizeof(t_node**)));
+	free(*line);
+}
+/*
+static void		get_edges(t_graph *graph, char **line)
+{
+	char	*s;
 	t_node	*tmp;
 
-	s = ft_strchr(*line, '-');
-	ft_printf(s + 1);
-	if ((tmp = node_bsearch(s + 1, graph->nodes[0], graph->node_num)))
+	if (!(s = ft_strchr(*line, '-')));
+	if (s && (tmp = node_bsearch(s + 1, graph->nodes, graph->node_num)))
 		print_node(tmp);
 	*s = '\0';
-	ft_printf(*line);
-	if ((tmp = node_bsearch(*line, graph->nodes[0], graph->node_num)))
+	if ((tmp = node_bsearch(*line, graph->nodes, graph->node_num)))
 		print_node(tmp);
 	free(*line);
 }
-
+*/
 t_graph			*get_graph(void)
 {
 	t_graph		*graph;

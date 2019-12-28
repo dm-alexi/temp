@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:27:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/28 15:54:23 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/28 18:30:17 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void print_node(const t_node *a)
 {
-	t_list	*tmp;
+	t_edge	*tmp;
 	
-	ft_printf("Name: %s, x = %d, y = %d\t\tconnected to: ", a->name, a->x, a->y);
+	ft_printf("Name: %s, x = %d, y = %d\tdistance: %u\tconnected to: ", a->name, a->distance, a->x, a->y);
 	tmp = a->nodes;
 	while (tmp)
 	{
-		ft_printf("%s ", (*((t_node**)(tmp->content)))->name);
+		ft_printf("%s ", tmp->node->name);
 		tmp = tmp->next;
 	}
 	ft_printf("\n");

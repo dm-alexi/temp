@@ -3,7 +3,7 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 LIBFT = libft/libft.a
 HEAD = lemma	in.h
-SRC = main.c nodes.c print.c input.c error.c
+SRC = main.c nodes.c edges.c print.c input.c error.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

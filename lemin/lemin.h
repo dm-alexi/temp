@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:27:04 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/29 15:24:36 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/29 17:28:26 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ t_graph			*get_graph(void);
 int				get_line(char **line, t_command *com);
 void			get_nodes(t_graph *graph, char **line);
 void			get_edges(t_graph *graph, char **line);
+void			delete_graph(t_graph *graph);
 
 #endif

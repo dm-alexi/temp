@@ -1,23 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   delete.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/27 21:27:08 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/29 17:28:05 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/12/29 17:21:34 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/12/29 17:32:52 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-int		main(void)
+void	delete_graph(t_graph *graph)
 {
-	t_graph		*graph;
+	int		i;
+	t_edge	*tmp;
 
-	graph = get_graph();
-	print_graph(graph);
-	delete_graph(graph);
-	return (0);
+	i = 0;
+	while (i < graph->node_num)
+	{
+		free(graph->nodes[i]->name);
+		while (graph->nodes[i]->nodes)
+		{
+			tmp = graph->nodes[i]->nodes->next;;
+			free(graph->nodes[i]->nodes);
+			graph->nodes[i]->nodes = tmp;
+		}
+		free(graph->nodes[i]);
+		++i;
+	}
+	free(graph->nodes);
+	free(graph);
 }

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:44:17 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/27 21:56:37 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/29 18:16:33 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,33 +41,27 @@ void	image_put_pixel(t_image *image, int x, int y, int color)
 void	image_draw_line(t_image *image, t_vertex *a, t_vertex *b)
 {
 	double	step;
-	int		m;
-	double	n;
+	int		i;
 
-	if (a->x > b->x)
+	i = 0;
+	if (a->x > b->x || (b->x - a->x <= ft_abs(b->y - a->y) && a->y > b->y))
 		image_draw_line(image, b, a);
 	else if (b->x - a->x > ft_abs(b->y - a->y))
 	{
 		step = (double)(a->y - b->y) / (a->x - b->x);
-		m = a->x;
-		n = a->y;
-		while (m <= b->x)
+		while (i <= b->x - a->x)
 		{
-			image_put_pixel(image, m++, (int)n, 0xffffff - (a->z + b->z) * 1000);
-			n += step;
+			image_put_pixel(image, a->x + i, a->y + i * step, 0xffffff - (a->z + b->z) * 1000);
+			++i;
 		}
 	}
-	else if (a->y > b->y)
-		image_draw_line(image, b, a);
 	else
 	{
 		step = (double)(a->x - b->x) / (a->y - b->y);
-		m = a->y;
-		n = a->x;
-		while (m <= b->y)
+		while (i <= b->y - a->y)
 		{
-			image_put_pixel(image, (int)n, m++, 0xffffff - (a->z + b->z) * 1000);
-			n += step;
+			image_put_pixel(image, a->x + i * step, a->y + i, 0xffffff - (a->z + b->z) * 1000);
+			++i;
 		}
 	}
 }

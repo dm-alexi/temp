@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 17:08:30 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/28 18:27:57 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/29 17:41:34 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void		add_edge(t_edge **edge, t_node *node)
 {
 	t_edge	*tmp;
 	t_edge	*t;
-	
+
 	tmp = *edge;
 	if (*edge == NULL || ft_strcmp(node->name, (*edge)->node->name) < 0)
 	{
@@ -48,12 +48,12 @@ static void		add_edge(t_edge **edge, t_node *node)
 			sys_error();
 		(*edge)->node = node;
 		(*edge)->next = tmp;
-		return;
+		return ;
 	}
 	while (tmp->next && ft_strcmp(node->name, tmp->next->node->name) > 0)
 		tmp = tmp->next;
 	if (tmp->next && !ft_strcmp(node->name, tmp->next->node->name))
-		return;
+		return ;
 	t = tmp->next;
 	if (!(tmp->next = (t_edge*)malloc(sizeof(t_edge))))
 		sys_error();
@@ -83,7 +83,7 @@ void			get_edges(t_graph *graph, char **line)
 {
 	int			tmp;
 	t_command	com;
-	
+
 	get_edge(graph, *line);
 	while ((tmp = get_line(line, &com)) == EDGE)
 		get_edge(graph, *line);

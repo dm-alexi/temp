@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:27:12 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/29 14:43:32 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/29 17:40:31 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void			get_nodes(t_graph *graph, char **line)
 	t_list		*lst;
 	t_list		*tmp;
 	t_command	com;
-	int i;
+	int			i;
 
 	lst = NULL;
 	while ((i = get_line(line, &com)) == NODE && ++graph->node_num)

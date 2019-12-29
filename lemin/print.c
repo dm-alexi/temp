@@ -6,13 +6,13 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:27:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/29 15:23:51 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/29 17:40:08 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-void print_node(const t_node *a)
+void	print_node(const t_node *a)
 {
 	t_edge	*tmp;
 

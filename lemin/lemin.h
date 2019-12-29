@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:27:04 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/29 17:28:26 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/29 17:38:36 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void			sys_error(void);
 void			error(void);
 
 void			print_graph(t_graph *graph);
-void 			print_node(const t_node *a);
+void			print_node(const t_node *a);
 
 t_graph			*get_graph(void);
 int				get_line(char **line, t_command *com);

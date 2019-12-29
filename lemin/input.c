@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:25:49 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/29 17:20:53 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/29 17:40:47 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void		finalize(t_graph *graph)
 		error();
 }
 
-int		get_line(char **line, t_command *com)
+int				get_line(char **line, t_command *com)
 {
 	int		tmp;
 

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:25:49 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/28 18:19:53 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/29 15:26:02 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,26 @@ static int		read_int(void)
 		error();
 	free(line);
 	return (n);
+}
+
+static void		finalize(t_graph *graph)
+{
+	int		i;
+
+	i = 0;
+	while (i < graph->node_num)
+	{
+		if (--graph->nodes[i]->distance == 0)
+			graph->start = graph->nodes[i];
+		else if (graph->nodes[i]->distance == 1)
+		{
+			graph->finish = graph->nodes[i];
+			graph->nodes[i]->distance = -1;
+		}
+		++i;
+	}
+	if (!graph->start || !graph->finish)
+		error();
 }
 
 int		get_line(char **line, t_command *com)
@@ -59,5 +79,6 @@ t_graph			*get_graph(void)
 	graph->ant_num = read_int();
 	get_nodes(graph, &line);
 	get_edges(graph, &line);
+	finalize(graph);
 	return (graph);
 }

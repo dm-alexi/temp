@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:27:04 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/28 18:19:18 by sscarecr         ###   ########.fr       */
+/*   Updated: 2019/12/29 15:24:36 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,10 @@ typedef enum	e_command
 typedef struct	s_node
 {
 	char			*name;
-	//t_list	*nodes;
 	struct s_edge	*nodes;
-	int				distance;
 	int				x;
 	int				y;
+	int				distance;
 }				t_node;
 
 typedef struct	s_edge

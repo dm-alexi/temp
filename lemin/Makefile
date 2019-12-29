@@ -2,13 +2,13 @@ NAME = lem-in
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
 LIBFT = libft/libft.a
-HEAD = lemma	in.h
+HEAD = lemin.h
 SRC = main.c nodes.c edges.c print.c input.c error.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(HEAD)
 	make -C ./libft/
 	$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(LIBFT)
 

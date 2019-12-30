@@ -33,6 +33,7 @@ typedef struct	s_node
 typedef struct	s_edge
 {
 	t_node			*node;
+	int				len;
 	struct s_edge	*next;
 }				t_edge;
 

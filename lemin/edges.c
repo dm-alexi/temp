@@ -47,6 +47,7 @@ static void		add_edge(t_edge **edge, t_node *node)
 		if (!(*edge = (t_edge*)malloc(sizeof(t_edge))))
 			sys_error();
 		(*edge)->node = node;
+		(*edge)->len = 1;
 		(*edge)->next = tmp;
 		return ;
 	}
@@ -58,6 +59,7 @@ static void		add_edge(t_edge **edge, t_node *node)
 	if (!(tmp->next = (t_edge*)malloc(sizeof(t_edge))))
 		sys_error();
 	tmp->next->node = node;
+	tmp->next->len = 1;
 	tmp->next->next = t;
 }
 

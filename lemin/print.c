@@ -21,7 +21,7 @@ void	print_node(const t_node *a)
 	tmp = a->nodes;
 	while (tmp)
 	{
-		ft_printf("%s ", tmp->node->name);
+		ft_printf("%s (%d); ", tmp->node->name, tmp->len);
 		tmp = tmp->next;
 	}
 	ft_printf("\n");

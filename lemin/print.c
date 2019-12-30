@@ -18,7 +18,7 @@ void	print_node(const t_node *a)
 
 	ft_printf("%-12s: (x, y) = (%d, %d)\tdistance: %d\tconnected to: ",
 		a->name, a->x, a->y, a->distance);
-	tmp = a->nodes;
+	tmp = a->edges;
 	while (tmp)
 	{
 		ft_printf("%s (%d); ", tmp->node->name, tmp->len);
@@ -35,8 +35,19 @@ void	print_graph(t_graph *graph)
 	ft_printf("Number of ants: %d\nNodes:\n", graph->ant_num);
 	ft_printf("Starting node: %s\n", graph->start->name);
 	ft_printf("Ending node:   %s\n", graph->finish->name);
-	i = -1;
-	while (++i < graph->node_num)
-		print_node(graph->nodes[i]);
+	i = 0;
+	while (i < graph->node_num)
+		print_node(graph->nodes[i++]);
 	ft_printf("--------------------\n");
+}
+
+void	print_path(t_edge *path)
+{
+	ft_printf("Path:\n");
+	while (path)
+	{
+		ft_printf("%s ", path->node->name);
+		path = path->next;
+	}
+	ft_printf("\n");
 }

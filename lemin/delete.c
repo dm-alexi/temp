@@ -21,11 +21,11 @@ void	delete_graph(t_graph *graph)
 	while (i < graph->node_num)
 	{
 		free(graph->nodes[i]->name);
-		while (graph->nodes[i]->nodes)
+		while (graph->nodes[i]->edges)
 		{
-			tmp = graph->nodes[i]->nodes->next;
-			free(graph->nodes[i]->nodes);
-			graph->nodes[i]->nodes = tmp;
+			tmp = graph->nodes[i]->edges->next;
+			free(graph->nodes[i]->edges);
+			graph->nodes[i]->edges = tmp;
 		}
 		free(graph->nodes[i]);
 		++i;

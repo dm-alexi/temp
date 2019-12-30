@@ -18,6 +18,10 @@ int		main(void)
 
 	graph = get_graph();
 	print_graph(graph);
+	dijkstra(graph);
+	print_graph(graph);
+	print_path(get_path(graph));
 	delete_graph(graph);
+
 	return (0);
 }

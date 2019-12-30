@@ -14,6 +14,10 @@
 #include <unistd.h>
 #include "lemin.h"
 
+/**
+** stdio.h for windows, unistd.h for unix
+**/
+
 static int		read_int(void)
 {
 	char	*line;

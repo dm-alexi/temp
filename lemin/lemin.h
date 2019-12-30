@@ -24,7 +24,7 @@ typedef enum	e_command
 typedef struct	s_node
 {
 	char			*name;
-	struct s_edge	*nodes;
+	struct s_edge	*edges;
 	int				x;
 	int				y;
 	int				distance;
@@ -57,5 +57,8 @@ int				get_line(char **line, t_command *com);
 void			get_nodes(t_graph *graph, char **line);
 void			get_edges(t_graph *graph, char **line);
 void			delete_graph(t_graph *graph);
+void			dijkstra(t_graph *graph);
+t_edge			*get_path(t_graph *graph);
+void			print_path(t_edge *path);
 
 #endif

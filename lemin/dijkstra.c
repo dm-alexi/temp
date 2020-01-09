@@ -17,6 +17,7 @@ static void		process(t_queue **q, t_queue **last)
 		if (t->node->distance < 0)
 		{
 			t->node->distance = (*q)->node->distance + t->len;
+			t->node->prev = (*q)->node;
             if (!((*last)->next = (t_queue*)malloc(sizeof(t_queue))))
 				sys_error();
 			*last = (*last)->next;
@@ -46,11 +47,9 @@ void			dijkstra(t_graph *graph)
 		error();
 }
 
-//only undirected!!!
 t_edge			*get_path(t_graph *graph)
 {
     t_edge	*res;
-    t_edge	*t;
     t_edge	*tmp;
     int		i;
 
@@ -59,17 +58,13 @@ t_edge			*get_path(t_graph *graph)
     if (!(res = (t_edge*)ft_memalloc(sizeof(t_edge))))
 		sys_error();
 	res->node = graph->finish;
-	while (i)
+	while (res->node->prev)
 	{
-		t = res->node->edges;
-		while (t->node->distance != i - 1)
-			t = t->next;
-        if (!(tmp = (t_edge*)malloc(sizeof(t_edge))))
+		if (!(tmp = (t_edge*)malloc(sizeof(t_edge))))
 			sys_error();
-		tmp->node = t->node;
+		tmp->node = res->node->prev;
 		tmp->next = res;
 		res = tmp;
-		--i;
 	}
 	return (res);
 }

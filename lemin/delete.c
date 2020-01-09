@@ -33,3 +33,14 @@ void	delete_graph(t_graph *graph)
 	free(graph->nodes);
 	free(graph);
 }
+
+void	delete_path(t_edge *path)
+{
+    t_edge	*t;
+
+    while ((t = path))
+	{
+		path = path->next;
+		free(t);
+	}
+}

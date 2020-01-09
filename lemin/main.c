@@ -15,12 +15,14 @@
 int		main(void)
 {
 	t_graph		*graph;
+	t_edge		*path;
 
 	graph = get_graph();
-	print_graph(graph);
+	//print_graph(graph);
 	dijkstra(graph);
 	print_graph(graph);
-	print_path(get_path(graph));
+	print_path(path = get_path(graph));
+	delete_path(path);
 	delete_graph(graph);
 
 	return (0);

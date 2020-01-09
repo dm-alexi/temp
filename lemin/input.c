@@ -9,14 +9,12 @@
 /*   Updated: 2019/12/29 17:40:47 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
-#include <unistd.h>
+#ifdef _WIN32
+# include <stdio.h>
+#else
+# include <unistd.h>
+#endif
 #include "lemin.h"
-
-/**
-** stdio.h for windows, unistd.h for unix
-**/
 
 static int		read_int(void)
 {

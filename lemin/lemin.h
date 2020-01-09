@@ -25,6 +25,7 @@ typedef struct	s_node
 {
 	char			*name;
 	struct s_edge	*edges;
+	struct s_node	*prev;
 	int				x;
 	int				y;
 	int				distance;
@@ -57,6 +58,7 @@ int				get_line(char **line, t_command *com);
 void			get_nodes(t_graph *graph, char **line);
 void			get_edges(t_graph *graph, char **line);
 void			delete_graph(t_graph *graph);
+void			delete_path(t_edge *path);
 void			dijkstra(t_graph *graph);
 t_edge			*get_path(t_graph *graph);
 void			print_path(t_edge *path);

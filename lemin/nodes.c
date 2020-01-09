@@ -29,6 +29,7 @@ static t_list	*new_node(char *line, t_command com)
 		error();
 	node.name = ft_strdup(line);
 	node.edges = NULL;
+	node.prev = NULL;
 	node.distance = com;
 	free(line);
 	return (ft_lstnew(&node, sizeof(t_node)));

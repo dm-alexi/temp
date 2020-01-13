@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/29 19:42:34 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/13 22:13:02 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 #include "fdf.h"
 #define ESC 53
 
+int		win_close(void *param)
+{
+	(void)param;
+	exit(EXIT_SUCCESS);
+}
+
 int		key_handle(int key, void *param)
 {
 	if (key == ESC)
-		exit(EXIT_SUCCESS);
+		win_close(param);
 	if (param == NULL)
 		ft_printf("%d ", key);
 	return (0);

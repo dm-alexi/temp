@@ -6,13 +6,13 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/27 21:50:41 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/19 18:23:22 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int		count_elem(char *s)
+static int			count_elem(char *s)
 {
 	int		n;
 
@@ -32,7 +32,7 @@ static int		count_elem(char *s)
 	return (n);
 }
 
-static t_vertex	get_next_vertex(int y, int x, char **s)
+static t_vertex		get_next_vertex(int y, int x, char **s)
 {
 	t_vertex	v;
 
@@ -53,7 +53,7 @@ static t_vertex	get_next_vertex(int y, int x, char **s)
 	return (v);
 }
 
-static void		get_grid(t_list *t, t_map *map)
+static void			get_grid(t_list *t, t_map *map)
 {
 	int		i;
 	int		j;
@@ -78,7 +78,22 @@ static void		get_grid(t_list *t, t_map *map)
 	}
 }
 
-t_map			*get_map(int fd)
+static t_map		*get_extremum(t_map *map)
+{
+	int		i;
+
+	i = 0;
+	map->z_max = map->grid->z;
+	map->z_min = map->grid->z;
+	while (++i < map->rows * map->columns)
+		if (map->grid[i].z > map->z_max)
+			map->z_max = map->grid[i].z;
+		else if (map->grid[i].z < map->z_min)
+			map->z_min = map->grid[i].z;
+	return (map);
+}
+
+t_map				*get_map(int fd)
 {
 	t_map	*map;
 	char	*line;
@@ -101,5 +116,5 @@ t_map			*get_map(int fd)
 	map->length = map->rows * map->columns;
 	get_grid(t, map);
 	ft_lstdel(&t, NULL);
-	return (map);
+	return (get_extremum(map));
 }

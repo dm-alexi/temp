@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:20 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/13 22:12:04 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/19 18:12:32 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct	s_map
 	int			length;
 	int			columns;
 	int			rows;
+	int			z_min;
+	int			z_max;
 	t_vertex	*grid;
 }				t_map;
 
@@ -54,6 +56,7 @@ int				win_close(void *param);
 t_image			*new_image(void *mlx, int width, int height);
 void			image_put_pixel(t_image *image, int x, int y, int color);
 void			image_draw_line(t_image *image, t_vertex *a, t_vertex *b);
+//void			image_clear(t_image *image);
 
 double			*mult(double a[16], double b[16], double c[16]);
 t_vertex		*transform(t_vertex *v, double m[16], t_vertex *out);

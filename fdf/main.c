@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:08 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/27 22:08:17 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/19 18:22:42 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int				main(int ac, char **av)
 		sys_error();
 	map = get_map(fd);
 	close(fd);
+	ft_printf("%d %d", map->z_min, map->z_max);
 	//show_map(map);
 /*
     for (int i = 0; i < map->rows; ++i)

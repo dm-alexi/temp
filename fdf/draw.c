@@ -6,13 +6,19 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:44:17 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/29 18:16:33 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/19 18:01:10 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "fdf.h"
-
+/*
+void	image_clear(t_image *image)
+{
+	for (int i = 0; i < image->width * image->height * image->bpp / 8; ++i)
+		image->s[i] = 0;
+}
+*/
 void	image_put_pixel(t_image *image, int x, int y, int color)
 {
 	int		i;

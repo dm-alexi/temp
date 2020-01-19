@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:44:17 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/19 19:56:50 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/19 21:21:54 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		gradient(t_vertex *a, t_vertex *b, int steps, int i)
 	k = (double)i / steps;
 	stepR = red(a->color) + (red(b->color) - red(a->color))*k;
 	stepG = green(a->color) + (green(b->color) - green(a->color))*k;
-	stepB = blue(a->color) + (blue(b->color) - red(a->color))*k;
+	stepB = blue(a->color) + (blue(b->color) - blue(a->color))*k;
 	color = (stepR << 16) + (stepG << 8) + stepB;
 	return (color);
 }

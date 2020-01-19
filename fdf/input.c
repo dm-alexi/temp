@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/19 19:49:20 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/19 21:22:27 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,22 @@ static void			get_grid(t_list *t, t_map *map)
 	}
 }
 
+static t_map		*set_colors(t_map *map)
+{
+	int		i;
+
+	i = 0;
+	while (i < map->rows * map->columns)
+	{
+		if (map->grid[i].z == map->z_max)
+			map->grid[i].color = 0xFF0000;
+		if (map->grid[i].z == map->z_min)
+			map->grid[i].color = 0xFFFFFF;
+		++i;
+	}
+	return (map);
+}
+
 static t_map		*get_extremum(t_map *map)
 {
 	int		i;
@@ -116,5 +132,5 @@ t_map				*get_map(int fd)
 	map->length = map->rows * map->columns;
 	get_grid(t, map);
 	ft_lstdel(&t, NULL);
-	return (get_extremum(map));
+	return (set_colors(get_extremum(map)));
 }

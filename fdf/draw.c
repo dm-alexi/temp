@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:44:17 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/19 21:21:54 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/19 21:33:15 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	image_draw_line(t_image *image, t_vertex *a, t_vertex *b)
 		while (i <= b->x - a->x)
 		{
 			//image_put_pixel(image, a->x + i, a->y + i * step, 0xffffff - (a->z + b->z) * 1000);
-			image_put_pixel(image, a->x + i, a->y + i * step, gradient(a, b, a->x - b->x, i));
+			image_put_pixel(image, a->x + i, a->y + i * step, gradient(a, b, b->x - a->x, i));
 			++i;
 		}
 	}
@@ -99,7 +99,7 @@ void	image_draw_line(t_image *image, t_vertex *a, t_vertex *b)
 		while (i <= b->y - a->y)
 		{
 			//image_put_pixel(image, a->x + i * step, a->y + i, 0xffffff - (a->z + b->z) * 1000);
-			image_put_pixel(image, a->x + i * step, a->y + i, gradient(a, b, a->y - b->y, i));
+			image_put_pixel(image, a->x + i * step, a->y + i, gradient(a, b, b->y - a->y, i));
 			++i;
 		}
 	}

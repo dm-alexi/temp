@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:20 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/19 18:12:32 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/20 19:58:03 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,23 @@ typedef struct	s_map
 	int			rows;
 	int			z_min;
 	int			z_max;
+	int			m[16];
+	void		*mlx;
+	void		*win;
+	t_image		*image;
 	t_vertex	*grid;
 }				t_map;
 
 void			sys_error(void);
 void			error(char *s);
 t_map			*get_map(int fd);
-void			window(char *file, t_map *map);
+void			fdf_init(char *file, t_map *map);
 int				key_handle(int key, void *param);
 int				win_close(void *param);
 t_image			*new_image(void *mlx, int width, int height);
 void			image_put_pixel(t_image *image, int x, int y, int color);
 void			image_draw_line(t_image *image, t_vertex *a, t_vertex *b);
+void			map_matrix_init(t_map *map);
 //void			image_clear(t_image *image);
 
 double			*mult(double a[16], double b[16], double c[16]);
@@ -63,5 +68,6 @@ t_vertex		*transform(t_vertex *v, double m[16], t_vertex *out);
 double			*identity(void);
 double			*scale(int r);
 double			*translation(double x, double y, double z);
+double			*rotation(double ax, double ay, double az);
 double			*projection(double fov, double ratio, double near, double far);
 #endif

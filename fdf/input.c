@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/19 21:37:30 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/20 19:04:43 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static t_map		*set_colors(t_map *map)
 	while (i < map->rows * map->columns)
 	{
 		if (map->grid[i].z == map->z_max)
-			map->grid[i].color = 0x00FF00;
+			map->grid[i].color = 0xFF0000;
 		if (map->grid[i].z == map->z_min)
 			map->grid[i].color = 0xFFFFFF;
 		++i;

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:08 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/19 18:22:42 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/20 19:17:43 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ int				main(int ac, char **av)
 		sys_error();
 	map = get_map(fd);
 	close(fd);
-	ft_printf("%d %d", map->z_min, map->z_max);
+	//ft_printf("%d %d", map->z_min, map->z_max);
 	//show_map(map);
 /*
     for (int i = 0; i < map->rows; ++i)
         for (int j = 0; j < map->columns; ++j)
             ft_printf("%2d%s", map->grid[i * map->columns + j].z, j == map->columns - 1 ? "\n" : " ");
 */
-	window(av[ac - 1], map);
+	fdf_init(av[ac - 1], map);
 	return (0);
 }

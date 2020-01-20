@@ -6,13 +6,18 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:52:19 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/13 19:45:32 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/20 20:08:50 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "fdf.h"
-
+/*
+void			map_matrix_init(t_map *map)
+{
+	map->m
+}
+*/
 double		*mult(double a[16], double b[16], double c[16])
 {
 	int		i;
@@ -75,6 +80,29 @@ double		*translation(double x, double y, double z)
 	return (m);
 }
 
+double		*rotation(double ax, double ay, double az)
+{
+	static double m[16];
+	static double rx[16] = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+	static double ry[16] = {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+	static double rz[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0};
+
+	rx[5] = cos(ax);
+	rx[6] = -sin(ax);
+	rx[9] = -rx[6];
+	rx[10] = rx[5];
+	ry[0] = cos(ay);
+	ry[2] = sin(ay);
+	ry[8] = -ry[2];
+	ry[10] = ry[0];
+	rz[0] = cos(az);
+	rz[1] = -sin(az);
+	rz[4] = -rz[1];
+	rz[5] = rz[0];
+	mult(rx, ry, m);
+	//mult(rz, m, m);
+	return (m);
+}
 
 double		*projection(double fov, double ratio, double near, double far)
 {

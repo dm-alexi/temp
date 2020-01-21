@@ -1,6 +1,6 @@
 NAME = fdf
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -Wall -Wextra -Werror ##-fsanitize=address
 LIBFT = libft/libft.a
 HEAD = fdf.h
 SRC = main.c input.c error.c window.c keyboard.c image.c draw.c matrices.c

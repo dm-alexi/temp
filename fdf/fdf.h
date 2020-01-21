@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:20 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/20 19:58:03 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/21 20:54:42 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct	s_vertex
 	int		x;
 	int		y;
 	int		z;
-	double	w;
+	int		w;
 	int		color;
 }				t_vertex;
 
@@ -31,9 +31,10 @@ typedef struct	s_image
 {
 	void	*img;
 	int		bpp;
+	int		sizeline;
 	int		width;
-	int		endian;
 	int		height;
+	int		endian;
 	char	*s;
 }				t_image;
 
@@ -61,6 +62,7 @@ t_image			*new_image(void *mlx, int width, int height);
 void			image_put_pixel(t_image *image, int x, int y, int color);
 void			image_draw_line(t_image *image, t_vertex *a, t_vertex *b);
 void			map_matrix_init(t_map *map);
+void			show_matrix(double m[16]);
 //void			image_clear(t_image *image);
 
 double			*mult(double a[16], double b[16], double c[16]);

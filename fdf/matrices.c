@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:52:19 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/20 21:18:08 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/21 21:38:12 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ void			map_matrix_init(t_map *map)
 	map->m
 }
 */
+void			show_matrix(double m[16])
+{
+	for (int i = 0;	i < 16; ++i)
+		ft_printf("%10f%c", m[i], i % 4 == 3 ? '\n' : 0);
+}
+
 double		*mult(double a[16], double b[16], double c[16])
 {
 	int		i;
@@ -100,7 +106,8 @@ double		*rotation(double ax, double ay, double az)
 	rz[4] = -rz[1];
 	rz[5] = rz[0];
 	mult(rx, ry, m);
-	//mult(rz, m, m);
+	mult(rz, m, m);
+	//show_matrix(m);
 	return (m);
 }
 

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:44:17 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/20 21:17:45 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/21 21:33:29 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	image_put_pixel(t_image *image, int x, int y, int color)
 
 	if (x < 0 || y < 0 || x >= image->width || y >= image->height)
 		return ;
-	i = x * image->bpp / 8 + y * image->width;
+	i = x * image->bpp / 8 + y * image->sizeline;
 	if (image->endian)
 	{
 		if (image->bpp > 24)
@@ -75,31 +75,40 @@ void	image_put_pixel(t_image *image, int x, int y, int color)
 	}
 }
 
+
+//todo: handle a = b!!!
+//handle division by zero
 void	image_draw_line(t_image *image, t_vertex *a, t_vertex *b)
 {
 	double	step;
 	int		i;
 
 	i = 0;
-	if (a->x > b->x || (b->x - a->x <= ft_abs(b->y - a->y) && a->y > b->y))
+	if ((a->x > b->x && a->y > b->y) || 
+	a->x - b->x > ft_abs(b->y - a->y) || a->y - b->y > ft_abs(b->x - a->x))
 		image_draw_line(image, b, a);
 	else if (b->x - a->x > ft_abs(b->y - a->y))
 	{
+		if (a->x == b->x)
+			error("x");
 		step = (double)(a->y - b->y) / (a->x - b->x);
 		while (i <= b->x - a->x)
 		{
-			//image_put_pixel(image, a->x + i, a->y + i * step, 0xffffff - (a->z + b->z) * 1000);
 			image_put_pixel(image, a->x + i, a->y + i * step, gradient(a, b, b->x - a->x, i));
+			//image_put_pixel(image, a->x + i, a->y + i * step, 0xFFFFFF);
 			++i;
 		}
 	}
 	else
 	{
+		if (a->y == b->y)
+			error("y");
+		//ft_printf("\nlucck\n");
 		step = (double)(a->x - b->x) / (a->y - b->y);
 		while (i <= b->y - a->y)
 		{
-			//image_put_pixel(image, a->x + i * step, a->y + i, 0xffffff - (a->z + b->z) * 1000);
 			image_put_pixel(image, a->x + i * step, a->y + i, gradient(a, b, b->y - a->y, i));
+			//image_put_pixel(image, a->x + i * step, a->y + i,  0xFFFFFF);
 			++i;
 		}
 	}

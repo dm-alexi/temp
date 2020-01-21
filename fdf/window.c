@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:19:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/20 21:20:26 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/21 21:37:45 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,13 @@ void	fdf_init(char *file, t_map *map)
 	mlx_hook(map->win, 17, 1L << 17, &win_close, NULL);
 	t_vertex *shown = (t_vertex*)malloc(sizeof(t_vertex) * map->length);
 	double *m = (double*)malloc(sizeof(double) * 16);
-	m = identity();
-	mult(translation(-map->columns / 2, -map->rows / 2, 0), m, m);
-	mult(scale(20), m, m);
-	mult(rotation(1, 1, 0), m, m);
+	mult(translation(-map->columns / 2, -map->rows / 2, 0), identity(), m);
+	mult(scale(40), m, m);
+	mult(rotation(0.4, 0.4, -1), m, m);
 	mult(translation(WIDTH / 2, HEIGHT / 2, 0), m, m);
 	//mult(projection(1.99, 0.25, 0.1, 120), m, m);
-
 	for (int i = 0; i < map->length; ++i)
-	{
 		transform(map->grid + i, m, shown + i);
-		
-	}
 	for (int i = 0; i < map->length; ++i)
 	{
 		if (i % map->columns < map->columns - 1)

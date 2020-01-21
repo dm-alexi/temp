@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 14:13:26 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/20 19:20:03 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/21 20:17:47 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ t_image		*new_image(void *mlx, int width, int height)
 	if (!(image = (t_image*)ft_memalloc(sizeof(t_image))) ||
 	!(image->img = mlx_new_image(mlx, width, height)))
 		sys_error();
-	image->s = mlx_get_data_addr(image->img, &(image->bpp), &(image->width),
+	image->s = mlx_get_data_addr(image->img, &(image->bpp), &(image->sizeline),
 		&(image->endian));
 	image->height = height;
+	image->width = width;
 	return (image);
 }

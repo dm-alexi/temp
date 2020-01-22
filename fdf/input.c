@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/22 21:39:51 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/22 22:57:37 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,7 @@ t_map				*get_map(int fd)
 	map->length = map->rows * map->columns;
 	get_grid(t, map);
 	ft_lstdel(&t, NULL);
+	if (!(map->show = (t_vertex *)malloc(sizeof(t_vertex) * map->length)))
+		sys_error();
 	return (set_colors(get_extremum(map)));
 }

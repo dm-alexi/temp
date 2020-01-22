@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:08 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/22 21:31:10 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/22 23:34:27 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include "fdf.h"
+#include <stdio.h>
 
 static int		usage(void)
 {
@@ -32,13 +33,6 @@ int				main(int ac, char **av)
 		sys_error();
 	map = get_map(fd);
 	close(fd);
-	//ft_printf("%d %d", map->z_min, map->z_max);
-	//show_map(map);
-/*
-    for (int i = 0; i < map->rows; ++i)
-        for (int j = 0; j < map->columns; ++j)
-            ft_printf("%2d%s", map->grid[i * map->columns + j].z, j == map->columns - 1 ? "\n" : " ");
-*/
 	fdf_init(av[ac - 1], map);
 
 	return (0);

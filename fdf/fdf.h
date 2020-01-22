@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:20 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/21 20:54:42 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/22 22:57:31 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,15 @@ typedef struct	s_image
 	char	*s;
 }				t_image;
 
+typedef struct	s_matrix
+{
+	double	initial[16];
+	double	result[16];
+	double	scale;
+	double	rotate[3];
+	double	move[3];
+}				t_matrix;
+
 typedef struct	s_map
 {
 	int			length;
@@ -45,11 +54,12 @@ typedef struct	s_map
 	int			rows;
 	int			z_min;
 	int			z_max;
-	int			m[16];
+	t_matrix	matrix;
 	void		*mlx;
 	void		*win;
 	t_image		*image;
 	t_vertex	*grid;
+	t_vertex 	*show;
 }				t_map;
 
 void			sys_error(void);
@@ -61,15 +71,12 @@ int				win_close(void *param);
 t_image			*new_image(void *mlx, int width, int height);
 void			image_put_pixel(t_image *image, int x, int y, int color);
 void			image_draw_line(t_image *image, t_vertex *a, t_vertex *b);
-void			map_matrix_init(t_map *map);
 void			show_matrix(double m[16]);
 //void			image_clear(t_image *image);
 
 double			*mult(double a[16], double b[16], double c[16]);
 t_vertex		*transform(t_vertex *v, double m[16], t_vertex *out);
-double			*identity(void);
-double			*scale(int r);
-double			*translation(double x, double y, double z);
-double			*rotation(double ax, double ay, double az);
+void			matrix_init(t_map *map);
+void			matrix_result(t_map *map);
 double			*projection(double fov, double ratio, double near, double far);
 #endif

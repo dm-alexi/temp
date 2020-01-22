@@ -84,15 +84,15 @@ void	image_draw_line(t_image *image, t_vertex *a, t_vertex *b)
 	int		i;
 
 	i = 0;
-	if ((a->x > b->x && a->y > b->y) || 
+	if (a->x == b->x && a->y == b->y)
+		image_put_pixel(image, a->x, a->y, a->color);
+	else if ((a->x >= b->x && a->y >= b->y) || 
 	a->x - b->x > ft_abs(b->y - a->y) || a->y - b->y > ft_abs(b->x - a->x))
 		image_draw_line(image, b, a);
 	else if (b->x - a->x > ft_abs(b->y - a->y))
 	{
-		if (a->x == b->x)
-			error("x");
 		step = (double)(a->y - b->y) / (a->x - b->x);
-		while (i <= b->x - a->x)
+		while (i < b->x - a->x)
 		{
 			image_put_pixel(image, a->x + i, a->y + i * step, gradient(a, b, b->x - a->x, i));
 			//image_put_pixel(image, a->x + i, a->y + i * step, 0xFFFFFF);
@@ -103,7 +103,6 @@ void	image_draw_line(t_image *image, t_vertex *a, t_vertex *b)
 	{
 		if (a->y == b->y)
 			error("y");
-		//ft_printf("\nlucck\n");
 		step = (double)(a->x - b->x) / (a->y - b->y);
 		while (i <= b->y - a->y)
 		{

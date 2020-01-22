@@ -6,13 +6,17 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/19 16:51:18 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/22 17:12:08 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "fdf.h"
 #define ESC 53
+#define UP 126
+#define DOWN 125
+#define LEFT 123
+#define RIGHT 124
 
 int		win_close(void *param)
 {

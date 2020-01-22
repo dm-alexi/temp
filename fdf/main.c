@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:08 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/20 19:17:43 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/22 21:31:10 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ int				main(int ac, char **av)
             ft_printf("%2d%s", map->grid[i * map->columns + j].z, j == map->columns - 1 ? "\n" : " ");
 */
 	fdf_init(av[ac - 1], map);
+
 	return (0);
 }

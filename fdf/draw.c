@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:44:17 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/21 21:33:29 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/22 17:08:02 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,7 @@ void	image_put_pixel(t_image *image, int x, int y, int color)
 }
 
 
-//todo: handle a = b!!!
-//handle division by zero
+//todo: delete zero devision check after thorough testing
 void	image_draw_line(t_image *image, t_vertex *a, t_vertex *b)
 {
 	double	step;

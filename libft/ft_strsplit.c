@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 20:10:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/11 21:27:54 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/22 21:37:16 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	word_count(char const *s, char c)
+size_t	ft_word_count(char const *s, char c)
 {
 	size_t	n;
 
@@ -47,7 +47,7 @@ char			**ft_strsplit(char const *s, char c)
 	size_t		n;
 	size_t		i;
 
-	n = word_count(s, c);
+	n = ft_word_count(s, c);
 	if (!s || !(arr = (char**)malloc(sizeof(char*) * (n + 1))))
 		return (NULL);
 	i = 0;

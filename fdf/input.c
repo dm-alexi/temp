@@ -6,31 +6,11 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/21 19:08:57 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/22 21:39:51 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-static int			count_elem(char *s)
-{
-	int		n;
-
-	if (!s)
-		return (0);
-	n = 0;
-	while (*s == ' ')
-		++s;
-	while (*s)
-	{
-		while (*s && *s != ' ')
-			++s;
-		++n;
-		while (*s == ' ')
-			++s;
-	}
-	return (n);
-}
 
 static t_vertex		get_next_vertex(int y, int x, char **s)
 {
@@ -71,7 +51,7 @@ static void			get_grid(t_list *t, t_map *map)
 			map->grid[i * map->columns + j] = get_next_vertex(i, j, &s);
 			++j;
 		}
-		if (count_elem(s))
+		if (ft_word_count(s, ' '))
 			error(INVALID);
 		t = t->next;
 		--i;
@@ -127,7 +107,7 @@ t_map				*get_map(int fd)
 		ft_lstadd(&t, tmp);
 		free(line);
 	}
-	if (!map->rows || !(map->columns = count_elem(t->content)))
+	if (!map->rows || !(map->columns = ft_word_count(t->content, ' ')))
 		error(INVALID);
 	map->length = map->rows * map->columns;
 	get_grid(t, map);

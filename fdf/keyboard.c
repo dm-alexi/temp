@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/22 23:35:38 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/23 21:12:45 by stristim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,24 @@
 #define DOWN 125
 #define LEFT 123
 #define RIGHT 124
-#define PLUS 69
-#define MINUS 78
-#define EIGHT 91
-#define TWO 84
-#define FOUR 86
-#define SIX 88
-#define SEVEN 89
-#define NINE 92
+#define NUM_PLUS 69
+#define PLUS 24
+#define NUM_MINUS 78
+#define MINUS 27
+#define NUM_EIGHT 91
+#define EIGHT 28
+#define NUM_TWO 84
+#define TWO 19
+#define NUM_FOUR 86
+#define FOUR 21
+#define NUM_SIX 88
+#define SIX 22
+#define NUM_SEVEN 89
+#define SEVEN 26
+#define NUM_NINE 92
+#define NINE 25
+#define NUM_FIVE 87
+#define FIVE 23
 
 int		win_close(void *param)
 {
@@ -40,9 +50,9 @@ int		key_handle(int key, void *param)
 	map = param;
 	if (key == ESC)
 		win_close(param);
-	else if (key == PLUS)
+	else if (key == PLUS || key == NUM_PLUS)
 		map->matrix.scale *= 1.04;
-	else if (key == MINUS)
+	else if (key == MINUS || key == NUM_MINUS)
 		map->matrix.scale /= 1.04;
 	else if (key == UP)
 		map->matrix.move[1] -= map->matrix.scale;
@@ -52,18 +62,20 @@ int		key_handle(int key, void *param)
 		map->matrix.move[0] -= map->matrix.scale;
 	else if (key == RIGHT)
 		map->matrix.move[0] += map->matrix.scale;
-	else if (key == EIGHT)
+	else if (key == EIGHT  || key == NUM_EIGHT)
 		map->matrix.rotate[0] += M_PI / 36;
-	else if (key == TWO)
+	else if (key == TWO ||  key == NUM_TWO)
 		map->matrix.rotate[0] -= M_PI / 36;
-	else if (key == SIX)
+	else if (key == SIX || key == NUM_SIX)
 		map->matrix.rotate[1] += M_PI / 36;
-	else if (key == FOUR)
+	else if (key == FOUR || key == NUM_FOUR)
 		map->matrix.rotate[1] -= M_PI / 36;
-	else if (key == SEVEN)
+	else if (key == SEVEN || key == NUM_SEVEN)
 		map->matrix.rotate[2] += M_PI / 36;
-	else if (key == NINE)
+	else if (key == NINE || key == NUM_NINE)
 		map->matrix.rotate[2] -= M_PI / 36;
+	else  if (key == FIVE || key == NUM_FIVE)
+		matrix_init(map);
 	matrix_result(map);
 	ft_printf("%d ", key);
 	return (0);

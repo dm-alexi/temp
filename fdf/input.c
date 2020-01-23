@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/22 22:57:37 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/23 21:41:10 by stristim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,17 @@ static t_map		*set_colors(t_map *map)
 	while (i < map->rows * map->columns)
 	{
 		if (map->grid[i].z == map->z_max)
-			map->grid[i].color = 0xFF0000;
+		{
+			map->grid[i].color = MAXCOLOR;
+			if (map->z_max == 0)
+				map->grid[i].color = MIDCOLOR;
+		}	
 		if (map->grid[i].z == map->z_min)
-			map->grid[i].color = 0xFFFFFF;
+		{
+			map->grid[i].color = MINCOLOR;
+			if (map->z_min == 0)
+				map->grid[i].color = MIDCOLOR;
+		}
 		++i;
 	}
 	return (map);

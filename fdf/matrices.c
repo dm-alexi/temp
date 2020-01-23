@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrices.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:52:19 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/22 23:38:19 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/23 19:49:33 by stristim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ void			matrix_result(t_map *map)
 			image_draw_line(map->image, map->show + i, map->show + i + map->columns);
 	}
 	mlx_put_image_to_window(map->mlx, map->win, map->image->img, 0, 0);
+	ft_menu(map);
 }
 
 void			matrix_init(t_map *map)

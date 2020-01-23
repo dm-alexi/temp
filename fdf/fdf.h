@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:20 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/22 22:57:31 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/23 21:24:48 by stristim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # define HEIGHT 1080
 # define STEP 10
 # define INVALID "Invalid map."
+# define MIDCOLOR 0xFFFFFF
+# define MINCOLOR 0x0000FF
+# define MAXCOLOR 0xFF0000
 
 typedef struct	s_vertex
 {
@@ -79,4 +82,8 @@ t_vertex		*transform(t_vertex *v, double m[16], t_vertex *out);
 void			matrix_init(t_map *map);
 void			matrix_result(t_map *map);
 double			*projection(double fov, double ratio, double near, double far);
+
+void			ft_menu(t_map *map);
+int				gradient_check(t_vertex *a, t_vertex *b, int steps, int i);
+int				gradient(int start, int finish, double k);
 #endif

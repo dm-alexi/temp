@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrices.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:52:19 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/23 19:49:33 by stristim         ###   ########.fr       */
+/*   Updated: 2020/01/24 20:36:27 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void			matrix_result(t_map *map)
 	mult(scale(map->matrix.scale), map->matrix.initial, map->matrix.result);
 	mult(rotation(map->matrix.rotate), map->matrix.result, map->matrix.result);
 	mult(translation(map->matrix.move), map->matrix.result, map->matrix.result);
+	//mult(projection(1.99, 0.25, 0.1, 50), map->matrix.result, map->matrix.result);
 	i = -1;
 	while (++i < map->length)
 		transform(map->grid + i, map->matrix.result, map->show + i);
@@ -125,6 +126,7 @@ void			matrix_result(t_map *map)
 		if (i < map->length - map->columns)
 			image_draw_line(map->image, map->show + i, map->show + i + map->columns);
 	}
+	//image_draw_line(map->image, map->show + 1, map->show + 2);
 	mlx_put_image_to_window(map->mlx, map->win, map->image->img, 0, 0);
 	ft_menu(map);
 }

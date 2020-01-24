@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:19:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/23 22:19:16 by stristim         ###   ########.fr       */
+/*   Updated: 2020/01/24 20:41:54 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	fdf_init(char *file, t_map *map)
 	mlx_hook(map->win, 2, 1L<<1, &key_handle, map);
 	mlx_hook(map->win, 17, 1L << 17, &win_close, map);
 	matrix_init(map);
-	//mult(projection(1.99, 0.25, 0.1, 50), m, m);
 	matrix_result(map);
 	ft_menu(map);
 	mlx_loop(map->mlx);

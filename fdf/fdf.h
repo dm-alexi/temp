@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:20 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/23 21:24:48 by stristim         ###   ########.fr       */
+/*   Updated: 2020/01/24 20:45:02 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ t_image			*new_image(void *mlx, int width, int height);
 void			image_put_pixel(t_image *image, int x, int y, int color);
 void			image_draw_line(t_image *image, t_vertex *a, t_vertex *b);
 void			show_matrix(double m[16]);
-//void			image_clear(t_image *image);
 
 double			*mult(double a[16], double b[16], double c[16]);
 t_vertex		*transform(t_vertex *v, double m[16], t_vertex *out);

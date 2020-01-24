@@ -3,22 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:44:17 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/23 21:26:20 by stristim         ###   ########.fr       */
+/*   Updated: 2020/01/24 20:44:56 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "fdf.h"
-/*
-void	image_clear(t_image *image)
-{
-	for (int i = 0; i < image->width * image->height * image->bpp / 8; ++i)
-		image->s[i] = 0;
-}
-*/
+
 // int red (int color)
 // {
 //     return (color >> 16);
@@ -75,8 +69,6 @@ void	image_put_pixel(t_image *image, int x, int y, int color)
 	}
 }
 
-
-//todo: delete zero devision check after thorough testing
 void	image_draw_line(t_image *image, t_vertex *a, t_vertex *b)
 {
 	double	step;
@@ -88,7 +80,7 @@ void	image_draw_line(t_image *image, t_vertex *a, t_vertex *b)
 	else if ((a->x >= b->x && a->y >= b->y) || 
 	a->x - b->x > ft_abs(b->y - a->y) || a->y - b->y > ft_abs(b->x - a->x))
 		image_draw_line(image, b, a);
-	else if (b->x - a->x > ft_abs(b->y - a->y))
+	else if (b->x - a->x >= ft_abs(b->y - a->y))
 	{
 		step = (double)(a->y - b->y) / (a->x - b->x);
 		while (i < b->x - a->x)
@@ -100,8 +92,6 @@ void	image_draw_line(t_image *image, t_vertex *a, t_vertex *b)
 	}
 	else
 	{
-		if (a->y == b->y)
-			error("y");
 		step = (double)(a->x - b->x) / (a->y - b->y);
 		while (i <= b->y - a->y)
 		{

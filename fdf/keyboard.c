@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/23 21:12:45 by stristim         ###   ########.fr       */
+/*   Updated: 2020/01/24 20:41:10 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ int		key_handle(int key, void *param)
 	else if (key == FOUR || key == NUM_FOUR)
 		map->matrix.rotate[1] -= M_PI / 36;
 	else if (key == SEVEN || key == NUM_SEVEN)
-		map->matrix.rotate[2] += M_PI / 36;
-	else if (key == NINE || key == NUM_NINE)
 		map->matrix.rotate[2] -= M_PI / 36;
+	else if (key == NINE || key == NUM_NINE)
+		map->matrix.rotate[2] += M_PI / 36;
 	else  if (key == FIVE || key == NUM_FIVE)
 		matrix_init(map);
 	matrix_result(map);

@@ -6,43 +6,12 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:44:17 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/24 20:44:56 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/24 22:01:49 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "fdf.h"
-
-// int red (int color)
-// {
-//     return (color >> 16);
-// }
-
-// int green(int color)
-// {
-//     return (color >> 8) & 0xFF;
-// }
-
-// int blue(int color)
-// {
-//     return (color & 0xFF);
-// }
-
-// int		gradient(t_vertex *a, t_vertex *b, int steps, int i)
-// {
-// 	int		stepR;
-// 	int		stepG;
-// 	int		stepB;
-// 	int		color;
-// 	double	k;
-
-// 	k = (double)i / steps;
-// 	stepR = red(a->color) + (red(b->color) - red(a->color))*k + 0.5;
-// 	stepG = green(a->color) + (green(b->color) - green(a->color))*k + 0.5;
-// 	stepB = blue(a->color) + (blue(b->color) - blue(a->color))*k + 0.5;
-// 	color = (stepR << 16) + (stepG << 8) + stepB;
-// 	return (color);
-// }
 
 void	image_put_pixel(t_image *image, int x, int y, int color)
 {

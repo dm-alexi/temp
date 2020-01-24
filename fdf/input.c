@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/24 20:04:01 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/24 21:57:42 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ static t_vertex		get_next_vertex(int y, int x, char **s)
 	v.x = x;
 	v.y = y;
 	v.w = 1.0;
-	v.z = ft_strtol(*s, s, 10);
+	v.z = ft_strtol(*s, s, 0);
 	if ((!v.z && *(*s - 1) != '0') || (**s && **s != ',' && **s != ' '))
 		error(INVALID);
-	if (*(*s++) == ',')
+	if (**s == ',')
 	{
+		++*s;
 		v.color = ft_strtol(*s, s, 0);
 		if ((!v.color && *(*s - 1) != '0') || (**s && **s != ' '))
 			error(INVALID);

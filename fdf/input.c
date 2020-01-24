@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/24 21:57:42 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/24 22:19:17 by stristim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static void			get_grid(t_list *t, t_map *map)
 	}
 }
 
+/*
 static t_map		*set_colors(t_map *map)
 {
 	int		i;
@@ -81,6 +82,42 @@ static t_map		*set_colors(t_map *map)
 		++i;
 	}
 	return (map);
+}*/
+
+static t_map		*set_colors(t_map *map)
+{
+    int stepR;
+    int stepG;
+    int stepB;
+    int color;
+    double k;
+	int		i;
+
+	i = 0;
+	while (i < map->rows * map->columns)
+	{
+		if (map->grid[i].z > 0)
+		{
+			k = (double)map->grid[i].z / map->z_max;
+			stepR = red(MIDCOLOR) + (red(MAXCOLOR) - red(MIDCOLOR))*k;
+			stepG = green(MIDCOLOR) + (green(MAXCOLOR) - green(MIDCOLOR))*k;
+			stepB = blue(MIDCOLOR) + (blue(MAXCOLOR) - blue(MIDCOLOR))*k;
+			color = (stepR << 16) | (stepG << 8) | stepB;
+		}
+		else if (map->grid[i].z == 0)
+			color = MIDCOLOR;
+		else
+		{
+			k = (double)map->grid[i].z / map->z_min;
+			stepR = red(MIDCOLOR) + (red(MINCOLOR) - red(MIDCOLOR))*k;
+			stepG = green(MIDCOLOR) + (green(MINCOLOR) - green(MIDCOLOR))*k;
+			stepB = blue(MIDCOLOR) + (blue(MINCOLOR) - blue(MIDCOLOR))*k;
+			color = (stepR << 16) | (stepG << 8) | stepB;
+		}
+		map->grid[i].color = color;
+		++i;		
+	}
+    return (map);
 }
 
 static t_map		*get_extremum(t_map *map)

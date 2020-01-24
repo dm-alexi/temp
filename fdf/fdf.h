@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:20 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/24 20:45:02 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/24 22:18:19 by stristim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,9 @@ double			*projection(double fov, double ratio, double near, double far);
 void			ft_menu(t_map *map);
 int				gradient_check(t_vertex *a, t_vertex *b, int steps, int i);
 int				gradient(int start, int finish, double k);
+
+int red (int color);
+int green (int color);
+int blue (int color);
+
 #endif

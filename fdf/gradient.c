@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gradient.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 19:42:42 by stristim          #+#    #+#             */
-/*   Updated: 2020/01/23 21:49:26 by stristim         ###   ########.fr       */
+/*   Updated: 2020/01/24 23:49:49 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,10 @@ int blue(int color)
 
 int gradient(int start, int finish, double k)
 {
-    // I = start + (end - start) * K
-    // K = i / line
-    int stepR;
-    int stepG;
-    int stepB;
-    int color;
+    int     stepR;
+    int     stepG;
+    int     stepB;
+    int     color;
 
     stepR = red(start) + (red(finish) - red(start))*k + 0.5;
     stepG = green(start) + (green(finish) - green(start))*k  + 0.5;
@@ -43,32 +41,21 @@ int gradient(int start, int finish, double k)
     return (color);
 }
 
-int gradient_check(t_vertex *a, t_vertex *b, int steps, int i)
+int     gradient_check(t_vertex *a, t_vertex *b, int steps, int i)
 {
-    int length;
-    double k;
-    double l;
-    int color;
+    double  length;
+    double  k;
+    int     color;
 
-    k = (double)i/steps;
+    k = (double)i / steps;
     length = ft_abs(a->z) + ft_abs(b->z);
-    if ((a->z > 0 && b->z > 0) || (a->z < 0 && b->z < 0))
+    if ((a->z >= 0 && b->z >= 0) || (a->z <= 0 && b->z <= 0))
         color = gradient(a->color, b->color, k);
     else if (a->z < 0)
-    {
-        l = (double)(length - b->z) / length;
-        if (k < l)
-            color = gradient(a->color, MIDCOLOR, k);
-        else
-            color = gradient(MIDCOLOR, b->color, k);
-    }
+        color = k < (length - b->z) / length ? gradient(a->color, MIDCOLOR, k) :
+            gradient(MIDCOLOR, b->color, k);
     else
-    {
-        l = (double)(length - a->z) / length;
-        if(k > l)
-            color = gradient(a->color, MIDCOLOR, k);
-        else
-            color = gradient(MIDCOLOR, b->color, k);
-    }
+        color = k > (length - a->z) / length ? gradient(a->color, MIDCOLOR, k) :
+            gradient(MIDCOLOR, b->color, k);
     return (color);
 }

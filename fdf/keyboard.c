@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/24 20:41:10 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/24 23:20:45 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,6 @@ int		key_handle(int key, void *param)
 	else  if (key == FIVE || key == NUM_FIVE)
 		matrix_init(map);
 	matrix_result(map);
-	ft_printf("%d ", key);
+	//ft_printf("%d ", key);
 	return (0);
 }

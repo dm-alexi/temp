@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/24 22:19:17 by stristim         ###   ########.fr       */
+/*   Updated: 2020/01/24 23:54:15 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,38 +59,13 @@ static void			get_grid(t_list *t, t_map *map)
 	}
 }
 
-/*
 static t_map		*set_colors(t_map *map)
 {
-	int		i;
-
-	i = 0;
-	while (i < map->rows * map->columns)
-	{
-		if (map->grid[i].z == map->z_max)
-		{
-			map->grid[i].color = MAXCOLOR;
-			if (map->z_max == 0)
-				map->grid[i].color = MIDCOLOR;
-		}	
-		if (map->grid[i].z == map->z_min)
-		{
-			map->grid[i].color = MINCOLOR;
-			if (map->z_min == 0)
-				map->grid[i].color = MIDCOLOR;
-		}
-		++i;
-	}
-	return (map);
-}*/
-
-static t_map		*set_colors(t_map *map)
-{
-    int stepR;
-    int stepG;
-    int stepB;
-    int color;
-    double k;
+	int		stepR;
+	int		stepG;
+	int		stepB;
+	int		color;
+	double	k;
 	int		i;
 
 	i = 0;

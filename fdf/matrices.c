@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:52:19 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/24 20:36:27 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/24 23:17:18 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ t_vertex	*transform(t_vertex *v, double m[16], t_vertex *out)
 {
 	out->x = v->x * m[0] + v->y * m[1] + v->z * m[2] + v->w * m[3];
 	out->y = v->x * m[4] + v->y * m[5] + v->z * m[6] + v->w * m[7];
-	out->z = v->x * m[8] + v->y * m[9] + v->z * m[10] + v->w * m[11];
+	out->z = v->z;//v->x * m[8] + v->y * m[9] + v->z * m[10] + v->w * m[11];
 	out->w = v->x * m[12] + v->y * m[13] + v->z * m[14] + v->w * m[15];
 	out->color = v->color;
 	return (out);

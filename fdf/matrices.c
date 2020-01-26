@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:52:19 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/26 19:01:33 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/26 21:44:57 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,9 @@ double		*rotation(double r[3])
 
 static double		*center()
 {
-	static double	m[16] = {1, 0, 0, WIDTH / 2, 0, 1, 0, HEIGHT / 2, 0, 0, 1, 0, 0, 0, 0, 1};
+	static double	m[16] = {1, 0, 0, WIDTH / 2, 0, 1, 0, HEIGHT / 2, 0, 0, -1, 0, 0, 0, 0, 1};
 
+	//m[14] = dist;
 	return (m);
 }
 
@@ -112,14 +113,14 @@ static void		translate(double m[16], double x, double y, double z)
 	m[7] = y;
 	m[11] = z;
 }
-/*
+
 static double		*project()
 {
-	static double	m[16] = {0.2, 0, 0, 0, 0, 0.2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5};
+	static double	m[16] = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, -1, 0};
 
 	return (m);
 }
-*/
+
 void			matrix_result(t_map *map)
 {
 	int		i;
@@ -130,14 +131,22 @@ void			matrix_result(t_map *map)
 	mult(rotation(map->matrix.rotate), map->matrix.result, map->matrix.result);
 	//mult(project(), map->matrix.result, map->matrix.result);
 	//mult(projection(1, 0.25, 0.1, 50), map->matrix.result, map->matrix.result);
+	//mult(projection(1.99, 0.25, 0.1, 50), map->matrix.result, map->matrix.result);
 	//mult(project(), map->matrix.result, map->matrix.result);
 	mult(center(), map->matrix.result, map->matrix.result);
 	mult(translation(map->matrix.move), map->matrix.result, map->matrix.result);
-	//mult(project(), map->matrix.result, map->matrix.result);
+	mult(project(), map->matrix.result, map->matrix.result);
 	//mult(projection(1.99, 0.25, 0.1, 50), map->matrix.result, map->matrix.result);
 	i = -1;
 	while (++i < map->length)
+	{
 		transform(map->grid + i, map->matrix.result, map->show + i);
+		//(map->show + i)->x += ((map->show + i)->x >= WIDTH / 2 ? -(map->show + i)->z : (map->show + i)->z) * 0.05;
+		//(map->show + i)->y += ((map->show + i)->y >= HEIGHT / 2 ? -(map->show + i)->z : (map->show + i)->z) * 0.05;
+	}
+	//for (int j = 0; j < map->length; ++j)
+	int j = 18;
+	ft_printf("%d %d %d\n", (map->show + j)->x, (map->show + j)->y, (map->show + j)->z);
 	ft_bzero(map->image->s, map->image->width * map->image->height * map->image->bpp / 8);
 	i = -1;
 	while (++i < map->length)

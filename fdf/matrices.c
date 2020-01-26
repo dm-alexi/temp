@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:52:19 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/24 23:17:18 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/26 19:01:33 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,13 @@ double		*rotation(double r[3])
 	return (m);
 }
 
+static double		*center()
+{
+	static double	m[16] = {1, 0, 0, WIDTH / 2, 0, 1, 0, HEIGHT / 2, 0, 0, 1, 0, 0, 0, 0, 1};
+
+	return (m);
+}
+
 static double		*translation(double move[3])
 {
 	static double	m[16] = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
@@ -105,14 +112,28 @@ static void		translate(double m[16], double x, double y, double z)
 	m[7] = y;
 	m[11] = z;
 }
+/*
+static double		*project()
+{
+	static double	m[16] = {0.2, 0, 0, 0, 0, 0.2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5};
 
+	return (m);
+}
+*/
 void			matrix_result(t_map *map)
 {
 	int		i;
 
 	mult(scale(map->matrix.scale), map->matrix.initial, map->matrix.result);
+	//mult(projection(1, 0.25, 0.1, 50), map->matrix.result, map->matrix.result);
+	//mult(project(map), map->matrix.result, map->matrix.result);
 	mult(rotation(map->matrix.rotate), map->matrix.result, map->matrix.result);
+	//mult(project(), map->matrix.result, map->matrix.result);
+	//mult(projection(1, 0.25, 0.1, 50), map->matrix.result, map->matrix.result);
+	//mult(project(), map->matrix.result, map->matrix.result);
+	mult(center(), map->matrix.result, map->matrix.result);
 	mult(translation(map->matrix.move), map->matrix.result, map->matrix.result);
+	//mult(project(), map->matrix.result, map->matrix.result);
 	//mult(projection(1.99, 0.25, 0.1, 50), map->matrix.result, map->matrix.result);
 	i = -1;
 	while (++i < map->length)
@@ -126,7 +147,6 @@ void			matrix_result(t_map *map)
 		if (i < map->length - map->columns)
 			image_draw_line(map->image, map->show + i, map->show + i + map->columns);
 	}
-	//image_draw_line(map->image, map->show + 1, map->show + 2);
 	mlx_put_image_to_window(map->mlx, map->win, map->image->img, 0, 0);
 	ft_menu(map);
 }
@@ -138,8 +158,8 @@ void			matrix_init(t_map *map)
 	map->matrix.rotate[0] = 0;
 	map->matrix.rotate[1] = 0;
 	map->matrix.rotate[2] = 0;
-	map->matrix.move[0] = WIDTH / 2;
-	map->matrix.move[1] = HEIGHT / 2;
+	//map->matrix.move[0] = WIDTH / 2;
+	//map->matrix.move[1] = HEIGHT / 2;
 	map->matrix.move[2] = 0;
 	matrix_result(map);
 }
@@ -148,8 +168,8 @@ t_vertex	*transform(t_vertex *v, double m[16], t_vertex *out)
 {
 	out->x = v->x * m[0] + v->y * m[1] + v->z * m[2] + v->w * m[3];
 	out->y = v->x * m[4] + v->y * m[5] + v->z * m[6] + v->w * m[7];
-	out->z = v->z;//v->x * m[8] + v->y * m[9] + v->z * m[10] + v->w * m[11];
-	out->w = v->x * m[12] + v->y * m[13] + v->z * m[14] + v->w * m[15];
+	out->z = v->x * m[8] + v->y * m[9] + v->z * m[10] + v->w * m[11];
+	out->w = v->z;
 	out->color = v->color;
 	return (out);
 }

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 19:42:42 by stristim          #+#    #+#             */
-/*   Updated: 2020/01/24 23:49:49 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/26 19:02:17 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ int     gradient_check(t_vertex *a, t_vertex *b, int steps, int i)
     int     color;
 
     k = (double)i / steps;
-    length = ft_abs(a->z) + ft_abs(b->z);
-    if ((a->z >= 0 && b->z >= 0) || (a->z <= 0 && b->z <= 0))
+    length = ft_abs(a->w) + ft_abs(b->w);
+    if ((a->w >= 0 && b->w >= 0) || (a->w <= 0 && b->w <= 0))
         color = gradient(a->color, b->color, k);
-    else if (a->z < 0)
-        color = k < (length - b->z) / length ? gradient(a->color, MIDCOLOR, k) :
+    else if (a->w < 0)
+        color = k < (length - b->w) / length ? gradient(a->color, MIDCOLOR, k) :
             gradient(MIDCOLOR, b->color, k);
     else
-        color = k > (length - a->z) / length ? gradient(a->color, MIDCOLOR, k) :
+        color = k > (length - a->w) / length ? gradient(a->color, MIDCOLOR, k) :
             gradient(MIDCOLOR, b->color, k);
     return (color);
 }

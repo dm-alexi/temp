@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:20 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/24 23:34:42 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/26 20:06:37 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void			fdf_init(char *file, t_map *map);
 int				key_handle(int key, void *param);
 int				win_close(void *param);
 t_image			*new_image(void *mlx, int width, int height);
-void			image_put_pixel(t_image *image, int x, int y, int color);
 void			image_draw_line(t_image *image, t_vertex *a, t_vertex *b);
 void			show_matrix(double m[16]);
 

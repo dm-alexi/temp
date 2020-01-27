@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/27 20:38:33 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/27 22:33:12 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 #define NINE 25
 #define NUM_FIVE 87
 #define FIVE 23
+#define A 0
+#define Z 6
 #define MOVE_SPEED 5
 #define ROTATE_SPEED (M_PI / 180)
 #define SCALE_FACTOR 1.04
@@ -79,6 +81,10 @@ int		key_handle(int key, void *param)
 		map->matrix.rotate[2] += ROTATE_SPEED;
 	else  if (key == FIVE || key == NUM_FIVE)
 		matrix_init(map);
+	else if (key == A)
+		map->matrix.move[2] += MOVE_SPEED;
+	else if (key == Z)
+		map->matrix.move[2] -= MOVE_SPEED;
 	matrix_result(map);
 	//ft_printf("%d ", key);
 	return (0);

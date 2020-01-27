@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:52:19 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/27 20:38:15 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/27 22:35:12 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ double		*rotation(double r[3])
 
 static double		*center()
 {
-	static double	m[16] = {1, 0, 0, WIDTH / 2, 0, 1, 0, HEIGHT / 2, 0, 0, -1, 0, 0, 0, 0, 1};
+	static double	m[16] = {1, 0, 0, WIDTH / 2, 0, 1, 0, HEIGHT / 2, 0, 0, 1, 0, 0, 0, 0, 1};
 
 	//m[14] = dist;
 	return (m);
@@ -124,19 +124,38 @@ double		*projection(double fov, double ratio, double near, double far)
 	m[11] = 2 * far * near / (near - far);
 	return (m);
 }
+/*
+static double *view()
+{
+	static double	m[16] = {1, 0, 0, WIDTH / 2, 0, 1, 0, HEIGHT / 2, 0, 0, 1, 0, WIDTH / 2, HEIGHT / 2, 0, 1};
 
-
+	//m[14] = dist;
+	return (m);
+}*/
 
 double		*frustum(double left, double right, double bottom, double top, double near, double far)
 {
-	static double m[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0};
+	static double m[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0};
 
 	m[0] = 2 * near / (right - left);
 	m[3] = -near * (right + left)/ (right - left);
 	m[5] = 2 * near / (top - bottom);
 	m[7] = -near * (top + bottom) / (top - bottom);
-	m[10] = (near + far) / (near - far);
-	m[11] = 2 * far * near / (near - far);
+	m[10] = -(far + near) / (far - near);
+	m[11] = 2 * (far + near) / (near - far);
+	return (m);
+}
+
+double		*orthographic(double left, double right, double bottom, double top, double near, double far)
+{
+	static double m[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
+
+	m[0] = 2 * near / (right - left);
+	m[3] = -(right + left) / (right - left);
+	m[5] = 2 / (top - bottom);
+	m[7] = -(top + bottom) / (top - bottom);
+	m[10] = -2 / (far - near);
+	m[11] = -(far + near) / (far - near);
 	return (m);
 }
 
@@ -149,19 +168,20 @@ void			matrix_result(t_map *map)
 	mult(scale(map->matrix.scale), map->matrix.initial, map->matrix.result);
 	mult(rotation(map->matrix.rotate), map->matrix.result, map->matrix.result);
 	//mult(projection(2, (double)HEIGHT / WIDTH, 0.11, 30), map->matrix.result, map->matrix.result);
+	//mult(orthographic(0, map->columns, 0, map->rows, map->z_min, map->z_max), map->matrix.result, map->matrix.result);
+	//mult(orthographic(-1, 1, -1, 1, 1, 1000), map->matrix.result, map->matrix.result);
+	//mult(frustum(-1, 1, -1, 1, 0.0001, 1000), map->matrix.result, map->matrix.result);
+	//mult(projection(2, (double)HEIGHT / WIDTH, 0.1, 100), map->matrix.initial, map->matrix.result);
+	//mult(scale(map->matrix.scale), map->matrix.initial, map->matrix.result);
 	mult(center(), map->matrix.result, map->matrix.result);
 	mult(translation(map->matrix.move), map->matrix.result, map->matrix.result);
-	//mult(frustum(000, 200, 000, 100, 1, 200), map->matrix.result, map->matrix.result);
 
-	mult(translation(map->matrix.move), map->matrix.result, map->matrix.result);
 	i = -1;
 	while (++i < map->length)
 	{
 		transform(map->grid + i, map->matrix.result, map->show + i);
-		//(map->show + i)->x += ((map->show + i)->x >= WIDTH / 2 ? -(map->show + i)->z : (map->show + i)->z) * 0.05;
-		//(map->show + i)->y += ((map->show + i)->y >= HEIGHT / 2 ? -(map->show + i)->z : (map->show + i)->z) * 0.05;
+		
 	}
-	//for (int j = 0; j < map->length; ++j)
 	ft_printf("zero point: %d %d %d\n", (map->show)->x, (map->show)->y, (map->show)->z);
 	ft_printf("last point: %d %d %d\n", (map->show + map->length - 1)->x, (map->show + map->length - 1)->y, (map->show + map->length - 1)->z);
 	ft_bzero(map->image->s, map->image->width * map->image->height * map->image->bpp / 8);
@@ -179,14 +199,18 @@ void			matrix_result(t_map *map)
 
 void			matrix_init(t_map *map)
 {
-	translate(map->matrix.initial, -map->columns / 2, -map->rows / 2, 0);
+	translate(map->matrix.initial, -map->columns / 2, -map->rows / 2, -(map->z_max + map->z_min) / 2);
+	
 	if ((double)map->image->width / map->columns < (double)map->image->height / map->rows)
 		map->matrix.scale = map->image->width / map->columns * 0.5;
 	else
 		map->matrix.scale = map->image->height / map->rows * 0.5;
-	// map->matrix.rotate[0] = 0;
-	// map->matrix.rotate[1] = 0;
-	// map->matrix.rotate[2] = 0;
+
+	map->matrix.rotate[0] = 0;
+	map->matrix.rotate[1] = 0;
+	map->matrix.rotate[2] = 0;
+	map->matrix.move[0] = 0;
+	map->matrix.move[1] = 0;
 	map->matrix.move[2] = 0;
 	matrix_result(map);
 }

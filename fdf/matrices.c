@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:52:19 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/26 21:44:57 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/27 20:38:15 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,29 @@ static void		translate(double m[16], double x, double y, double z)
 	m[11] = z;
 }
 
-static double		*project()
+double		*projection(double fov, double ratio, double near, double far)
 {
-	static double	m[16] = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, -1, 0};
+	static double m[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0};
 
+	m[0] = 1.0 / (tan(fov / 2) * ratio);
+	m[5] = 1.0 / tan(fov / 2);
+	m[10] = (near + far) / (near - far);
+	m[11] = 2 * far * near / (near - far);
+	return (m);
+}
+
+
+
+double		*frustum(double left, double right, double bottom, double top, double near, double far)
+{
+	static double m[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0};
+
+	m[0] = 2 * near / (right - left);
+	m[3] = -near * (right + left)/ (right - left);
+	m[5] = 2 * near / (top - bottom);
+	m[7] = -near * (top + bottom) / (top - bottom);
+	m[10] = (near + far) / (near - far);
+	m[11] = 2 * far * near / (near - far);
 	return (m);
 }
 
@@ -125,18 +144,16 @@ void			matrix_result(t_map *map)
 {
 	int		i;
 
+	//mult(frustum(0, 20, 0, 20, 0.1, 100), map->matrix.initial, map->matrix.result);
+	//mult(projection(2, (double)HEIGHT / WIDTH, 0.11, 1000), map->matrix.initial, map->matrix.result);
 	mult(scale(map->matrix.scale), map->matrix.initial, map->matrix.result);
-	//mult(projection(1, 0.25, 0.1, 50), map->matrix.result, map->matrix.result);
-	//mult(project(map), map->matrix.result, map->matrix.result);
 	mult(rotation(map->matrix.rotate), map->matrix.result, map->matrix.result);
-	//mult(project(), map->matrix.result, map->matrix.result);
-	//mult(projection(1, 0.25, 0.1, 50), map->matrix.result, map->matrix.result);
-	//mult(projection(1.99, 0.25, 0.1, 50), map->matrix.result, map->matrix.result);
-	//mult(project(), map->matrix.result, map->matrix.result);
+	//mult(projection(2, (double)HEIGHT / WIDTH, 0.11, 30), map->matrix.result, map->matrix.result);
 	mult(center(), map->matrix.result, map->matrix.result);
 	mult(translation(map->matrix.move), map->matrix.result, map->matrix.result);
-	mult(project(), map->matrix.result, map->matrix.result);
-	//mult(projection(1.99, 0.25, 0.1, 50), map->matrix.result, map->matrix.result);
+	//mult(frustum(000, 200, 000, 100, 1, 200), map->matrix.result, map->matrix.result);
+
+	mult(translation(map->matrix.move), map->matrix.result, map->matrix.result);
 	i = -1;
 	while (++i < map->length)
 	{
@@ -145,8 +162,8 @@ void			matrix_result(t_map *map)
 		//(map->show + i)->y += ((map->show + i)->y >= HEIGHT / 2 ? -(map->show + i)->z : (map->show + i)->z) * 0.05;
 	}
 	//for (int j = 0; j < map->length; ++j)
-	int j = 18;
-	ft_printf("%d %d %d\n", (map->show + j)->x, (map->show + j)->y, (map->show + j)->z);
+	ft_printf("zero point: %d %d %d\n", (map->show)->x, (map->show)->y, (map->show)->z);
+	ft_printf("last point: %d %d %d\n", (map->show + map->length - 1)->x, (map->show + map->length - 1)->y, (map->show + map->length - 1)->z);
 	ft_bzero(map->image->s, map->image->width * map->image->height * map->image->bpp / 8);
 	i = -1;
 	while (++i < map->length)
@@ -163,12 +180,13 @@ void			matrix_result(t_map *map)
 void			matrix_init(t_map *map)
 {
 	translate(map->matrix.initial, -map->columns / 2, -map->rows / 2, 0);
-	map->matrix.scale = 40;
-	map->matrix.rotate[0] = 0;
-	map->matrix.rotate[1] = 0;
-	map->matrix.rotate[2] = 0;
-	//map->matrix.move[0] = WIDTH / 2;
-	//map->matrix.move[1] = HEIGHT / 2;
+	if ((double)map->image->width / map->columns < (double)map->image->height / map->rows)
+		map->matrix.scale = map->image->width / map->columns * 0.5;
+	else
+		map->matrix.scale = map->image->height / map->rows * 0.5;
+	// map->matrix.rotate[0] = 0;
+	// map->matrix.rotate[1] = 0;
+	// map->matrix.rotate[2] = 0;
 	map->matrix.move[2] = 0;
 	matrix_result(map);
 }
@@ -182,7 +200,7 @@ t_vertex	*transform(t_vertex *v, double m[16], t_vertex *out)
 	out->color = v->color;
 	return (out);
 }
-
+/*
 double		*projection(double fov, double ratio, double near, double far)
 {
 	static double m[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0};
@@ -193,3 +211,5 @@ double		*projection(double fov, double ratio, double near, double far)
 	m[11] = 2 * far * near / (near - far);
 	return (m);
 }
+*/
+

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:20 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/26 20:06:37 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/27 20:26:58 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ double			*mult(double a[16], double b[16], double c[16]);
 t_vertex		*transform(t_vertex *v, double m[16], t_vertex *out);
 void			matrix_init(t_map *map);
 void			matrix_result(t_map *map);
-double			*projection(double fov, double ratio, double near, double far);
+//double			*projection(double fov, double ratio, double near, double far);
 
 void			ft_menu(t_map *map);
 int				gradient_check(t_vertex *a, t_vertex *b, int steps, int i);

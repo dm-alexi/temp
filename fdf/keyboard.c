@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/27 22:33:12 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/29 20:23:04 by stristim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		win_close(void *param)
 int		key_handle(int key, void *param)
 {
 	t_map	*map;
-	
+
 	map = param;
 	if (key == ESC)
 		win_close(param);
@@ -85,7 +85,11 @@ int		key_handle(int key, void *param)
 		map->matrix.move[2] += MOVE_SPEED;
 	else if (key == Z)
 		map->matrix.move[2] -= MOVE_SPEED;
+	else if (key == 82)
+	{		
+		put_colors(map);
+		set_colors(map);
+	}
 	matrix_result(map);
-	//ft_printf("%d ", key);
 	return (0);
 }

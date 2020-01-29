@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:20 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/27 20:26:58 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/29 20:52:01 by stristim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@
 # define STEP 10
 # define INVALID "Invalid map."
 # define MIDCOLOR 0xFFFFFF
-# define MINCOLOR 0x0000FF
-# define MAXCOLOR 0xFF0000
+# define MINCOLOR1 0x000FFF
+# define MAXCOLOR1 0xFF0000
+# define MINCOLOR2 0x00FF00
+# define MAXCOLOR2 0x8000FF
+# define MINCOLOR3 0xFFFF00
+# define MAXCOLOR3 0xFF00FF
 
 typedef struct	s_vertex
 {
@@ -57,6 +61,9 @@ typedef struct	s_map
 	int			rows;
 	int			z_min;
 	int			z_max;
+	int			mincolor;
+	int			maxcolor;
+	int			midcolor;
 	t_matrix	matrix;
 	void		*mlx;
 	void		*win;
@@ -88,5 +95,8 @@ int				gradient(int start, int finish, double k);
 int red (int color);
 int green (int color);
 int blue (int color);
+
+void			put_colors(t_map *map);
+void			set_colors(t_map *map);
 
 #endif

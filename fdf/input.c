@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/24 23:54:15 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/01/29 20:36:54 by stristim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void			put_colors(t_map *map)
+{
+	map->midcolor = MIDCOLOR;
+	if (map->mincolor == MINCOLOR1)
+	{
+		map->mincolor = MINCOLOR2;
+		map->maxcolor = MAXCOLOR2;
+	}
+	else if (map->mincolor == MINCOLOR2)
+	{
+		map->mincolor = MINCOLOR3;
+		map->maxcolor = MAXCOLOR3;
+	}
+	else
+	{
+		map->mincolor = MINCOLOR1;
+		map->maxcolor = MAXCOLOR1;
+	}
+}
 
 static t_vertex		get_next_vertex(int y, int x, char **s)
 {
@@ -59,7 +79,7 @@ static void			get_grid(t_list *t, t_map *map)
 	}
 }
 
-static t_map		*set_colors(t_map *map)
+void		set_colors(t_map *map)
 {
 	int		stepR;
 	int		stepG;
@@ -74,28 +94,27 @@ static t_map		*set_colors(t_map *map)
 		if (map->grid[i].z > 0)
 		{
 			k = (double)map->grid[i].z / map->z_max;
-			stepR = red(MIDCOLOR) + (red(MAXCOLOR) - red(MIDCOLOR))*k;
-			stepG = green(MIDCOLOR) + (green(MAXCOLOR) - green(MIDCOLOR))*k;
-			stepB = blue(MIDCOLOR) + (blue(MAXCOLOR) - blue(MIDCOLOR))*k;
+			stepR = red(map->midcolor) + (red(map->maxcolor) - red(map->midcolor))*k;
+			stepG = green(map->midcolor) + (green(map->maxcolor) - green(map->midcolor))*k;
+			stepB = blue(map->midcolor) + (blue(map->maxcolor) - blue(map->midcolor))*k;
 			color = (stepR << 16) | (stepG << 8) | stepB;
 		}
 		else if (map->grid[i].z == 0)
-			color = MIDCOLOR;
+			color = map->midcolor;
 		else
 		{
 			k = (double)map->grid[i].z / map->z_min;
-			stepR = red(MIDCOLOR) + (red(MINCOLOR) - red(MIDCOLOR))*k;
-			stepG = green(MIDCOLOR) + (green(MINCOLOR) - green(MIDCOLOR))*k;
-			stepB = blue(MIDCOLOR) + (blue(MINCOLOR) - blue(MIDCOLOR))*k;
+			stepR = red(map->midcolor) + (red(map->mincolor) - red(map->midcolor))*k;
+			stepG = green(map->midcolor) + (green(map->mincolor) - green(map->midcolor))*k;
+			stepB = blue(map->midcolor) + (blue(map->mincolor) - blue(map->midcolor))*k;
 			color = (stepR << 16) | (stepG << 8) | stepB;
 		}
 		map->grid[i].color = color;
 		++i;		
 	}
-    return (map);
 }
 
-static t_map		*get_extremum(t_map *map)
+static void		get_extremum(t_map *map)
 {
 	int		i;
 
@@ -107,7 +126,6 @@ static t_map		*get_extremum(t_map *map)
 			map->z_max = map->grid[i].z;
 		else if (map->grid[i].z < map->z_min)
 			map->z_min = map->grid[i].z;
-	return (map);
 }
 
 t_map				*get_map(int fd)
@@ -135,5 +153,8 @@ t_map				*get_map(int fd)
 	ft_lstdel(&t, NULL);
 	if (!(map->show = (t_vertex *)malloc(sizeof(t_vertex) * map->length)))
 		sys_error();
-	return (set_colors(get_extremum(map)));
+	get_extremum(map);
+	put_colors(map);
+	set_colors(map);
+	return (map);
 }

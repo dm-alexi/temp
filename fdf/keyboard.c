@@ -6,7 +6,7 @@
 /*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/29 20:23:04 by stristim         ###   ########.fr       */
+/*   Updated: 2020/01/31 21:17:01 by stristim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,16 @@
 #define NINE 25
 #define NUM_FIVE 87
 #define FIVE 23
+#define SPACE 49
 #define A 0
 #define Z 6
 #define MOVE_SPEED 5
 #define ROTATE_SPEED (M_PI / 180)
 #define SCALE_FACTOR 1.04
+#define SC_UP 4
+#define SC_DN 5
+#define Z 6
+#define X 7
 
 int		win_close(void *param)
 {
@@ -51,7 +56,8 @@ int		win_close(void *param)
 int		key_handle(int key, void *param)
 {
 	t_map	*map;
-
+	int i;
+	i = -1;
 	map = param;
 	if (key == ESC)
 		win_close(param);
@@ -79,8 +85,11 @@ int		key_handle(int key, void *param)
 		map->matrix.rotate[2] -= ROTATE_SPEED;
 	else if (key == NINE || key == NUM_NINE)
 		map->matrix.rotate[2] += ROTATE_SPEED;
-	else  if (key == FIVE || key == NUM_FIVE)
+	else  if (key == SPACE)
+	{
+		//map = get_map(map->fd);
 		matrix_init(map);
+	}
 	else if (key == A)
 		map->matrix.move[2] += MOVE_SPEED;
 	else if (key == Z)
@@ -90,6 +99,52 @@ int		key_handle(int key, void *param)
 		put_colors(map);
 		set_colors(map);
 	}
+	else if (key == 12)
+	{
+		map->matrix.rotate[0] = 0.75;
+		map->matrix.rotate[1] = -0.5;
+		map->matrix.rotate[2] = 0.5;
+	}
+	// else if(key == Z)
+	// {
+	// 	while (++i < map->length)
+	// 	if (map->grid[i].z != 0)
+	// 			map->grid[i].z -= 1;
+	// }
+	// else if(key == X)
+	// {
+	// 	while (++i < map->length)
+	// 	if (map->grid[i].z != 0)
+	// 			map->grid[i].z += 1;
+	// }
 	matrix_result(map);
+	//ft_printf("0 - %f\n", map->matrix.rotate[0]);
+	//ft_printf("1 - %f\n", map->matrix.rotate[1]);
+	//ft_printf("2 - %f\n", map->matrix.rotate[2]);
 	return (0);
+}
+
+int		mouse_handle(int key, int x, int y, void *param)
+{
+	t_map *map;
+	int i;
+
+	i = -1;
+	map = param;
+	(void)x;
+	(void)y;
+	if(key == SC_UP)
+	{
+		while (++i < map->length)
+		if (map->grid[i].z != 0)
+				map->grid[i].z -= 1;
+	}
+	else if (key == SC_DN)
+	{
+		while (++i < map->length)
+		if (map->grid[i].z != 0)
+			map->grid[i].z += 1;
+	}
+	matrix_result(map);
+	return(0);
 }

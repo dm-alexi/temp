@@ -6,7 +6,7 @@
 /*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:20 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/29 20:52:01 by stristim         ###   ########.fr       */
+/*   Updated: 2020/01/31 21:02:48 by stristim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct	s_matrix
 
 typedef struct	s_map
 {
+	int 		fd;
 	int			length;
 	int			columns;
 	int			rows;
@@ -98,5 +99,7 @@ int blue (int color);
 
 void			put_colors(t_map *map);
 void			set_colors(t_map *map);
+
+int		mouse_handle(int key, int x, int y, void *param);
 
 #endif

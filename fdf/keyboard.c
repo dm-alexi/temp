@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/01 21:42:48 by stristim         ###   ########.fr       */
+/*   Updated: 2020/02/01 23:38:32 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
 #include <math.h>
 #include "fdf.h"
 #define ESC 53
@@ -35,40 +34,24 @@
 #define NUM_NINE 92
 #define NINE 25
 #define SPACE 49
-#define MOVE_SPEED 5
-#define ROTATE_SPEED (M_PI / 180)
-#define SCALE_FACTOR 1.04
-#define Z_SCALE_FACTOR 1.25
+#define Q 12
 #define SCROLL_UP 4
 #define SCROLL_DN 5
 
-int		win_close(void *param)
+#define MOVE_SPEED 5
+#define ROTATE_SPEED (M_PI / 180)
+#define SCALE_FACTOR 1.04
+#define Z_SCALE_FACTOR 1.2
+
+int				win_close(void *param)
 {
 	(void)param;
 	exit(EXIT_SUCCESS);
 }
 
-int		key_handle(int key, void *param)
+static void		key_matrix_movement(int key, t_map *map)
 {
-	t_map	*map;
-	int i;
-	i = -1;
-	map = param;
-	if (key == ESC)
-		win_close(param);
-	else if (key == PLUS || key == NUM_PLUS)
-	{
-		map->matrix.scale[0] *= SCALE_FACTOR;
-		map->matrix.scale[1] *= SCALE_FACTOR;
-		map->matrix.scale[2] *= SCALE_FACTOR;
-	}
-	else if (key == MINUS || key == NUM_MINUS)
-	{
-		map->matrix.scale[0] /= SCALE_FACTOR;
-		map->matrix.scale[1] /= SCALE_FACTOR;
-		map->matrix.scale[2] /= SCALE_FACTOR;
-	}
-	else if (key == UP)
+	if (key == UP)
 		map->matrix.move[1] -= MOVE_SPEED;
 	else if (key == DOWN)
 		map->matrix.move[1] += MOVE_SPEED;
@@ -76,9 +59,9 @@ int		key_handle(int key, void *param)
 		map->matrix.move[0] -= MOVE_SPEED;
 	else if (key == RIGHT)
 		map->matrix.move[0] += MOVE_SPEED;
-	else if (key == EIGHT  || key == NUM_EIGHT)
+	else if (key == EIGHT || key == NUM_EIGHT)
 		map->matrix.rotate[0] += ROTATE_SPEED;
-	else if (key == TWO ||  key == NUM_TWO)
+	else if (key == TWO || key == NUM_TWO)
 		map->matrix.rotate[0] -= ROTATE_SPEED;
 	else if (key == SIX || key == NUM_SIX)
 		map->matrix.rotate[1] += ROTATE_SPEED;
@@ -88,76 +71,57 @@ int		key_handle(int key, void *param)
 		map->matrix.rotate[2] -= ROTATE_SPEED;
 	else if (key == NINE || key == NUM_NINE)
 		map->matrix.rotate[2] += ROTATE_SPEED;
-	else  if (key == SPACE)
+	else if (key == SPACE)
 		matrix_init(map);
-	else if (key == 12)
+}
+
+int				key_handle(int key, void *param)
+{
+	int		i;
+
+	i = -1;
+	if (key == UP || key == DOWN || key == LEFT || key == RIGHT || key == EIGHT
+		|| key == NUM_EIGHT || key == TWO || key == NUM_TWO || key == SIX ||
+		key == NUM_SIX || key == FOUR || key == NUM_FOUR || key == SEVEN ||
+		key == NUM_SEVEN || key == NINE || key == NUM_NINE || key == SPACE)
+		key_matrix_movement(key, (t_map*)param);
+	else if (key == ESC)
+		win_close(param);
+	else if (key == PLUS || key == NUM_PLUS)
+		while (++i < 3)
+			((t_map*)param)->matrix.scale[i] *= SCALE_FACTOR;
+	else if (key == MINUS || key == NUM_MINUS)
+		while (++i < 3)
+			((t_map*)param)->matrix.scale[i] /= SCALE_FACTOR;
+	else if (key == Q)
 	{
-		map->matrix.rotate[0] = 0.75;
-		map->matrix.rotate[1] = -0.5;
-		map->matrix.rotate[2] = 0.5;
+		((t_map*)param)->matrix.rotate[0] = 0.75;
+		((t_map*)param)->matrix.rotate[1] = -0.5;
+		((t_map*)param)->matrix.rotate[2] = 0.5;
 	}
-	matrix_result(map);
+	matrix_result(((t_map*)param));
 	return (0);
 }
 
-static void		colors(int x, int y, t_map *map)
+int				mouse_handle(int key, int x, int y, void *param)
 {
-	if (x < 130)
-	{
-		if (y < 290)
-			map->maxcolor = RED;
-		else if (y < 310)
-			map->maxcolor = BLUE;
-		else if (y < 330)
-			map->maxcolor = PINK;
-		else if (y < 350)
-			map->maxcolor = CYAN;
-		else if (y < 370)
-			map->maxcolor = GREEN;
-		else if (y < 390)
-			map->maxcolor = VIOLET;
-		else if (y < 410)
-			map->maxcolor = YELLOW;
-		else if (y < 430)
-			map->maxcolor = ORANGE;
-		else
-			map->maxcolor = AVOCADO;
-	}
-	else
-	{
-		if (y < 290)
-			map->mincolor = RED;
-		else if (y < 310)
-			map->mincolor = BLUE;
-		else if (y < 330)
-			map->mincolor = PINK;
-		else if (y < 350)
-			map->mincolor = CYAN;
-		else if (y < 370)
-			map->mincolor = GREEN;
-		else if (y < 390)
-			map->mincolor = VIOLET;
-		else if (y < 410)
-			map->mincolor = YELLOW;
-		else if (y < 430)
-			map->mincolor = ORANGE;
-		else
-			map->mincolor = AVOCADO;
-	}
-	set_colors(map);
-}
-
-int		mouse_handle(int key, int x, int y, void *param)
-{
-	t_map	*map;
+	t_map				*map;
+	static const int	colors[] = {RED, BLUE, PINK, CYAN, GREEN, VIOLET,
+		YELLOW, ORANGE, AVOCADO, WHITE};
 
 	map = param;
 	if (key == SCROLL_UP)
 		map->matrix.scale[2] /= Z_SCALE_FACTOR;
 	else if (key == SCROLL_DN)
 		map->matrix.scale[2] *= Z_SCALE_FACTOR;
-	else if (x >= 15 && x <= 240 && y >= 270 && y <= 450)	
-		colors(x, y, map);
+	else if (x >= 15 && x <= 210 && y >= 270 && y < 470)
+	{
+		if (x < 120)
+			map->maxcolor = colors[(y - 270) / 20];
+		else
+			map->mincolor = colors[(y - 270) / 20];
+		set_colors(map);
+	}
 	matrix_result(map);
-	return(0);
+	return (0);
 }

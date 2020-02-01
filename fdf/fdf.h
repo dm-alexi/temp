@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:20 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/01 21:26:38 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/01 23:12:47 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 # define INVALID "Invalid map."
+
 # define WHITE 0xFFFFFF
 # define RED 0xFF0000
 # define BLUE 0x0000FF

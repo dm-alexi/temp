@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/01 19:21:47 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/01 20:25:29 by stristim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,15 @@ int		mouse_handle(int key, int x, int y, void *param)
 	t_map	*map;
 
 	map = param;
-	(void)x;
-	(void)y;
 	if (key == SCROLL_UP)
 		map->matrix.scale[2] /= Z_SCALE_FACTOR;
 	else if (key == SCROLL_DN)
 		map->matrix.scale[2] *= Z_SCALE_FACTOR;
+	else if (x >= 15 && x <= 100 && y >= 175 && y <= 275)
+	{		
+		map->maxcolor = BLUE;
+		set_colors(map);
+	}
 	matrix_result(map);
 	return(0);
 }

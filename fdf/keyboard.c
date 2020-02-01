@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/01 18:33:38 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/01 19:21:47 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,13 @@
 #define SEVEN 26
 #define NUM_NINE 92
 #define NINE 25
-#define NUM_FIVE 87
-#define FIVE 23
 #define SPACE 49
-#define A 0
-#define Z 6
 #define MOVE_SPEED 5
 #define ROTATE_SPEED (M_PI / 180)
 #define SCALE_FACTOR 1.04
-#define SC_UP 4
-#define SC_DN 5
-#define Z 6
-#define X 7
+#define Z_SCALE_FACTOR 1.25
+#define SCROLL_UP 4
+#define SCROLL_DN 5
 
 int		win_close(void *param)
 {
@@ -94,14 +89,7 @@ int		key_handle(int key, void *param)
 	else if (key == NINE || key == NUM_NINE)
 		map->matrix.rotate[2] += ROTATE_SPEED;
 	else  if (key == SPACE)
-	{
-		//map = get_map(map->fd);
 		matrix_init(map);
-	}
-	else if (key == A)
-		map->matrix.move[2] += MOVE_SPEED;
-	else if (key == Z)
-		map->matrix.move[2] -= MOVE_SPEED;
 	else if (key == 82)
 	{		
 		put_colors(map);
@@ -113,46 +101,21 @@ int		key_handle(int key, void *param)
 		map->matrix.rotate[1] = -0.5;
 		map->matrix.rotate[2] = 0.5;
 	}
-	// else if(key == Z)
-	// {
-	// 	while (++i < map->length)
-	// 	if (map->grid[i].z != 0)
-	// 			map->grid[i].z -= 1;
-	// }
-	// else if(key == X)
-	// {
-	// 	while (++i < map->length)
-	// 	if (map->grid[i].z != 0)
-	// 			map->grid[i].z += 1;
-	// }
 	matrix_result(map);
-	//ft_printf("0 - %f\n", map->matrix.rotate[0]);
-	//ft_printf("1 - %f\n", map->matrix.rotate[1]);
-	//ft_printf("2 - %f\n", map->matrix.rotate[2]);
 	return (0);
 }
 
 int		mouse_handle(int key, int x, int y, void *param)
 {
-	t_map *map;
-	int i;
+	t_map	*map;
 
-	i = -1;
 	map = param;
 	(void)x;
 	(void)y;
-	if(key == SC_UP)
-	{
-		while (++i < map->length)
-		if (map->grid[i].color != MIDCOLOR)
-				map->grid[i].z -= 1;
-	}
-	else if (key == SC_DN)
-	{
-		while (++i < map->length)
-		if (map->grid[i].color != MIDCOLOR)
-			map->grid[i].z += 1;
-	}
+	if (key == SCROLL_UP)
+		map->matrix.scale[2] /= Z_SCALE_FACTOR;
+	else if (key == SCROLL_DN)
+		map->matrix.scale[2] *= Z_SCALE_FACTOR;
 	matrix_result(map);
 	return(0);
 }

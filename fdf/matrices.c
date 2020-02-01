@@ -6,12 +6,11 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:52:19 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/01 18:32:01 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/01 19:05:30 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
-#include <mlx.h>
 #include "fdf.h"
 
 double		*mult(double a[16], double b[16], double c[16])
@@ -53,7 +52,7 @@ double		*scale(double r[3])
 
 double		*rotation(double r[3])
 {
-	static double m[16] = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
+	static double m[16];
 	static double rx[16] = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
 	static double ry[16] = {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
 	static double rz[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};

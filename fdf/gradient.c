@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gradient.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 19:42:42 by stristim          #+#    #+#             */
-/*   Updated: 2020/01/29 20:37:06 by stristim         ###   ########.fr       */
+/*   Updated: 2020/02/01 19:32:32 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,24 @@ int     gradient_check(t_vertex *a, t_vertex *b, int steps, int i)
         color = k > (length - a->w) / length ? gradient(a->color, MIDCOLOR, k) :
             gradient(MIDCOLOR, b->color, k);
     return (color);
+}
+
+void			put_colors(t_map *map)
+{
+	map->midcolor = MIDCOLOR;
+	if (map->mincolor == MINCOLOR1)
+	{
+		map->mincolor = MINCOLOR2;
+		map->maxcolor = MAXCOLOR2;
+	}
+	else if (map->mincolor == MINCOLOR2)
+	{
+		map->mincolor = MINCOLOR3;
+		map->maxcolor = MAXCOLOR3;
+	}
+	else
+	{
+		map->mincolor = MINCOLOR1;
+		map->maxcolor = MAXCOLOR1;
+	}
 }

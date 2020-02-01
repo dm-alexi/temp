@@ -6,31 +6,11 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/01 18:11:06 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/01 19:32:21 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void			put_colors(t_map *map)
-{
-	map->midcolor = MIDCOLOR;
-	if (map->mincolor == MINCOLOR1)
-	{
-		map->mincolor = MINCOLOR2;
-		map->maxcolor = MAXCOLOR2;
-	}
-	else if (map->mincolor == MINCOLOR2)
-	{
-		map->mincolor = MINCOLOR3;
-		map->maxcolor = MAXCOLOR3;
-	}
-	else
-	{
-		map->mincolor = MINCOLOR1;
-		map->maxcolor = MAXCOLOR1;
-	}
-}
 
 static t_vertex		get_next_vertex(int y, int x, char **s)
 {

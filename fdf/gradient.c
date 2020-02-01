@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 19:42:42 by stristim          #+#    #+#             */
-/*   Updated: 2020/02/01 19:32:32 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/01 20:40:11 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int red (int color)
 {
-    return (color >> 16);
+    return (color >> 16) & 0xFF;
 }
 
 int green(int color)
@@ -27,7 +27,13 @@ int blue(int color)
     return (color & 0xFF);
 }
 
-int gradient(int start, int finish, double k)
+/*
+** (color >> 16) & 0xFF - red channel
+** (color >> 8) & 0xFF - green channel
+** (color & 0xFF) - blue channel
+*/
+
+int     gradient(int start, int finish, double k)
 {
     int     stepR;
     int     stepG;
@@ -60,7 +66,23 @@ int     gradient_check(t_vertex *a, t_vertex *b, int steps, int i)
     return (color);
 }
 
-void			put_colors(t_map *map)
+void		set_colors(t_map *map)
+{
+	int		i;
+
+	i = -1;
+	while (++i < map->length)
+		if (map->grid[i].z == 0)
+			map->grid[i].color = map->midcolor;
+		else if (map->grid[i].z > 0)
+			map->grid[i].color = gradient(map->midcolor, map->maxcolor,
+				(double)map->grid[i].z / map->z_max);
+		else
+			map->grid[i].color = gradient(map->midcolor, map->mincolor,
+				(double)map->grid[i].z / map->z_min);
+}
+
+void		put_colors(t_map *map)
 {
 	map->midcolor = MIDCOLOR;
 	if (map->mincolor == MINCOLOR1)

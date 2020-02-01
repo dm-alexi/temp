@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:20 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/01 20:47:18 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/01 21:13:10 by stristim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,16 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 # define INVALID "Invalid map."
-# define MIDCOLOR 0xFFFFFF
-# define MINCOLOR1 0x000FFF
-# define MAXCOLOR1 0xFF0000
-# define MINCOLOR2 0x00FF00
-# define MAXCOLOR2 0x8000FF
-# define MINCOLOR3 0xFFFF00
-# define MAXCOLOR3 0xFF00FF
+# define WHITE 0xFFFFFF
+# define RED 0xFF0000
+# define BLUE 0x0000FF
+# define PINK 0xFF0080
+# define CYAN 0x00FFFF
+# define GREEN 0x00FF00
+# define VIOLET 0xFF00FF
+# define YELLOW 0xFFFF00
+# define ORANGE 0xFF8000
+# define AVOCADO 0x00FF80
 
 typedef struct	s_vertex
 {

@@ -6,7 +6,7 @@
 /*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 19:42:42 by stristim          #+#    #+#             */
-/*   Updated: 2020/02/01 21:08:09 by stristim         ###   ########.fr       */
+/*   Updated: 2020/02/01 21:13:39 by stristim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ int     gradient_check(t_vertex *a, t_vertex *b, int steps, int i)
     if ((a->w >= 0 && b->w >= 0) || (a->w <= 0 && b->w <= 0))
         color = gradient(a->color, b->color, k);
     else if (a->w < 0)
-        color = k < (length - b->w) / length ? gradient(a->color, MIDCOLOR, k) :
-            gradient(MIDCOLOR, b->color, k);
+        color = k < (length - b->w) / length ? gradient(a->color, WHITE, k) :
+            gradient(WHITE, b->color, k);
     else
-        color = k > (length - a->w) / length ? gradient(a->color, MIDCOLOR, k) :
-            gradient(MIDCOLOR, b->color, k);
+        color = k > (length - a->w) / length ? gradient(a->color, WHITE, k) :
+            gradient(WHITE, b->color, k);
     return (color);
 }
 

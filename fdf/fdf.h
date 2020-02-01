@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:20 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/01 23:12:47 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/02 00:11:52 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define HEIGHT 1080
 # define INVALID "Invalid map."
 
+# define DEFAULT 0xFFFFFF
 # define WHITE 0xFFFFFF
 # define RED 0xFF0000
 # define BLUE 0x0000FF
@@ -68,6 +69,7 @@ typedef struct	s_map
 	int			mincolor;
 	int			maxcolor;
 	int			midcolor;
+	int			color_defined;
 	t_matrix	matrix;
 	void		*mlx;
 	void		*win;

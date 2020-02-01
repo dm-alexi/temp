@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gradient.c                                         :+:      :+:    :+:   */
+/*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 19:42:42 by stristim          #+#    #+#             */
-/*   Updated: 2020/02/01 21:30:15 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/02 00:09:10 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,11 @@ int		gradient(int start, int finish, double k)
 	int		r;
 	int		g;
 	int		b;
-	int		color;
 
 	r = ((start >> 16) & 0xFF) * (1 - k) + ((finish >> 16) & 0xFF) * k + 0.5;
 	g = ((start >> 8) & 0xFF) * (1 - k) + ((finish >> 8) & 0xFF) * k + 0.5;
 	b = (start & 0xFF) * (1 - k) + (finish & 0xFF) * k + 0.5;
-	color = (r << 16) | (g << 8) | b;
-	return (color);
+	return ((r << 16) | (g << 8) | b);
 }
 
 int		gradient_check(t_vertex *a, t_vertex *b, int steps, int i)
@@ -43,10 +41,10 @@ int		gradient_check(t_vertex *a, t_vertex *b, int steps, int i)
 	if ((a->w >= 0 && b->w >= 0) || (a->w <= 0 && b->w <= 0))
 		color = gradient(a->color, b->color, k);
 	else if (a->w < 0)
-		color = k < (length - b->w) / length ? gradient(a->color, WHITE, k) :
+		color = k < (length - b->w) / length ? gradient(a->color, DEFAULT, k) :
 			gradient(WHITE, b->color, k);
 	else
-		color = k > (length - a->w) / length ? gradient(a->color, WHITE, k) :
+		color = k > (length - a->w) / length ? gradient(a->color, DEFAULT, k) :
 			gradient(WHITE, b->color, k);
 	return (color);
 }
@@ -55,6 +53,8 @@ void	set_colors(t_map *map)
 {
 	int		i;
 
+	if (map->color_defined)
+		return ;
 	i = -1;
 	while (++i < map->length)
 		if (map->grid[i].z == 0)

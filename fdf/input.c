@@ -6,13 +6,13 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/01 21:17:53 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/02 00:13:45 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static t_vertex		get_next_vertex(int y, int x, char **s)
+static t_vertex		get_next_vertex(int y, int x, char **s, int *defined)
 {
 	t_vertex	v;
 
@@ -28,9 +28,10 @@ static t_vertex		get_next_vertex(int y, int x, char **s)
 		v.color = ft_strtol(*s, s, 0);
 		if ((!v.color && *(*s - 1) != '0') || (**s && **s != ' '))
 			error(INVALID);
+		*defined = 1;
 	}
 	else
-		v.color = 0xffffff;
+		v.color = DEFAULT;
 	return (v);
 }
 
@@ -49,7 +50,8 @@ static void			get_grid(t_list *t, t_map *map)
 		s = t->content;
 		while (j < map->columns)
 		{
-			map->grid[i * map->columns + j] = get_next_vertex(i, j, &s);
+			map->grid[i * map->columns + j] =
+				get_next_vertex(i, j, &s, &(map->color_defined));
 			++j;
 		}
 		if (ft_word_count(s, ' '))
@@ -59,7 +61,7 @@ static void			get_grid(t_list *t, t_map *map)
 	}
 }
 
-static void			gradient_settings(t_map *map)
+static void			color_settings(t_map *map)
 {
 	int		i;
 
@@ -71,9 +73,10 @@ static void			gradient_settings(t_map *map)
 			map->z_max = map->grid[i].z;
 		else if (map->grid[i].z < map->z_min)
 			map->z_min = map->grid[i].z;
-	map->maxcolor = 0xFFFFFF;
-	map->midcolor = 0xFFFFFF;
-	map->mincolor = 0xFFFFFF;
+	map->maxcolor = RED;
+	map->midcolor = DEFAULT;
+	map->mincolor = BLUE;
+	set_colors(map);
 }
 
 t_map				*get_map(int fd)
@@ -101,6 +104,6 @@ t_map				*get_map(int fd)
 	ft_lstdel(&t, NULL);
 	if (!(map->show = (t_vertex *)malloc(sizeof(t_vertex) * map->length)))
 		sys_error();
-	gradient_settings(map);
+	color_settings(map);
 	return (map);
 }

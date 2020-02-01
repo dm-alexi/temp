@@ -6,13 +6,23 @@
 /*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 19:35:03 by stristim          #+#    #+#             */
-/*   Updated: 2020/02/01 20:48:37 by stristim         ###   ########.fr       */
+/*   Updated: 2020/02/01 20:52:02 by stristim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "fdf.h"
 #define WHITE 0xFFFFFF
+# define MIDCOLOR 0xFFFFFF
+# define BLUE 0x0000FF
+# define RED 0xFF0000
+# define GREEN 0x00FF00
+# define VIOLET 0xFF00FF
+# define YELLOW 0xFFFF00
+# define CYAN 0x00FFFF
+# define PINK 0xFF0080
+# define ORANGE 0xFF8000
+# define AVOCADO 0x00FF80
 
 void ft_menu(t_map *map)
 {

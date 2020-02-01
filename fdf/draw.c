@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:44:17 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/01 16:11:45 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/01 16:39:38 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_vertex		make_vertex(int x, int y, int z, int color)
 	return (v);
 }
 
-static void	image_put_pixel(t_image *image, t_vertex v)
+static void			image_put_pixel(t_image *image, t_vertex v)
 {
 	int		i;
 
@@ -51,30 +51,30 @@ static void	image_put_pixel(t_image *image, t_vertex v)
 	image->zbuf[v.y * image->width + v.x] = v.z;
 }
 
-void	image_draw_line(t_image *image, t_vertex *a, t_vertex *b)
+void				image_draw_line(t_image *image, t_vertex *a, t_vertex *b)
 {
 	double	step;
 	double	z_step;
 	int		i;
 
 	i = -1;
+	step = b->x - a->x >= ft_abs(b->y - a->y) ?
+		(double)(a->y - b->y) / (a->x - b->x) :
+		(double)(a->x - b->x) / (a->y - b->y);
+	z_step = (double)(a->z - b->z) / (b->x - a->x >= ft_abs(b->y - a->y) ?
+		a->x - b->x : a->y - b->y);
 	if (a->x == b->x && a->y == b->y)
-		image_put_pixel(image, make_vertex(a->x, a->y, a->z > b->z ? a->z : b->z, a->z > b->z ? a->color : b->color));
+		image_put_pixel(image, make_vertex(a->x, a->y, a->z > b->z ? a->z : 
+			b->z, a->z > b->z ? a->color : b->color));
 	else if ((a->x >= b->x && a->y >= b->y) || 
 	a->x - b->x > ft_abs(b->y - a->y) || a->y - b->y > ft_abs(b->x - a->x))
 		image_draw_line(image, b, a);
 	else if (b->x - a->x >= ft_abs(b->y - a->y))
-	{
-		step = (double)(a->y - b->y) / (a->x - b->x);
-		z_step = (double)(a->z - b->z) / (a->x - b->x);
 		while (++i < b->x - a->x)
-			image_put_pixel(image, make_vertex(a->x + i, a->y + i * step, a->z + z_step * i, gradient_check(a, b, b->x - a->x, i)));
-	}
+			image_put_pixel(image, make_vertex(a->x + i, a->y + i * step,
+				a->z + z_step * i, gradient_check(a, b, b->x - a->x, i)));
 	else
-	{
-		step = (double)(a->x - b->x) / (a->y - b->y);
-		z_step = (double)(a->z - b->z) / (a->y - b->y);
 		while (++i <= b->y - a->y)
-			image_put_pixel(image, make_vertex(a->x + i * step, a->y + i, a->z + z_step * i, gradient_check(a, b, b->y - a->y, i)));
-	}
+			image_put_pixel(image, make_vertex(a->x + i * step, a->y + i,
+				a->z + z_step * i, gradient_check(a, b, b->y - a->y, i)));
 }

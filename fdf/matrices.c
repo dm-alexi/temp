@@ -6,19 +6,13 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:52:19 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/01 15:00:32 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/01 16:30:47 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include <mlx.h>
 #include "fdf.h"
-
-void			show_matrix(double m[16])
-{
-	for (int i = 0;	i < 16; ++i)
-		ft_printf("%10f%c", m[i], i % 4 == 3 ? '\n' : 0);
-}
 
 double		*mult(double a[16], double b[16], double c[16])
 {
@@ -113,52 +107,6 @@ static void		translate(double m[16], double x, double y, double z)
 	m[11] = z;
 }
 
-/*
-static double		*zcamera(double z)
-{
-	static double	m[16] = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
-	
-	m[11] = z;
-	return (m);
-}
-
-double		*projection(double fov, double ratio, double near, double far)
-{
-	static double m[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0};
-
-	m[0] = 1.0 / (tan(fov / 2) * ratio);
-	m[5] = 1.0 / tan(fov / 2);
-	m[10] = (near + far) / (near - far);
-	m[11] = 2 * far * near / (near - far);
-	return (m);
-}
-
-double		*frustum(double left, double right, double bottom, double top, double near, double far)
-{
-	static double m[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0};
-
-	m[0] = 2 * near / (right - left);
-	m[3] = -near * (right + left)/ (right - left);
-	m[5] = 2 * near / (top - bottom);
-	m[7] = -near * (top + bottom) / (top - bottom);
-	m[10] = -(far + near) / (far - near);
-	m[11] = 2 * far * near / (near - far);
-	return (m);
-}
-
-double		*orthographic(double left, double right, double bottom, double top, double near, double far)
-{
-	static double m[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
-
-	m[0] = 2 * near / (right - left);
-	m[3] = -(right + left) / (right - left);
-	m[5] = 2 / (top - bottom);
-	m[7] = -(top + bottom) / (top - bottom);
-	m[10] = -2 / (far - near);
-	m[11] = -(far + near) / (far - near);
-	return (m);
-}
-*/
 void			matrix_result(t_map *map)
 {
 	int		i;
@@ -170,14 +118,7 @@ void			matrix_result(t_map *map)
 	mult(translation(map->matrix.move), map->matrix.result, map->matrix.result);
 	i = -1;
 	while (++i < map->length)
-	{
 		transform(map->grid + i, map->matrix.result, map->show + i);
-		//double x = (map->show + i)->x;
-		//(map->show + i)->x = ((map->show+ i)->x - (map->show + i)->y) * cos(0.523599);
-    	//(map->show + i)->y = -(map->show + i)->z + (x + (map->show + i)->y) * sin(0.523599);		
-	}
-	ft_printf("zero point: %d %d %d\n", (map->show)->x, (map->show)->y, (map->show)->z);
-	ft_printf("last point: %d %d %d\n", (map->show + map->length - 1)->x, (map->show + map->length - 1)->y, (map->show + map->length - 1)->z);
 	ft_bzero(map->image->s, map->image->width * map->image->height * map->image->bpp / 8);
 	i = -1;
 	while (++i < map->length)
@@ -193,12 +134,12 @@ void			matrix_result(t_map *map)
 
 void			matrix_init(t_map *map)
 {
-	if ((double)map->image->width / map->columns < (double)map->image->height / map->rows)
+	if ((double)map->image->width / map->columns <
+		(double)map->image->height / map->rows)
 		map->matrix.scale = map->image->width / map->columns * 0.5;
 	else
 		map->matrix.scale = map->image->height / map->rows * 0.5;
-
-	map->matrix.rotate[0] = 0;//asin(tan(M_PI / 6));
+	map->matrix.rotate[0] = 0;
 	map->matrix.rotate[1] = 0;
 	map->matrix.rotate[2] = 0;
 	map->matrix.move[0] = 0;

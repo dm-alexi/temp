@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/31 21:17:01 by stristim         ###   ########.fr       */
+/*   Updated: 2020/02/01 16:42:53 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,13 +136,13 @@ int		mouse_handle(int key, int x, int y, void *param)
 	if(key == SC_UP)
 	{
 		while (++i < map->length)
-		if (map->grid[i].z != 0)
+		if (map->grid[i].color != MIDCOLOR)
 				map->grid[i].z -= 1;
 	}
 	else if (key == SC_DN)
 	{
 		while (++i < map->length)
-		if (map->grid[i].z != 0)
+		if (map->grid[i].color != MIDCOLOR)
 			map->grid[i].z += 1;
 	}
 	matrix_result(map);

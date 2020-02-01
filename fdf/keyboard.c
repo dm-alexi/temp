@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/01 16:42:53 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/01 18:33:38 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,17 @@ int		key_handle(int key, void *param)
 	if (key == ESC)
 		win_close(param);
 	else if (key == PLUS || key == NUM_PLUS)
-		map->matrix.scale *= SCALE_FACTOR;
+	{
+		map->matrix.scale[0] *= SCALE_FACTOR;
+		map->matrix.scale[1] *= SCALE_FACTOR;
+		map->matrix.scale[2] *= SCALE_FACTOR;
+	}
 	else if (key == MINUS || key == NUM_MINUS)
-		map->matrix.scale /= SCALE_FACTOR;
+	{
+		map->matrix.scale[0] /= SCALE_FACTOR;
+		map->matrix.scale[1] /= SCALE_FACTOR;
+		map->matrix.scale[2] /= SCALE_FACTOR;
+	}
 	else if (key == UP)
 		map->matrix.move[1] -= MOVE_SPEED;
 	else if (key == DOWN)

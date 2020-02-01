@@ -6,7 +6,7 @@
 /*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/01 21:08:08 by stristim         ###   ########.fr       */
+/*   Updated: 2020/02/01 21:42:48 by stristim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,53 @@ int		key_handle(int key, void *param)
 	return (0);
 }
 
+static void		colors(int x, int y, t_map *map)
+{
+	if (x < 130)
+	{
+		if (y < 290)
+			map->maxcolor = RED;
+		else if (y < 310)
+			map->maxcolor = BLUE;
+		else if (y < 330)
+			map->maxcolor = PINK;
+		else if (y < 350)
+			map->maxcolor = CYAN;
+		else if (y < 370)
+			map->maxcolor = GREEN;
+		else if (y < 390)
+			map->maxcolor = VIOLET;
+		else if (y < 410)
+			map->maxcolor = YELLOW;
+		else if (y < 430)
+			map->maxcolor = ORANGE;
+		else
+			map->maxcolor = AVOCADO;
+	}
+	else
+	{
+		if (y < 290)
+			map->mincolor = RED;
+		else if (y < 310)
+			map->mincolor = BLUE;
+		else if (y < 330)
+			map->mincolor = PINK;
+		else if (y < 350)
+			map->mincolor = CYAN;
+		else if (y < 370)
+			map->mincolor = GREEN;
+		else if (y < 390)
+			map->mincolor = VIOLET;
+		else if (y < 410)
+			map->mincolor = YELLOW;
+		else if (y < 430)
+			map->mincolor = ORANGE;
+		else
+			map->mincolor = AVOCADO;
+	}
+	set_colors(map);
+}
+
 int		mouse_handle(int key, int x, int y, void *param)
 {
 	t_map	*map;
@@ -109,11 +156,8 @@ int		mouse_handle(int key, int x, int y, void *param)
 		map->matrix.scale[2] /= Z_SCALE_FACTOR;
 	else if (key == SCROLL_DN)
 		map->matrix.scale[2] *= Z_SCALE_FACTOR;
-	else if (x >= 15 && x <= 100 && y >= 175 && y <= 275)
-	{		
-		map->maxcolor = BLUE;
-		set_colors(map);
-	}
+	else if (x >= 15 && x <= 240 && y >= 270 && y <= 450)	
+		colors(x, y, map);
 	matrix_result(map);
 	return(0);
 }

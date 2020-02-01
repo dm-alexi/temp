@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   gradient.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 19:42:42 by stristim          #+#    #+#             */
-/*   Updated: 2020/02/01 21:13:39 by stristim         ###   ########.fr       */
+/*   Updated: 2020/02/01 21:30:15 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-int red (int color)
-{
-    return (color >> 16) & 0xFF;
-}
-
-int green(int color)
-{
-    return (color >> 8) & 0xFF;
-}
-
-int blue(int color)
-{
-    return (color & 0xFF);
-}
 
 /*
 ** (color >> 16) & 0xFF - red channel
@@ -33,40 +18,40 @@ int blue(int color)
 ** (color & 0xFF) - blue channel
 */
 
-int     gradient(int start, int finish, double k)
+int		gradient(int start, int finish, double k)
 {
-    int     stepR;
-    int     stepG;
-    int     stepB;
-    int     color;
+	int		r;
+	int		g;
+	int		b;
+	int		color;
 
-    stepR = red(start) + (red(finish) - red(start))*k + 0.5;
-    stepG = green(start) + (green(finish) - green(start))*k  + 0.5;
-    stepB = blue(start) + (blue(finish) - blue(start))*k + 0.5;
-    color = (stepR << 16) | (stepG << 8) | stepB;
-    return (color);
+	r = ((start >> 16) & 0xFF) * (1 - k) + ((finish >> 16) & 0xFF) * k + 0.5;
+	g = ((start >> 8) & 0xFF) * (1 - k) + ((finish >> 8) & 0xFF) * k + 0.5;
+	b = (start & 0xFF) * (1 - k) + (finish & 0xFF) * k + 0.5;
+	color = (r << 16) | (g << 8) | b;
+	return (color);
 }
 
-int     gradient_check(t_vertex *a, t_vertex *b, int steps, int i)
+int		gradient_check(t_vertex *a, t_vertex *b, int steps, int i)
 {
-    double  length;
-    double  k;
-    int     color;
+	double	length;
+	double	k;
+	int		color;
 
-    k = (double)i / steps;
-    length = ft_abs(a->w) + ft_abs(b->w);
-    if ((a->w >= 0 && b->w >= 0) || (a->w <= 0 && b->w <= 0))
-        color = gradient(a->color, b->color, k);
-    else if (a->w < 0)
-        color = k < (length - b->w) / length ? gradient(a->color, WHITE, k) :
-            gradient(WHITE, b->color, k);
-    else
-        color = k > (length - a->w) / length ? gradient(a->color, WHITE, k) :
-            gradient(WHITE, b->color, k);
-    return (color);
+	k = (double)i / steps;
+	length = ft_abs(a->w) + ft_abs(b->w);
+	if ((a->w >= 0 && b->w >= 0) || (a->w <= 0 && b->w <= 0))
+		color = gradient(a->color, b->color, k);
+	else if (a->w < 0)
+		color = k < (length - b->w) / length ? gradient(a->color, WHITE, k) :
+			gradient(WHITE, b->color, k);
+	else
+		color = k > (length - a->w) / length ? gradient(a->color, WHITE, k) :
+			gradient(WHITE, b->color, k);
+	return (color);
 }
 
-void		set_colors(t_map *map)
+void	set_colors(t_map *map)
 {
 	int		i;
 

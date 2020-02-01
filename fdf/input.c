@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/01 21:01:42 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/01 21:17:53 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void			get_grid(t_list *t, t_map *map)
 	}
 }
 
-static void		gradient_settings(t_map *map)
+static void			gradient_settings(t_map *map)
 {
 	int		i;
 

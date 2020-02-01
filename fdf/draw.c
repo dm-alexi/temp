@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:44:17 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/01 19:05:23 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/01 21:19:06 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ void				image_draw_line(t_image *image, t_vertex *a, t_vertex *b)
 	z_step = (double)(a->z - b->z) / (b->x - a->x >= ft_abs(b->y - a->y) ?
 		a->x - b->x : a->y - b->y);
 	if (a->x == b->x && a->y == b->y)
-		image_put_pixel(image, make_vertex(a->x, a->y, a->z > b->z ? a->z : 
+		image_put_pixel(image, make_vertex(a->x, a->y, a->z > b->z ? a->z :
 			b->z, a->z > b->z ? a->color : b->color));
-	else if ((a->x >= b->x && a->y >= b->y) || 
+	else if ((a->x >= b->x && a->y >= b->y) ||
 	a->x - b->x > ft_abs(b->y - a->y) || a->y - b->y > ft_abs(b->x - a->x))
 		image_draw_line(image, b, a);
 	else if (b->x - a->x >= ft_abs(b->y - a->y))

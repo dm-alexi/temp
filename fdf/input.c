@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/01 19:32:21 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/01 20:45:58 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,42 +59,7 @@ static void			get_grid(t_list *t, t_map *map)
 	}
 }
 
-void		set_colors(t_map *map)
-{
-	int		stepR;
-	int		stepG;
-	int		stepB;
-	int		color;
-	double	k;
-	int		i;
-
-	i = 0;
-	while (i < map->rows * map->columns)
-	{
-		if (map->grid[i].z > 0)
-		{
-			k = (double)map->grid[i].z / map->z_max;
-			stepR = red(map->midcolor) + (red(map->maxcolor) - red(map->midcolor))*k;
-			stepG = green(map->midcolor) + (green(map->maxcolor) - green(map->midcolor))*k;
-			stepB = blue(map->midcolor) + (blue(map->maxcolor) - blue(map->midcolor))*k;
-			color = (stepR << 16) | (stepG << 8) | stepB;
-		}
-		else if (map->grid[i].z == 0)
-			color = map->midcolor;
-		else
-		{
-			k = (double)map->grid[i].z / map->z_min;
-			stepR = red(map->midcolor) + (red(map->mincolor) - red(map->midcolor))*k;
-			stepG = green(map->midcolor) + (green(map->mincolor) - green(map->midcolor))*k;
-			stepB = blue(map->midcolor) + (blue(map->mincolor) - blue(map->midcolor))*k;
-			color = (stepR << 16) | (stepG << 8) | stepB;
-		}
-		map->grid[i].color = color;
-		++i;		
-	}
-}
-
-static void		get_extremum(t_map *map)
+static void		gradient_settings(t_map *map)
 {
 	int		i;
 
@@ -106,6 +71,9 @@ static void		get_extremum(t_map *map)
 			map->z_max = map->grid[i].z;
 		else if (map->grid[i].z < map->z_min)
 			map->z_min = map->grid[i].z;
+	map->maxcolor = 0xFFFFFF;
+	map->midcolor = 0xFFFFFF;
+	map->mincolor = 0xFFFFFF;
 }
 
 t_map				*get_map(int fd)
@@ -133,8 +101,6 @@ t_map				*get_map(int fd)
 	ft_lstdel(&t, NULL);
 	if (!(map->show = (t_vertex *)malloc(sizeof(t_vertex) * map->length)))
 		sys_error();
-	get_extremum(map);
-	put_colors(map);
-	set_colors(map);
+	gradient_settings(map);
 	return (map);
 }

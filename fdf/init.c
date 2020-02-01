@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:19:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/01 19:25:50 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/01 19:54:43 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ void				matrix_result(t_map *map)
 void				matrix_init(t_map *map)
 {
 	double	scale;
-	
-	scale = (((double)map->image->width / map->columns < 
+
+	scale = (((double)map->image->width / map->columns <
 		(double)map->image->height / map->rows) ? map->image->width
 		/ map->columns : map->image->height / map->rows) * 0.7;
 	map->matrix.rotate[0] = 0;

@@ -6,7 +6,7 @@
 /*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/01 20:25:29 by stristim         ###   ########.fr       */
+/*   Updated: 2020/02/01 21:08:08 by stristim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,6 @@ int		key_handle(int key, void *param)
 		map->matrix.rotate[2] += ROTATE_SPEED;
 	else  if (key == SPACE)
 		matrix_init(map);
-	else if (key == 82)
-	{		
-		put_colors(map);
-		set_colors(map);
-	}
 	else if (key == 12)
 	{
 		map->matrix.rotate[0] = 0.75;

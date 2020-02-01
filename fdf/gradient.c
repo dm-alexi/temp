@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gradient.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stristim <stristim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 19:42:42 by stristim          #+#    #+#             */
-/*   Updated: 2020/02/01 21:01:39 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/01 21:08:09 by stristim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,24 +80,4 @@ void		set_colors(t_map *map)
 		else
 			map->grid[i].color = gradient(map->midcolor, map->mincolor,
 				(double)map->grid[i].z / map->z_min);
-}
-
-void		put_colors(t_map *map)
-{
-	map->midcolor = MIDCOLOR;
-	if (map->mincolor == MINCOLOR1)
-	{
-		map->mincolor = MINCOLOR2;
-		map->maxcolor = MAXCOLOR2;
-	}
-	else if (map->mincolor == MINCOLOR2)
-	{
-		map->mincolor = MINCOLOR3;
-		map->maxcolor = MAXCOLOR3;
-	}
-	else
-	{
-		map->mincolor = MINCOLOR1;
-		map->maxcolor = MAXCOLOR1;
-	}
 }

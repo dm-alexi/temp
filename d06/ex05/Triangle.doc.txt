@@ -1,9 +1,0 @@
-
-<- Triangle ----------------------------------------------------------------------
-The Triangle class represents a triangle.
-
-An instance can be constructed with three mandatory parameters representing three 
-vertices of the triangle (each must be an instance of class Vertex).
-
-The class doesn't provides public methods.
----------------------------------------------------------------------- Triangle ->

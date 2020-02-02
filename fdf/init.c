@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:19:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/02 11:18:58 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/02 11:33:45 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void				matrix_result(t_map *map)
 	{
 		if (i % map->columns < map->columns - 1 &&
 		check_line(map->image, map->show + i, map->show + i + 1))
-				image_draw_line(map->image, map->show + i, map->show + i + 1);
+			image_draw_line(map->image, map->show + i, map->show + i + 1);
 		if (i < map->length - map->columns &&
 		check_line(map->image, map->show + i, map->show + i + 1))
 			image_draw_line(map->image, map->show + i,

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 19:42:42 by stristim          #+#    #+#             */
-/*   Updated: 2020/02/02 00:09:10 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/02 11:12:17 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 ** (color & 0xFF) - blue channel
 */
 
-int		gradient(int start, int finish, double k)
+static int	gradient(int start, int finish, double k)
 {
 	int		r;
 	int		g;
@@ -30,7 +30,7 @@ int		gradient(int start, int finish, double k)
 	return ((r << 16) | (g << 8) | b);
 }
 
-int		gradient_check(t_vertex *a, t_vertex *b, int steps, int i)
+int			gradient_check(t_vertex *a, t_vertex *b, int steps, int i)
 {
 	double	length;
 	double	k;
@@ -49,7 +49,7 @@ int		gradient_check(t_vertex *a, t_vertex *b, int steps, int i)
 	return (color);
 }
 
-void	set_colors(t_map *map)
+void		set_colors(t_map *map)
 {
 	int		i;
 

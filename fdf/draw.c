@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:44:17 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/01 23:19:47 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/02 11:20:36 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ void				image_draw_line(t_image *image, t_vertex *a, t_vertex *b)
 	else if (b->x - a->x >= ft_abs(b->y - a->y))
 		while (++i < b->x - a->x)
 			image_put_pixel(image, make_vertex(a->x + i, a->y + i * step,
-				a->z + z_step * i, gradient_check(a, b, b->x - a->x, i)));
+			a->z + z_step * i, gradient_check(a, b, b->x - a->x, i)));
 	else
 		while (++i <= b->y - a->y)
 			image_put_pixel(image, make_vertex(a->x + i * step, a->y + i,
-				a->z + z_step * i, gradient_check(a, b, b->y - a->y, i)));
+			a->z + z_step * i, gradient_check(a, b, b->y - a->y, i)));
 }

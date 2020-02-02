@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:20 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/02 00:11:52 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/02 11:19:52 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int				mouse_handle(int key, int x, int y, void *param);
 int				win_close(void *param);
 t_image			*new_image(void *mlx, int width, int height);
 void			image_draw_line(t_image *image, t_vertex *a, t_vertex *b);
+int				check_line(t_image *image, t_vertex *a, t_vertex *b);
 double			*mult(double a[16], double b[16], double c[16]);
 double			*translation(double move[3]);
 double			*rotation(double r[3]);
@@ -95,7 +96,6 @@ void			matrix_init(t_map *map);
 void			matrix_result(t_map *map);
 void			ft_menu(t_map *map);
 int				gradient_check(t_vertex *a, t_vertex *b, int steps, int i);
-int				gradient(int start, int finish, double k);
 void			set_colors(t_map *map);
 
 #endif

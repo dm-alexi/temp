@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:19:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/01 19:54:43 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/02 11:18:58 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,13 @@ void				matrix_result(t_map *map)
 	i = -1;
 	while (++i < map->length)
 	{
-		if (i % map->columns < map->columns - 1)
-			image_draw_line(map->image, map->show + i, map->show + i + 1);
-		if (i < map->length - map->columns)
+		if (i % map->columns < map->columns - 1 &&
+		check_line(map->image, map->show + i, map->show + i + 1))
+				image_draw_line(map->image, map->show + i, map->show + i + 1);
+		if (i < map->length - map->columns &&
+		check_line(map->image, map->show + i, map->show + i + 1))
 			image_draw_line(map->image, map->show + i,
-				map->show + i + map->columns);
+			map->show + i + map->columns);
 	}
 	mlx_put_image_to_window(map->mlx, map->win, map->image->img, 0, 0);
 	ft_menu(map);

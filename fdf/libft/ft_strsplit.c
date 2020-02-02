@@ -6,13 +6,13 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 20:10:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/01/22 21:37:16 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/02 11:55:17 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_word_count(char const *s, char c)
+size_t			ft_word_count(char const *s, char c)
 {
 	size_t	n;
 

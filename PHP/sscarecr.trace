@@ -1,0 +1,292 @@
+===[ DIFF EX11 >>> ]===
+2,9c2,5
+< AGBIDINOUKOUN	ghislain	238
+< ANDRIES	tieu-philippe	500
+< ANFROY	achille	238
+< ARBONA	naji	60
+< AVEDISSIAN	vinh	500
+< AZOURY	pierrick	500
+< BACCI	paul-henri	238
+< BAILLIN	mouhamadou-moustapha	60
+---
+> ARBONA	naji	500
+> AUBOUY	kamel	500
+> AZINCOURT	augustin	500
+> BACCI	paul-henri	60
+11,13c7
+< BALLABRIGA	nathanaelle	500
+< BARRAUD	jacquesharan	500
+< BELANYI	nikita	500
+---
+> BELANYI	nikita	60
+15,17c9,11
+< BENNANI	razik	60
+< BERTHIER	xuan-vi	500
+< BETTAN	jean-christian	60
+---
+> BERTHIER	xuan-vi	238
+> BETTAN	jean-christian	500
+> BIALECKI	tobounsiang	500
+19,21c13,14
+< BIQUE	seka-yann	238
+< BLONDEL	claire	60
+< BLOT	jean-romain	238
+---
+> BIRSEN	virgile	500
+> BODARD	sabeur	500
+23,28c16,20
+< BORDONI	mikael	500
+< BORNE	rene	60
+< BOUR	adolfo	500
+< BOURGINEAU	pierre-yves	500
+< BOUVET	jean-romain	238
+< BROCARD	tangui	238
+---
+> BOUAMAR	ravi	500
+> BOUCHAKHCHOUKHA	smael	238
+> BOUR	adolfo	60
+> BOURGINEAU	pierre-yves	238
+> BRINON	florestan	60
+30c22
+< BUCH	hicham	500
+---
+> BUCH	hicham	238
+32,36c24,28
+< CANALS	daravibol	60
+< CANTET	tomas	500
+< CARLUCCI	matthieu	500
+< CARME	nikola	500
+< CATORC	sebastien	500
+---
+> CARLUCCI	matthieu	60
+> CASENAVE-PERE	edwin	500
+> CASSIGNAC	henri-ousmane	238
+> CATORC	sebastien	238
+> CAZE	guy	238
+38,46c30,37
+< CHAFFRAIX	hanna	60
+< CHAMPAGNE	jean-Pierre	60
+< CHOIZIT	mu	238
+< COISNE-DAVROU	orpheas	60
+< CONSTANT	marie-eve	238
+< CORDIVAL	fatima	238
+< COSTE	vladimir	238
+< COSTE	yves	238
+< COULM	marwan	60
+---
+> CHAFFRAIX	hanna	500
+> CHAILLOUX	kassem	238
+> CHAMPAGNE	jean-Pierre	500
+> CHOIZIT	mu	500
+> COISNE-DAVROU	orpheas	238
+> CORDIVAL	fatima	500
+> COULM	marwan	238
+> COURSON	frank	60
+48,49c39,41
+< DAPSALMON	peter	60
+< DAUXERRE	pierrick	60
+---
+> DAUPHIN	mathavarajan	500
+> DAUXERRE	pierrick	238
+> DAVOINE-GRAZIANI	faouzi	60
+51,85c43,76
+< DE-FERRIERES-DE-SAUVEBOEUF	armand	238
+< DE-MARESCHAL	sandy	60
+< DE-TONNAC	teona	60
+< DELAHAYE	edric	500
+< DELESTRE	hossein	500
+< DELPUECH	swan	60
+< DETAVERNIER	alan	500
+< DEVAUX	yoan	500
+< DIENG	rama	60
+< DUEZ	quang-tam	238
+< DUPERTUYS	fabien	238
+< DUPIRE	dunstan	60
+< DUPUIS	nadir	238
+< DUPUY	marie	238
+< ECHCHATBI	elisete	500
+< EMSALLEM	jonnas	60
+< ESTEVE	khadir	238
+< FABRETTI	charly	500
+< FAILLY	marcel	500
+< FAJARDO	igor	238
+< FAYE	elior	500
+< FEDOROWICZ	constantin	60
+< FERSANCOURT	abdesslam	238
+< FLANDRIN	rhita	60
+< GAMBERT	massi	500
+< GAUDEFROY	sonia	238
+< GAUDIN	mouhamadou-moustapha	238
+< GAUTHEYROU	jean-michel	60
+< GERMOND	aubin	500
+< GIARDI	jean-michel	60
+< GILLE	thanh-huy	500
+< GUECHOT	paul	60
+< GUYARD	lilian	60
+< HANS	zeliha	238
+< HAROUNEN	manh	60
+---
+> DE-FERRIERES-DE-SAUVEBOEUF	armand	60
+> DE-MARESCHAL	sandy	500
+> DE-TURCKHEIM	jeremie	500
+> DEJOUR	alexandre	500
+> DELAHAYE	edric	238
+> DELAMOTTE	kwakou	238
+> DELBOS	laurenT	500
+> DELESTRE	hossein	238
+> DERRIEN	minh-long	238
+> DESAULTY	farhdine	500
+> DESFLACHES	emerick	60
+> DESMARES	faycal	60
+> DUEZ	quang-tam	60
+> DUPERTUYS	fabien	60
+> DUPIRE	dunstan	500
+> DUPUIS	nadir	60
+> EMSALLEM	jonnas	500
+> EPT2005	anne-marie	238
+> ESTEVE	khadir	500
+> FABRETTI	charly	60
+> FAILLY	marcel	60
+> FAJARDO	igor	60
+> FERSANCOURT	abdesslam	60
+> FLANDRIN	rhita	500
+> GALITE	djibril	238
+> GANGAT	anouar	500
+> GAUDEFROY	sonia	500
+> GAUDIN	mouhamadou-moustapha	60
+> GAUTHEYROU	jean-michel	500
+> GENTHIAL	anna	60
+> GILLE	thanh-huy	60
+> GILSOUL	eddy	60
+> GOUDAL	rostom	500
+> GRASSET	hoang-tung	238
+87,90c78,80
+< HENNEGRAVE	severin	60
+< JALOUZOT	didier	500
+< JARDINET	michael	500
+< JIANG	jean-cedric	238
+---
+> HENNEGRAVE	severin	500
+> HUYNH	damieN	60
+> JALOUZOT	didier	238
+92,93c82,83
+< KAJMAR	thierry-tong-suor	238
+< KAUFMANN	j-baptiste	500
+---
+> KAUFMANN	j-baptiste	60
+> KERMAGORET	jerome	60
+95,102c85,97
+< KURSUNCU	rhita	60
+< LAFONTAINE	pierre-henri	238
+< LARANE	victorien	500
+< LHUILLIER	gregory	500
+< MALBRAND	sivary	500
+< MALGUY	zineb	60
+< MAMATH	florian	60
+< MARCOT	carlos	60
+---
+> KOSELLEK	basile	238
+> LAMORY	remi	238
+> LANDRY	renaud	60
+> LATREILLE	harold	500
+> LE-CAM	gerald	500
+> LE-DU	thierry	500
+> LECERF	pierrick	60
+> LHUILLIER	gregory	238
+> MAHEO	lionel	500
+> MALBRAND	sivary	238
+> MALGUY	zineb	238
+> MALOISEL	zoltan	238
+> MARCOT	carlos	500
+104,105c99,102
+< MEREAU	nils	500
+< MESSIAEN	henri-francois	238
+---
+> MARRON	hansi	60
+> MEREAU	nils	238
+> MESSIAEN	henri-francois	60
+> MEYNARD	jean-pierre	500
+107,122c104,121
+< MIGEOT-DE-BARAN	elodie	60
+< MILLIAT	mario	238
+< MOFFRONT	gregory	500
+< MOULIER	frederic-eugene	238
+< MOUTARDE	min-kyou	238
+< MULIER	walid	60
+< NEPHTALI	camel	238
+< NGUYEN-XUAN	chafik	500
+< O-SULLIVAN	krisna	238
+< ODOU	stephanie	238
+< PATIN	abass	238
+< PAUL	yuri	238
+< PELISSIER	anishley	500
+< PERASTE	abdelali	500
+< PEZZULLA	willy	238
+< QUERVET	evan	500
+---
+> MILLIAT	mario	500
+> MOISSAING	edouard	238
+> MONNEREAU	frederiC	60
+> MOULIER	frederic-eugene	60
+> MOUTARDE	min-kyou	60
+> N-GUYEN-DINH-THINH	mourad	60
+> NGUYEN-XUAN	chafik	238
+> NITASSI	rene	60
+> OBADIA	charles-alexis	60
+> OBRIOT	franck	238
+> ODOU	stephanie	500
+> PATIN	abass	500
+> PAUL	yuri	500
+> PENALBA	julie	238
+> PENET	leni	238
+> PERASTE	abdelali	238
+> PEZZULLA	willy	60
+> PONTIAC	juste-step	238
+126,127c125
+< REVILLON	alexandra	500
+< ROCHARD	joan	60
+---
+> ROCHARD	joan	238
+129c127
+< RUCKEBUSCH	abdesslam	238
+---
+> RUCKEBUSCH	abdesslam	500
+131,132c129,131
+< SARRIO	yves-mathieu	60
+< SCHUH	robert	60
+---
+> SARRIO	yves-mathieu	500
+> SCHIFF	karl	238
+> SCHUH	robert	238
+136,147c135,146
+< SHAMAH	ando	60
+< SOULAC	theo	238
+< STANGRET	pierre-thomas	500
+< STRINGARO	gregoire	238
+< TCHALE-FOYET	jean-loup	500
+< TCHALE-FOYET	mohamed-kamel	500
+< TCHIAPI	fernand	60
+< TOUFFU	tristan	60
+< TROUILLOUD	myriam	500
+< VAILLIER	kamel	60
+< VALET	jean-remi	238
+< VANAERDE	jean-claude	500
+---
+> SHPARSKY	delegue	500
+> SIBILLE	dinh	238
+> SOQUIN	jose	60
+> SOULAC	theo	60
+> SOUSSI	teona	500
+> STANGRET	pierre-thomas	238
+> STRINGARO	gregoire	500
+> TARANNE	swann	60
+> TCHIAPI	fernand	238
+> TRON-DE-BOUCHONY	ariel	238
+> TROUILLOUD	myriam	60
+> VAILLIER	kamel	500
+149c148,149
+< WIEDEMANN	jofrey	500
+---
+> VULIC	nathaniel	500
+> WETTER	frederic-eugene	60
+===[ <<< DIFF EX11 ]===

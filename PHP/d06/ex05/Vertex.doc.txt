@@ -1,0 +1,14 @@
+
+<- Vertex -----------------------------------------------------------------------------------
+The Vertex class handles vertices.
+
+An instance can be constructed from distinct x, y, z, w, and color constitutives:
+new Vertex( array( 'x' => 1.0, 'y' => 0.0, 'z' => 0.0, 'w' = 1.0, 'color' => GREEN ) );
+
+'x', 'y' and 'z' parameters are mandatory. 'w' parameter is optional (1.0 by default).
+'color' parameter should be an instance of Color class, also optional (white by default)
+
+'x, 'y', 'z' and 'w' parameters are converted to float.
+
+The class does not provide public methods.
+----------------------------------------------------------------------------------- Vertex ->

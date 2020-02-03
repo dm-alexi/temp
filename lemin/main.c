@@ -19,7 +19,7 @@ int		main(void)
 
 	graph = get_graph();
 	//print_graph(graph);
-	dijkstra(graph);
+	bfs(graph);
 	print_graph(graph);
 	print_path(path = get_path(graph));
 	delete_path(path);

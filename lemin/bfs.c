@@ -31,7 +31,7 @@ static void		process(t_queue **q, t_queue **last)
 	*q = tmp;
 }
 
-void			dijkstra(t_graph *graph)
+void			bfs(t_graph *graph)
 {
 	t_queue		*q;
 	t_queue		*last;

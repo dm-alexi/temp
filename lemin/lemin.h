@@ -52,6 +52,7 @@ void			error(void);
 
 void			print_graph(t_graph *graph);
 void			print_node(const t_node *a);
+void			print_path(t_edge *path);
 
 t_graph			*get_graph(void);
 int				get_line(char **line, t_command *com);
@@ -61,9 +62,6 @@ void			delete_graph(t_graph *graph);
 void			delete_path(t_edge *path);
 void			bfs(t_graph *graph);
 t_edge			*get_path(t_graph *graph);
-void			print_path(t_edge *path);
-void			path_reverse(t_edge *path);
-t_node			*split(t_graph *graph, t_node *node, t_edge *prev, t_edge *next);
 void			path_split(t_graph *graph, t_edge *path);
 
 #endif

@@ -62,5 +62,6 @@ void			delete_path(t_edge *path);
 void			bfs(t_graph *graph);
 t_edge			*get_path(t_graph *graph);
 void			print_path(t_edge *path);
+void path_reverse(t_edge *path);
 
 #endif

@@ -44,6 +44,10 @@ static int		compare(const void *a, const void *b)
 	return (res);
 }
 
+/*
+** Memory allocated for 2 times node number to allow splitting
+*/
+
 void			get_nodes(t_graph *graph, char **line)
 {
 	t_list		*lst;
@@ -56,7 +60,8 @@ void			get_nodes(t_graph *graph, char **line)
 		ft_lstadd(&lst, new_node(*line, com));
 	if (i <= 0)
 		i ? sys_error() : error();
-	if (!(graph->nodes = (t_node **)malloc(sizeof(t_node *) * graph->node_num)))
+	if (!(graph->nodes = (t_node **)malloc(sizeof(t_node *) *
+		graph->node_num * 2)))
 		sys_error();
 	i = 0;
 	while (lst)

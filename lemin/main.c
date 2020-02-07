@@ -23,6 +23,7 @@ int		main(void)
 	print_graph(graph);
 	print_path(path = get_path(graph));
 	path_reverse(path);
+	path_split(graph, path);
 	print_graph(graph);
 	delete_path(path);
 	delete_graph(graph);

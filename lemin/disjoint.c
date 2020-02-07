@@ -27,6 +27,25 @@ static void remove_edge(t_node *node, t_edge **edge)
 	}
 }
 
+void split(t_graph *graph, t_node *node, t_edge *in)
+{
+	t_node	*out;
+
+	if (!(out = (t_node*)ft_memalloc(sizeof(t_node))))
+		sys_error();
+	graph->nodes[graph->node_num++] = out;
+	out->name = ft_strjoin(node->name, "-out");
+	in->node = out;
+	in->len = -1;
+	out->edges = node->edges;
+	if (!(node->edges = (t_edge*)ft_memalloc(sizeof(t_edge))))
+		sys_error();
+    node->edges->node = prev->node;
+    node->edges->len = -1;
+    node->edges->next = NULL;
+    prev->node = node;
+}
+
 void path_reverse(t_edge *path)
 {
 	while (path->next)
@@ -37,18 +56,13 @@ void path_reverse(t_edge *path)
 	}
 }
 
-void split(t_graph *graph, t_node *node, t_node *next)
+void path_split(t_graph *graph, t_edge *path)
 {
-	t_node	*out;
-	t_edge	*in;
-
-	out = (*graph->nodes) + graph->node_num++;
-	out->name = ft_strjoin(node->name, "-out");
-	in = find(node, next->edges);
-	in->len = -1;
-	in->node = out;
-	out->edges = node->edges;
-	if (!(node->edges = (t_edge*)ft_memalloc(sizeof(t_edge))))
-		sys_error();
-    node->edges->node = out;
+    path = path->next;
+    while (path->next)
+	{
+		ft_printf("Now splitting: %s\n", path->node->name);
+		split(graph, path->node, find(path->node, path->next->node->edges));
+		path = path->next;
+	}
 }

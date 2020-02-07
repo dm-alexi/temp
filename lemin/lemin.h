@@ -63,5 +63,7 @@ void			bfs(t_graph *graph);
 t_edge			*get_path(t_graph *graph);
 void			print_path(t_edge *path);
 void path_reverse(t_edge *path);
+void split(t_graph *graph, t_node *node, t_node *next);
+void path_split(t_graph *graph, t_edge *path);
 
 #endif

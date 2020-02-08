@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:27:04 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/29 17:38:36 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/08 16:45:51 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ typedef struct	s_graph
 	t_node	*finish;
 }				t_graph;
 
+typedef struct	s_queue
+{
+	t_node			*node;
+	struct s_queue	*next;
+}				t_queue;
+
 void			sys_error(void);
 void			error(void);
 
@@ -61,6 +67,7 @@ void			get_edges(t_graph *graph, char **line);
 void			delete_graph(t_graph *graph);
 void			delete_path(t_edge *path);
 void			bfs(t_graph *graph);
+void			belford(t_graph *graph);
 t_edge			*get_path(t_graph *graph);
 void			path_split(t_graph *graph, t_edge *path);
 

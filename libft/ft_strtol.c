@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtol.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 22:43:57 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/19 11:40:27 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/08 16:54:49 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <limits.h>
 #include "libft.h"
-#define LONGMAX ((long)(~0UL >> 1))
-#define LONGMIN ((long)((~0UL >> 1) + 1))
 
 static int			is_valid(char c, int base)
 {
@@ -30,9 +29,9 @@ static long int		ft_strtol_process(const char *nptr, char **endptr,
 	while (is_valid((c = ft_toupper(*nptr)), base))
 	{
 		c = ft_isdigit(c) ? c - '0' : c - 'A' + 10;
-		if (n > (LONGMAX - c) / base)
+		if (n > (LONG_MAX - c) / base)
 		{
-			n = neg ? LONGMIN : LONGMAX;
+			n = neg ? LONG_MIN : LONG_MAX;
 			break ;
 		}
 		n = n * base + c;

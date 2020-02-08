@@ -1,46 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete.c                                           :+:      :+:    :+:   */
+/*   belford.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/29 17:21:34 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/08 16:48:22 by sscarecr         ###   ########.fr       */
+/*   Created: 2020/02/08 16:30:09 by sscarecr          #+#    #+#             */
+/*   Updated: 2020/02/08 16:48:38 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <limits.h>
 #include "lemin.h"
 
-void	delete_graph(t_graph *graph)
+static void		reset_distance(t_graph *graph)
 {
 	int		i;
-	t_edge	*tmp;
 
 	i = 0;
 	while (i < graph->node_num)
-	{
-		free(graph->nodes[i]->name);
-		while (graph->nodes[i]->edges)
-		{
-			tmp = graph->nodes[i]->edges->next;
-			free(graph->nodes[i]->edges);
-			graph->nodes[i]->edges = tmp;
-		}
-		free(graph->nodes[i]);
-		++i;
-	}
-	free(graph->nodes);
-	free(graph);
+		graph->nodes[i++]->distance = INT_MAX;
+	graph->start->distance = 0;
 }
 
-void	delete_path(t_edge *path)
+void			belford(t_graph *graph)
 {
-	t_edge	*t;
-
-	while ((t = path))
-	{
-		path = path->next;
-		free(t);
-	}
+	reset_distance(graph);
 }

@@ -1,10 +1,16 @@
-#include "lemin.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bfs.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/08 16:30:18 by sscarecr          #+#    #+#             */
+/*   Updated: 2020/02/08 16:47:56 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-typedef struct	s_queue
-{
-	t_node			*node;
-	struct s_queue	*next;
-}				t_queue;
+#include "lemin.h"
 
 static void		process(t_queue **q, t_queue **last)
 {
@@ -18,7 +24,7 @@ static void		process(t_queue **q, t_queue **last)
 		{
 			t->node->distance = (*q)->node->distance + t->len;
 			t->node->prev = (*q)->node;
-            if (!((*last)->next = (t_queue*)malloc(sizeof(t_queue))))
+			if (!((*last)->next = (t_queue*)malloc(sizeof(t_queue))))
 				sys_error();
 			*last = (*last)->next;
 			(*last)->node = t->node;
@@ -49,13 +55,13 @@ void			bfs(t_graph *graph)
 
 t_edge			*get_path(t_graph *graph)
 {
-    t_edge	*res;
-    t_edge	*tmp;
-    int		i;
+	t_edge	*res;
+	t_edge	*tmp;
+	int		i;
 
-    if ((i = graph->finish->distance) <= 0)
+	if ((i = graph->finish->distance) <= 0)
 		return (NULL);
-    if (!(res = (t_edge*)ft_memalloc(sizeof(t_edge))))
+	if (!(res = (t_edge*)ft_memalloc(sizeof(t_edge))))
 		sys_error();
 	res->node = graph->finish;
 	while (res->node->prev)

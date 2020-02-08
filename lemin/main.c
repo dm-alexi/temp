@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:27:08 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/29 17:28:05 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/08 16:55:10 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@ int		main(void)
 	bfs(graph);
 	print_graph(graph);
 	print_path(path = get_path(graph));
-	//path_reverse(path);
 	path_split(graph, path);
 	print_graph(graph);
 	print_path(path);
 	delete_path(path);
 	delete_graph(graph);
-
 	return (0);
 }

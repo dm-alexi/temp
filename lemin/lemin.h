@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:27:04 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/08 16:45:51 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/08 17:19:45 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,7 @@ void			bfs(t_graph *graph);
 void			belford(t_graph *graph);
 t_edge			*get_path(t_graph *graph);
 void			path_split(t_graph *graph, t_edge *path);
+
+void			reset_distance(t_graph *graph);
 
 #endif

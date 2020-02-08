@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:27:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/08 16:30:37 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/08 17:00:39 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	print_node(const t_node *a)
 {
 	t_edge	*tmp;
 
-	ft_printf("%-12s: (x, y) = (%d, %d)\tdistance: %d\tconnected to: ",
+	ft_printf("%-12s: (x, y) = (%d, %d)\tdistance: %10d\tconnected to: ",
 		a->name, a->x, a->y, a->distance);
 	tmp = a->edges;
 	while (tmp)

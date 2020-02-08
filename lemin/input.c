@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:25:49 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/08 16:45:30 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/08 19:33:55 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,28 @@ static int		read_int(void)
 	return (n);
 }
 
+static int		path_count(t_graph *graph)
+{
+	int		count;
+	int		i;
+	t_edge	*t;
+
+	count = graph->ant_num;
+	t = graph->start->edges;
+	i = 0;
+	while (t && ++i)
+		t = t->next;
+	if (i < count)
+		count = i;
+	t = graph->finish->edges;
+	i = 0;
+	while (t && ++i)
+		t = t->next;
+	if (i < count)
+		count = i;
+	return (count);
+}
+
 static void		finalize(t_graph *graph)
 {
 	int		i;
@@ -53,8 +75,10 @@ static void		finalize(t_graph *graph)
 		}
 		++i;
 	}
-	if (!graph->start || !graph->finish)
+	if (!graph->start || !graph->finish ||
+	!(graph->path_max = path_count(graph)))
 		error();
+	graph->paths = (t_edge**)ft_memalloc(sizeof(t_edge*) * graph->path_max);
 }
 
 int				get_line(char **line, t_command *com)

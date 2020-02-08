@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:27:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/08 17:00:39 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/08 19:34:14 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	print_graph(t_graph *graph)
 	i = 0;
 	while (i < graph->node_num)
 		print_node(graph->nodes[i++]);
+	ft_printf("Maximum paths possible: %d\n", graph->path_max);
 	ft_printf("--------------------\n");
 }
 

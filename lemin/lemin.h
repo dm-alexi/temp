@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:27:04 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/08 18:41:31 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/08 19:33:45 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ typedef struct	s_graph
 {
 	int		ant_num;
 	int		node_num;
+	int		path_max;
 	t_node	**nodes;
+	t_edge	**paths;
 	t_node	*start;
 	t_node	*finish;
 }				t_graph;

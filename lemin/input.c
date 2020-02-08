@@ -66,13 +66,10 @@ static void		finalize(t_graph *graph)
 	i = 0;
 	while (i < graph->node_num)
 	{
-		if (--graph->nodes[i]->distance == 0)
+		if (graph->nodes[i]->type == START)
 			graph->start = graph->nodes[i];
-		else if (graph->nodes[i]->distance == 1)
-		{
+		else if (graph->nodes[i]->type == FINISH)
 			graph->finish = graph->nodes[i];
-			graph->nodes[i]->distance = -1;
-		}
 		++i;
 	}
 	if (!graph->start || !graph->finish ||
@@ -89,7 +86,7 @@ int				get_line(char **line, t_command *com)
 	while ((tmp = get_next_line(STDIN_FILENO, line)) > 0 && **line == '#')
 	{
 		if (ft_strequ(*line, "##start"))
-			*com = START;
+			*com = BEGIN;
 		else if (ft_strequ(*line, "##end"))
 			*com = END;
 		else if (ft_strnequ(*line, "##", 2))

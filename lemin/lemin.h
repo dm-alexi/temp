@@ -18,8 +18,13 @@
 
 typedef enum	e_command
 {
-	UNKNOWN, START, END
+	UNKNOWN, BEGIN, END
 }				t_command;
+
+typedef enum	e_type
+{
+	REAL, START, FINISH, TEMP
+}				t_type;
 
 typedef struct	s_node
 {
@@ -29,6 +34,7 @@ typedef struct	s_node
 	int				x;
 	int				y;
 	int				distance;
+	t_type			type;
 }				t_node;
 
 typedef struct	s_edge

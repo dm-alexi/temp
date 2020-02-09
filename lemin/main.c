@@ -15,20 +15,14 @@
 int		main(void)
 {
 	t_graph		*graph;
-	t_edge		*path;
-	t_edge		*path2;
 
 	graph = get_graph();
 	bfs(graph);
 	print_graph(graph);
-	print_path(path = get_path(graph));
-	path_split(graph, path);
-	print_graph(graph);
-	belford(graph);
-	print_graph(graph);
-	print_path(path);
-	print_path(path2 = get_path(graph));
-	delete_path(path);
+	print_path(graph->paths[0]);
+	reset_distance(graph);
+	solve(graph);
+
 	delete_graph(graph);
 	return (0);
 }

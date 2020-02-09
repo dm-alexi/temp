@@ -75,7 +75,7 @@ static void		finalize(t_graph *graph)
 	if (!graph->start || !graph->finish ||
 	!(graph->path_max = path_count(graph)))
 		error();
-	graph->paths = (t_edge**)ft_memalloc(sizeof(t_edge*) * graph->path_max);
+	graph->paths = (t_edge**)ft_memalloc(sizeof(t_edge*));
 }
 
 int				get_line(char **line, t_command *com)

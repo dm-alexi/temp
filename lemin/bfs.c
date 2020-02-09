@@ -51,6 +51,9 @@ void			bfs(t_graph *graph)
 		process(&q, &last);
 	if ((graph->finish->distance) < 0)
 		error();
+    graph->path_num = 1;
+    graph->paths[0] = get_path(graph);
+	set_rank(graph->paths[0], 1);
 }
 
 t_edge			*get_path(t_graph *graph)
@@ -73,4 +76,10 @@ t_edge			*get_path(t_graph *graph)
 		res = tmp;
 	}
 	return (res);
+}
+
+void			set_rank(t_edge *path, int rank)
+{
+    while ((path = path->next)->node->type != FINISH)
+		path->node->rank = rank;
 }

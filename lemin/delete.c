@@ -32,8 +32,9 @@ void	delete_graph(t_graph *graph)
 	}
 	free(graph->nodes);
 	i = 0;
-	while ((tmp = graph->paths[i++]))
-		delete_path(tmp);
+	while (i < graph->path_num)
+		delete_path(graph->paths[i++]);
+	free(graph->paths);
 	free(graph);
 }
 

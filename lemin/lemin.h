@@ -33,6 +33,7 @@ typedef struct	s_node
 	struct s_node	*prev;
 	int				x;
 	int				y;
+	int				rank;
 	int				distance;
 	t_type			type;
 }				t_node;
@@ -48,6 +49,7 @@ typedef struct	s_graph
 {
 	int		ant_num;
 	int		node_num;
+	int		path_num;
 	int		path_max;
 	t_node	**nodes;
 	t_edge	**paths;
@@ -76,9 +78,14 @@ void			delete_graph(t_graph *graph);
 void			delete_path(t_edge *path);
 void			bfs(t_graph *graph);
 void			belford(t_graph *graph);
+t_edge			*find(t_node *node, t_edge *edge);
 t_edge			*get_path(t_graph *graph);
+void			set_rank(t_edge *path, int rank);
 void			path_split(t_graph *graph, t_edge *path);
-
+void			path_reverse(t_graph *graph, t_edge *path);
 void			reset_distance(t_graph *graph);
+void			path_restore(t_graph *graph, t_edge *path);
+void			solve(t_graph *graph);
+t_edge			**clone(t_edge **paths, int n);
 
 #endif

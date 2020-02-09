@@ -32,6 +32,7 @@ static t_list	*new_node(char *line, t_command com)
 	node.prev = NULL;
 	node.distance = (com == BEGIN ? 0 : -1);
     node.type = com;
+    node.rank = 0;
 	free(line);
 	return (ft_lstnew(&node, sizeof(t_node)));
 }

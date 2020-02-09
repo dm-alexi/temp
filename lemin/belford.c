@@ -37,16 +37,18 @@ void	belford(t_graph *graph)
 		j = -1;
 		fin = 1;
 		while (++j < graph->node_num && (t = graph->nodes[j]->edges))
-			while (t)
-			{
-				if (graph->nodes[j]->distance != -1 && (t->node->distance == -1
-				|| t->node->distance > graph->nodes[j]->distance + t->len))
+			if (graph->nodes[j]->distance != -1)
+				while (t)
 				{
-					t->node->distance = graph->nodes[j]->distance + t->len;
-					t->node->prev = graph->nodes[j];
-					fin = 0;
+					if ((t->node->distance == -1
+					|| t->node->distance > graph->nodes[j]->distance + t->len) &&
+					(t->node->rank == graph->nodes[j]->rank || graph->nodes[j]->rank == graph->nodes[j]->prev->rank))
+					{
+						t->node->distance = graph->nodes[j]->distance + t->len;
+						t->node->prev = graph->nodes[j];
+						fin = 0;
+					}
+					t = t->next;
 				}
-				t = t->next;
-			}
 	}
 }

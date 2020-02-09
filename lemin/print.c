@@ -16,8 +16,8 @@ void	print_node(const t_node *a)
 {
 	t_edge	*tmp;
 
-	ft_printf("%-12s: (x, y) = (%d, %d)\tdistance: %10d\tconnected to: ",
-		a->name, a->x, a->y, a->distance);
+	ft_printf("%-12s: (x, y) = (%d, %d)\trank = %d\tdistance: %10d\tconnected to: ",
+		a->name, a->x, a->y, a->rank, a->distance);
 	tmp = a->edges;
 	while (tmp)
 	{

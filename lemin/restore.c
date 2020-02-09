@@ -12,15 +12,19 @@
 
 #include "lemin.h"
 
-void			graph_restore(t_graph *graph)
+void path_restore(t_graph *graph, t_edge *path)
 {
-	t_node *t;
+	t_edge	*t;
 
-	t = graph->finish;
-	
-}
-
-static void		node_restore(t_graph *graph, t_node *out, t_node *in)
-{
-
+	while (path->next)
+	{
+		if (!(t = (t_edge*)ft_memalloc(sizeof(t_edge))))
+			sys_error();
+		t->next = path->node->edges;
+		t->node = path->next->node;
+		t->len = 1;
+		path->node->edges = t;
+		find(path->node, path->next->node->edges)->len = 1;
+		path = path->next;
+	}
 }

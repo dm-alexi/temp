@@ -6,13 +6,13 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 19:38:52 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/08 19:51:22 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/10 20:11:29 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-void path_restore(t_graph *graph, t_edge *path)
+void	path_restore(t_edge *path)
 {
 	t_edge	*t;
 

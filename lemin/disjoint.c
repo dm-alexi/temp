@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 16:30:24 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/08 18:40:27 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/10 20:11:02 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void		remove_edge(t_node *node, t_edge **edge)
 	}
 }
 
-void			path_reverse(t_graph *graph, t_edge *path)
+void			path_reverse(t_edge *path)
 {
 	while (path->next)
 	{

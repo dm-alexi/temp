@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:27:12 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/29 17:40:31 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/10 20:23:41 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static t_list	*new_node(char *line, t_command com)
 	node.edges = NULL;
 	node.prev = NULL;
 	node.distance = (com == BEGIN ? 0 : -1);
-    node.type = com;
-    node.rank = 0;
+	node.type = (t_type)com;
+	node.rank = 0;
 	free(line);
 	return (ft_lstnew(&node, sizeof(t_node)));
 }

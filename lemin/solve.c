@@ -1,20 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   solve.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/10 20:22:05 by sscarecr          #+#    #+#             */
+/*   Updated: 2020/02/10 20:23:30 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
 //free intermediate nodes here!
 int		resolve_conflict(t_edge *p1, t_edge *p2)
 {
 	t_edge	*t2s;
-    t_edge	*t2f;
-    t_edge	*tmp;
-    int		r1;
-    int		r2;
+	t_edge	*t2f;
+	t_edge	*tmp;
+	int		r1;
+	int		r2;
 
-    if (p1->next->node->type == FINISH || p2->next->node->type == FINISH)
+	if (p1->next->node->type == FINISH || p2->next->node->type == FINISH)
 		return (0);
 	r1 = p1->next->node->rank;
 	r2 = p2->next->node->rank;
-    t2s = p2->next;
-    while (t2s->node->rank != r1 && t2s->node->type != FINISH)
+	t2s = p2->next;
+	while (t2s->node->rank != r1 && t2s->node->type != FINISH)
 		t2s = t2s->next;
 	if (t2s->node->type == FINISH)
 		return (0);
@@ -23,23 +35,22 @@ int		resolve_conflict(t_edge *p1, t_edge *p2)
 		t2f = t2f->next;
 	while (p1->node != t2f->node)
 		p1 = p1->next;
-    tmp = p1->next;
-    p1->next = t2f->next;
-    while (tmp->node != t2s->node)
+	tmp = p1->next;
+	p1->next = t2f->next;
+	while (tmp->node != t2s->node)
 		tmp = tmp->next;
 	t2s->next = tmp->next;
 	return (1);
 }
 
-void		resolve_conflicts(t_edge **paths, int n)
+void	resolve_conflicts(t_edge **paths, int n)
 {
 	int		i;
 	int		j;
 	t_edge	*tmp;
 
-	i = 0;
-	while (i < n - 1)
-	{
+	i = -1;
+	while (++i < n - 1)
 		if (resolve_conflict(paths[i], paths[n - 1]))
 		{
 			tmp = paths[i];
@@ -52,8 +63,6 @@ void		resolve_conflicts(t_edge **paths, int n)
 			resolve_conflicts(paths, n);
 			return ;
 		}
-		++i;
-	}
 }
 
 int		path_len(t_edge *path)
@@ -80,29 +89,29 @@ int		count_moves(t_edge **paths, int n_paths, int ants)
 
 void	solve(t_graph *graph)
 {
-    t_edge	**new_paths;
-    int		i;
-    int		c;
+	t_edge	**new_paths;
+	int		i;
+	int		c;
 
-    while (graph->path_num < graph->path_max)
+	while (graph->path_num < graph->path_max)
 	{
 		reset_distance(graph);
 		set_ranks(graph);
 		new_paths = clone(graph->paths, graph->path_num);
 		i = 0;
 		while (i < graph->path_num)
-			path_reverse(graph, graph->paths[i++]);
+			path_reverse(graph->paths[i++]);
 		belford(graph);
 		new_paths[graph->path_num] = get_path(graph);
 		while (--i >= 0)
-			path_restore(graph, graph->paths[i]);
+			path_restore(graph->paths[i]);
 		resolve_conflicts(new_paths, graph->path_num + 1);
 		if ((c = count_moves(new_paths, graph->path_num + 1, graph->ant_num))
 			>= graph->moves)
 		{
-            delete_paths(new_paths, graph->path_num + 1);
-            print_graph(graph);
-            return ;
+			delete_paths(new_paths, graph->path_num + 1);
+			print_graph(graph);
+			return ;
 		}
 		delete_paths(graph->paths, graph->path_num);
 		graph->paths = new_paths;

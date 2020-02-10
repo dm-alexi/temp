@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:27:08 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/08 18:43:26 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/10 20:24:19 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int		main(void)
 	print_path(graph->paths[0]);
 	reset_distance(graph);
 	solve(graph);
-
 	delete_graph(graph);
 	return (0);
 }

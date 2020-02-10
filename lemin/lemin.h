@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:27:04 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/08 19:33:45 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/10 20:11:22 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ t_edge			*get_path(t_graph *graph);
 void			set_rank(t_edge *path, int rank);
 void			set_ranks(t_graph *graph);
 void			path_split(t_graph *graph, t_edge *path);
-void			path_reverse(t_graph *graph, t_edge *path);
+void			path_reverse(t_edge *path);
 void			reset_distance(t_graph *graph);
-void			path_restore(t_graph *graph, t_edge *path);
+void			path_restore(t_edge *path);
 void			solve(t_graph *graph);
 t_edge			**clone(t_edge **paths, int n);
 

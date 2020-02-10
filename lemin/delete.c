@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/29 17:21:34 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/08 16:48:22 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/10 20:03:48 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	delete_path(t_edge *path)
 
 void	delete_paths(t_edge **paths, int n)
 {
-    while (--n >= 0)
+	while (--n >= 0)
 		delete_path(paths[n]);
 	free(paths);
 }

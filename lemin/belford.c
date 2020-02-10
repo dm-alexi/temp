@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 16:30:09 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/08 18:39:27 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/10 20:09:45 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ void	belford(t_graph *graph)
 				while (t)
 				{
 					if ((t->node->distance == -1
-					|| t->node->distance > graph->nodes[j]->distance + t->len) &&
-					(t->node->rank == graph->nodes[j]->rank || graph->nodes[j]->rank == graph->nodes[j]->prev->rank))
+					|| t->node->distance > graph->nodes[j]->distance + t->len)
+					&& (t->node->rank == graph->nodes[j]->rank ||
+					graph->nodes[j]->rank == graph->nodes[j]->prev->rank))
 					{
 						t->node->distance = graph->nodes[j]->distance + t->len;
 						t->node->prev = graph->nodes[j];

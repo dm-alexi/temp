@@ -31,13 +31,38 @@ int		resolve_conflict(t_edge *p1, t_edge *p2)
 	return (1);
 }
 
+int		path_len(t_edge *path)
+{
+	int		n;
+
+	n = 0;
+	while ((path = path->next))
+		++n;
+	return (n);
+}
+
+int		count_moves(t_edge **paths, int n_paths, int ants)
+{
+	int		i;
+	int		n;
+
+	n = 0;
+	i = 0;
+	while (i < n_paths)
+		n += path_len(paths[i++]);
+	return ((ants - n_paths + n) / n_paths + ((ants + n) % n_paths > 0));
+}
+
 void	solve(t_graph *graph)
 {
     t_edge	**new_paths;
     int		i;
+    int		c;
 
     while (graph->path_num < graph->path_max)
 	{
+		reset_distance(graph);
+		set_ranks(graph);
 		new_paths = clone(graph->paths, graph->path_num);
 		i = 0;
 		while (i < graph->path_num)
@@ -46,13 +71,18 @@ void	solve(t_graph *graph)
 		new_paths[graph->path_num] = get_path(graph);
 		while (--i >= 0)
 			path_restore(graph, graph->paths[i]);
-        print_graph(graph);
-        for (int i = 0; i <= graph->path_num; ++i)
-			print_path(new_paths[i]);
 		resolve_conflict(new_paths[0], new_paths[1]);
+		if ((c = count_moves(new_paths, graph->path_num + 1, graph->ant_num))
+			>= graph->moves)
+		{
+            delete_paths(new_paths, graph->path_num + 1);
+            print_graph(graph);
+            return ;
+		}
+		delete_paths(graph->paths, graph->path_num);
+		graph->paths = new_paths;
+		++graph->path_num;
+		graph->moves = c;
 		print_graph(graph);
-        for (int i = 0; i <= graph->path_num; ++i)
-			print_path(new_paths[i]);
-		break;
 	}
 }

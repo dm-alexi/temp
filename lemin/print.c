@@ -27,6 +27,28 @@ void	print_node(const t_node *a)
 	ft_printf("\n");
 }
 
+void	print_path(t_edge *path)
+{
+	while (path)
+	{
+		ft_printf("%s ", path->node->name);
+		path = path->next;
+	}
+	ft_printf("\n");
+}
+
+void	print_paths(t_edge **paths, int n)
+{
+	int		i;
+
+	i = 0;
+	while (i < n)
+	{
+		ft_printf("Path %3d: ", i + 1);
+		print_path(paths[i++]);
+	}
+}
+
 void	print_graph(t_graph *graph)
 {
 	int		i;
@@ -40,15 +62,6 @@ void	print_graph(t_graph *graph)
 		print_node(graph->nodes[i++]);
 	ft_printf("Maximum paths possible: %d\n", graph->path_max);
 	ft_printf("--------------------\n");
-}
-
-void	print_path(t_edge *path)
-{
-	ft_printf("Path:\n");
-	while (path)
-	{
-		ft_printf("%s ", path->node->name);
-		path = path->next;
-	}
-	ft_printf("\n");
+	print_paths(graph->paths, graph->path_num);
+	ft_printf("Moves: %d\n", graph->moves);
 }

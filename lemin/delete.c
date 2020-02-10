@@ -48,3 +48,10 @@ void	delete_path(t_edge *path)
 		free(t);
 	}
 }
+
+void	delete_paths(t_edge **paths, int n)
+{
+    while (--n >= 0)
+		delete_path(paths[n]);
+	free(paths);
+}

@@ -31,6 +31,31 @@ int		resolve_conflict(t_edge *p1, t_edge *p2)
 	return (1);
 }
 
+void		resolve_conflicts(t_edge **paths, int n)
+{
+	int		i;
+	int		j;
+	t_edge	*tmp;
+
+	i = 0;
+	while (i < n - 1)
+	{
+		if (resolve_conflict(paths[i], paths[n - 1]))
+		{
+			tmp = paths[i];
+			paths[i] = paths[n - 1];
+			paths[n - 1] = tmp;
+			set_rank(paths[n - 1], 0);
+			j = -1;
+			while (++j < n - 1)
+				set_rank(paths[j], j + 1);
+			resolve_conflicts(paths, n);
+			return ;
+		}
+		++i;
+	}
+}
+
 int		path_len(t_edge *path)
 {
 	int		n;
@@ -71,7 +96,7 @@ void	solve(t_graph *graph)
 		new_paths[graph->path_num] = get_path(graph);
 		while (--i >= 0)
 			path_restore(graph, graph->paths[i]);
-		resolve_conflict(new_paths[0], new_paths[1]);
+		resolve_conflicts(new_paths, graph->path_num + 1);
 		if ((c = count_moves(new_paths, graph->path_num + 1, graph->ant_num))
 			>= graph->moves)
 		{

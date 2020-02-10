@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:22:05 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/10 20:23:30 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/10 21:00:18 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,18 @@ int		resolve_conflict(t_edge *p1, t_edge *p2)
 	t_edge	*t2s;
 	t_edge	*t2f;
 	t_edge	*tmp;
-	int		r1;
-	int		r2;
+	int		rank;
 
 	if (p1->next->node->type == FINISH || p2->next->node->type == FINISH)
 		return (0);
-	r1 = p1->next->node->rank;
-	r2 = p2->next->node->rank;
+	rank = p1->next->node->rank;
 	t2s = p2->next;
-	while (t2s->node->rank != r1 && t2s->node->type != FINISH)
+	while (t2s->node->rank != rank && t2s->node->type != FINISH)
 		t2s = t2s->next;
 	if (t2s->node->type == FINISH)
 		return (0);
 	t2f = t2s->next;
-	while (t2f->next->node->rank == r1)
+	while (t2f->next->node->rank == rank)
 		t2f = t2f->next;
 	while (p1->node != t2f->node)
 		p1 = p1->next;

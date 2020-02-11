@@ -83,10 +83,12 @@ void			belford(t_graph *graph);
 t_edge			*find(t_node *node, t_edge *edge);
 t_edge			*get_path(t_graph *graph);
 void			set_rank(t_edge *path, int rank);
-void			set_ranks(t_graph *graph);
+void			set_ranks(t_edge **paths, int n);
+int				path_len(t_edge *path);
+int				count_moves(t_edge **paths, int n_paths, int ants);
 void			path_reverse(t_edge *path);
-void			reset_distance(t_graph *graph);
 void			path_restore(t_edge *path);
+void			reset_distance(t_graph *graph);
 void			solve(t_graph *graph);
 t_edge			**clone(t_edge **paths, int n);
 

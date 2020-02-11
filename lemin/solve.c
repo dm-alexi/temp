@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-void	resolve(t_edge *s1, t_edge *f1, t_edge *s2, t_edge *f2)
+static void		resolve(t_edge *s1, t_edge *f1, t_edge *s2, t_edge *f2)
 {
     t_edge	*t;
     t_edge	*tmp;
@@ -35,7 +35,7 @@ void	resolve(t_edge *s1, t_edge *f1, t_edge *s2, t_edge *f2)
     free(f2);
 }
 
-void	resolve_conflict(t_edge *p, t_edge *s2, t_edge *f2)
+static void		resolve_conflict(t_edge *p, t_edge *s2, t_edge *f2)
 {
 	t_edge	*s1;
 	t_edge	*f1;
@@ -49,12 +49,11 @@ void	resolve_conflict(t_edge *p, t_edge *s2, t_edge *f2)
 	resolve(s1, f1, s2, f2);
 }
 
-void	resolve_conflicts(t_edge **paths, int n)
+static void		resolve_conflicts(t_edge **paths, int n)
 {
     t_edge	*s;
     t_edge	*f;
     int		rank;
-    int		i;
 
     s = paths[n - 1]->next;
     while ((rank = s->node->rank) == paths[n - 1]->node->rank)
@@ -70,35 +69,11 @@ void	resolve_conflicts(t_edge **paths, int n)
 	paths[n - 1] = paths[rank - 1];
 	paths[rank - 1] = s;
 	set_rank(paths[n - 1], 0);
-	i = -1;
-	while (++i < n - 1)
-		set_rank(paths[i], i + 1);
+	set_ranks(paths, n - 1);
 	resolve_conflicts(paths, n);
 }
 
-int		path_len(t_edge *path)
-{
-	int		n;
-
-	n = 0;
-	while ((path = path->next))
-		++n;
-	return (n);
-}
-
-int		count_moves(t_edge **paths, int n_paths, int ants)
-{
-	int		i;
-	int		n;
-
-	n = 0;
-	i = 0;
-	while (i < n_paths)
-		n += path_len(paths[i++]);
-	return ((ants - n_paths + n) / n_paths + ((ants + n) % n_paths > 0));
-}
-
-void	solve(t_graph *graph)
+void			solve(t_graph *graph)
 {
 	t_edge	**new_paths;
 	int		i;
@@ -107,7 +82,7 @@ void	solve(t_graph *graph)
 	while (graph->path_num < graph->path_max)
 	{
 		reset_distance(graph);
-		set_ranks(graph);
+		set_ranks(graph->paths, graph->path_num);
 		new_paths = clone(graph->paths, graph->path_num);
 		i = 0;
 		while (i < graph->path_num)

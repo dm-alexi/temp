@@ -78,19 +78,19 @@ static void		finalize(t_graph *graph)
 	graph->paths = (t_edge**)ft_memalloc(sizeof(t_edge*));
 }
 
-int				get_line(char **line, t_command *com)
+int				get_line(char **line, t_type *type)
 {
 	int		tmp;
 
-	*com = UNKNOWN;
+	*type = UNKNOWN;
 	while ((tmp = get_next_line(STDIN_FILENO, line)) > 0 && **line == '#')
 	{
 		if (ft_strequ(*line, "##start"))
-			*com = BEGIN;
+			*type = START;
 		else if (ft_strequ(*line, "##end"))
-			*com = END;
+			*type = FINISH;
 		else if (ft_strnequ(*line, "##", 2))
-			*com = UNKNOWN;
+			*type = UNKNOWN;
 		ft_printf("%s\n", *line);
 		free(*line);
 	}

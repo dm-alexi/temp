@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-static t_list	*new_node(char *line, t_command com)
+static t_list	*new_node(char *line, t_type type)
 {
 	char	*s;
 	t_node	node;
@@ -30,8 +30,8 @@ static t_list	*new_node(char *line, t_command com)
 	node.name = ft_strdup(line);
 	node.edges = NULL;
 	node.prev = NULL;
-	node.distance = (com == BEGIN ? 0 : -1);
-	node.type = (t_type)com;
+	node.distance = (type == START ? 0 : -1);
+	node.type = type;
 	node.rank = 0;
 	free(line);
 	return (ft_lstnew(&node, sizeof(t_node)));
@@ -48,14 +48,14 @@ static int		compare(const void *a, const void *b)
 
 void			get_nodes(t_graph *graph, char **line)
 {
-	t_list		*lst;
-	t_list		*tmp;
-	t_command	com;
-	int			i;
+	t_list	*lst;
+	t_list	*tmp;
+	t_type	type;
+	int		i;
 
 	lst = NULL;
-	while ((i = get_line(line, &com)) == NODE && ++graph->node_num)
-		ft_lstadd(&lst, new_node(*line, com));
+	while ((i = get_line(line, &type)) == NODE && ++graph->node_num)
+		ft_lstadd(&lst, new_node(*line, type));
 	if (i <= 0)
 		i ? sys_error() : error();
 	if (!(graph->nodes = (t_node **)malloc(sizeof(t_node *) *

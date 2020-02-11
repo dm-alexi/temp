@@ -83,11 +83,11 @@ static void		get_edge(t_graph *graph, char *line)
 
 void			get_edges(t_graph *graph, char **line)
 {
-	int			tmp;
-	t_command	com;
+	int		tmp;
+	t_type	type;
 
 	get_edge(graph, *line);
-	while ((tmp = get_line(line, &com)) == EDGE)
+	while ((tmp = get_line(line, &type)) == EDGE)
 		get_edge(graph, *line);
 	if (tmp < 0)
 		sys_error();

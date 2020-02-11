@@ -16,14 +16,9 @@
 # define NODE 1
 # define EDGE 2
 
-typedef enum	e_command
-{
-	UNKNOWN, BEGIN, END
-}				t_command;
-
 typedef enum	e_type
 {
-	REAL, START, FINISH
+	UNKNOWN, START, FINISH
 }				t_type;
 
 typedef struct	s_node
@@ -72,7 +67,7 @@ void			print_node(const t_node *a);
 void			print_path(t_edge *path);
 
 t_graph			*get_graph(void);
-int				get_line(char **line, t_command *com);
+int				get_line(char **line, t_type *type);
 void			get_nodes(t_graph *graph, char **line);
 void			get_edges(t_graph *graph, char **line);
 void			delete_graph(t_graph *graph);

@@ -54,7 +54,7 @@ void	print_graph(t_graph *graph)
 	int		i;
 
 	ft_printf("--------------------\n");
-	ft_printf("Number of ants: %d\nNodes:\n", graph->ant_num);
+	ft_printf("Number of ants: %d\n", graph->ant_num);
 	ft_printf("Starting node: %s\n", graph->start->name);
 	ft_printf("Ending node:   %s\n", graph->finish->name);
 	i = 0;

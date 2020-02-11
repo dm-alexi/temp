@@ -54,6 +54,4 @@ void			bfs(t_graph *graph)
 	graph->moves = graph->ant_num - 1 + graph->finish->distance;
 	graph->path_num = 1;
 	graph->paths[0] = get_path(graph);
-	set_rank(graph->paths[0], 1);
 }
-

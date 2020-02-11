@@ -76,7 +76,6 @@ int				get_line(char **line, t_command *com);
 void			get_nodes(t_graph *graph, char **line);
 void			get_edges(t_graph *graph, char **line);
 void			delete_graph(t_graph *graph);
-void			delete_path(t_edge *path);
 void			delete_paths(t_edge **paths, int n);
 void			bfs(t_graph *graph);
 void			belford(t_graph *graph);
@@ -86,10 +85,9 @@ void			set_rank(t_edge *path, int rank);
 void			set_ranks(t_edge **paths, int n);
 int				path_len(t_edge *path);
 int				count_moves(t_edge **paths, int n_paths, int ants);
-void			path_reverse(t_edge *path);
-void			path_restore(t_edge *path);
+void			reverse_paths(t_graph *graph);
+void			restore_paths(t_graph *graph);
 void			reset_distance(t_graph *graph);
 void			solve(t_graph *graph);
-t_edge			**clone(t_edge **paths, int n);
 
 #endif

@@ -12,13 +12,6 @@
 
 #include "lemin.h"
 
-t_edge			*find(t_node *node, t_edge *edge)
-{
-	while (edge->node && edge->node != node)
-		edge = edge->next;
-	return (edge);
-}
-
 static void		remove_edge(t_node *node, t_edge **edge)
 {
 	t_edge	*t;
@@ -39,7 +32,7 @@ static void		remove_edge(t_node *node, t_edge **edge)
 	}
 }
 
-void			path_reverse(t_edge *path)
+static void		reverse_path(t_edge *path)
 {
 	while (path->next)
 	{
@@ -47,4 +40,39 @@ void			path_reverse(t_edge *path)
 		remove_edge(path->next->node, &(path->node->edges));
 		path = path->next;
 	}
+}
+
+void			reverse_paths(t_graph *graph)
+{
+	int		i;
+
+	i = 0;
+	while (i < graph->path_num)
+		reverse_path(graph->paths[i++]);
+}
+
+static void		restore_path(t_edge *path)
+{
+	t_edge	*t;
+
+	while (path->next)
+	{
+		if (!(t = (t_edge*)ft_memalloc(sizeof(t_edge))))
+			sys_error();
+		t->next = path->node->edges;
+		t->node = path->next->node;
+		t->len = 1;
+		path->node->edges = t;
+		find(path->node, path->next->node->edges)->len = 1;
+		path = path->next;
+	}
+}
+
+void			restore_paths(t_graph *graph)
+{
+	int		i;
+
+	i = 0;
+	while (i < graph->path_num)
+		restore_path(graph->paths[i++]);
 }

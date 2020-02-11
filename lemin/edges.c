@@ -94,3 +94,10 @@ void			get_edges(t_graph *graph, char **line)
 	if (tmp)
 		error();
 }
+
+t_edge			*find(t_node *node, t_edge *edge)
+{
+	while (edge->node && edge->node != node)
+		edge = edge->next;
+	return (edge);
+}

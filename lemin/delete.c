@@ -31,14 +31,11 @@ void	delete_graph(t_graph *graph)
 		++i;
 	}
 	free(graph->nodes);
-	i = 0;
-	while (i < graph->path_num)
-		delete_path(graph->paths[i++]);
-	free(graph->paths);
+	delete_paths(graph->paths, graph->path_num);
 	free(graph);
 }
 
-void	delete_path(t_edge *path)
+static void		delete_path(t_edge *path)
 {
 	t_edge	*t;
 
@@ -49,7 +46,7 @@ void	delete_path(t_edge *path)
 	}
 }
 
-void	delete_paths(t_edge **paths, int n)
+void			delete_paths(t_edge **paths, int n)
 {
 	while (--n >= 0)
 		delete_path(paths[n]);

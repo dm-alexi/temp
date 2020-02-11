@@ -12,6 +12,35 @@
 
 #include "lemin.h"
 
+static t_edge	**clone(t_edge **paths, int n)
+{
+	int		i;
+	t_edge	**arr;
+	t_edge	*t;
+	t_edge	*s;
+
+	arr = (t_edge**)malloc(sizeof(t_edge*) * (n + 1));
+	i = -1;
+	while (++i < n)
+	{
+		s = paths[i];
+		t = (t_edge*)malloc(sizeof(t_edge));
+		arr[i] = t;
+		t->len = 1;
+		t->node = s->node;
+		while (s->next)
+		{
+			t->next = (t_edge*)malloc(sizeof(t_edge));
+			t->next->len = 1;
+			t->next->node = s->next->node;
+			t = t->next;
+			s = s->next;
+		}
+		t->next = NULL;
+	}
+	return (arr);
+}
+
 static void		resolve(t_edge *s1, t_edge *f1, t_edge *s2, t_edge *f2)
 {
     t_edge	*t;
@@ -76,32 +105,26 @@ static void		resolve_conflicts(t_edge **paths, int n)
 void			solve(t_graph *graph)
 {
 	t_edge	**new_paths;
-	int		i;
 	int		c;
 
 	while (graph->path_num < graph->path_max)
 	{
 		set_ranks(graph->paths, graph->path_num);
 		new_paths = clone(graph->paths, graph->path_num);
-		i = 0;
-		while (i < graph->path_num)
-			path_reverse(graph->paths[i++]);
+		reverse_paths(graph);
 		belford(graph);
 		new_paths[graph->path_num] = get_path(graph);
-		while (--i >= 0)
-			path_restore(graph->paths[i]);
+		restore_paths(graph);
 		resolve_conflicts(new_paths, graph->path_num + 1);
 		if ((c = count_moves(new_paths, graph->path_num + 1, graph->ant_num))
 			>= graph->moves)
 		{
 			delete_paths(new_paths, graph->path_num + 1);
-			print_graph(graph);
 			return ;
 		}
 		delete_paths(graph->paths, graph->path_num);
 		graph->paths = new_paths;
 		++graph->path_num;
 		graph->moves = c;
-		print_graph(graph);
 	}
 }

@@ -12,55 +12,68 @@
 
 #include "lemin.h"
 
-//free intermediate nodes here!
-int		resolve_conflict(t_edge *p1, t_edge *p2)
+void	resolve(t_edge *s1, t_edge *f1, t_edge *s2, t_edge *f2)
 {
-	t_edge	*t2s;
-	t_edge	*t2f;
-	t_edge	*tmp;
-	int		rank;
+    t_edge	*t;
+    t_edge	*tmp;
 
-	if (p1->next->node->type == FINISH || p2->next->node->type == FINISH)
-		return (0);
-	rank = p1->next->node->rank;
-	t2s = p2->next;
-	while (t2s->node->rank != rank && t2s->node->type != FINISH)
-		t2s = t2s->next;
-	if (t2s->node->type == FINISH)
-		return (0);
-	t2f = t2s->next;
-	while (t2f->next->node->rank == rank)
-		t2f = t2f->next;
-	while (p1->node != t2f->node)
-		p1 = p1->next;
-	tmp = p1->next;
-	p1->next = t2f->next;
-	while (tmp->node != t2s->node)
-		tmp = tmp->next;
-	t2s->next = tmp->next;
-	return (1);
+    t = s1->next;
+    s1->next = f2->next;
+    while ((tmp = t) != f1)
+	{
+		t = t->next;
+		free(tmp);
+	}
+	t = s2->next;
+	s2->next = f1->next;
+    while ((tmp = t) != f2)
+	{
+		t = t->next;
+		free(tmp);
+	}
+    free(f1);
+    free(f2);
+}
+
+void	resolve_conflict(t_edge *p, t_edge *s2, t_edge *f2)
+{
+	t_edge	*s1;
+	t_edge	*f1;
+
+	s1 = p;
+	while (s1->node != f2->node)
+		s1 = s1->next;
+	f1 = s1->next;
+	while (f1->node != s2->node)
+		f1 = f1->next;
+	resolve(s1, f1, s2, f2);
 }
 
 void	resolve_conflicts(t_edge **paths, int n)
 {
-	int		i;
-	int		j;
-	t_edge	*tmp;
+    t_edge	*s;
+    t_edge	*f;
+    int		rank;
+    int		i;
 
+    s = paths[n - 1]->next;
+    while ((rank = s->node->rank) == paths[n - 1]->node->rank)
+		if (s->next->node->type == FINISH)
+			return ;
+		else
+			s = s->next;
+	f = s->next;
+	while (f->next->node->rank == rank)
+		f = f->next;
+	resolve_conflict(paths[rank - 1], s, f);
+	s = paths[n - 1];
+	paths[n - 1] = paths[rank - 1];
+	paths[rank - 1] = s;
+	set_rank(paths[n - 1], 0);
 	i = -1;
 	while (++i < n - 1)
-		if (resolve_conflict(paths[i], paths[n - 1]))
-		{
-			tmp = paths[i];
-			paths[i] = paths[n - 1];
-			paths[n - 1] = tmp;
-			set_rank(paths[n - 1], 0);
-			j = -1;
-			while (++j < n - 1)
-				set_rank(paths[j], j + 1);
-			resolve_conflicts(paths, n);
-			return ;
-		}
+		set_rank(paths[i], i + 1);
+	resolve_conflicts(paths, n);
 }
 
 int		path_len(t_edge *path)

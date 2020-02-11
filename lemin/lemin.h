@@ -23,7 +23,7 @@ typedef enum	e_command
 
 typedef enum	e_type
 {
-	REAL, START, FINISH, TEMP
+	REAL, START, FINISH
 }				t_type;
 
 typedef struct	s_node
@@ -84,7 +84,6 @@ t_edge			*find(t_node *node, t_edge *edge);
 t_edge			*get_path(t_graph *graph);
 void			set_rank(t_edge *path, int rank);
 void			set_ranks(t_graph *graph);
-void			path_split(t_graph *graph, t_edge *path);
 void			path_reverse(t_edge *path);
 void			reset_distance(t_graph *graph);
 void			path_restore(t_edge *path);

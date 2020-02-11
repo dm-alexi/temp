@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-void	reset_distance(t_graph *graph)
+void			reset_distance(t_graph *graph)
 {
 	int		i;
 
@@ -22,7 +22,19 @@ void	reset_distance(t_graph *graph)
 	graph->start->distance = 0;
 }
 
-void	belford(t_graph *graph)
+static void		update(t_node *from, t_edge *edge, int *fin)
+{
+	if ((edge->node->distance == -1 ||
+	edge->node->distance > from->distance + edge->len) &&
+	(edge->node->rank == from->rank || from->rank == from->prev->rank))
+	{
+		edge->node->distance = from->distance + edge->len;
+		edge->node->prev = from;
+		*fin = 0;
+	}
+}
+
+void			belford(t_graph *graph)
 {
 	int		i;
 	int		j;
@@ -40,15 +52,7 @@ void	belford(t_graph *graph)
 			if (graph->nodes[j]->distance != -1)
 				while (t)
 				{
-					if ((t->node->distance == -1
-					|| t->node->distance > graph->nodes[j]->distance + t->len)
-					&& (t->node->rank == graph->nodes[j]->rank ||
-					graph->nodes[j]->rank == graph->nodes[j]->prev->rank))
-					{
-						t->node->distance = graph->nodes[j]->distance + t->len;
-						t->node->prev = graph->nodes[j];
-						fin = 0;
-					}
+					update(graph->nodes[j], t, &fin);
 					t = t->next;
 				}
 	}

@@ -18,10 +18,8 @@ int		main(void)
 
 	graph = get_graph();
 	bfs(graph);
-	print_graph(graph);
-	print_path(graph->paths[0]);
-	reset_distance(graph);
 	solve(graph);
+	print_graph(graph);
 	delete_graph(graph);
 	return (0);
 }

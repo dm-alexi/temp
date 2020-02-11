@@ -81,7 +81,6 @@ void			solve(t_graph *graph)
 
 	while (graph->path_num < graph->path_max)
 	{
-		reset_distance(graph);
 		set_ranks(graph->paths, graph->path_num);
 		new_paths = clone(graph->paths, graph->path_num);
 		i = 0;

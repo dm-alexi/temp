@@ -47,6 +47,8 @@ typedef struct	s_graph
 	int		path_num;
 	int		path_max;
 	int		moves;
+	int		*ants;
+	int		*path_len;
 	t_node	**nodes;
 	t_edge	**paths;
 	t_node	*start;
@@ -84,5 +86,7 @@ void			reverse_paths(t_graph *graph);
 void			restore_paths(t_graph *graph);
 void			reset_distance(t_graph *graph);
 void			solve(t_graph *graph);
+
+void			distribute(t_graph *graph);
 
 #endif

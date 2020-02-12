@@ -32,6 +32,8 @@ void	delete_graph(t_graph *graph)
 	}
 	free(graph->nodes);
 	delete_paths(graph->paths, graph->path_num);
+	free(graph->path_len);
+	free(graph->ants);
 	free(graph);
 }
 

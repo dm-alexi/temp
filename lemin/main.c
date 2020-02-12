@@ -17,9 +17,9 @@ int		main(void)
 	t_graph		*graph;
 
 	graph = get_graph();
-	bfs(graph);
 	solve(graph);
 	print_graph(graph);
+	distribute(graph);
 	delete_graph(graph);
 	return (0);
 }

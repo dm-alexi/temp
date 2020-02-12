@@ -107,6 +107,7 @@ void			solve(t_graph *graph)
 	t_edge	**new_paths;
 	int		c;
 
+	bfs(graph);
 	while (graph->path_num < graph->path_max)
 	{
 		set_ranks(graph->paths, graph->path_num);

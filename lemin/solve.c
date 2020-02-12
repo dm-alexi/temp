@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:22:05 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/10 21:00:18 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/12 19:31:09 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,25 @@ static t_edge	**clone(t_edge **paths, int n)
 
 static void		resolve(t_edge *s1, t_edge *f1, t_edge *s2, t_edge *f2)
 {
-    t_edge	*t;
-    t_edge	*tmp;
+	t_edge	*t;
+	t_edge	*tmp;
 
-    t = s1->next;
-    s1->next = f2->next;
-    while ((tmp = t) != f1)
+	t = s1->next;
+	s1->next = f2->next;
+	while ((tmp = t) != f1)
 	{
 		t = t->next;
 		free(tmp);
 	}
 	t = s2->next;
 	s2->next = f1->next;
-    while ((tmp = t) != f2)
+	while ((tmp = t) != f2)
 	{
 		t = t->next;
 		free(tmp);
 	}
-    free(f1);
-    free(f2);
+	free(f1);
+	free(f2);
 }
 
 static void		resolve_conflict(t_edge *p, t_edge *s2, t_edge *f2)
@@ -80,12 +80,12 @@ static void		resolve_conflict(t_edge *p, t_edge *s2, t_edge *f2)
 
 static void		resolve_conflicts(t_edge **paths, int n)
 {
-    t_edge	*s;
-    t_edge	*f;
-    int		rank;
+	t_edge	*s;
+	t_edge	*f;
+	int		rank;
 
-    s = paths[n - 1]->next;
-    while ((rank = s->node->rank) == paths[n - 1]->node->rank)
+	s = paths[n - 1]->next;
+	while ((rank = s->node->rank) == paths[n - 1]->node->rank)
 		if (s->next->node->type == FINISH)
 			return ;
 		else

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ants.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/12 19:30:28 by sscarecr          #+#    #+#             */
+/*   Updated: 2020/02/12 19:34:20 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
 static void		setup(t_graph *graph)
@@ -9,16 +21,16 @@ static void		setup(t_graph *graph)
 	if (!(graph->path_len = (int*)ft_memalloc(sizeof(int) * graph->path_num)) ||
 	!(graph->ants = (int*)malloc(sizeof(int) * graph->path_num)))
 		sys_error();
-    i = -1;
-    s = 0;
-    while (++i < graph->path_num)
+	i = -1;
+	s = 0;
+	while (++i < graph->path_num)
 	{
 		t = graph->paths[i];
 		while (t->node->type != FINISH)
 		{
-            t->len = 0;
-            t = t->next;
-            ++graph->path_len[i];
+			t->len = 0;
+			t = t->next;
+			++graph->path_len[i];
 		}
 		s += graph->path_len[i];
 	}
@@ -30,14 +42,14 @@ static void		setup(t_graph *graph)
 
 static int		send_ants(t_graph *graph, int sent)
 {
-    int		i;
-    int		j;
+	int		i;
+	int		j;
 
-    i = -1;
-    j = 0;
-    while (++i < graph->path_num && sent + j < graph->ant_num)
-        if (graph->ants[i] && --graph->ants[i] && ++j)
-            graph->paths[i]->len = j;
+	i = -1;
+	j = 0;
+	while (++i < graph->path_num && sent + j < graph->ant_num)
+		if (graph->ants[i] && --graph->ants[i] && ++j)
+			graph->paths[i]->len = j;
 	return (sent + j);
 }
 
@@ -48,9 +60,8 @@ static void		promote_ants(t_graph *graph)
 
 	for (int i = 0; i < graph->path_num; ++i)
 	{
-        t = graph->paths[i];
-        //tmp = t->next->len;
-        while (t->next)
+		t = graph->paths[i];
+		while (t->next)
 		{
 			tmp = t->next->len;
 			if (tmp)
@@ -61,7 +72,7 @@ static void		promote_ants(t_graph *graph)
 	}
 }
 
-void	distribute(t_graph *graph)
+void			distribute(t_graph *graph)
 {
 	int		sent;
 

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:27:12 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/10 20:23:41 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/12 19:29:23 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ void			get_nodes(t_graph *graph, char **line)
 		ft_lstadd(&lst, new_node(*line, type));
 	if (i <= 0)
 		i ? sys_error() : error();
-	if (!(graph->nodes = (t_node **)malloc(sizeof(t_node *) *
-		graph->node_num )))
+	if (!(graph->nodes = (t_node **)malloc(sizeof(t_node *) * graph->node_num)))
 		sys_error();
 	i = 0;
 	while (lst)

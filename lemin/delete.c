@@ -6,13 +6,13 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/29 17:21:34 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/10 20:03:48 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/12 19:18:07 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-void	delete_graph(t_graph *graph)
+void			delete_graph(t_graph *graph)
 {
 	int		i;
 	t_edge	*tmp;

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 19:30:28 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/12 19:34:20 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/12 20:36:50 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,28 +47,33 @@ static int		send_ants(t_graph *graph, int sent)
 
 	i = -1;
 	j = 0;
-	while (++i < graph->path_num && sent + j < graph->ant_num)
-		if (graph->ants[i] && --graph->ants[i] && ++j)
-			graph->paths[i]->len = j;
+	while (++i < graph->path_num)
+		if (graph->ants[i] && sent + j < graph->ant_num && --graph->ants[i] && ++j)
+			graph->paths[i]->len = sent + j;
+		else
+			graph->paths[i]->len = 0;
 	return (sent + j);
 }
 
 static void		promote_ants(t_graph *graph)
 {
 	t_edge	*t;
-	int		tmp;
+	int		prev;
 
 	for (int i = 0; i < graph->path_num; ++i)
 	{
 		t = graph->paths[i];
-		while (t->next)
+		while (t->len == 0 && t->node->type != FINISH)
+			t = t->next;
+		prev = 0;
+		while (t->len && t->node->type != FINISH)
 		{
-			tmp = t->next->len;
-			if (tmp)
-				ft_printf("L%d-%s ", t->next->len, t->next->node->name);
-			t->next->len = t->len;
+			ft_printf("L%d-%s ", t->len, t->next->node->name);
+			ft_memswap(&prev, &t->len, sizeof(int));
 			t = t->next;
 		}
+		if (t->node->type != FINISH)
+			t->len = prev;
 	}
 }
 
@@ -82,7 +87,41 @@ void			distribute(t_graph *graph)
 	ft_printf("\n");
 	for (int i = 0; i < graph->path_num; ++i)
 		ft_printf("%d ", graph->ants[i]);
+	ft_printf("\n");
+	/*for (int i = 0; i < graph->path_num; ++i)
+	{
+		t_edge *t = graph->paths[i];
+		ft_printf("\n");
+		while (t->next)
+		{
+			ft_printf("%d ", t->len);
+			t = t->next;
+		}
+	}*/
 	sent = send_ants(graph, 0);
+/*	promote_ants(graph);
+	for (int i = 0; i < graph->path_num; ++i)
+	{
+		t_edge *t = graph->paths[i];
+		ft_printf("\n");
+		while (t->next)
+		{
+			ft_printf("%d ", t->len);
+			t = t->next;
+		}
+	}
+	promote_ants(graph);
+	for (int i = 0; i < graph->path_num; ++i)
+	{
+		t_edge *t = graph->paths[i];
+		ft_printf("\n");
+		while (t->next)
+		{
+			ft_printf("%d ", t->len);
+			t = t->next;
+		}
+	}*/
+	
 	for (int i = 0; i < graph->moves; ++i)
 	{
 		promote_ants(graph);

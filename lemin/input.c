@@ -63,15 +63,20 @@ static void		finalize(t_graph *graph)
 {
 	int		i;
 
-	i = 0;
-	while (i < graph->node_num)
-	{
+	i = -1;
+	while (++i < graph->node_num)
 		if (graph->nodes[i]->type == START)
+		{
+			if (graph->start)
+				error();
 			graph->start = graph->nodes[i];
+		}
 		else if (graph->nodes[i]->type == FINISH)
+		{
+			if (graph->finish)
+				error();
 			graph->finish = graph->nodes[i];
-		++i;
-	}
+		}
 	if (!graph->start || !graph->finish ||
 	!(graph->path_max = path_count(graph)))
 		error();

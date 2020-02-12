@@ -114,18 +114,18 @@ void			solve(t_graph *graph)
 		new_paths = clone(graph->paths, graph->path_num);
 		reverse_paths(graph);
 		belford(graph);
-		new_paths[graph->path_num] = get_path(graph);
 		restore_paths(graph);
+		if (!(new_paths[graph->path_num] = get_path(graph)))
+			break ;
 		resolve_conflicts(new_paths, graph->path_num + 1);
 		if ((c = count_moves(new_paths, graph->path_num + 1, graph->ant_num))
-			>= graph->moves)
-		{
-			delete_paths(new_paths, graph->path_num + 1);
-			return ;
-		}
+		>= graph->moves)
+			break ;
 		delete_paths(graph->paths, graph->path_num);
 		graph->paths = new_paths;
 		++graph->path_num;
 		graph->moves = c;
+		new_paths = NULL;
 	}
+	delete_paths(new_paths, graph->path_num + 1);
 }

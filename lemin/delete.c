@@ -50,7 +50,10 @@ static void		delete_path(t_edge *path)
 
 void			delete_paths(t_edge **paths, int n)
 {
-	while (--n >= 0)
-		delete_path(paths[n]);
-	free(paths);
+	if (paths)
+	{
+		while (--n >= 0)
+			delete_path(paths[n]);
+		free(paths);
+	}
 }

@@ -47,7 +47,7 @@ void			bfs(t_graph *graph)
 	q->node = graph->start;
 	q->next = NULL;
 	last = q;
-	while (q)
+	while (q && graph->finish->distance < 0)
 		process(&q, &last);
 	if ((graph->finish->distance) < 0)
 		error();

@@ -76,8 +76,11 @@ static void		get_edge(t_graph *graph, char *line)
 	*s = '\0';
 	if (!(a = node_bsearch(line, graph->nodes, graph->node_num)))
 		error();
-	add_edge(&(a->edges), b);
-	add_edge(&(b->edges), a);
+	if (a != b)
+	{
+		add_edge(&(a->edges), b);
+		add_edge(&(b->edges), a);
+	}
 	free(line);
 }
 

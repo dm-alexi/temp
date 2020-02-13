@@ -41,7 +41,8 @@ static int		compare(const void *a, const void *b)
 {
 	int		res;
 
-	if (!(res = ft_strcmp((*((t_node **)a))->name, (*((t_node **)b))->name)))
+	if (!(res = ft_strcmp((*((t_node **)a))->name, (*((t_node **)b))->name))
+	&& a != b)
 		error();
 	return (res);
 }

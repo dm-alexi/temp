@@ -114,7 +114,8 @@ void			solve(t_graph *graph)
 		set_ranks(graph->paths, graph->path_num);
 		new_paths = clone(graph->paths, graph->path_num);
 		reverse_paths(graph);
-		belford(graph);
+		//belford(graph);
+        dijkstra(graph);
 		restore_paths(graph);
 		if (!(new_paths[graph->path_num] = get_path(graph)))
 			break ;

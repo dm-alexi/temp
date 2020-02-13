@@ -88,5 +88,6 @@ void			reset_distance(t_graph *graph);
 void			solve(t_graph *graph);
 
 void			distribute(t_graph *graph);
+void			dijkstra(t_graph *graph);
 
 #endif

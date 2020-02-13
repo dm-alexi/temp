@@ -25,7 +25,7 @@ static void		*partition(void *low, void *high, size_t size,
 	ft_memswap(p, p + (r - p) / size / 2 * size, size);
 	while (1)
 	{
-		while (compar(l, p) < 0)
+		while (l < r && compar(l, p) < 0)
 			l += size;
 		while (compar(r, p) > 0)
 			r -= size;

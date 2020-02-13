@@ -12,14 +12,16 @@
 
 #include "lemin.h"
 
-int		main(void)
+int		main(int ac, char **av)
 {
 	t_graph		*graph;
 
 	graph = get_graph();
 	solve(graph);
-	print_graph(graph);
+	//print_graph(graph);
 	distribute(graph);
+	if (ac == 2 && ft_strequ(av[1], "-v"))
+		ft_printf("\nMoves: %d", graph->moves);
 	delete_graph(graph);
 	return (0);
 }

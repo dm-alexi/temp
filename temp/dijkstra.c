@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dijkstra.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/14 20:57:24 by sscarecr          #+#    #+#             */
+/*   Updated: 2020/02/14 20:59:18 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
 typedef struct	s_elem
@@ -13,7 +25,7 @@ typedef struct	s_heap
 	int		num;
 }				t_heap;
 
-void	heapify(t_heap *h, int i)
+static void		heapify(t_heap *h, int i)
 {
 	int		left;
 	int		right;
@@ -26,34 +38,34 @@ void	heapify(t_heap *h, int i)
 		smallest = left;
 	if (right < h->num && h->t[right].dist < h->t[smallest].dist)
 		smallest = right;
-    if (smallest != i)
+	if (smallest != i)
 	{
 		ft_memswap(&h->t[smallest], &h->t[i], sizeof(t_elem));
 		heapify(h, smallest);
 	}
 }
 
-void	put(t_heap *h, t_node *from, t_node *to, int dist)
+static void		put(t_heap *h, t_node *from, t_node *to, int dist)
 {
-    int		k;
+	int		k;
 
-    k = h->num++;
-    h->t[k].dist = dist;
-    h->t[k].from = from;
-    h->t[k].to = to;
-    while (k && h->t[k].dist < h->t[(k - 1) / 2].dist)
+	k = h->num++;
+	h->t[k].dist = dist;
+	h->t[k].from = from;
+	h->t[k].to = to;
+	while (k && h->t[k].dist < h->t[(k - 1) / 2].dist)
 	{
 		ft_memswap(&h->t[k], &h->t[(k - 1) / 2], sizeof(t_elem));
 		k = (k - 1) / 2;
 	}
 }
 
-void	put_node(t_heap *h, t_node *node)
+static void		put_node(t_heap *h, t_node *node)
 {
-    t_edge	*t;
+	t_edge	*t;
 
-    t = node->edges;
-    while (t)
+	t = node->edges;
+	while (t)
 	{
 		if (t->node->distance < 0)
 			put(h, node, t->node, node->distance + t->len);
@@ -61,7 +73,7 @@ void	put_node(t_heap *h, t_node *node)
 	}
 }
 
-t_elem	get(t_heap *h)
+static t_elem	get(t_heap *h)
 {
 	t_elem	tmp;
 
@@ -71,7 +83,7 @@ t_elem	get(t_heap *h)
 	return (tmp);
 }
 
-void	dijkstra(t_graph *graph)
+void			dijkstra(t_graph *graph)
 {
 	t_heap	h;
 	t_elem	tmp;
@@ -81,16 +93,17 @@ void	dijkstra(t_graph *graph)
 	if (!(h.t = (t_elem*)malloc(sizeof(t_elem) *
 	((graph->node_num - 1) * (graph->node_num - 2) / 2 + 1))))
 		sys_error();
-    put_node(&h, graph->start);
-    while (h.num && graph->finish->distance < 0)
+	put_node(&h, graph->start);
+	while (h.num && graph->finish->distance < 0)
 	{
 		tmp = get(&h);
-        if (tmp.to->distance < 0)
-        {
-        	tmp.to->distance = tmp.dist;
-        	tmp.to->prev = tmp.from;
-        	put_node(&h, tmp.to);
-        }
+		if (tmp.to->distance < 0 && (tmp.from->rank == tmp.to->rank ||
+		tmp.from->rank == tmp.from->prev->rank))
+		{
+			tmp.to->distance = tmp.dist;
+			tmp.to->prev = tmp.from;
+			put_node(&h, tmp.to);
+		}
 	}
 	free(h.t);
 }

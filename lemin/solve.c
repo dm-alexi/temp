@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:22:05 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/14 19:15:34 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/14 19:30:45 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,8 @@ void			solve(t_graph *graph)
 		if (!(new_paths[graph->path_num] = get_path(graph)))
 			break ;
 		resolve_conflicts(new_paths, graph->path_num + 1);
-		if ((c = count_moves(new_paths, graph->path_num + 1, graph->ant_num))
-		>= graph->moves)
+		if ((c = count_moves(new_paths, graph->path_num + 1, graph->ant_num)
+		>= graph->moves))
 			break ;
 		delete_paths(graph->paths, graph->path_num);
 		graph->paths = new_paths;

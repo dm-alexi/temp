@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:25:49 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/08 19:33:55 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/14 21:08:44 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ static int		read_int(void)
 	int		n;
 
 	while ((tmp = get_next_line(STDIN_FILENO, &line)) > 0 && *line == '#')
+	{
+		ft_printf("%s\n", line);
 		free(line);
+	}
 	if (tmp <= 0)
 		tmp ? sys_error() : error();
 	if (((n = ft_atoi(line))) <= 0)
@@ -95,8 +98,8 @@ int				get_line(char **line, t_type *type)
 				*type = FINISH;
 			else
 				*type = UNKNOWN;
-			ft_printf("%s\n", *line);
 		}
+		ft_printf("%s\n", *line);
 		free(*line);
 	}
 	if (tmp <= 0)

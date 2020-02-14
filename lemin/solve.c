@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:22:05 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/12 19:31:09 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/14 19:15:34 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ void			solve(t_graph *graph)
 		new_paths = clone(graph->paths, graph->path_num);
 		reverse_paths(graph);
 		belford(graph);
-        //dijkstra(graph);
 		restore_paths(graph);
 		if (!(new_paths[graph->path_num] = get_path(graph)))
 			break ;

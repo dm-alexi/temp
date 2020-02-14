@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:27:04 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/10 20:11:22 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/14 19:17:12 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ void			reverse_paths(t_graph *graph);
 void			restore_paths(t_graph *graph);
 void			reset_distance(t_graph *graph);
 void			solve(t_graph *graph);
-
 void			distribute(t_graph *graph);
-void			dijkstra(t_graph *graph);
 
 #endif

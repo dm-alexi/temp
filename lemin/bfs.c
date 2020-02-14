@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 16:30:18 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/14 19:29:28 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/14 19:47:45 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ void			bfs(t_graph *graph)
 	last = q;
 	while (q && graph->finish->distance < 0)
 		process(&q, &last);
+	while (q)
+	{
+		last = q->next;
+		free(q);
+		q = last;
+	}
 	if ((graph->finish->distance) < 0)
 		error();
 	if ((graph->moves = graph->ant_num - 1 + graph->finish->distance) <= 0)

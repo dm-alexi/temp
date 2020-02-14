@@ -12,18 +12,31 @@
 
 #include "lemin.h"
 
+static int		get_coordinate(char *s)
+{
+    int		n;
+    char	*t;
+
+	n = ft_strtol(s, &t, 10);
+    if (n == 0 && *(t - 1) != '0')
+		error();
+	return (n);
+}
+
 static t_list	*new_node(char *line, t_type type)
 {
 	char	*s;
 	t_node	node;
 
+	if (*line == 'L')
+		error();
 	if (!(s = ft_strrchr(line, ' ')))
 		error();
-	node.y = ft_atoi(s);
+	node.y = get_coordinate(s);
 	*s = '\0';
 	if (!(s = ft_strrchr(line, ' ')))
 		error();
-	node.x = ft_atoi(s);
+	node.x = get_coordinate(s);
 	*s = '\0';
 	if (!*line)
 		error();

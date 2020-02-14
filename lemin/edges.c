@@ -76,7 +76,7 @@ static void		get_edge(t_graph *graph, char *line)
 	*s = '\0';
 	if (!(a = node_bsearch(line, graph->nodes, graph->node_num)))
 		error();
-	if (a != b)
+	if (a != b && !find(b, a->edges))
 	{
 		add_edge(&(a->edges), b);
 		add_edge(&(b->edges), a);
@@ -100,7 +100,7 @@ void			get_edges(t_graph *graph, char **line)
 
 t_edge			*find(t_node *node, t_edge *edge)
 {
-	while (edge->node && edge->node != node)
+	while (edge && edge->node && edge->node != node)
 		edge = edge->next;
 	return (edge);
 }

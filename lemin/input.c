@@ -24,10 +24,7 @@ static int		read_int(void)
 	int		n;
 
 	while ((tmp = get_next_line(STDIN_FILENO, &line)) > 0 && *line == '#')
-	{
-		ft_printf("%s\n", line);
 		free(line);
-	}
 	if (tmp <= 0)
 		tmp ? sys_error() : error();
 	if (((n = ft_atoi(line))) <= 0)
@@ -90,13 +87,16 @@ int				get_line(char **line, t_type *type)
 	*type = UNKNOWN;
 	while ((tmp = get_next_line(STDIN_FILENO, line)) > 0 && **line == '#')
 	{
-		if (ft_strequ(*line, "##start"))
-			*type = START;
-		else if (ft_strequ(*line, "##end"))
-			*type = FINISH;
-		else if (ft_strnequ(*line, "##", 2))
-			*type = UNKNOWN;
-		ft_printf("%s\n", *line);
+		if (ft_strnequ(*line, "##", 2))
+		{
+			if (ft_strequ(*line, "##start"))
+				*type = START;
+			else if (ft_strequ(*line, "##end"))
+				*type = FINISH;
+			else
+				*type = UNKNOWN;
+			ft_printf("%s\n", *line);
+		}
 		free(*line);
 	}
 	if (tmp <= 0)

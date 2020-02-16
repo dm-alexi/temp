@@ -5,34 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/28 23:32:08 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/16 16:00:20 by sscarecr         ###   ########.fr       */
+/*   Created: 2020/02/16 15:53:50 by sscarecr          #+#    #+#             */
+/*   Updated: 2020/02/16 16:37:07 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include <unistd.h>
-#include <errno.h>
-#include "fdf.h"
-#include <stdio.h>
+#include "fractol.h"
 
+//todo: update usage when fractal list is finished
 static int	usage(void)
 {
-	ft_printf("usage: fdf filename\n");
+	ft_printf("usage: fractol type\n\nFractal types:\n" \
+	"\tm : Madnelbrot set\n\tj : Julia set\n");
 	return (0);
 }
 
 int			main(int ac, char **av)
 {
-	int		fd;
-	t_map	*map;
-
-	if (ac < 2)
+	if (ac < 2 || (ft_strcmp(av[1], "m") && ft_strcmp(av[1], "j")))
 		return (usage());
-	if ((fd = open(av[ac - 1], O_RDONLY)) < 0)
-		sys_error();
-	map = get_map(fd);
-	close(fd);
-	fdf_init(av[ac - 1], map);
+	
 	return (0);
 }

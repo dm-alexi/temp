@@ -1,38 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_wcslen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/28 23:32:08 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/16 16:00:20 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/10/05 20:27:59 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/10/05 20:36:04 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include <unistd.h>
-#include <errno.h>
-#include "fdf.h"
-#include <stdio.h>
+#include <stdlib.h>
 
-static int	usage(void)
+size_t	ft_wcslen(const wchar_t *wcs)
 {
-	ft_printf("usage: fdf filename\n");
-	return (0);
-}
+	size_t	n;
 
-int			main(int ac, char **av)
-{
-	int		fd;
-	t_map	*map;
-
-	if (ac < 2)
-		return (usage());
-	if ((fd = open(av[ac - 1], O_RDONLY)) < 0)
-		sys_error();
-	map = get_map(fd);
-	close(fd);
-	fdf_init(av[ac - 1], map);
-	return (0);
+	n = 0;
+	while (*wcs++)
+		++n;
+	return (n);
 }

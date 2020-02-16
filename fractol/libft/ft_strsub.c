@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/28 23:32:08 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/16 16:00:20 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/09/05 22:08:24 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/11/02 17:23:43 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include <unistd.h>
-#include <errno.h>
-#include "fdf.h"
-#include <stdio.h>
+#include <stdlib.h>
 
-static int	usage(void)
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	ft_printf("usage: fdf filename\n");
-	return (0);
-}
+	char	*str;
+	char	*t;
 
-int			main(int ac, char **av)
-{
-	int		fd;
-	t_map	*map;
-
-	if (ac < 2)
-		return (usage());
-	if ((fd = open(av[ac - 1], O_RDONLY)) < 0)
-		sys_error();
-	map = get_map(fd);
-	close(fd);
-	fdf_init(av[ac - 1], map);
-	return (0);
+	if (!s || !(len + 1) || !(str = (char*)malloc(len + 1)))
+		return (NULL);
+	t = str;
+	s += start;
+	while ((size_t)(t - str) < len)
+		*t++ = *s++;
+	*t = '\0';
+	return (str);
 }

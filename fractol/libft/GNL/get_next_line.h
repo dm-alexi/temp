@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/28 23:32:08 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/16 16:00:20 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
+/*   Updated: 2019/11/03 16:56:14 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include <unistd.h>
-#include <errno.h>
-#include "fdf.h"
-#include <stdio.h>
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# define BUFF_SIZE 1024
+# include "../libft.h"
 
-static int	usage(void)
+typedef struct	s_buf
 {
-	ft_printf("usage: fdf filename\n");
-	return (0);
-}
+	int				len;
+	char			*offset;
+	struct s_buf	*next;
+	char			str[BUFF_SIZE];
+}				t_buf;
 
-int			main(int ac, char **av)
+typedef struct	s_file
 {
-	int		fd;
-	t_map	*map;
+	int		len;
+	t_buf	**arr;
+}				t_file;
 
-	if (ac < 2)
-		return (usage());
-	if ((fd = open(av[ac - 1], O_RDONLY)) < 0)
-		sys_error();
-	map = get_map(fd);
-	close(fd);
-	fdf_init(av[ac - 1], map);
-	return (0);
-}
+#endif

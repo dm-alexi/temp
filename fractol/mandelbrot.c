@@ -1,35 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/16 15:53:50 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/16 19:24:13 by sscarecr         ###   ########.fr       */
+/*   Created: 2020/02/16 19:27:37 by sscarecr          #+#    #+#             */
+/*   Updated: 2020/02/16 19:29:46 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-//todo: update usage when fractal list is finished
-static int	usage(void)
+void            *mandelbrot(void *param)
 {
-	ft_printf("usage: fractol type\n\nFractal types:\n" \
-	"\tm : Madnelbrot set\n\tj : Julia set\n");
-	return (0);
-}
-
-int			main(int ac, char **av)
-{
-	if (ac > 1)
-	{
-		if (ft_strequ(av[1], "m"))
-			init(mandelbrot, "Mandelbrot set");
-		else if (ft_strequ(av[1], "j"))
-			init(julia, "Julia set");
-	}
-	else
-		return (usage());
-	return (0);
+    (void)param;
+    return (NULL);
 }

@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/16 15:53:50 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/16 19:24:13 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/12/01 14:13:26 by sscarecr          #+#    #+#             */
+/*   Updated: 2020/02/16 19:09:24 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <mlx.h>
 #include "fractol.h"
 
-//todo: update usage when fractal list is finished
-static int	usage(void)
+t_image		*new_image(void *mlx, int width, int height)
 {
-	ft_printf("usage: fractol type\n\nFractal types:\n" \
-	"\tm : Madnelbrot set\n\tj : Julia set\n");
-	return (0);
-}
+	t_image		*image;
 
-int			main(int ac, char **av)
-{
-	if (ac > 1)
-	{
-		if (ft_strequ(av[1], "m"))
-			init(mandelbrot, "Mandelbrot set");
-		else if (ft_strequ(av[1], "j"))
-			init(julia, "Julia set");
-	}
-	else
-		return (usage());
-	return (0);
+	if (!(image = (t_image*)ft_memalloc(sizeof(t_image))) ||
+	!(image->img = mlx_new_image(mlx, width, height)))
+		sys_error();
+	image->map = mlx_get_data_addr(image->img, &(image->bpp),
+		&(image->sizeline), &(image->endian));
+	image->height = height;
+	image->width = width;
+	return (image);
 }

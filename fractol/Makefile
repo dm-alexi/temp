@@ -3,7 +3,7 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 LIBFT = libft/libft.a
 HEAD = fractol.h
-SRC = main.c error.c init.c ui.c image.c mandelbrot.c julia.c
+SRC = main.c error.c init.c ui.c image.c mandelbrot.c julia.c draw.c 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

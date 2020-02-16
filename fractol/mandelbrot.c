@@ -6,14 +6,17 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 19:27:37 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/16 19:29:46 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/16 21:35:43 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void            *mandelbrot(void *param)
+void	*mandelbrot(void *param)
 {
-    (void)param;
-    return (NULL);
+	t_screen	*s;
+
+	s = param;
+    
+	return (NULL);
 }

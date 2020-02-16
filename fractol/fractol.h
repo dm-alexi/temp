@@ -6,15 +6,16 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 15:52:09 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/16 19:32:35 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/16 21:43:59 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 # include "libft/libft.h"
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 640
+# define HEIGHT 640
+# define WHITE 0xFFFFFF
 
 typedef struct	s_image
 {
@@ -34,6 +35,12 @@ typedef struct  s_screen
     t_image *image;
 }               t_screen;
 
+typedef struct	s_complex
+{
+	double re;
+	double im;
+}				t_complex;
+
 void	        sys_error(void);
 
 int				win_close(void *param);
@@ -43,4 +50,5 @@ void            init(void *(void *), char *name);
 t_image		    *new_image(void *mlx, int width, int height);
 void            *mandelbrot(void *param);
 void            *julia(void *param);
+void			image_put_pixel(t_image *image, int x, int y, int color);
 #endif

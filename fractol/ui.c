@@ -6,17 +6,20 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/16 19:33:25 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/17 22:18:46 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "fractol.h"
 #define ESC 53
-/*#define UP 126
+#define SCROLL_UP 4
+#define SCROLL_DN 5
+#define UP 126
 #define DOWN 125
 #define LEFT 123
 #define RIGHT 124
+/*
 #define NUM_PLUS 69
 #define PLUS 24
 #define NUM_MINUS 78
@@ -35,9 +38,9 @@
 #define NINE 25
 #define SPACE 49
 #define Q 12
-#define SCROLL_UP 4
-#define SCROLL_DN 5
+*/
 
+/*
 #define MOVE_SPEED 5
 #define ROTATE_SPEED (M_PI / 180)
 #define SCALE_FACTOR 1.04
@@ -103,27 +106,48 @@ int				key_handle(int key, void *param)
 	matrix_result(((t_map*)param));*/
 	return (0);
 }
+
+int				mouse_move(int x, int y, void *param)
+{
+	t_screen	*s;
+
+	s = param;
+	if (x >= 0 && y >=0 && x < s->image->width && y < s->image->height)
+		map_coord(&s->c, s->image, x, y);
+	else
+	{
+		s->c.re = JULIA_RE;//-0.7;
+		s->c.im = JULIA_IM;//0.27015;
+	}
+	julia(s);
+	return (0);
+}
+
 /*
 int				mouse_handle(int key, int x, int y, void *param)
 {
-	t_map				*map;
-	static const int	colors[] = {RED, BLUE, PINK, CYAN, GREEN, VIOLET,
-		YELLOW, ORANGE, AVOCADO, WHITE};
+	t_screen	*s;
+	//static const int	colors[] = {RED, BLUE, PINK, CYAN, GREEN, VIOLET,
+	//	YELLOW, ORANGE, AVOCADO, WHITE};
 
-	map = param;
+	s = param;
+	(void)key;
 	if (key == SCROLL_UP)
 		map->matrix.scale[2] /= Z_SCALE_FACTOR;
 	else if (key == SCROLL_DN)
 		map->matrix.scale[2] *= Z_SCALE_FACTOR;
-	else if (x >= 15 && x <= 210 && y >= 270 && y < 470)
+	
+	if (x >= 0 && y >=0 && x < s->image->width && y < s->image->height)
 	{
-		if (x < 120)
-			map->maxcolor = colors[(y - 270) / 20];
-		else
-			map->mincolor = colors[(y - 270) / 20];
-		set_colors(map);
+		s->c.re = x;
+		s->c.im = y;
 	}
-	matrix_result(map);
+	else
+	{
+		s->c.re = -0.7;
+		s->c.im = 0.27015;
+	}
+	julia(s);
 	return (0);
 }
 */

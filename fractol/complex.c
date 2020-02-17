@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   image.c                                            :+:      :+:    :+:   */
+/*   complex.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/01 14:13:26 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/17 19:23:36 by sscarecr         ###   ########.fr       */
+/*   Created: 2020/02/17 18:55:37 by sscarecr          #+#    #+#             */
+/*   Updated: 2020/02/17 19:32:07 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
 #include "fractol.h"
 
-t_image		*new_image(void *mlx, int width, int height)
-{
-	t_image		*image;
+/*
+** square_dist returns square distance, avoiding sqrt() call here
+*/
 
-	if (!(image = (t_image*)ft_memalloc(sizeof(t_image))) ||
-	!(image->img = mlx_new_image(mlx, width, height)))
-		sys_error();
-	image->map = mlx_get_data_addr(image->img, &(image->bpp),
-		&(image->sizeline), &(image->endian));
-	image->height = height;
-	image->width = width;
-	return (image);
+double	square_dist(t_complex *z, t_complex c)
+{
+	double	t;
+	
+	t = z->re * z->re - z->im * z->im + c.re;
+	z->im = 2 * z->re * z->im + c.im;
+	z->re = t;
+	return (z->re * z->re + z->im * z->im);
 }

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 20:27:21 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/18 19:29:54 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/18 19:32:07 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static int	gradient(int start, int finish, double k)
 int			get_color(int iter, int maxiter, int g)
 {
 	double				k;
-	static const int	pal[CN] = {BLACK, RED, BLUE, PINK, CYAN, GREEN, VIOLET,
-		YELLOW, ORANGE, RED, WHITE};
+	static const int	pal[CN] = {WHITE, RED, BLUE, PINK, CYAN, GREEN, VIOLET,
+		YELLOW, ORANGE, RED, BLACK};
 
 	k = (double)maxiter / 5;
 	if (iter < k)

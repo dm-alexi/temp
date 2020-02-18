@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/18 19:26:18 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/18 19:42:31 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@
 #define LEFT 123
 #define RIGHT 124
 #define SPACE 49
-/*
 #define NUM_PLUS 69
 #define PLUS 24
 #define NUM_MINUS 78
 #define MINUS 27
+#define Q 12
+/*
 #define NUM_EIGHT 91
 #define EIGHT 28
 #define NUM_TWO 84
@@ -37,7 +38,6 @@
 #define SEVEN 26
 #define NUM_NINE 92
 #define NINE 25
-#define Q 12
 */
 /*
 #define MOVE_SPEED 5
@@ -83,22 +83,20 @@ int				key_handle(int key, void *param)
 	s = param;
 	if (key == ESC)
 		win_close(param);
-	if (key == SPACE)
+	else if (key == SPACE)
 		++s->gamma;
+	else if (key == PLUS || key == NUM_PLUS)
+		s->maxiter += 8;
+	else if ((key == MINUS || key == NUM_MINUS) && s->maxiter > 8)
+		s->maxiter -= 8;
+	else if (key == Q)
+		s->maxiter = INIT_ITER;
 /*
 	if (key == UP || key == DOWN || key == LEFT || key == RIGHT || key == EIGHT
 		|| key == NUM_EIGHT || key == TWO || key == NUM_TWO || key == SIX ||
 		key == NUM_SIX || key == FOUR || key == NUM_FOUR || key == SEVEN ||
 		key == NUM_SEVEN || key == NINE || key == NUM_NINE || key == SPACE)
 		key_matrix_movement(key, (t_map*)param);
-	else if (key == ESC)
-		win_close(param);
-	else if (key == PLUS || key == NUM_PLUS)
-		while (++i < 3)
-			((t_map*)param)->matrix.scale[i] *= SCALE_FACTOR;
-	else if (key == MINUS || key == NUM_MINUS)
-		while (++i < 3)
-			((t_map*)param)->matrix.scale[i] /= SCALE_FACTOR;
 	else if (key == Q)
 	{
 		((t_map*)param)->matrix.rotate[0] = 0.75;

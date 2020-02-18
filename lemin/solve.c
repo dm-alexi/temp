@@ -120,7 +120,7 @@ void			solve(t_graph *graph)
 			break ;
 		resolve_conflicts(new_paths, graph->path_num + 1);
 		if ((c = count_moves(new_paths, graph->path_num + 1, graph->ant_num))
-		>= graph->moves)
+		>= graph->moves || c <= 0)
 			break ;
 		delete_paths(graph->paths, graph->path_num);
 		graph->paths = new_paths;

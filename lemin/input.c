@@ -15,13 +15,14 @@
 #else
 # include <unistd.h>
 #endif
+#include <limits.h>
 #include "lemin.h"
 
 static int		read_int(void)
 {
 	char	*line;
 	int		tmp;
-	int		n;
+	long	n;
 
 	while ((tmp = get_next_line(STDIN_FILENO, &line)) > 0 && *line == '#')
 	{
@@ -30,11 +31,11 @@ static int		read_int(void)
 	}
 	if (tmp <= 0)
 		tmp ? sys_error() : error();
-	if (((n = ft_atoi(line))) <= 0)
+	if ((n = ft_strtol(line, NULL, 10)) <= 0 || n > INT_MAX)
 		error();
 	ft_printf("%s\n", line);
 	free(line);
-	return (n);
+	return ((int)n);
 }
 
 static int		path_count(t_graph *graph)

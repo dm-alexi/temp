@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/18 19:42:31 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/18 20:18:56 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int				mouse_move(int x, int y, void *param)
 
 	s = param;
 	if (x >= 0 && y >= 0 && x < s->image->width && y < s->image->height)
-		map_coord(&s->c, s->image, x, y);
+		map_coord(&s->c, s, x, y);
 	else
 	{
 		s->c.re = JULIA_RE;

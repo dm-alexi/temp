@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 15:52:09 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/18 19:37:40 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/18 20:18:42 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # define ORANGE 0xFF8000
 # define AVOCADO 0x00FF80
 
-# define JULIA_RE -0.4
-# define JULIA_IM -0.59
+# define JULIA_RE 0.325
+# define JULIA_IM -0.0375
 
 typedef struct	s_complex
 {
@@ -73,6 +73,6 @@ void			*julia(void *param);
 void			image_put_pixel(t_image *image, int x, int y, int color);
 
 double			square_dist(t_complex *z, t_complex c);
-void			map_coord(t_complex *z, t_image *image, int x, int y);
+void			map_coord(t_complex *z, t_screen *s, int x, int y);
 int				get_color(int iter, int maxiter, int g);
 #endif

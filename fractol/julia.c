@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 19:27:55 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/18 20:14:35 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/18 21:32:26 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void	map_coord(t_complex *z, t_screen *s, int x, int y)
 {
-	z->re = 2 * ((2 * (double)x - s->image->width) / s->image->width);
-	z->im = 2 * ((2 * (double)y - s->image->height) / s->image->height);
+	z->re = 2 * ((2 * ((double)x + s->moveX) - s->image->width) / s->image->width * s->zoom);
+	z->im = 2 * ((2 * ((double)y + s->moveY) - s->image->height) / s->image->height * s->zoom);
 }
 
 void	*julia(void *param)

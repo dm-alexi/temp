@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/17 22:18:46 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/18 19:26:18 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #define DOWN 125
 #define LEFT 123
 #define RIGHT 124
+#define SPACE 49
 /*
 #define NUM_PLUS 69
 #define PLUS 24
@@ -36,10 +37,8 @@
 #define SEVEN 26
 #define NUM_NINE 92
 #define NINE 25
-#define SPACE 49
 #define Q 12
 */
-
 /*
 #define MOVE_SPEED 5
 #define ROTATE_SPEED (M_PI / 180)
@@ -74,15 +73,18 @@ static void		key_matrix_movement(int key, t_map *map)
 		map->matrix.rotate[2] -= ROTATE_SPEED;
 	else if (key == NINE || key == NUM_NINE)
 		map->matrix.rotate[2] += ROTATE_SPEED;
-	else if (key == SPACE)
-		matrix_init(map);
 }
 */
 
 int				key_handle(int key, void *param)
 {
+	t_screen	*s;
+	
+	s = param;
 	if (key == ESC)
 		win_close(param);
+	if (key == SPACE)
+		++s->gamma;
 /*
 	if (key == UP || key == DOWN || key == LEFT || key == RIGHT || key == EIGHT
 		|| key == NUM_EIGHT || key == TWO || key == NUM_TWO || key == SIX ||
@@ -104,6 +106,7 @@ int				key_handle(int key, void *param)
 		((t_map*)param)->matrix.rotate[2] = 0.5;
 	}
 	matrix_result(((t_map*)param));*/
+	s->func(s);
 	return (0);
 }
 
@@ -112,14 +115,14 @@ int				mouse_move(int x, int y, void *param)
 	t_screen	*s;
 
 	s = param;
-	if (x >= 0 && y >=0 && x < s->image->width && y < s->image->height)
+	if (x >= 0 && y >= 0 && x < s->image->width && y < s->image->height)
 		map_coord(&s->c, s->image, x, y);
 	else
 	{
-		s->c.re = JULIA_RE;//-0.7;
-		s->c.im = JULIA_IM;//0.27015;
+		s->c.re = JULIA_RE;
+		s->c.im = JULIA_IM;
 	}
-	julia(s);
+	s->func(s);
 	return (0);
 }
 
@@ -136,16 +139,8 @@ int				mouse_handle(int key, int x, int y, void *param)
 		map->matrix.scale[2] /= Z_SCALE_FACTOR;
 	else if (key == SCROLL_DN)
 		map->matrix.scale[2] *= Z_SCALE_FACTOR;
-	
 	if (x >= 0 && y >=0 && x < s->image->width && y < s->image->height)
 	{
-		s->c.re = x;
-		s->c.im = y;
-	}
-	else
-	{
-		s->c.re = -0.7;
-		s->c.im = 0.27015;
 	}
 	julia(s);
 	return (0);

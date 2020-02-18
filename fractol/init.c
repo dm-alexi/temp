@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 18:57:56 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/17 22:17:35 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/18 19:24:00 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@ void	init(void *func(void*), char *name)
 {
 	t_screen	*screen;
 
-    if (!(screen = (t_screen*)ft_memalloc(sizeof(t_screen))) ||
+	if (!(screen = (t_screen*)ft_memalloc(sizeof(t_screen))) ||
 	!(screen->mlx = mlx_init()) ||
 	!(screen->win = mlx_new_window(screen->mlx, WIDTH, HEIGHT, name)) ||
 	!(screen->image = new_image(screen->mlx, WIDTH, HEIGHT)))
 		sys_error();
 	screen->maxiter = INIT_ITER;
+	screen->func = func;
 	mlx_hook(screen->win, 2, 1L << 0, &key_handle, screen);
 	//mlx_hook(screen->win, 4, 1L << 2, &mouse_handle, screen);
 	if (func == julia)

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 18:55:37 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/17 19:32:07 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/18 19:24:35 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 double	square_dist(t_complex *z, t_complex c)
 {
 	double	t;
-	
+
 	t = z->re * z->re - z->im * z->im + c.re;
 	z->im = 2 * z->re * z->im + c.im;
 	z->re = t;

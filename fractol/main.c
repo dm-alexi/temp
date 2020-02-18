@@ -6,13 +6,14 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 15:53:50 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/16 19:24:13 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/18 19:27:41 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 //todo: update usage when fractal list is finished
+
 static int	usage(void)
 {
 	ft_printf("usage: fractol type\n\nFractal types:\n" \

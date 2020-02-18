@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 19:27:37 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/16 21:35:43 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/18 19:24:55 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,5 @@ void	*mandelbrot(void *param)
 	t_screen	*s;
 
 	s = param;
-    
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 15:52:09 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/17 22:45:11 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/18 19:23:39 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # define ORANGE 0xFF8000
 # define AVOCADO 0x00FF80
 
-#define JULIA_RE -0.4
-#define JULIA_IM -0.59
+# define JULIA_RE -0.4
+# define JULIA_IM -0.59
 
 typedef struct	s_complex
 {
@@ -48,29 +48,31 @@ typedef struct	s_image
 	char	*map;
 }				t_image;
 
-typedef struct  s_screen
+typedef struct	s_screen
 {
-    void    	*mlx;
-    void    	*win;
-    t_image 	*image;
+	void		*mlx;
+	void		*win;
+	t_image		*image;
+	void		*(*func)(void *);
+	int			gamma;
 	int			maxiter;
 	t_complex	c;
-}               t_screen;
+}				t_screen;
 
-void	        sys_error(void);
+void			sys_error(void);
 
 int				win_close(void *param);
 int				key_handle(int key, void *param);
 int				mouse_handle(int key, int x, int y, void *param);
 int				mouse_move(int x, int y, void *param);
 
-void            init(void *(void *), char *name);
-t_image		    *new_image(void *mlx, int width, int height);
-void            *mandelbrot(void *param);
-void            *julia(void *param);
+void			init(void *func(void *), char *name);
+t_image			*new_image(void *mlx, int width, int height);
+void			*mandelbrot(void *param);
+void			*julia(void *param);
 void			image_put_pixel(t_image *image, int x, int y, int color);
 
 double			square_dist(t_complex *z, t_complex c);
 void			map_coord(t_complex *z, t_image *image, int x, int y);
-int				get_color(int iter, int maxiter);
+int				get_color(int iter, int maxiter, int g);
 #endif

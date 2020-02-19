@@ -6,13 +6,14 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 19:27:55 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/19 22:55:46 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/19 23:19:50 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include <pthread.h>
 #include "fractol.h"
+#define THREADS 4
 
 void	map_coord(t_complex *z, t_screen *s, int x, int y)
 {
@@ -48,25 +49,16 @@ void	*julia_inst(void *param)
 void	*julia(void *param)
 {
 	t_screen	*s;
-	t_complex	z;
-	int			x;
 	int			y;
 	int			i;
-	pthread_t	t[4];
+	t_thread	thread;
+	pthread_t	t[THREADS];
 
 	s = param;
-	y = -1;
-	while (++y < s->image->height)
+	i = 0;
+	while (i < THREADS)
 	{
-		x = -1;
-		while (++x < s->image->width)
-		{
-			map_coord(&z, s, x, y);
-			i = 0;
-			while (i < s->maxiter && square_dist(&z, s->c) <= 4)
-				++i;
-			image_put_pixel(s->image, x, y, get_color(i, s->maxiter, s->gamma));
-		}
+		pthread_create(t + i, NULL, julia_inst, );
 	}
 	mlx_put_image_to_window(s->mlx, s->win, s->image->img, 0, 0);
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 15:52:09 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/18 22:00:17 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/19 22:50:15 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,20 @@ typedef struct	s_screen
 	t_image		*image;
 	void		*(*func)(void *);
 	int			gamma;
-	int			moveX;
-	int			moveY;
+	double		moveX;
+	double		moveY;
 	char		cblock;
 	double		zoom;
 	int			maxiter;
 	t_complex	c;
 }				t_screen;
+
+typedef struct	s_thread
+{
+	int			start;
+	int			finish;
+	t_screen	*s;
+}				t_thread;
 
 void			sys_error(void);
 

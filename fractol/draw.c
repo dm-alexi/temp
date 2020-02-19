@@ -6,12 +6,12 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 20:27:21 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/18 19:32:07 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/19 20:19:01 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#define CN 11
+#define CN 10
 
 static int	gradient(int start, int finish, double k)
 {
@@ -28,12 +28,12 @@ static int	gradient(int start, int finish, double k)
 int			get_color(int iter, int maxiter, int g)
 {
 	double				k;
-	static const int	pal[CN] = {WHITE, RED, BLUE, PINK, CYAN, GREEN, VIOLET,
-		YELLOW, ORANGE, RED, BLACK};
+	static const int	pal[CN] = {BLACK, RED, BLUE, PINK, CYAN, GREEN, VIOLET,
+		YELLOW, ORANGE, RED};
 
 	k = (double)maxiter / 5;
 	if (iter < k)
-		return (gradient(pal[g % CN], pal[g % CN + 1], iter / k));
+		return (gradient(WHITE, pal[g % CN + 1], iter / k));
 	else if (iter < 2 * k)
 		return (gradient(pal[g % CN + 2], pal[g % CN + 3], (iter - k) / k));
 	else if (iter < 3 * k)

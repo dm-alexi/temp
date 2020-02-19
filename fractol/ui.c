@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/18 22:14:37 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/19 22:43:44 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 #define NINE 25
 */
 
-#define MOVE_SPEED 5
+#define MOVE_SPEED 0.1
 #define ZOOM 1.1
 /*
 #define ROTATE_SPEED (M_PI / 180)
@@ -76,13 +76,13 @@ int				key_handle(int key, void *param)
 		s->zoom = 1;
 	}
 	else if (key == UP)
-		s->moveY += MOVE_SPEED;
+		s->moveY += MOVE_SPEED / s->zoom;
 	else if (key == DOWN)
-		s->moveY -= MOVE_SPEED;
+		s->moveY -= MOVE_SPEED / s->zoom;
 	else if (key == LEFT)
-		s->moveX += MOVE_SPEED;
+		s->moveX += MOVE_SPEED / s->zoom;
 	else if (key == RIGHT)
-		s->moveX -= MOVE_SPEED;
+		s->moveX -= MOVE_SPEED / s->zoom;
 	s->func(s);
 	return (0);
 }
@@ -114,10 +114,15 @@ int				mouse_handle(int key, int x, int y, void *param)
 	(void)key;
 	if (x >= 0 && y >=0 && x < s->image->width && y < s->image->height)
 	{
-		if (key == SCROLL_UP)
-			s->zoom *= ZOOM;
-		else if (key == SCROLL_DN)
+		if (key == SCROLL_UP && s->zoom / ZOOM > 0)
+		{
 			s->zoom /= ZOOM;
+			
+		}
+		else if (key == SCROLL_DN)
+		{
+			s->zoom *= ZOOM;
+		}
 		else if (key == MOUSE1)
 			s->cblock = !s->cblock;
 	}

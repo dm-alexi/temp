@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 16:30:09 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/14 19:30:36 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/20 22:40:53 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void			belford(t_graph *graph)
 		j = -1;
 		fin = 1;
 		while (++j < graph->node_num && (t = graph->nodes[j]->edges))
-			if (graph->nodes[j]->distance != -1)
+			if (graph->nodes[j]->distance != -1 &&
+			graph->nodes[j]->type != FINISH)
 				while (t)
 				{
 					update(graph->nodes[j], t, &fin);

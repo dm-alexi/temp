@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 20:27:21 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/19 20:19:01 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/20 18:59:31 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int			get_color(int iter, int maxiter, int g)
 {
 	double				k;
 	static const int	pal[CN] = {BLACK, RED, BLUE, PINK, CYAN, GREEN, VIOLET,
-		YELLOW, ORANGE, RED};
+		YELLOW, ORANGE, AVOCADO};
 
 	k = (double)maxiter / 5;
 	if (iter < k)

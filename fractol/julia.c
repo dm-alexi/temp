@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 19:27:55 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/19 23:19:50 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/20 19:09:42 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,22 @@ void	*julia_inst(void *param)
 void	*julia(void *param)
 {
 	t_screen	*s;
-	int			y;
 	int			i;
-	t_thread	thread;
+	t_thread	thread[THREADS];
 	pthread_t	t[THREADS];
 
 	s = param;
-	i = 0;
-	while (i < THREADS)
+	i = -1;
+	while (++i < THREADS)
 	{
-		pthread_create(t + i, NULL, julia_inst, );
+		thread[i].s = s;
+		thread[i].start = i * (s->image->height / THREADS);
+		thread[i].finish = thread[i].start + s->image->height / THREADS;
+		pthread_create(t + i, NULL, julia_inst, thread + i);
 	}
+	i = -1;
+	while (++i < THREADS)
+		pthread_join(t[i], NULL);
 	mlx_put_image_to_window(s->mlx, s->win, s->image->img, 0, 0);
 	return (NULL);
 }

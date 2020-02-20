@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:22:05 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/20 22:38:20 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/20 23:10:01 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,4 +129,5 @@ void			solve(t_graph *graph)
 		new_paths = NULL;
 	}
 	delete_paths(new_paths, graph->path_num + 1);
+	print_graph(graph);
 }

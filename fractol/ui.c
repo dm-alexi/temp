@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/20 18:57:04 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/20 19:22:57 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,14 +117,14 @@ int				mouse_handle(int key, int x, int y, void *param)
 		if (key == SCROLL_UP && s->zoom / ZOOM > 0)
 		{
 			s->zoom /= ZOOM;
-	/*		s->moveX = (4.0 * x / s->image->width - 2.0) / s->zoom * (s->zoom - 1);
-			s->moveY = (4.0 * y / s->image->height - 2.0) / s->zoom * (s->zoom - 1);*/
+			s->moveX = (4.0 * x / s->image->width - 2.0) / s->zoom * (s->zoom - 1);
+			s->moveY = (4.0 * y / s->image->height - 2.0) / s->zoom * (s->zoom - 1);
 		}
 		else if (key == SCROLL_DN)
 		{
 			s->zoom *= ZOOM;
-	/*		s->moveX = (4.0 * x / s->image->width - 2.0) / s->zoom * (s->zoom - 1);
-			s->moveY = (4.0 * y / s->image->height - 2.0) / s->zoom * (s->zoom - 1);*/
+			s->moveX = ((4.0 * x / s->image->width - 2.0) / s->zoom) * (s->zoom - 1);
+			s->moveY = ((4.0 * y / s->image->height - 2.0) / s->zoom) * (s->zoom - 1);
 		}
 		else if (key == MOUSE1)
 			s->cblock = !s->cblock;

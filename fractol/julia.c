@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 19:27:55 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/23 14:27:39 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/23 15:11:04 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	map_coord(t_complex *z, t_screen *s, int x, int y)
 	z->im = (s->maxy - s->miny) * y / s->image->height + s->miny;
 }
 
-void	*julia_inst(void *param)
+void	*julia(void *param)
 {
 	t_thread	*t;
 	t_complex	z;
@@ -46,7 +46,7 @@ void	*julia_inst(void *param)
 	return (NULL);
 }
 
-void	*julia(void *param)
+void	*threads(void *param)
 {
 	t_screen	*s;
 	int			i;
@@ -60,7 +60,7 @@ void	*julia(void *param)
 		thread[i].s = s;
 		thread[i].start = i * (s->image->height / THREADS);
 		thread[i].finish = thread[i].start + s->image->height / THREADS;
-		pthread_create(t + i, NULL, julia_inst, thread + i);
+		pthread_create(t + i, NULL, s->func, thread + i);
 	}
 	i = -1;
 	while (++i < THREADS)

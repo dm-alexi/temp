@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 15:52:09 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/22 20:19:08 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/23 14:51:43 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct	s_screen
 	double		maxx;
 	double		maxy;
 	char		cblock;
-	double		zoom;
 	int			maxiter;
 	t_complex	c;
 }				t_screen;
@@ -83,6 +82,7 @@ void			init(void *func(void *), char *name);
 t_image			*new_image(void *mlx, int width, int height);
 void			*mandelbrot(void *param);
 void			*julia(void *param);
+void			*threads(void *param);
 void			image_put_pixel(t_image *image, int x, int y, int color);
 
 double			square_dist(t_complex *z, t_complex c);

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/23 15:10:43 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/23 16:00:36 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,41 +37,31 @@ int				win_close(void *param)
 	exit(EXIT_SUCCESS);
 }
 
-static void		move(int key, void *param)
+static void		key_move(int key, void *param)
 {
 	t_screen	*s;
 	double		sizex;
 	double		sizey;
-	
+
 	s = param;
 	sizex = s->maxx - s->minx;
 	sizey = s->maxy - s->miny;
-	if (key == UP)
+	if (key == UP || key == DOWN)
 	{
-		s->miny += MOVE_SPEED * sizey;
-		s->maxy += MOVE_SPEED * sizey;
+		s->miny += key == UP ? MOVE_SPEED * sizey : -MOVE_SPEED * sizey;
+		s->maxy += key == UP ? MOVE_SPEED * sizey : -MOVE_SPEED * sizey;
 	}
-	else if (key == DOWN)
+	else if (key == LEFT || key == RIGHT)
 	{
-		s->miny -= MOVE_SPEED * sizey;
-		s->maxy -= MOVE_SPEED * sizey;
-	}
-	else if (key == LEFT)
-	{
-		s->minx += MOVE_SPEED * sizex;
-		s->maxx += MOVE_SPEED * sizex;
-	}
-	else if (key == RIGHT)
-	{
-		s->minx -= MOVE_SPEED * sizex;
-		s->maxx -= MOVE_SPEED * sizex;
+		s->minx += key == LEFT ? MOVE_SPEED * sizex : -MOVE_SPEED * sizex;
+		s->maxx += key == LEFT ? MOVE_SPEED * sizex : -MOVE_SPEED * sizex;
 	}
 }
 
 int				key_handle(int key, void *param)
 {
 	t_screen	*s;
-	
+
 	s = param;
 	if (key == ESC)
 		win_close(param);
@@ -82,7 +72,7 @@ int				key_handle(int key, void *param)
 	else if ((key == MINUS || key == NUM_MINUS) && s->maxiter > 8)
 		s->maxiter -= 8;
 	else if (key == UP || key == DOWN || key == LEFT || key == RIGHT)
-		move(key, param);
+		key_move(key, param);
 	else if (key == Q)
 	{
 		s->maxiter = INIT_ITER;
@@ -123,13 +113,13 @@ int				mouse_handle(int key, int x, int y, void *param)
 
 	s = param;
 	(void)key;
-	if (x >= 0 && y >=0 && x < s->image->width && y < s->image->height)
+	if (x >= 0 && y >= 0 && x < s->image->width && y < s->image->height)
 	{
 		if (key == SCROLL_UP || key == SCROLL_DN)
 		{
 			zoom = (key == SCROLL_UP ? ZOOM_FACTOR : 1.0 / ZOOM_FACTOR);
 			wx = s->minx + x * (s->maxx - s->minx) / s->image->width;
-    		wy = s->miny + y * (s->maxy - s->miny) / s->image->height;
+			wy = s->miny + y * (s->maxy - s->miny) / s->image->height;
 			s->minx = wx + (s->minx - wx) * zoom;
 			s->miny = wy + (s->miny - wy) * zoom;
 			s->maxx = wx + (s->maxx - wx) * zoom;

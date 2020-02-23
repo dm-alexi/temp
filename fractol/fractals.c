@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.c                                            :+:      :+:    :+:   */
+/*   fractals.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 19:27:55 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/23 15:44:41 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/23 15:57:26 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	*julia(void *param)
 			i = 0;
 			while (i < t->s->maxiter && square_dist(&z, t->s->c) <= 4)
 				++i;
-			image_put_pixel(t->s->image, x, t->start, get_color(i, t->s->maxiter,
-				t->s->gamma));
+			image_put_pixel(t->s->image, x, t->start,
+				get_color(i, t->s->maxiter, t->s->gamma));
 		}
 		++t->start;
 	}
@@ -57,8 +57,8 @@ void	*mandelbrot(void *param)
 			i = 0;
 			while (i < t->s->maxiter && square_dist(&z, c) <= 4)
 				++i;
-			image_put_pixel(t->s->image, x, t->start, get_color(i, t->s->maxiter,
-				t->s->gamma));
+			image_put_pixel(t->s->image, x, t->start,
+				get_color(i, t->s->maxiter, t->s->gamma));
 		}
 		++t->start;
 	}

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 18:57:56 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/19 22:05:40 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/22 16:42:04 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ void	init(void *func(void*), char *name)
 	screen->maxiter = INIT_ITER;
 	screen->func = func;
 	screen->zoom = 1.0;
+	screen->minx = -2.0;
+	screen->miny = -2.0;
+	screen->maxx = 2.0;
+	screen->maxy = 2.0;
 	mlx_hook(screen->win, 2, 1L << 0, &key_handle, screen);
 	mlx_hook(screen->win, 4, 1L << 2, &mouse_handle, screen);
 	if (func == julia)

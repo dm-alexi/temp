@@ -6,19 +6,19 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 19:27:55 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/20 19:09:42 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/23 14:27:39 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include <pthread.h>
 #include "fractol.h"
-#define THREADS 4
+#define THREADS 32
 
 void	map_coord(t_complex *z, t_screen *s, int x, int y)
 {
-	z->re = (4.0 * x / s->image->width - 2.0) / s->zoom + s->moveX;
-	z->im = (4.0 * y / s->image->height - 2.0) / s->zoom + s->moveY;
+	z->re = (s->maxx - s->minx) * x / s->image->width + s->minx;
+	z->im = (s->maxy - s->miny) * y / s->image->height + s->miny;
 }
 
 void	*julia_inst(void *param)

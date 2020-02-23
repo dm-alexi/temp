@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/20 19:22:57 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/23 14:26:12 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int				key_handle(int key, void *param)
 		s->maxiter += 8;
 	else if ((key == MINUS || key == NUM_MINUS) && s->maxiter > 8)
 		s->maxiter -= 8;
-	else if (key == Q)
+/*	else if (key == Q)
 	{
 		s->maxiter = INIT_ITER;
 		s->moveX = 0;
@@ -82,7 +82,7 @@ int				key_handle(int key, void *param)
 	else if (key == LEFT)
 		s->moveX += MOVE_SPEED / s->zoom;
 	else if (key == RIGHT)
-		s->moveX -= MOVE_SPEED / s->zoom;
+		s->moveX -= MOVE_SPEED / s->zoom;*/
 	s->func(s);
 	return (0);
 }
@@ -109,6 +109,8 @@ int				mouse_move(int x, int y, void *param)
 int				mouse_handle(int key, int x, int y, void *param)
 {
 	t_screen	*s;
+	double wx;
+	double wy;
 
 	s = param;
 	(void)key;
@@ -116,15 +118,21 @@ int				mouse_handle(int key, int x, int y, void *param)
 	{
 		if (key == SCROLL_UP && s->zoom / ZOOM > 0)
 		{
-			s->zoom /= ZOOM;
-			s->moveX = (4.0 * x / s->image->width - 2.0) / s->zoom * (s->zoom - 1);
-			s->moveY = (4.0 * y / s->image->height - 2.0) / s->zoom * (s->zoom - 1);
+			wx = s->minx + x * (s->maxx - s->minx) / s->image->width;
+    		wy = s->miny + y * (s->maxy - s->miny) / s->image->height;
+			s->minx = wx + (s->minx - wx) * ZOOM;
+			s->miny = wy + (s->miny - wy) * ZOOM;
+			s->maxx = wx + (s->maxx - wx) * ZOOM;
+			s->maxy = wy + (s->maxy - wy) * ZOOM;
 		}
 		else if (key == SCROLL_DN)
 		{
-			s->zoom *= ZOOM;
-			s->moveX = ((4.0 * x / s->image->width - 2.0) / s->zoom) * (s->zoom - 1);
-			s->moveY = ((4.0 * y / s->image->height - 2.0) / s->zoom) * (s->zoom - 1);
+			wx = s->minx + x * (s->maxx - s->minx) / s->image->width;
+    		wy = s->miny + y * (s->maxy - s->miny) / s->image->height;
+			s->minx = wx + (s->minx - wx) / ZOOM;
+			s->miny = wy + (s->miny - wy) / ZOOM;
+			s->maxx = wx + (s->maxx - wx) / ZOOM;
+			s->maxy = wy + (s->maxy - wy) / ZOOM;
 		}
 		else if (key == MOUSE1)
 			s->cblock = !s->cblock;
@@ -132,3 +140,22 @@ int				mouse_handle(int key, int x, int y, void *param)
 	s->func(s);
 	return (0);
 }
+/*
+int		change_zoom(int key, int x, int y, t_ptr *ptr)
+{
+	t_complex	mouse;
+	double		zoom;
+	double		i;
+	mouse = get_complex(x, y, ptr);
+	if (key == SCROLL_UP)
+		zoom = 0.90;
+	else
+		zoom = 1.10;
+	i = 1.0 / zoom;
+	ptr->min.x = mouse.x + ((ptr->min.x - mouse.x) * i);
+	ptr->min.y = mouse.y + ((ptr->min.y - mouse.y) * i);
+	ptr->max.x = mouse.x + ((ptr->max.x - mouse.x) * i);
+	ptr->max.y = mouse.y + ((ptr->max.y - mouse.y) * i);
+	thread(ptr);
+	return (0);
+}*/

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 15:52:09 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/19 22:50:15 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/22 20:19:08 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define FRACTOL_H
 # include "libft/libft.h"
 # define INIT_ITER 256
-# define WIDTH 640
-# define HEIGHT 640
+# define WIDTH 1024
+# define HEIGHT 1024
 # define BLACK 0x000000
 # define WHITE 0xFFFFFF
 # define RED 0xFF0000
@@ -55,8 +55,10 @@ typedef struct	s_screen
 	t_image		*image;
 	void		*(*func)(void *);
 	int			gamma;
-	double		moveX;
-	double		moveY;
+	double		minx;
+	double		miny;
+	double		maxx;
+	double		maxy;
 	char		cblock;
 	double		zoom;
 	int			maxiter;

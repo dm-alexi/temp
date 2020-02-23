@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 18:55:37 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/23 20:17:07 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/23 20:45:32 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,20 @@ double	square_dist_abs(t_complex *z, t_complex c)
 
 int		sierpinsky_fill(t_complex *z)
 {
-	int x = z->re, y = z->im;
+	int	x;
+	int	y;
+	int	i;
+
+	x = z->re;
+	y = z->im;
+	i = 0;
 	while (x > 0 && y > 0)
 	{
 		if (x % 3 == 1 && y % 3 == 1)
 			return (0);
 		x /= 3;
 		y /= 3;
+		++i;
 	}
-	return (1);
+	return (i);
 }

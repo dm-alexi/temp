@@ -6,11 +6,17 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 18:55:37 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/18 20:14:19 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/23 15:14:28 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	map_coord(t_complex *z, t_screen *s, int x, int y)
+{
+	z->re = (s->maxx - s->minx) * x / s->image->width + s->minx;
+	z->im = (s->maxy - s->miny) * y / s->image->height + s->miny;
+}
 
 /*
 ** square_dist returns square distance, avoiding sqrt() call here

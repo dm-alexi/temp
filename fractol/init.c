@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 18:57:56 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/23 14:43:39 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/23 15:30:53 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ void	init(void *func(void*), char *name)
 		mlx_hook(screen->win, 6, 1L << 6, &mouse_move, screen);
 		screen->c.re = JULIA_RE;
 		screen->c.im = JULIA_IM;
+	}
+	if (func == mandelbrot)
+	{
+		mlx_hook(screen->win, 6, 1L << 6, &mouse_move, screen);
+		//screen->c.re = JULIA_RE;
+		//screen->c.im = JULIA_IM;
 	}
 	mlx_hook(screen->win, 2, 1L << 0, &key_handle, screen);
 	mlx_hook(screen->win, 4, 1L << 2, &mouse_handle, screen);

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 20:27:21 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/23 14:27:51 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/23 15:48:00 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int			get_color(int iter, int maxiter, int g)
 	else if (iter < 4 * k)
 		return (gradient(pal[g % CN + 6], pal[g % CN + 7], (iter - 3 * k) / k));
 	else
-		return (gradient(pal[g % CN + 8], pal[g % CN + 9], (iter - 4 * k) / k));
+		return (gradient(pal[g % CN + 8], BLACK, (iter - 4 * k) / k));
 }
 
 void		image_put_pixel(t_image *image, int x, int y, int color)

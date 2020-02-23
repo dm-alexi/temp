@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 15:14:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/23 15:25:42 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/23 18:49:23 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ void	*threads(void *param)
 		thread[i].s = s;
 		thread[i].start = i * (s->image->height / THREADS);
 		thread[i].finish = thread[i].start + s->image->height / THREADS;
-		pthread_create(t + i, NULL, s->func, thread + i);
+		if (pthread_create(t + i, NULL, s->func, thread + i))
+			sys_error();
 	}
 	i = -1;
 	while (++i < THREADS)
-		pthread_join(t[i], NULL);
+		if (pthread_join(t[i], NULL))
+			sys_error();
 	mlx_put_image_to_window(s->mlx, s->win, s->image->img, 0, 0);
 	return (NULL);
 }

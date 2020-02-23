@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 15:52:09 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/23 18:30:48 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/23 18:47:14 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define INIT_ITER 256
 # define WIDTH 1024
 # define HEIGHT 1024
+
 # define BLACK 0x000000
 # define WHITE 0xFFFFFF
 # define RED 0xFF0000

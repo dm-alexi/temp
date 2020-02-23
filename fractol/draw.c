@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 20:27:21 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/23 15:48:00 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/23 18:39:40 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,20 @@ static int	gradient(int start, int finish, double k)
 int			get_color(int iter, int maxiter, int g)
 {
 	double				k;
-	static const int	pal[CN] = {BLACK, RED, BLUE, PINK, CYAN, GREEN, VIOLET,
+	static const int	pal[CN] = {RED, BLUE, PINK, CYAN, GREEN, VIOLET,
 		YELLOW, ORANGE, AVOCADO};
 
 	k = (double)maxiter / 5;
 	if (iter < k)
-		return (gradient(WHITE, pal[g % CN + 1], iter / k));
+		return (gradient(WHITE, pal[g % CN], iter / k));
 	else if (iter < 2 * k)
-		return (gradient(pal[g % CN + 2], pal[g % CN + 3], (iter - k) / k));
+		return (gradient(pal[g % CN + 1], pal[g % CN + 2], (iter - k) / k));
 	else if (iter < 3 * k)
-		return (gradient(pal[g % CN + 4], pal[g % CN + 5], (iter - 2 * k) / k));
+		return (gradient(pal[g % CN + 3], pal[g % CN + 4], (iter - 2 * k) / k));
 	else if (iter < 4 * k)
-		return (gradient(pal[g % CN + 6], pal[g % CN + 7], (iter - 3 * k) / k));
+		return (gradient(pal[g % CN + 5], pal[g % CN + 6], (iter - 3 * k) / k));
 	else
-		return (gradient(pal[g % CN + 8], BLACK, (iter - 4 * k) / k));
+		return (gradient(pal[g % CN + 7], BLACK, (iter - 4 * k) / k));
 }
 
 void		image_put_pixel(t_image *image, int x, int y, int color)

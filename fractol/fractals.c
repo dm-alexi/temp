@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 19:27:55 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/23 16:58:01 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/23 18:30:21 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void	*mandelbrot(void *param)
 		while (++x < t->s->image->width)
 		{
 			map_coord(&c, t->s, x, t->start);
-			z = c;
+			z.re = 0;
+			z.im = 0;
 			i = 0;
 			while (i < t->s->maxiter && square_dist(&z, c) <= 4)
 				++i;
@@ -80,9 +81,10 @@ void	*burning(void *param)
 		while (++x < t->s->image->width)
 		{
 			map_coord(&c, t->s, x, t->start);
-			z = c;
+			z.re = 0;
+			z.im = 0;
 			i = 0;
-			while (i < t->s->maxiter && square_dist(&z, c) <= 4)
+			while (i < t->s->maxiter && square_dist_abs(&z, c) <= 4)
 				++i;
 			image_put_pixel(t->s->image, x, t->start,
 				get_color(i, t->s->maxiter, t->s->gamma));

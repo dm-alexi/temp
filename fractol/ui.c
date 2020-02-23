@@ -6,11 +6,12 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/23 16:00:36 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/23 17:53:17 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
+#include <mlx.h>
 #include "fractol.h"
 #define ESC 53
 #define MOUSE1 1
@@ -33,8 +34,16 @@
 
 int				win_close(void *param)
 {
-	(void)param;
-	exit(EXIT_SUCCESS);
+	t_screen	*s;
+
+	s = param;
+	mlx_destroy_window(s->mlx, s->win);
+	mlx_destroy_image(s->mlx, s->image->img);
+	free(s->image);
+	free(s);
+	if (!counter(-1))
+		exit(EXIT_SUCCESS);
+	return (0);
 }
 
 static void		key_move(int key, void *param)
@@ -64,7 +73,7 @@ int				key_handle(int key, void *param)
 
 	s = param;
 	if (key == ESC)
-		win_close(param);
+		exit(EXIT_SUCCESS);
 	else if (key == SPACE)
 		++s->gamma;
 	else if (key == PLUS || key == NUM_PLUS)

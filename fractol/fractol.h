@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 15:52:09 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/23 14:51:43 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/23 17:48:59 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,19 @@ typedef struct	s_thread
 void			sys_error(void);
 
 int				win_close(void *param);
+int				counter(int x);
 int				key_handle(int key, void *param);
 int				mouse_handle(int key, int x, int y, void *param);
 int				mouse_move(int x, int y, void *param);
 
-void			init(void *func(void *), char *name);
+int				init(void *mlx, void *func(void *), char *name);
 t_image			*new_image(void *mlx, int width, int height);
+void			image_put_pixel(t_image *image, int x, int y, int color);
+
 void			*mandelbrot(void *param);
 void			*julia(void *param);
+void			*burning(void *param);
 void			*threads(void *param);
-void			image_put_pixel(t_image *image, int x, int y, int color);
 
 double			square_dist(t_complex *z, t_complex c);
 void			map_coord(t_complex *z, t_screen *s, int x, int y);

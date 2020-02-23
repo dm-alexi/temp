@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 15:53:50 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/23 18:35:10 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/23 20:05:09 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	usage(void)
 
 static int	get_fractal(void *mlx, char *arg)
 {
-	static const char	*types[FRACTALS] = {"m", "j", "b"};
+	static const char	*types[FRACTALS] = {"m", "j", "b", "s"};
 	int					i;
 
 	i = 0;

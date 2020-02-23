@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 18:57:56 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/23 18:35:01 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/23 20:21:18 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,22 @@ void	init_burning(t_screen *s)
 	s->maxy = 2.0;
 }
 
+void	init_sierpinsky(t_screen *s)
+{
+	s->func = sierpinsky;
+	s->maxiter = 5;
+	s->minx = 0;
+	s->miny = 0;
+	s->maxx = 2 * s->image->width;
+	s->maxy = 2 * s->image->height;
+}
+
 int		init(void *mlx, int type)
 {
 	static void	(*inits[FRACTALS])(t_screen *) = {init_mandelbrot, init_julia,
-		init_burning};
+		init_burning, init_sierpinsky};
 	static char	*names[FRACTALS] = {"Mandelbrot set", "Julia set",
-		"Burning Ship"};
+		"Burning Ship", "Sierpinsky carpet"};
 	t_screen	*screen;
 
 	if (!(screen = (t_screen*)ft_memalloc(sizeof(t_screen))) ||

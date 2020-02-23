@@ -6,14 +6,14 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 15:52:09 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/23 18:47:14 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/23 20:17:35 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 # include "libft/libft.h"
-# define FRACTALS 3
+# define FRACTALS 4
 # define INIT_ITER 256
 # define WIDTH 1024
 # define HEIGHT 1024
@@ -88,10 +88,12 @@ void			image_put_pixel(t_image *image, int x, int y, int color);
 void			*mandelbrot(void *param);
 void			*julia(void *param);
 void			*burning(void *param);
+void			*sierpinsky(void *param);
 void			*threads(void *param);
 
 double			square_dist(t_complex *z, t_complex c);
 double			square_dist_abs(t_complex *z, t_complex c);
+int 			sierpinsky_fill(t_complex *z);
 void			map_coord(t_complex *z, t_screen *s, int x, int y);
 int				get_color(int iter, int maxiter, int g);
 #endif

@@ -6,15 +6,15 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 15:52:09 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/23 20:27:00 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/24 16:28:06 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 # include "libft/libft.h"
-# define FRACTALS 4
-# define INIT_ITER 256
+# define FRACTALS 5
+# define INIT_ITER 512
 # define WIDTH 729
 # define HEIGHT 729
 
@@ -57,6 +57,7 @@ typedef struct	s_screen
 	t_image		*image;
 	void		*(*func)(void *);
 	int			gamma;
+	int			degree;
 	double		minx;
 	double		miny;
 	double		maxx;
@@ -86,14 +87,16 @@ t_image			*new_image(void *mlx, int width, int height);
 void			image_put_pixel(t_image *image, int x, int y, int color);
 
 void			*mandelbrot(void *param);
+void			*multibrot(void *param);
 void			*julia(void *param);
 void			*burning(void *param);
 void			*sierpinsky(void *param);
 void			*threads(void *param);
 
 double			square_dist(t_complex *z, t_complex c);
+double			mult_dist(t_complex *z, t_complex c, int n);
 double			square_dist_abs(t_complex *z, t_complex c);
-int 			sierpinsky_fill(t_complex *z);
+int				sierpinsky_fill(t_complex *z);
 void			map_coord(t_complex *z, t_screen *s, int x, int y);
 int				get_color(int iter, int maxiter, int g);
 #endif

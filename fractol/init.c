@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 18:57:56 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/23 20:30:38 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/24 16:23:31 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,16 @@ void	init_mandelbrot(t_screen *s)
 	s->maxy = 2.0;
 }
 
+void	init_multibrot(t_screen *s)
+{
+	s->func = multibrot;
+	s->minx = -2.0;
+	s->miny = -2.0;
+	s->maxx = 2.0;
+	s->maxy = 2.0;
+	s->degree = 3;
+}
+
 void	init_burning(t_screen *s)
 {
 	s->func = burning;
@@ -46,7 +56,7 @@ void	init_burning(t_screen *s)
 void	init_sierpinsky(t_screen *s)
 {
 	s->func = sierpinsky;
-	s->maxiter = 5;
+	s->maxiter = 8;
 	s->minx = 0;
 	s->miny = 0;
 	s->maxx = s->image->width;
@@ -56,9 +66,9 @@ void	init_sierpinsky(t_screen *s)
 int		init(void *mlx, int type)
 {
 	static void	(*inits[FRACTALS])(t_screen *) = {init_mandelbrot, init_julia,
-		init_burning, init_sierpinsky};
+		init_burning, init_multibrot, init_sierpinsky};
 	static char	*names[FRACTALS] = {"Mandelbrot set", "Julia set",
-		"Burning Ship", "Sierpinsky carpet"};
+		"Burning Ship", "Multibrot set", "Sierpinsky carpet"};
 	t_screen	*screen;
 
 	if (!(screen = (t_screen*)ft_memalloc(sizeof(t_screen))) ||

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/23 17:53:17 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/24 16:14:24 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 #define NUM_MINUS 78
 #define MINUS 27
 #define Q 12
+#define A 0
+#define Z 6
 
 #define MOVE_SPEED 0.05
 #define ZOOM_FACTOR 1.1
@@ -90,6 +92,10 @@ int				key_handle(int key, void *param)
 		s->maxx = 2.0;
 		s->maxy = 2.0;
 	}
+	else if (key == A)
+		++s->degree;
+	else if (key == Z && s->degree > 2)
+		--s->degree;
 	threads(s);
 	return (0);
 }
@@ -133,6 +139,10 @@ int				mouse_handle(int key, int x, int y, void *param)
 			s->miny = wy + (s->miny - wy) * zoom;
 			s->maxx = wx + (s->maxx - wx) * zoom;
 			s->maxy = wy + (s->maxy - wy) * zoom;
+			if (key == SCROLL_UP && s->maxiter > 8)
+				s->maxiter -= 8;
+			else if (key == SCROLL_DN)
+				s->maxiter += 8;
 		}
 		else if (key == MOUSE1)
 			s->cblock = !s->cblock;

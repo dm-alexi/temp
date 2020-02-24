@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 15:53:50 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/23 20:43:22 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/24 16:24:07 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@
 
 static int	usage(void)
 {
-	ft_printf("usage: fractol [m | j | b]\n\nFractal types:\n" \
+	ft_printf("usage: fractol [m | j | b | u | s]\n\nFractal types:\n" \
 	"\tm : Madnelbrot set\n\tj : Julia set\n\tb : Burning Ship\n"\
-	"\tSierpinsky carpet\n");
+	"\tu : Multibrot set\n\ts : Sierpinsky carpet\n");
 	return (0);
 }
 
 static int	get_fractal(void *mlx, char *arg)
 {
-	static const char	*types[FRACTALS] = {"m", "j", "b", "s"};
+	static const char	*types[FRACTALS] = {"m", "j", "b", "u", "s"};
 	int					i;
 
 	i = 0;

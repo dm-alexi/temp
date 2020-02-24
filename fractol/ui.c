@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/24 16:14:24 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/24 18:13:15 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,7 @@
 #define MOVE_SPEED 0.05
 #define ZOOM_FACTOR 1.1
 
-int				win_close(void *param)
-{
-	t_screen	*s;
-
-	s = param;
-	mlx_destroy_window(s->mlx, s->win);
-	mlx_destroy_image(s->mlx, s->image->img);
-	free(s->image);
-	free(s);
-	if (!counter(-1))
-		exit(EXIT_SUCCESS);
-	return (0);
-}
-
-static void		key_move(int key, void *param)
+static void	key_move(int key, void *param)
 {
 	t_screen	*s;
 	double		sizex;
@@ -69,7 +55,7 @@ static void		key_move(int key, void *param)
 	}
 }
 
-int				key_handle(int key, void *param)
+int			key_handle(int key, void *param)
 {
 	t_screen	*s;
 
@@ -85,13 +71,7 @@ int				key_handle(int key, void *param)
 	else if (key == UP || key == DOWN || key == LEFT || key == RIGHT)
 		key_move(key, param);
 	else if (key == Q)
-	{
-		s->maxiter = INIT_ITER;
-		s->minx = -2.0;
-		s->miny = -2.0;
-		s->maxx = 2.0;
-		s->maxy = 2.0;
-	}
+		reset(s);
 	else if (key == A)
 		++s->degree;
 	else if (key == Z && s->degree > 2)
@@ -100,7 +80,7 @@ int				key_handle(int key, void *param)
 	return (0);
 }
 
-int				mouse_move(int x, int y, void *param)
+int			mouse_move(int x, int y, void *param)
 {
 	t_screen	*s;
 
@@ -119,26 +99,31 @@ int				mouse_move(int x, int y, void *param)
 	return (0);
 }
 
-int				mouse_handle(int key, int x, int y, void *param)
+static void	zoom(int key, int x, int y, t_screen *s)
 {
-	t_screen	*s;
 	double		wx;
 	double		wy;
 	double		zoom;
 
+	zoom = (key == SCROLL_UP ? ZOOM_FACTOR : 1.0 / ZOOM_FACTOR);
+	wx = s->minx + x * (s->maxx - s->minx) / s->image->width;
+	wy = s->miny + y * (s->maxy - s->miny) / s->image->height;
+	s->minx = wx + (s->minx - wx) * zoom;
+	s->miny = wy + (s->miny - wy) * zoom;
+	s->maxx = wx + (s->maxx - wx) * zoom;
+	s->maxy = wy + (s->maxy - wy) * zoom;
+}
+
+int			mouse_handle(int key, int x, int y, void *param)
+{
+	t_screen	*s;
+
 	s = param;
-	(void)key;
 	if (x >= 0 && y >= 0 && x < s->image->width && y < s->image->height)
 	{
 		if (key == SCROLL_UP || key == SCROLL_DN)
 		{
-			zoom = (key == SCROLL_UP ? ZOOM_FACTOR : 1.0 / ZOOM_FACTOR);
-			wx = s->minx + x * (s->maxx - s->minx) / s->image->width;
-			wy = s->miny + y * (s->maxy - s->miny) / s->image->height;
-			s->minx = wx + (s->minx - wx) * zoom;
-			s->miny = wy + (s->miny - wy) * zoom;
-			s->maxx = wx + (s->maxx - wx) * zoom;
-			s->maxy = wy + (s->maxy - wy) * zoom;
+			zoom(key, x, y, s);
 			if (key == SCROLL_UP && s->maxiter > 8)
 				s->maxiter -= 8;
 			else if (key == SCROLL_DN)

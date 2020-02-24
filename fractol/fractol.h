@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 15:52:09 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/24 16:28:06 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/24 17:55:29 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,24 +75,25 @@ typedef struct	s_thread
 }				t_thread;
 
 void			sys_error(void);
-
-int				win_close(void *param);
 int				counter(int x);
 int				key_handle(int key, void *param);
 int				mouse_handle(int key, int x, int y, void *param);
 int				mouse_move(int x, int y, void *param);
-
 int				init(void *mlx, int type);
+void			reset(t_screen *s);
 t_image			*new_image(void *mlx, int width, int height);
 void			image_put_pixel(t_image *image, int x, int y, int color);
-
 void			*mandelbrot(void *param);
 void			*multibrot(void *param);
 void			*julia(void *param);
 void			*burning(void *param);
 void			*sierpinsky(void *param);
 void			*threads(void *param);
-
+void			init_julia(t_screen *s);
+void			init_mandelbrot(t_screen *s);
+void			init_multibrot(t_screen *s);
+void			init_burning(t_screen *s);
+void			init_sierpinsky(t_screen *s);
 double			square_dist(t_complex *z, t_complex c);
 double			mult_dist(t_complex *z, t_complex c, int n);
 double			square_dist_abs(t_complex *z, t_complex c);

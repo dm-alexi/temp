@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 18:55:37 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/24 16:11:02 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/24 17:28:13 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,6 @@ void	map_coord(t_complex *z, t_screen *s, int x, int y)
 {
 	z->re = (s->maxx - s->minx) * x / s->image->width + s->minx;
 	z->im = (s->maxy - s->miny) * y / s->image->height + s->miny;
-}
-
-t_complex	complex_div(t_complex a, t_complex b)
-{
-	t_complex	c;
-
-	c.re = (a.re * b.re + a.im * b.im) / (b.re * b.re + b.im * b.im);
-	c.im = (a.im * b.re - b.im * a.re) / (b.re * b.re + b.im * b.im);
-	return (c);
 }
 
 double	square_dist(t_complex *z, t_complex c)

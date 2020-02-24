@@ -6,14 +6,12 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 15:53:50 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/24 16:24:07 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/24 17:13:42 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "fractol.h"
-
-//todo: update usage when fractal list is finished
 
 static int	usage(void)
 {

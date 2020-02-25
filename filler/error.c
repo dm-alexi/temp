@@ -6,13 +6,11 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:18 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/29 19:34:30 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/25 21:39:45 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifdef _WIN32
-# include <stdio.h>
-#endif
+#include <stdio.h>
 #include <unistd.h>
 #include "libft/libft.h"
 

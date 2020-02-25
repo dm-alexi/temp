@@ -11,7 +11,8 @@ char	get_player(void)
     int		r;
     char	c;
 
-    if ((r = get_next_line(STDIN_FILENO, &line)) <= 0)
+    c = 0;
+	if ((r = get_next_line(STDIN_FILENO, &line)) <= 0)
 		r ? sys_error() : error("player number not received\n");
 	if (ft_strequ(line, "$$$ exec p1 : [sscarecr]"))
 		c = 'O';

@@ -35,7 +35,6 @@ static void		setup(t_graph *graph)
 		s += graph->path_len[i];
 	}
 	i = -1;
-	//check this!!!!
 	while (++i < graph->path_num)
 		graph->ants[i] = graph->moves - graph->path_len[i] +
 		(i <= graph->path_num - (graph->ant_num + s) % graph->path_num);

@@ -6,14 +6,14 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 15:14:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/23 18:49:23 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/26 21:02:34 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pthread.h>
 #include <mlx.h>
 #include "fractol.h"
-#define THREADS 32
+#define THREADS 8
 
 void	*threads(void *param)
 {

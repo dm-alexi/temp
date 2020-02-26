@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 15:52:09 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/25 21:25:35 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/26 21:49:36 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FRACTOL_H
 # include "libft/libft.h"
 # define FRACTALS 5
-# define INIT_ITER 256
+# define INIT_ITER 128
 # define WIDTH 729
 # define HEIGHT 729
 

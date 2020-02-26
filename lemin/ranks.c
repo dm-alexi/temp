@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ranks.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/26 18:45:26 by sscarecr          #+#    #+#             */
+/*   Updated: 2020/02/26 18:45:45 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
 void	set_rank(t_edge *path, int rank)
@@ -20,9 +32,9 @@ void	set_ranks(t_edge **paths, int n)
 
 void	reset_ranks(t_graph *graph)
 {
-    int		i;
+	int		i;
 
-    i = -1;
-    while (++i < graph->node_num)
+	i = -1;
+	while (++i < graph->node_num)
 		graph->nodes[i]->rank = 0;
 }

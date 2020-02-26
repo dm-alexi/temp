@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/26 18:46:50 by sscarecr          #+#    #+#             */
+/*   Updated: 2020/02/26 18:50:24 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifdef _WIN32
 # include <stdio.h>
 #else
@@ -7,8 +19,8 @@
 
 void	get_player(t_map *map)
 {
-    char	*line;
-    int		r;
+	char	*line;
+	int		r;
 
 	if ((r = get_next_line(STDIN_FILENO, &line)) <= 0)
 		r ? sys_error() : error("player number not received\n");
@@ -55,12 +67,12 @@ void	get_map(t_map *map)
 		r ? sys_error() : error("invalid map\n");
 	free(line);
 	i = -1;
-    while (++i < map->h)
+	while (++i < map->h)
 	{
 		if ((r = get_next_line(STDIN_FILENO, &line)) <= 0)
-		r ? sys_error() : error("invalid map\n");
-        ft_strncpy(map->field + map->w * i, ft_strchr(line, ' ') + 1, map->w);
-        free(line);
+			r ? sys_error() : error("invalid map\n");
+		ft_strncpy(map->field + map->w * i, ft_strchr(line, ' ') + 1, map->w);
+		free(line);
 	}
 }
 
@@ -71,22 +83,22 @@ void	get_piece(t_piece *piece)
 	int		i;
 	int		r;
 
-	if ((r= get_next_line(STDIN_FILENO, &line)) < 0)
+	if ((r = get_next_line(STDIN_FILENO, &line)) < 0)
 		sys_error();
 	if (!r || !ft_strnequ(line, "Piece ", 6))
 		error("piece not received\n");
 	if ((piece->h = ft_strtol(line + 6, &t, 10)) <= 0 ||
 		(piece->w = ft_atoi(t)) <= 0)
-			error("invalid piece size\n");
+		error("invalid piece size\n");
 	free(line);
 	if (!piece->field && !(piece->field = (char*)malloc(piece->h * piece->w)))
 		sys_error();
 	i = -1;
-    while (++i < piece->h)
+	while (++i < piece->h)
 	{
 		if ((r = get_next_line(STDIN_FILENO, &line)) <= 0)
 			r ? sys_error() : error("invalid piece\n");
-        ft_strncpy(piece->field + piece->w * i, line, piece->w);
-        free(line);
+		ft_strncpy(piece->field + piece->w * i, line, piece->w);
+		free(line);
 	}
 }

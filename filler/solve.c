@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   solve.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/26 18:46:58 by sscarecr          #+#    #+#             */
+/*   Updated: 2020/02/26 18:48:35 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "filler.h"
 
 int		dist(t_map *map, int a, int b)
@@ -7,18 +19,18 @@ int		dist(t_map *map, int a, int b)
 
 int		get_center(t_map map, char c)
 {
-    int		i;
-    int		x;
-    int		y;
-    int		n;
+	int		i;
+	int		x;
+	int		y;
+	int		n;
 
-    i = 0;
-    x = 0;
-    y = 0;
-    n = 0;
-    while (i < map.w * map.h)
+	i = 0;
+	x = 0;
+	y = 0;
+	n = 0;
+	while (i < map.w * map.h)
 	{
-        if (ft_toupper(map.field[i]) == c && ++n)
+		if (ft_toupper(map.field[i]) == c && ++n)
 		{
 			x += i % map.w;
 			y += i / map.w;
@@ -32,12 +44,12 @@ int		get_center(t_map map, char c)
 
 void	solve(t_map map, t_piece piece)
 {
-    int		i;
-    int		center;
-    int		len;
-    int		k;
+	int		i;
+	int		center;
+	int		len;
+	int		k;
 
-    len = map.w * map.h;
+	len = map.w * map.h;
 	center = get_center(map, map.enemy);
 	i = -(piece.h - 1) * map.w - (piece.w - 1);
 	while (i < map.h * map.w)

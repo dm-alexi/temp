@@ -5,23 +5,21 @@
 #endif
 #include "filler.h"
 
-char	get_player(void)
+void	get_player(t_map *map)
 {
     char	*line;
     int		r;
-    char	c;
 
-    c = 0;
 	if ((r = get_next_line(STDIN_FILENO, &line)) <= 0)
 		r ? sys_error() : error("player number not received\n");
 	if (ft_strequ(line, "$$$ exec p1 : [sscarecr]"))
-		c = 'O';
+		map->mine = 'O';
 	else if (ft_strequ(line, "$$$ exec p2 : [sscarecr]"))
-		c = 'X';
+		map->mine = 'X';
 	else
 		error("invalid player number\n");
+	map->enemy = (map->mine == 'O' ? 'X' : 'O');
 	free(line);
-	return (c);
 }
 
 int		get_dim(t_map *map)
@@ -66,3 +64,29 @@ void	get_map(t_map *map)
 	}
 }
 
+void	get_piece(t_piece *piece)
+{
+	char	*line;
+	char	*t;
+	int		i;
+	int		r;
+
+	if ((r= get_next_line(STDIN_FILENO, &line)) < 0)
+		sys_error();
+	if (!r || !ft_strnequ(line, "Piece ", 6))
+		error("piece not received\n");
+	if ((piece->h = ft_strtol(line + 6, &t, 10)) <= 0 ||
+		(piece->w = ft_atoi(t)) <= 0)
+			error("invalid piece size\n");
+	free(line);
+	if (!piece->field && !(piece->field = (char*)malloc(piece->h * piece->w)))
+		sys_error();
+	i = -1;
+    while (++i < piece->h)
+	{
+		if ((r = get_next_line(STDIN_FILENO, &line)) <= 0)
+			r ? sys_error() : error("invalid piece\n");
+        ft_strncpy(piece->field + piece->w * i, line, piece->w);
+        free(line);
+	}
+}

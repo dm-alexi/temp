@@ -7,12 +7,23 @@ typedef struct	s_map
 	int		w;
 	int		h;
 	char	*field;
-	char	sign;
+	char	mine;
+	char	enemy;
 }				t_map;
+
+typedef struct	s_piece
+{
+	int		w;
+	int		h;
+	char	*field;
+}				t_piece;
 
 void			sys_error(void);
 void			error(char *s);
-char			get_player(void);
+void			get_player(t_map *map);
 int				get_dim(t_map *map);
+void			get_map(t_map *map);
+void			get_piece(t_piece *piece);
+void			solve(t_map map, t_piece piece);
 
 #endif

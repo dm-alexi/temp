@@ -3,7 +3,7 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 LIBFT = libft/libft.a
 HEAD = lemin.h
-SRC = main.c nodes.c edges.c print.c input.c error.c delete.c bfs.c disjoint.c belford.c solve.c paths.c ants.c
+SRC = main.c nodes.c edges.c print.c input.c error.c delete.c bfs.c disjoint.c belford.c solve.c paths.c ants.c ranks.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

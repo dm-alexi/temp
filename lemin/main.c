@@ -21,7 +21,6 @@ int		main(int ac, char **av)
 	distribute(graph);
 	if (ac == 2 && ft_strequ(av[1], "-v"))
 		ft_printf("\nMoves: %d", graph->moves);
-	//print_graph(graph);
 	delete_graph(graph);
 	return (0);
 }

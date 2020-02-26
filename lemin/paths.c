@@ -12,24 +12,6 @@
 
 #include "lemin.h"
 
-void	set_rank(t_edge *path, int rank)
-{
-	while ((path = path->next)->node->type != FINISH)
-		path->node->rank = rank;
-}
-
-void	set_ranks(t_edge **paths, int n)
-{
-	int		i;
-
-	i = 0;
-	while (i < n)
-	{
-		set_rank(paths[i], i + 1);
-		++i;
-	}
-}
-
 t_edge	*get_path(t_graph *graph)
 {
 	t_edge	*res;

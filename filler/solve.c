@@ -42,19 +42,47 @@ int		get_center(t_map map, char c)
 	return ((int)((double)y / n + 0.5) * map.w + (int)((double)x / n + 0.5));
 }
 
+int		possible(t_map map, t_piece piece, int x, int y)
+{
+    int		i;
+    int		connection;
+
+    i = 0;
+    connection = 0;
+    while (i < piece.h * piece.w)
+		if ((piece.field[y * piece.w + x] == '*') &&
+		(y + i / piece.w < 0 || x + i % piece.w < 0 ||
+		ft_toupper(map.field[(y + i / piece.w) * map.w + x + i % piece.w])
+		== map.enemy ||
+		(ft_toupper(map.field[(y + i / piece.w) * map.w + x + i % piece.w])
+		== map.mine && 	++connection > 1)))
+			return (0);
+	return (connection);
+}
+
 void	solve(t_map map, t_piece piece)
 {
-	int		i;
+	int		x;
+	int		y;
 	int		center;
 	int		len;
-	int		k;
+	t_point	k;
 
-	len = map.w * map.h;
+	len = map.w + map.h + 1;
 	center = get_center(map, map.enemy);
-	i = -(piece.h - 1) * map.w - (piece.w - 1);
-	while (i < map.h * map.w)
+	y = -piece.h;
+	while (++y < map.h)
 	{
-		//if (possible(map, i)) //&& dist(map, i, center) < len &&
-		++i;
+		x = -piece.w;
+		while (++x < map.w)
+			if (possible(map, piece, x, y) && dist(&map, (y + piece.ycent)
+			* map.w + x + piece.xcent, center) < len)
+			{
+				len = dist(&map, (y + piece.ycent) * map.w + x
+					+ piece.xcent, center);
+				k.x = x;
+				k.y = y;
+			}
 	}
+	ft_printf("%d %d\n", k.x, k.y);
 }

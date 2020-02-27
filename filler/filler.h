@@ -14,6 +14,12 @@
 # define FILLER_H
 # include "libft/libft.h"
 
+typedef struct	s_point
+{
+	int	x;
+	int	y;
+}				t_point;
+
 typedef struct	s_map
 {
 	int		w;
@@ -27,6 +33,8 @@ typedef struct	s_piece
 {
 	int		w;
 	int		h;
+	int		xcent;
+	int		ycent;
 	char	*field;
 }				t_piece;
 

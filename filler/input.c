@@ -17,7 +17,7 @@
 #endif
 #include "filler.h"
 
-void	get_player(t_map *map)
+void		get_player(t_map *map)
 {
 	char	*line;
 	int		r;
@@ -34,7 +34,7 @@ void	get_player(t_map *map)
 	free(line);
 }
 
-int		get_dim(t_map *map)
+int			get_dim(t_map *map)
 {
 	char	*line;
 	char	*t;
@@ -57,7 +57,7 @@ int		get_dim(t_map *map)
 	return (r);
 }
 
-void	get_map(t_map *map)
+void		get_map(t_map *map)
 {
 	char	*line;
 	int		r;
@@ -76,7 +76,31 @@ void	get_map(t_map *map)
 	}
 }
 
-void	get_piece(t_piece *piece)
+static void	get_piece_center(t_piece *piece)
+{
+	int		i;
+	int		x;
+	int		y;
+	int		n;
+
+	i = 0;
+	x = 0;
+	y = 0;
+	n = 0;
+	while (i < piece->w * piece->h)
+	{
+		if (piece->field[i] == '*' && ++n)
+		{
+			x += i % piece->w;
+			y += i / piece->w;
+		}
+		++i;
+	}
+	piece->ycent = (double)y / n + 0.5;
+	piece->xcent = (double)x / n + 0.5;
+}
+
+void		get_piece(t_piece *piece)
 {
 	char	*line;
 	char	*t;
@@ -101,4 +125,5 @@ void	get_piece(t_piece *piece)
 		ft_strncpy(piece->field + piece->w * i, line, piece->w);
 		free(line);
 	}
+	get_piece_center(piece);
 }

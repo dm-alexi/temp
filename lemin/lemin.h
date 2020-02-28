@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:27:04 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/14 20:59:40 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/28 18:46:11 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ t_edge			*find(t_node *node, t_edge *edge);
 t_edge			*get_path(t_graph *graph);
 void			set_rank(t_edge *path, int rank);
 void			set_ranks(t_edge **paths, int n);
+void			reset_ranks(t_graph *graph);
 int				path_len(t_edge *path);
 int				count_moves(t_edge **paths, int n_paths, int ants);
 void			reverse_paths(t_graph *graph);

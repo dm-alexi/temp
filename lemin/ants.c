@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 19:30:28 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/20 23:24:31 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/02/29 16:38:55 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void		setup(t_graph *graph)
 	i = -1;
 	while (++i < graph->path_num)
 		graph->ants[i] = graph->moves - graph->path_len[i] +
-		(i <= graph->path_num - (graph->ant_num + s) % graph->path_num);
+		(i >= graph->path_num - (graph->ant_num + s) % graph->path_num);
 }
 
 static int		send_ants(t_graph *graph, int sent)

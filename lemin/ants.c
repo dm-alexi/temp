@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 19:30:28 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/29 16:49:46 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/01 15:47:29 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void		setup(t_graph *graph)
 {
 	int		i;
-	int		s;
 	t_edge	*t;
 	int		a;
 
@@ -23,7 +22,6 @@ static void		setup(t_graph *graph)
 	!(graph->ants = (int*)ft_memalloc(sizeof(int) * graph->path_num)))
 		sys_error();
 	i = -1;
-	s = 0;
 	while (++i < graph->path_num)
 	{
 		t = graph->paths[i];
@@ -33,20 +31,14 @@ static void		setup(t_graph *graph)
 			t = t->next;
 			++graph->path_len[i];
 		}
-		s += graph->path_len[i];
 	}
 	i = -1;
-	/*while (++i < graph->path_num)
-		graph->ants[i] = graph->moves - graph->path_len[i] + 1
-		- (i > graph->path_num - (graph->ant_num + s) % graph->path_num);*/
 	a = 0;
 	while (++i < graph->path_num && (a += graph->moves - graph->path_len[i]))
 		graph->ants[i] = graph->moves - graph->path_len[i];
 	i = 0;
 	while (a++ < graph->ant_num)
 		++graph->ants[i++];
-	//for (int j = 0; j < graph->path_num; ++j)
-	//	ft_printf("Path %d: len %d, ants %d\n", j + 1, graph->path_len[j], graph->ants[j]);
 }
 
 static int		send_ants(t_graph *graph, int sent)

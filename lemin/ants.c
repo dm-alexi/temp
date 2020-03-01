@@ -17,9 +17,10 @@ static void		setup(t_graph *graph)
 	int		i;
 	int		s;
 	t_edge	*t;
+	int		a;
 
 	if (!(graph->path_len = (int*)ft_memalloc(sizeof(int) * graph->path_num)) ||
-	!(graph->ants = (int*)malloc(sizeof(int) * graph->path_num)))
+	!(graph->ants = (int*)ft_memalloc(sizeof(int) * graph->path_num)))
 		sys_error();
 	i = -1;
 	s = 0;
@@ -35,9 +36,15 @@ static void		setup(t_graph *graph)
 		s += graph->path_len[i];
 	}
 	i = -1;
-	while (++i < graph->path_num)
+	/*while (++i < graph->path_num)
 		graph->ants[i] = graph->moves - graph->path_len[i] + 1
-		- (i > graph->path_num - (graph->ant_num + s) % graph->path_num);
+		- (i > graph->path_num - (graph->ant_num + s) % graph->path_num);*/
+	a = 0;
+	while (++i < graph->path_num && (a += graph->moves - graph->path_len[i]))
+		graph->ants[i] = graph->moves - graph->path_len[i];
+	i = 0;
+	while (a++ < graph->ant_num)
+		++graph->ants[i++];
 	//for (int j = 0; j < graph->path_num; ++j)
 	//	ft_printf("Path %d: len %d, ants %d\n", j + 1, graph->path_len[j], graph->ants[j]);
 }

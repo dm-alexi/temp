@@ -104,6 +104,7 @@ void restore_graph(t_graph *graph)
 	while (ft_strchr(graph->nodes[graph->node_num - 1]->name, '-'))
 	{
 		delete_path(graph->nodes[--graph->node_num]->edges);
+		free(graph->nodes[graph->node_num]->name);
 		free(graph->nodes[graph->node_num]);
 	}
 	i = -1;

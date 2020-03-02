@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:25:49 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/02 18:59:00 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/02 19:07:31 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ static void		finalize(t_graph *graph)
 int				get_line(char **line, t_type *type)
 {
 	int		tmp;
+	int		is_node;
 
 	*type = UNKNOWN;
 	while ((tmp = get_next_line(STDIN_FILENO, line)) > 0 && **line == '#')
@@ -113,8 +114,11 @@ int				get_line(char **line, t_type *type)
 	}
 	if (tmp <= 0)
 		return (tmp);
+	if (!(is_node = (ft_strchr(*line, ' ') != NULL)) &&
+	(*type == START || *type == FINISH))
+		error();
 	ft_printf("%s\n", *line);
-	return (ft_strchr(*line, ' ') ? NODE : EDGE);
+	return (is_node ? NODE : EDGE);
 }
 
 t_graph			*get_graph(void)

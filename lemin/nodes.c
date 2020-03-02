@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:27:12 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/18 18:52:41 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/02 18:59:07 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,14 @@ static int		get_coordinate(char *s)
 	long	n;
 	char	*t;
 
-	n = ft_strtol(s, &t, 10);
-	if ((n == 0 && *(t - 1) != '0') || n > INT_MAX || n < INT_MIN)
+	if (!(*(t = s)))
 		error();
-	return (n);
+	while (*t)
+		if (!ft_isdigit(*t++))
+			error();
+	if ((n = ft_strtol(s, NULL, 10)) > INT_MAX || n < INT_MIN)
+		error();
+	return ((int)n);
 }
 
 static t_list	*new_node(char *line, t_type type)
@@ -33,11 +37,11 @@ static t_list	*new_node(char *line, t_type type)
 		error();
 	if (!(s = ft_strrchr(line, ' ')))
 		error();
-	node.y = get_coordinate(s);
+	node.y = get_coordinate(s + 1);
 	*s = '\0';
 	if (!(s = ft_strrchr(line, ' ')))
 		error();
-	node.x = get_coordinate(s);
+	node.x = get_coordinate(s + 1);
 	*s = '\0';
 	if (!*line)
 		error();

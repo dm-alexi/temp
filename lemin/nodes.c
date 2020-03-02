@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:27:12 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/02 18:59:07 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/02 20:00:24 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ static int		get_coordinate(char *s)
 	long	n;
 	char	*t;
 
-	if (!(*(t = s)))
+	t = s;
+	if (*t == '-')
+		++t;
+	if (!*t)
 		error();
 	while (*t)
 		if (!ft_isdigit(*t++))

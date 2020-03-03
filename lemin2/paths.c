@@ -16,8 +16,7 @@ static void unite_path(t_edge *path)
 {
 	t_edge	*t;
 
-	while (path->next->node->type != FINISH)
-	{
+	while (path->node->type != FINISH && path->next->node->type != FINISH)
 		if (ft_strchr(path->next->node->name, '-'))
 		{
 			t = path->next->node->edges;
@@ -25,14 +24,14 @@ static void unite_path(t_edge *path)
 				t = t->next;
 			path->next->node = t->node;
 		}
-		if (path->node == path->next->node)
+		else if (path->node == path->next->node)
 		{
 			t = path->next->next;
 			free(path->next);
 			path->next = t;
 		}
-		path = path->next;
-	}
+		else
+			path = path->next;
 }
 
 t_edge	*get_path(t_graph *graph)

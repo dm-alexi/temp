@@ -53,7 +53,8 @@ void			belford(t_graph *graph)
 			graph->nodes[j]->type != FINISH)
 				while (t)
 				{
-					update(graph->nodes[j], t, &fin);
+					if (t->node->type != START)
+						update(graph->nodes[j], t, &fin);
 					t = t->next;
 				}
 	}

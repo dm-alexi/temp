@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/29 17:21:34 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/12 19:18:07 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/03 15:04:46 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,18 @@
 void			delete_graph(t_graph *graph)
 {
 	int		i;
-	t_edge	*tmp;
 
 	i = 0;
+	//delete_paths(graph->backup, graph->node_num);
+	delete_paths(graph->paths, graph->path_num);
 	while (i < graph->node_num)
 	{
 		free(graph->nodes[i]->name);
-		while (graph->nodes[i]->edges)
-		{
-			tmp = graph->nodes[i]->edges->next;
-			free(graph->nodes[i]->edges);
-			graph->nodes[i]->edges = tmp;
-		}
+		delete_path(graph->nodes[i]->edges);
 		free(graph->nodes[i]);
 		++i;
 	}
 	free(graph->nodes);
-	delete_paths(graph->paths, graph->path_num);
 	free(graph->backup);
 	free(graph->path_len);
 	free(graph->ants);
@@ -45,7 +40,7 @@ void			delete_path(t_edge *path)
 	while ((t = path))
 	{
 		path = path->next;
-		free(t);
+		ft_memdel((void**)&t);
 	}
 }
 

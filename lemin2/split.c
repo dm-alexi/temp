@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 13:15:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/03 13:16:11 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/03 14:01:45 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_node	*split(t_graph *graph, t_node *node, t_edge *prev, t_edge *next)
 		sys_error();
 	graph->nodes[graph->node_num++] = out;
 	out->name = ft_strjoin(node->name, "-out");
-	out->type = UNKNOWN;
+	out->type = TEMP;
 	next->node = out;
 	next->len = -1;
 	out->edges = node->edges;
@@ -89,7 +89,7 @@ void			restore_graph(t_graph *graph)
 {
 	int	i;
 
-	while (ft_strchr(graph->nodes[graph->node_num - 1]->name, '-'))
+	while (graph->nodes[graph->node_num - 1]->type == TEMP)
 	{
 		delete_path(graph->nodes[--graph->node_num]->edges);
 		free(graph->nodes[graph->node_num]->name);

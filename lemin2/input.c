@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:25:49 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/02 19:07:31 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/03 14:26:36 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ static void		finalize(t_graph *graph)
 	if (!graph->start || !graph->finish ||
 	!(graph->path_max = path_count(graph)))
 		error();
-	if (!(graph->backup = (t_edge**)malloc(sizeof(t_edge*) * graph->node_num))
-	|| !(graph->paths = (t_edge**)ft_memalloc(sizeof(t_edge*))))
+	if (!(graph->paths = (t_edge**)ft_memalloc(sizeof(t_edge*))) ||
+	!(graph->backup = (t_edge**)ft_memalloc(sizeof(t_edge*) * graph->node_num)))
 		sys_error();
 }
 

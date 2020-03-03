@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 19:30:43 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/20 22:32:15 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/03 14:01:26 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	unite_path(t_edge *path)
 	t_edge	*t;
 
 	while (path->node->type != FINISH && path->next->node->type != FINISH)
-		if (ft_strchr(path->next->node->name, '-'))
+		if (path->next->node->type == TEMP)
 		{
 			t = path->next->node->edges;
 			while (t->len)
@@ -54,7 +54,7 @@ t_edge		*get_path(t_graph *graph)
 		res = tmp;
 	}
 	unite_path(res);
-	if (ft_strchr(graph->nodes[graph->node_num - 1]->name, '-'))
+	if (graph->nodes[graph->node_num - 1]->type == TEMP)
 		restore_graph(graph);
 	return (res);
 }

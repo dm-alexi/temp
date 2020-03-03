@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:27:04 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/28 18:46:11 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/03 13:59:14 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 typedef enum	e_type
 {
-	UNKNOWN, START, FINISH
+	UNKNOWN, START, FINISH, TEMP
 }				t_type;
 
 typedef struct	s_node

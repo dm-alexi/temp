@@ -24,9 +24,8 @@ void			reset_distance(t_graph *graph)
 
 static void		update(t_node *from, t_edge *edge, int *fin)
 {
-	if ((edge->node->distance == -1 ||
-	edge->node->distance > from->distance + edge->len) &&
-	(edge->node->rank == from->rank || from->rank == from->prev->rank))
+	if (edge->node->distance == -1 ||
+	edge->node->distance > from->distance + edge->len)
 	{
 		edge->node->distance = from->distance + edge->len;
 		edge->node->prev = from;

@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-static void		remove_edge(t_node *node, t_edge **edge)
+void			remove_edge(t_node *node, t_edge **edge)
 {
 	t_edge	*t;
 	t_edge	*tmp;

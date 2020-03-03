@@ -92,5 +92,6 @@ void			solve(t_graph *graph);
 void			distribute(t_graph *graph);
 void			split_paths(t_graph *graph);
 void			restore_graph(t_graph *graph);
+void			remove_edge(t_node *node, t_edge **edge);
 
 #endif

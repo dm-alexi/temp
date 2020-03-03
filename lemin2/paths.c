@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-static void unite_path(t_edge *path)
+static void	unite_path(t_edge *path)
 {
 	t_edge	*t;
 
@@ -34,7 +34,7 @@ static void unite_path(t_edge *path)
 			path = path->next;
 }
 
-t_edge	*get_path(t_graph *graph)
+t_edge		*get_path(t_graph *graph)
 {
 	t_edge	*res;
 	t_edge	*tmp;
@@ -59,7 +59,7 @@ t_edge	*get_path(t_graph *graph)
 	return (res);
 }
 
-int		path_len(t_edge *path)
+int			path_len(t_edge *path)
 {
 	int		n;
 
@@ -69,7 +69,7 @@ int		path_len(t_edge *path)
 	return (n);
 }
 
-int		count_moves(t_edge **paths, int n_paths, int ants)
+int			count_moves(t_edge **paths, int n_paths, int ants)
 {
 	int		i;
 	int		n;

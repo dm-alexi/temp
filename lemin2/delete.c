@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/29 17:21:34 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/03 15:57:28 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/03 17:10:23 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void			delete_path(t_edge *path)
 		path = path->next;
 		free(t);
 	}
+	path = NULL;
 }
 
 void			delete_paths(t_edge **paths, int n)
@@ -62,20 +63,20 @@ void			backup_edges(t_graph *graph)
 
 	i = -1;
 	while (++i < graph->node_num)
-	{
-		s = graph->nodes[i]->edges;
-		t = (t_edge*)ft_memalloc(sizeof(t_edge));
-		graph->backup[i] = t;
-		t->len = 1;
-		t->node = s->node;
-		while (s->next)
+		if ((s = graph->nodes[i]->edges))
 		{
-			t->next = (t_edge*)ft_memalloc(sizeof(t_edge));
-			t->next->len = 1;
-			t->next->node = s->next->node;
-			t = t->next;
-			s = s->next;
+			t = (t_edge*)ft_memalloc(sizeof(t_edge));
+			graph->backup[i] = t;
+			t->len = 1;
+			t->node = s->node;
+			while (s->next)
+			{
+				t->next = (t_edge*)ft_memalloc(sizeof(t_edge));
+				t->next->len = 1;
+				t->next->node = s->next->node;
+				t = t->next;
+				s = s->next;
+			}
+			t->next = NULL;
 		}
-		t->next = NULL;
-	}
 }

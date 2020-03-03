@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 13:15:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/03 15:57:46 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/03 17:10:58 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,22 +66,23 @@ static void		restore_edges(t_graph *graph)
 
 	i = -1;
 	while (++i < graph->node_num)
-	{
-		s = graph->backup[i];
-		t = (t_edge*)ft_memalloc(sizeof(t_edge));
-		graph->nodes[i]->edges = t;
-		t->len = 1;
-		t->node = s->node;
-		while (s->next)
+		if ((s = graph->backup[i]))
 		{
-			t->next = (t_edge*)ft_memalloc(sizeof(t_edge));
-			t->next->len = 1;
-			t->next->node = s->next->node;
-			t = t->next;
-			s = s->next;
+			s = graph->backup[i];
+			t = (t_edge*)ft_memalloc(sizeof(t_edge));
+			graph->nodes[i]->edges = t;
+			t->len = 1;
+			t->node = s->node;
+			while (s->next)
+			{
+				t->next = (t_edge*)ft_memalloc(sizeof(t_edge));
+				t->next->len = 1;
+				t->next->node = s->next->node;
+				t = t->next;
+				s = s->next;
+			}
+			t->next = NULL;
 		}
-		t->next = NULL;
-	}
 }
 
 void			restore_graph(t_graph *graph)

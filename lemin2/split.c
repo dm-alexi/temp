@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 13:15:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/03 14:01:45 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/03 15:57:46 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,16 @@ void			split_path(t_graph *graph, t_edge *path)
 	}
 }
 
-void			backup_edges(t_graph *graph)
+void			split_paths(t_graph *graph)
+{
+	int	i;
+
+	i = -1;
+	while (++i < graph->path_num)
+		split_path(graph, graph->paths[i]);
+}
+
+static void		restore_edges(t_graph *graph)
 {
 	int		i;
 	t_edge	*t;
@@ -58,14 +67,14 @@ void			backup_edges(t_graph *graph)
 	i = -1;
 	while (++i < graph->node_num)
 	{
-		s = graph->nodes[i]->edges;
-		t = (t_edge*)malloc(sizeof(t_edge));
-		graph->backup[i] = t;
+		s = graph->backup[i];
+		t = (t_edge*)ft_memalloc(sizeof(t_edge));
+		graph->nodes[i]->edges = t;
 		t->len = 1;
 		t->node = s->node;
 		while (s->next)
 		{
-			t->next = (t_edge*)malloc(sizeof(t_edge));
+			t->next = (t_edge*)ft_memalloc(sizeof(t_edge));
 			t->next->len = 1;
 			t->next->node = s->next->node;
 			t = t->next;
@@ -73,16 +82,6 @@ void			backup_edges(t_graph *graph)
 		}
 		t->next = NULL;
 	}
-}
-
-void			split_paths(t_graph *graph)
-{
-	int	i;
-
-	backup_edges(graph);
-	i = -1;
-	while (++i < graph->path_num)
-		split_path(graph, graph->paths[i]);
 }
 
 void			restore_graph(t_graph *graph)
@@ -97,8 +96,6 @@ void			restore_graph(t_graph *graph)
 	}
 	i = -1;
 	while (++i < graph->node_num)
-	{
 		delete_path(graph->nodes[i]->edges);
-		graph->nodes[i]->edges = graph->backup[i];
-	}
+	restore_edges(graph);
 }

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 19:30:43 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/03 14:01:26 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/03 15:56:58 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,11 @@ t_edge		*get_path(t_graph *graph)
 	int		i;
 
 	if ((i = graph->finish->distance) <= 0)
+	{
+		if (graph->nodes[graph->node_num - 1]->type == TEMP)
+			restore_graph(graph);
 		return (NULL);
+	}
 	if (!(res = (t_edge*)ft_memalloc(sizeof(t_edge))))
 		sys_error();
 	res->node = graph->finish;

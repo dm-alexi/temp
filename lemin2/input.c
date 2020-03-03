@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 21:25:49 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/03 14:26:36 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/03 15:11:27 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ static void		finalize(t_graph *graph)
 	if (!(graph->paths = (t_edge**)ft_memalloc(sizeof(t_edge*))) ||
 	!(graph->backup = (t_edge**)ft_memalloc(sizeof(t_edge*) * graph->node_num)))
 		sys_error();
+	backup_edges(graph);
 }
 
 int				get_line(char **line, t_type *type)

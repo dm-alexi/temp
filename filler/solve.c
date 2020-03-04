@@ -47,9 +47,9 @@ int		possible(t_map map, t_piece piece, int x, int y)
     int		i;
     int		connection;
 
-    i = 0;
+    i = -1;
     connection = 0;
-    while (i < piece.h * piece.w)
+    while (++i < piece.h * piece.w)
 		if ((piece.field[y * piece.w + x] == '*') &&
 		(y + i / piece.w < 0 || x + i % piece.w < 0 ||
 		ft_toupper(map.field[(y + i / piece.w) * map.w + x + i % piece.w])

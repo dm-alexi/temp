@@ -20,20 +20,16 @@
 void		get_player(t_map *map)
 {
 	char	*line;
+	char	*s;
 	int		r;
 
 	if ((r = get_next_line(STDIN_FILENO, &line)) <= 0)
 		r ? sys_error() : error("player number not received\n");
-	if ((r = get_next_line(STDIN_FILENO, &line)) <= 0)
-		r ? sys_error() : error("player number not received\n");
-	if (*(ft_strchr(line, 'p') + 1) == '1') 
-		map->mine = 'O';
-	else if (*(ft_strchr(line, 'p') + 1) == '2') 
-		map->mine = 'X';
+	if ((s = ft_strchr(line, 'p')))
+		map->mine = (*(s + 1) == '1' ? 'O' : 'X');
 	else
 		error("invalid player number\n");
 	map->enemy = (map->mine == 'O' ? 'X' : 'O');
-	ft_printf("%s\n", line);
 	free(line);
 }
 
@@ -43,21 +39,17 @@ int			get_dim(t_map *map)
 	char	*t;
 	int		r;
 
-	if ((r = get_next_line(STDIN_FILENO, &line)) <= 0)
-		r ? sys_error() : error("map not received\n");
-	if (!ft_strnequ(line, "Plateau ", 8))
-		r = 0;
-	else
-	{
-		if ((map->h = ft_strtol(line + 8, &t, 10)) <= 0 ||
+	if ((r = get_next_line(STDIN_FILENO, &line)) < 0)
+		sys_error();
+	if (!r)
+		return (0);
+	if ((map->h = ft_strtol(line + 8, &t, 10)) <= 0 ||
 		(map->w = ft_atoi(t)) <= 0)
 			error("invalid map size\n");
-		r = 1;
-	}
 	free(line);
 	if (!map->field && !(map->field = (char*)malloc(map->h * map->w)))
 		sys_error();
-	return (r);
+	return (1);
 }
 
 void		get_map(t_map *map)

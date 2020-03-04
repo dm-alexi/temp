@@ -64,10 +64,7 @@ typedef struct	s_queue
 
 void			sys_error(void);
 void			error(void);
-
 void			print_graph(t_graph *graph);
-void			print_node(const t_node *a);
-void			print_path(t_edge *path);
 
 t_graph			*get_graph(void);
 int				get_line(char **line, t_type *type);
@@ -85,8 +82,6 @@ void			set_ranks(t_edge **paths, int n);
 void			reset_ranks(t_graph *graph);
 int				path_len(t_edge *path);
 int				count_moves(t_edge **paths, int n_paths, int ants);
-void			reverse_paths(t_graph *graph);
-void			restore_paths(t_graph *graph);
 void			reset_distance(t_graph *graph);
 void			solve(t_graph *graph);
 void			distribute(t_graph *graph);

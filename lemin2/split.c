@@ -33,7 +33,7 @@ static t_node	*split(t_graph *graph, t_node *node, t_edge *prev, t_edge *next)
 	return (out);
 }
 
-void			split_path(t_graph *graph, t_edge *path)
+static void		split_path(t_graph *graph, t_edge *path)
 {
 	t_edge	*prev;
 
@@ -69,13 +69,15 @@ static void		restore_edges(t_graph *graph)
 		if ((s = graph->backup[i]))
 		{
 			s = graph->backup[i];
-			t = (t_edge*)ft_memalloc(sizeof(t_edge));
+			if (!(t = (t_edge*)malloc(sizeof(t_edge))))
+				sys_error();
 			graph->nodes[i]->edges = t;
 			t->len = 1;
 			t->node = s->node;
 			while (s->next)
 			{
-				t->next = (t_edge*)ft_memalloc(sizeof(t_edge));
+				if (!(t->next = (t_edge*)malloc(sizeof(t_edge))))
+					sys_error();
 				t->next->len = 1;
 				t->next->node = s->next->node;
 				t = t->next;

@@ -65,13 +65,15 @@ void			backup_edges(t_graph *graph)
 	while (++i < graph->node_num)
 		if ((s = graph->nodes[i]->edges))
 		{
-			t = (t_edge*)ft_memalloc(sizeof(t_edge));
+			if (!(t = (t_edge*)malloc(sizeof(t_edge))))
+				sys_error();
 			graph->backup[i] = t;
 			t->len = 1;
 			t->node = s->node;
 			while (s->next)
 			{
-				t->next = (t_edge*)ft_memalloc(sizeof(t_edge));
+				if (!(t->next = (t_edge*)malloc(sizeof(t_edge))))
+					sys_error();
 				t->next->len = 1;
 				t->next->node = s->next->node;
 				t = t->next;

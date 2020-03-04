@@ -24,7 +24,8 @@ static t_edge	**clone(t_edge **paths, int n)
 	while (++i < n)
 	{
 		s = paths[i];
-		t = (t_edge*)malloc(sizeof(t_edge));
+		if (!(t = (t_edge*)ft_memalloc(sizeof(t_edge))))
+			sys_error();
 		arr[i] = t;
 		t->len = 1;
 		t->node = s->node;
@@ -36,7 +37,6 @@ static t_edge	**clone(t_edge **paths, int n)
 			t = t->next;
 			s = s->next;
 		}
-		t->next = NULL;
 	}
 	return (arr);
 }

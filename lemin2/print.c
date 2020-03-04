@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-void	print_node(const t_node *a)
+static void	print_node(const t_node *a)
 {
 	t_edge	*tmp;
 
@@ -27,7 +27,7 @@ void	print_node(const t_node *a)
 	ft_printf("\n");
 }
 
-void	print_path(t_edge *path)
+static void	print_path(t_edge *path)
 {
 	while (path)
 	{
@@ -37,7 +37,7 @@ void	print_path(t_edge *path)
 	ft_printf("\n");
 }
 
-void	print_paths(t_edge **paths, int n)
+static void	print_paths(t_edge **paths, int n)
 {
 	int		i;
 
@@ -49,7 +49,7 @@ void	print_paths(t_edge **paths, int n)
 	}
 }
 
-void	print_graph(t_graph *graph)
+void		print_graph(t_graph *graph)
 {
 	int		i;
 

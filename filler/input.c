@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 18:46:50 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/26 18:50:24 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/04 17:20:49 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,16 @@ void		get_player(t_map *map)
 
 	if ((r = get_next_line(STDIN_FILENO, &line)) <= 0)
 		r ? sys_error() : error("player number not received\n");
-	if (ft_strequ(line, "$$$ exec p1 : [sscarecr]"))
+	if ((r = get_next_line(STDIN_FILENO, &line)) <= 0)
+		r ? sys_error() : error("player number not received\n");
+	if (*(ft_strchr(line, 'p') + 1) == '1') 
 		map->mine = 'O';
-	else if (ft_strequ(line, "$$$ exec p2 : [sscarecr]"))
+	else if (*(ft_strchr(line, 'p') + 1) == '2') 
 		map->mine = 'X';
 	else
 		error("invalid player number\n");
 	map->enemy = (map->mine == 'O' ? 'X' : 'O');
+	ft_printf("%s\n", line);
 	free(line);
 }
 

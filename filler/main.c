@@ -16,17 +16,15 @@ int	main(void)
 {
 	t_map	map;
 	t_piece	piece;
-	int		found;
 
 	map.field = NULL;
 	piece.field = NULL;
-	found = 1;
 	get_player(&map);
-	while (found && get_dim(&map))
+	while (get_dim(&map))
 	{
 		get_map(&map);
 		get_piece(&piece);
-		found = solve(map, piece);
+		solve(map, piece);
 		free(piece.field);
 		piece.field = NULL;
 	}

@@ -61,7 +61,7 @@ int		possible(t_map map, t_piece piece, int x, int y)
 	return (connection);
 }
 
-int		solve(t_map map, t_piece piece)
+void		solve(t_map map, t_piece piece)
 {
 	int		x;
 	int		y;
@@ -76,24 +76,14 @@ int		solve(t_map map, t_piece piece)
 	{
 		x = -piece.w;
 		while (++x < map.w)
-			{
-				if (possible(map, piece, x, y))
-					{
-						ft_printf("%d %d\n", y, x);
-						break ;
-					}
-				/*if (possible(map, piece, x, y) && dist(&map, (y + piece.ycent)
+			if (possible(map, piece, x, y) && dist(&map, (y + piece.ycent)
 			* map.w + x + piece.xcent, center) < len)
 			{
 				len = dist(&map, (y + piece.ycent) * map.w + x
 					+ piece.xcent, center);
 				k.x = x;
 				k.y = y;
-			}*/
 			}
-		if (x < map.w)
-			break ;
 	}
-	//ft_printf("%d %d\n", k.x, k.y);
-	return (y < map.h);
+	ft_printf("%d %d\n", k.y, k.x);
 }

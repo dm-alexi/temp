@@ -20,19 +20,13 @@
 void		get_player(t_map *map)
 {
 	char	*line;
-	char	*s;
 	int		r;
 
 	if ((r = get_next_line(STDIN_FILENO, &line)) <= 0)
 		r ? sys_error() : error("player number not received\n");
-	if (!(s = ft_strchr(line, 'p')))
+	if (!ft_strnequ(line, "$$$ exec p", 10) || line[10] < '1' || line[10] > '2')
 		error("invalid player number\n");
-	if (*(s + 1) == '1')
-		map->mine = 'O';
-	else if (*(s + 1) == '2')
-		map->mine = 'X';
-	else
-		error("invalid player number\n");
+	map->mine = (line[10] == '1' ? 'O' : 'X');
 	map->enemy = (map->mine == 'O' ? 'X' : 'O');
 	free(line);
 }

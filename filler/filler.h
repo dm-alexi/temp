@@ -44,6 +44,6 @@ void			get_player(t_map *map);
 int				get_dim(t_map *map);
 void			get_map(t_map *map);
 void			get_piece(t_piece *piece);
-void			solve(t_map map, t_piece piece);
+int				solve(t_map map, t_piece piece);
 
 #endif

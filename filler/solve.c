@@ -50,8 +50,9 @@ int		possible(t_map map, t_piece piece, int x, int y)
     i = -1;
     connection = 0;
     while (++i < piece.h * piece.w)
-		if ((piece.field[y * piece.w + x] == '*') &&
+		if ((piece.field[i] == '*') &&
 		(y + i / piece.w < 0 || x + i % piece.w < 0 ||
+		y + i / piece.w >= map.h || x + i % piece.w >= map.w ||
 		ft_toupper(map.field[(y + i / piece.w) * map.w + x + i % piece.w])
 		== map.enemy ||
 		(ft_toupper(map.field[(y + i / piece.w) * map.w + x + i % piece.w])
@@ -60,7 +61,7 @@ int		possible(t_map map, t_piece piece, int x, int y)
 	return (connection);
 }
 
-void	solve(t_map map, t_piece piece)
+int		solve(t_map map, t_piece piece)
 {
 	int		x;
 	int		y;
@@ -75,14 +76,24 @@ void	solve(t_map map, t_piece piece)
 	{
 		x = -piece.w;
 		while (++x < map.w)
-			if (possible(map, piece, x, y) && dist(&map, (y + piece.ycent)
+			{
+				if (possible(map, piece, x, y))
+					{
+						ft_printf("%d %d\n", y, x);
+						break ;
+					}
+				/*if (possible(map, piece, x, y) && dist(&map, (y + piece.ycent)
 			* map.w + x + piece.xcent, center) < len)
 			{
 				len = dist(&map, (y + piece.ycent) * map.w + x
 					+ piece.xcent, center);
 				k.x = x;
 				k.y = y;
+			}*/
 			}
+		if (x < map.w)
+			break ;
 	}
-	ft_printf("%d %d\n", k.x, k.y);
+	//ft_printf("%d %d\n", k.x, k.y);
+	return (y < map.h);
 }

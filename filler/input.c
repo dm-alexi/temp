@@ -25,8 +25,12 @@ void		get_player(t_map *map)
 
 	if ((r = get_next_line(STDIN_FILENO, &line)) <= 0)
 		r ? sys_error() : error("player number not received\n");
-	if ((s = ft_strchr(line, 'p')))
-		map->mine = (*(s + 1) == '1' ? 'O' : 'X');
+	if (!(s = ft_strchr(line, 'p')))
+		error("invalid player number\n");
+	if (*(s + 1) == '1')
+		map->mine = 'O';
+	else if (*(s + 1) == '2')
+		map->mine = 'X';
 	else
 		error("invalid player number\n");
 	map->enemy = (map->mine == 'O' ? 'X' : 'O');

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 18:46:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/26 18:48:35 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/09 15:36:30 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,24 @@ int		get_center(t_map map, char c)
 
 int		possible(t_map map, t_piece piece, int x, int y)
 {
-    int		i;
-    int		connection;
+	int		i;
+	int		connection;
 
-    i = -1;
-    connection = 0;
-    while (++i < piece.h * piece.w)
+	i = -1;
+	connection = 0;
+	while (++i < piece.h * piece.w)
 		if ((piece.field[i] == '*') &&
 		(y + i / piece.w < 0 || x + i % piece.w < 0 ||
 		y + i / piece.w >= map.h || x + i % piece.w >= map.w ||
 		ft_toupper(map.field[(y + i / piece.w) * map.w + x + i % piece.w])
 		== map.enemy ||
 		(ft_toupper(map.field[(y + i / piece.w) * map.w + x + i % piece.w])
-		== map.mine && 	++connection > 1)))
+		== map.mine && ++connection > 1)))
 			return (0);
 	return (connection);
 }
 
-void		solve(t_map map, t_piece piece)
+void	solve(t_map map, t_piece piece)
 {
 	int		x;
 	int		y;

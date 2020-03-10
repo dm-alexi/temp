@@ -45,7 +45,8 @@ int			get_dim(t_map *map)
 		(map->w = ft_atoi(t)) <= 0)
 		error("invalid map size\n");
 	free(line);
-	if (!map->field && !(map->field = (char*)malloc(map->h * map->w)))
+	if ((!map->field && !(map->field = (char*)malloc(map->h * map->w))) ||
+	(!map->arr && !(map->arr = (int*)malloc(map->w * map->w * sizeof(int)))))
 		sys_error();
 	return (1);
 }
@@ -67,6 +68,7 @@ void		get_map(t_map *map)
 		ft_strncpy(map->field + map->w * i, ft_strchr(line, ' ') + 1, map->w);
 		free(line);
 	}
+	setup(map);
 }
 
 static void	get_piece_center(t_piece *piece)

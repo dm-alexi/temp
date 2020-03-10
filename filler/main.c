@@ -18,6 +18,7 @@ int	main(void)
 	t_piece	piece;
 
 	map.field = NULL;
+	map.arr = NULL;
 	piece.field = NULL;
 	get_player(&map);
 	while (get_dim(&map))
@@ -29,5 +30,6 @@ int	main(void)
 		piece.field = NULL;
 	}
 	free(map.field);
+	free(map.arr);
 	return (0);
 }

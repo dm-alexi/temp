@@ -25,6 +25,7 @@ typedef struct	s_map
 	int		w;
 	int		h;
 	char	*field;
+	int		*arr;
 	char	mine;
 	char	enemy;
 }				t_map;
@@ -38,11 +39,18 @@ typedef struct	s_piece
 	char	*field;
 }				t_piece;
 
+typedef struct	s_queue
+{
+	int				num;
+	struct s_queue	*next;
+}				t_queue;
+
 void			sys_error(void);
 void			error(char *s);
 void			get_player(t_map *map);
 int				get_dim(t_map *map);
 void			get_map(t_map *map);
+void			setup(t_map *map);
 void			get_piece(t_piece *piece);
 void			solve(t_map map, t_piece piece);
 

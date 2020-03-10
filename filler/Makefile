@@ -3,7 +3,7 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 LIBFT = libft/libft.a
 HEAD = filler.h
-SRC = main.c error.c input.c solve.c
+SRC = main.c error.c input.c solve.c setup.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

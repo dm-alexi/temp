@@ -42,47 +42,52 @@ int		get_center(t_map map, char c)
 	return ((int)((double)y / n + 0.5) * map.w + (int)((double)x / n + 0.5));
 }
 
-int		possible(t_map map, t_piece piece, int x, int y)
+int		score(t_map map, t_piece piece, int x, int y)
 {
 	int		i;
+	int		score;
 	int		connection;
 
 	i = -1;
 	connection = 0;
+	score = 1;
 	while (++i < piece.h * piece.w)
-		if ((piece.field[i] == '*') &&
-		(y + i / piece.w < 0 || x + i % piece.w < 0 ||
-		y + i / piece.w >= map.h || x + i % piece.w >= map.w ||
-		ft_toupper(map.field[(y + i / piece.w) * map.w + x + i % piece.w])
-		== map.enemy ||
-		(ft_toupper(map.field[(y + i / piece.w) * map.w + x + i % piece.w])
-		== map.mine && ++connection > 1)))
-			return (0);
-	return (connection);
+		if (piece.field[i] == '*')
+		{
+			if (y + i / piece.w < 0 || x + i % piece.w < 0 ||
+			y + i / piece.w >= map.h || x + i % piece.w >= map.w ||
+			ft_toupper(map.field[(y + i / piece.w) * map.w + x + i % piece.w])
+			== map.enemy ||
+			(ft_toupper(map.field[(y + i / piece.w) * map.w + x + i % piece.w])
+			== map.mine && ++connection > 1))
+				return (0);
+			score += map.arr[(y + i / piece.w) * map.w + x + i % piece.w];
+		}
+	return (connection ? score : 0);
 }
 
 void	solve(t_map map, t_piece piece)
 {
-	int		x;
-	int		y;
 	int		center;
-	int		len;
+	int		smin;
+	int		sc;
 	t_point	k;
+	t_point	t;
 
-	len = map.w + map.h + 1;
+	smin = map.w * map.h * piece.h * piece.w;
 	center = get_center(map, map.enemy);
-	y = -piece.h;
-	while (++y < map.h)
+	t.y = -piece.h;
+	while (++t.y < map.h)
 	{
-		x = -piece.w;
-		while (++x < map.w)
-			if (possible(map, piece, x, y) && dist(&map, (y + piece.ycent)
-			* map.w + x + piece.xcent, center) < len)
+		t.x = -piece.w;
+		while (++t.x < map.w)
+			if ((sc = score(map, piece, t.x, t.y)) && (sc < smin ||
+			(sc == smin && dist(&map, (t.y + piece.ycent) * map.w + t.x +
+			piece.xcent, center) < dist(&map, (k.y + piece.ycent) * map.w + k.x
+			+ piece.xcent, center))))
 			{
-				len = dist(&map, (y + piece.ycent) * map.w + x
-					+ piece.xcent, center);
-				k.x = x;
-				k.y = y;
+				smin = sc;
+				k = t;
 			}
 	}
 	ft_printf("%d %d\n", k.y, k.x);

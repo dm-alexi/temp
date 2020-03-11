@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 18:46:32 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/09 14:40:51 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/11 19:37:30 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ typedef struct	s_piece
 {
 	int		w;
 	int		h;
-	int		xcent;
-	int		ycent;
 	char	*field;
 }				t_piece;
 

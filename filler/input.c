@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 18:46:50 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/11 19:39:33 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/11 22:59:51 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int			get_dim(t_map *map)
 	if (!r)
 		return (0);
 	if ((map->h = ft_strtol(line + 8, &t, 10)) <= 0 ||
-		(map->w = ft_atoi(t)) <= 0)
+	(map->w = ft_atoi(t)) <= 0)
 		error("invalid map size\n");
 	free(line);
 	if ((!map->field && !(map->field = (char*)malloc(map->h * map->w))) ||

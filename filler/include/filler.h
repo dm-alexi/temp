@@ -6,13 +6,13 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 18:46:32 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/11 19:44:51 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/12 20:16:33 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLER_H
 # define FILLER_H
-# include "libft/libft.h"
+# include "libft.h"
 
 typedef struct	s_point
 {

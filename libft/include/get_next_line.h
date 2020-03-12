@@ -6,14 +6,14 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/03 16:56:14 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/12 20:00:05 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # define BUFF_SIZE 1024
-# include "../libft.h"
+# include "libft.h"
 
 typedef struct	s_buf
 {

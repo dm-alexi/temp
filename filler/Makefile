@@ -2,18 +2,21 @@ NAME = sscarecr.filler
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
 LIBFT = libft/libft.a
-HEAD = filler.h
+LIBFT_HEAD = libft/include/
+HEAD_DIR = include/
+HEAD_FILES = filler.h
+HEADERS = $(addprefix $(HEAD_DIR),$(HEAD_FILES))
 SRC = main.c error.c input.c solve.c setup.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(HEAD)
+$(NAME): $(OBJ)
 	make -C ./libft/
 	$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(LIBFT)
 
-%.o: %.c $(HEAD)
-	$(CC) $(FLAGS) -o $@ -c $<
+%.o: %.c $(HEADERS)
+	$(CC) $(FLAGS) -I$(HEAD_DIR) -I$(LIBFT_HEAD) -o $@ -c $<
 
 clean:
 	rm -f $(OBJ)

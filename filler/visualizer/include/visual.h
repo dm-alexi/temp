@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 15:35:01 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/12 21:14:45 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/12 21:57:18 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ typedef struct	s_game
 
 void			sys_error(void);
 void			error(char *s);
+void			input(int fd, t_game *game);
 
 #endif

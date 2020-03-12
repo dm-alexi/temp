@@ -14,7 +14,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C $(LIBFT_DIR)
-	$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(LIBFT)
+	$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(LIBFT) -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 
 %.o: %.c $(HEADERS)
 	$(CC) $(FLAGS) -I$(HEAD_DIR) -I$(LIBFT_HEAD) -o $@ -c $<

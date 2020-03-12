@@ -54,4 +54,7 @@ typedef struct	s_game
 	t_screen	*screen;
 }				t_game;
 
+void			sys_error(void);
+void			error(char *s);
+
 #endif

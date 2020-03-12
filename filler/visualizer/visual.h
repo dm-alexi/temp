@@ -6,13 +6,13 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 15:35:01 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/11 18:06:23 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/12 21:14:45 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VISUAL_H
 # define VISUAL_H
-# include "libft/libft.h"
+# include "libft.h"
 
 # define RED 0xFF0000
 # define BLUE 0x0000FF

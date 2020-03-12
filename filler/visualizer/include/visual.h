@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 15:35:01 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/12 21:57:18 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/12 22:27:46 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ typedef struct	s_game
 	t_field		*current;
 	char		*p1;
 	char		*p2;
+	int			score1;
+	int			score2;
 	t_screen	*screen;
 }				t_game;
 

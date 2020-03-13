@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 15:35:01 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/12 22:27:46 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/13 22:58:45 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@
 # define BLUE 0x0000FF
 
 # define CELL 12
+# define MENU_HEIGHT 400
+# define MENU_WIDTH 400
 # define MAX_HEIGHT 1200
 # define MAX_WIDTH 1600
-# define MENU_HEIGHT 200
-# define MENU_WIDTH 200
+# define MIN_HEIGHT MENU_HEIGHT
+# define MIN_WIDTH MENU_WIDTH
 
 typedef struct	s_image
 {
@@ -69,6 +71,7 @@ typedef struct	s_game
 void			sys_error(void);
 void			error(char *s);
 void			input(int fd, t_game *game);
+void			init_visual(t_game *game);
 void			delete_game(t_game *game);
 
 #endif

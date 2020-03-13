@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/24 18:13:15 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/13 23:07:32 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@
 #define PLUS 24
 #define NUM_MINUS 78
 #define MINUS 27
-#define Q 12
-#define A 0
-#define Z 6
 
 #define MOVE_SPEED 0.05
 #define ZOOM_FACTOR 1.1

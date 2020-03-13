@@ -52,6 +52,7 @@ static void	get_initials(int fd, t_game *game)
 	(game->w = ft_atoi(t)) <= 0)
 		error("invalid map\n");
 	free(line);
+
 }
 
 static void	get_field(int fd, t_game *game)
@@ -59,7 +60,7 @@ static void	get_field(int fd, t_game *game)
 	int	i;
 	int	r;
 	char	*line;
-	
+
 	if (!game->start)
 		(game->start = (t_field*)ft_memalloc(sizeof(t_field))) ?
 			(game->finish = game->start) : sys_error();
@@ -76,15 +77,48 @@ static void	get_field(int fd, t_game *game)
 	while (++i < game->h)
 	{
 		if ((r = get_next_line(fd, &line)) <= 0)
-			r ? sys_error() : error("invalid piece\n");
-		ft_memcpy(game->finish->table + game->w * i, line, game->w);
+			r ? sys_error() : error("invalid map\n");
+		ft_memcpy(game->finish->table + game->w * i,
+			ft_strchr(line, ' ') + 1, game->w);
 		free(line);
 	}
 }
 
+static void	get_result(int fd, t_game *game, char *line)
+{
+    int	r;
+
+    if (!ft_isdigit(line[10]))
+		error("incorrect score\n");
+	game->score1 = ft_atoi(line + 10);
+	free(line);
+	if ((r = get_next_line(fd, &line)) <= 0)
+		r ? sys_error() : error("incorrect score\n");
+	if (!ft_strnequ(line, "== X fin: ", 10) || !ft_isdigit(line[10]))
+		error("incorrect score\n");
+	game->score2 = ft_atoi(line + 10);
+	free(line);
+}
+
 void		input(int fd, t_game *game)
 {
-	ft_bzero(game, sizeof(game));
+	char	*line;
+	int		r;
+
+	ft_bzero(game, sizeof(t_game));
 	get_initials(fd, game);
-	
+	line = NULL;
+	while (1)
+	{
+		while ((r = get_next_line(fd, &line)) > 0 && !ft_strnequ(line, "    ", 4) &&
+		!ft_strnequ(line, "== O fin: ", 10))
+			free(line);
+		if (r <= 0)
+			r ? sys_error() : error("invalid map\n");
+        if (line[0] == '=')
+			break ;
+		free(line);
+		get_field(fd, game);
+	}
+	get_result(fd, game, line);
 }

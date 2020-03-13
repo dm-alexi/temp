@@ -20,7 +20,7 @@
 
 static int  usage(void)
 {
-    ft_printf("usage: visual [filename]\n");
+    ft_printf("Filler visualizer takes 0 or 1 argument.\n");
 	return (0);
 }
 
@@ -35,7 +35,8 @@ int main(int ac, char **av)
     if (fd < 0)
 		sys_error();
 	input(fd, &game);
-	close(fd);
+	if (fd != STDIN_FILENO)
+		close(fd);
 	//fdf_init(av[ac - 1], map);
     //delete(&game);
     return (0);

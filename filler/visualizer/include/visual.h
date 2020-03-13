@@ -46,13 +46,13 @@ typedef struct	s_game
 {
 	int			w;
 	int			h;
+	int			score1;
+	int			score2;
 	t_field		*start;
 	t_field		*finish;
 	t_field		*current;
 	char		*p1;
 	char		*p2;
-	int			score1;
-	int			score2;
 	t_screen	*screen;
 }				t_game;
 

@@ -17,6 +17,12 @@
 # define RED 0xFF0000
 # define BLUE 0x0000FF
 
+# define CELL 12
+# define MAX_HEIGHT 1200
+# define MAX_WIDTH 1600
+# define MENU_HEIGHT 200
+# define MENU_WIDTH 200
+
 typedef struct	s_image
 {
 	void	*img;
@@ -30,9 +36,13 @@ typedef struct	s_image
 
 typedef struct	s_screen
 {
-	void		*mlx;
-	void		*win;
-	t_image		*image;
+	int		h;
+	int		w;
+	void	*mlx;
+	void	*win;
+	t_image	*image;
+	t_image	*menu;
+	char	*title;
 }				t_screen;
 
 typedef struct	s_field
@@ -59,5 +69,6 @@ typedef struct	s_game
 void			sys_error(void);
 void			error(char *s);
 void			input(int fd, t_game *game);
+void			delete_game(t_game *game);
 
 #endif

@@ -7,7 +7,7 @@ LIBFT_HEAD = $(LIBFT_DIR)include/
 HEAD_DIR = include/
 HEAD_FILES = visual.h
 HEADERS = $(addprefix $(HEAD_DIR),$(HEAD_FILES))
-SRC = main.c error.c input.c
+SRC = main.c error.c input.c delete.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

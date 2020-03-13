@@ -38,3 +38,8 @@ void	*init(int height, int width, char *title)
 		sys_error();
 	return (s);
 }
+
+void	init_visual(t_game *game)
+{
+
+}

@@ -37,7 +37,7 @@ int main(int ac, char **av)
 	input(fd, &game);
 	if (fd != STDIN_FILENO)
 		close(fd);
-	//fdf_init(av[ac - 1], map);
-    //delete(&game);
+	//init_visual(&game);
+    delete_game(&game);
     return (0);
 }

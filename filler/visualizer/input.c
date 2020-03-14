@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 21:24:32 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/14 20:01:34 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/14 20:06:18 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static void	get_initials(int fd, t_game *game)
 		error("players not launched\n");
 	if (get_player(fd, &line, &game->p2) && (r = get_next_line(fd, &line)) <= 0)
 		r ? sys_error() : error("map not received\n");
-	ft_printf("%s\n", line);
 	if (!ft_strnequ(line, "Plateau ", 8) ||
 	(game->h = ft_strtol(line + 8, &t, 10)) <= 0 ||
 	(game->w = ft_atoi(t)) <= 0)

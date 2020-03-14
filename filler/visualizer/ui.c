@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/14 19:19:11 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/14 19:46:33 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 #define PGUP 116
 #define END 119
 #define HOME 115
-#define SPACE 49
 
 #define STEP 10
 

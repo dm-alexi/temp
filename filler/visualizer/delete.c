@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 21:58:48 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/13 22:23:18 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/14 15:23:57 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,5 @@ void	delete_game(t_game *game)
 	}
 	free(game->p1);
 	free(game->p2);
+	free(game->title);
 }

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 21:24:32 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/13 23:23:02 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/14 14:48:06 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,4 +120,5 @@ void		input(int fd, t_game *game)
 		get_field(fd, game);
 	}
 	get_result(fd, game, line);
+	game->current = game->start;
 }

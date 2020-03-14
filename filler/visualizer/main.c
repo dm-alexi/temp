@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 21:24:35 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/13 23:19:26 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/14 15:17:02 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,5 @@ int			main(int ac, char **av)
 	if (fd != STDIN_FILENO)
 		close(fd);
 	init_visual(&game);
-	delete_game(&game);
 	return (0);
 }

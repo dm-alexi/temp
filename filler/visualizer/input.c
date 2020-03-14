@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 21:24:32 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/14 14:48:06 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/14 19:29:45 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static int	get_player(int fd, char *line, char **name)
 		{
 			if (!(*name = ft_strsub(line, t1 - line + 1, t2 - t1 - 1)))
 				sys_error();
-			else
-				return (1);
+			free(line);
+			return (1);
 		}
 		free(line);
 	}

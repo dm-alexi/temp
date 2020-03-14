@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 18:28:09 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/14 16:36:22 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/14 19:09:52 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ static void		*get_screen(int height, int width, char *title)
 
 	if (!(s = (t_screen*)malloc(sizeof(t_screen))) ||
 	!(s->mlx = mlx_init()) ||
-	!(s->win = mlx_new_window(s->mlx, width, height, title)) ||
-	!(s->image = new_image(s->mlx, width - MENU_WIDTH, height)) ||
-	!(s->menu = new_image(s->mlx, MENU_WIDTH, height)))
+	!(s->win = mlx_new_window(s->mlx, width + MENU_WIDTH + 2 * BORDER,
+	height + 2 * BORDER, title)) ||
+	!(s->image = new_image(s->mlx, width, height)))
 		sys_error();
+	s->play = 0;
 	return (s);
 }
 
@@ -70,11 +71,9 @@ void			init_visual(t_game *game)
 	height = game->h * game->cell;
 	width = game->w * game->cell;
 	game->title = get_title(game);
-	game->screen = get_screen(height, width + MENU_WIDTH, game->title);
+	game->screen = get_screen(height, width, game->title);
 	mlx_hook(game->screen->win, 17, 1L << 17, &win_close, game);
 	mlx_hook(game->screen->win, 2, 1L << 0, &key_handle, game);
-	//mlx_hook(game->screen->win, 4, 1L << 2, &mouse_handle, game->screen);
-	draw_map(game);
-	draw_menu(game);
+	draw(game);
 	mlx_loop(game->screen->mlx);
 }

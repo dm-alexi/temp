@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 15:35:01 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/14 16:36:38 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/03/14 19:09:34 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define GREY 0x808080
 # define BLACK 0x000000
 
+# define BORDER 10
 # define MENU_WIDTH 400
 # define HEIGHT 1200
 # define WIDTH 1600
@@ -39,12 +40,10 @@ typedef struct	s_image
 
 typedef struct	s_screen
 {
-	int		h;
-	int		w;
+	int		play;
 	void	*mlx;
 	void	*win;
 	t_image	*image;
-	t_image	*menu;
 }				t_screen;
 
 typedef struct	s_field
@@ -76,8 +75,6 @@ void			input(int fd, t_game *game);
 void			init_visual(t_game *game);
 int				win_close(void *param);
 int				key_handle(int key, void *param);
-void			delete_game(t_game *game);
-void			draw_map(t_game *game);
-void			draw_menu(t_game *game);
+void			draw(t_game *game);
 
 #endif

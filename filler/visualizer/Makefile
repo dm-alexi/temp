@@ -1,26 +1,36 @@
 NAME = ../visual
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
-LIBFT_DIR = ../libft/
-LIBFT = $(LIBFT_DIR)libft.a
-LIBFT_HEAD = $(LIBFT_DIR)include/
-HEAD_DIR = include/
+HEAD_DIR = include
+SRC_DIR = src
+OBJ_DIR = obj
+LIBFT_DIR = ../libft
+LIBFT = $(LIBFT_DIR)/libft.a
+LIBFT_HEAD = $(LIBFT_DIR)/include
 HEAD_FILES = visual.h
-HEADERS = $(addprefix $(HEAD_DIR),$(HEAD_FILES))
-SRC = main.c error.c input.c init.c ui.c draw.c
-OBJ = $(SRC:.c=.o)
+SRC_FILES = main.c error.c input.c init.c ui.c draw.c
+SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
+OBJ = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
 all: $(NAME)
+
+-include $(OBJ:.o=.d)
 
 $(NAME): $(OBJ)
 	make -C $(LIBFT_DIR)
 	$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(LIBFT) -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 
-%.o: %.c $(HEADERS)
-	$(CC) $(FLAGS) -I$(HEAD_DIR) -I$(LIBFT_HEAD) -o $@ -c $<
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(FLAGS) -I$(HEAD_DIR) -I$(LIBFT_HEAD) -o $@ -c $< -MMD
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
+$(LIBFT): FAKE
+	make -C $(LIBFT_DIR)
 
 clean:
-	rm -f $(OBJ)
+	rm -rf $(OBJ_DIR)
 	make clean -C $(LIBFT_DIR)
 
 fclean: clean
@@ -29,4 +39,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re FAKE

@@ -29,7 +29,7 @@ $(LIBFT): FAKE
 	make -C $(LIBFT_DIR)
 
 clean:
-	rm -f $(OBJ)
+	rm -rf $(OBJ_DIR)
 	make clean -C $(LIBFT_DIR)
 
 fclean: clean

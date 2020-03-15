@@ -1,9 +1,9 @@
 NAME = libft.a
 CC = gcc
 FLAGS = -c -Wall -Wextra -Werror -MMD
-HEAD_DIR = ./include
-SRC_DIR = ./src
-OBJ_DIR = ./obj
+HEAD_DIR = include
+SRC_DIR = src
+OBJ_DIR = obj
 PRINTF_DIR = ft_printf
 HEAD_FILES = libft.h ft_printf.h ft_bigint.h get_next_line.h
 PRINTF_FILES = ft_printf.c ft_printf_b.c ft_printf_e.c ft_printf_efg.c ft_printf_f.c ft_printf_float.c ft_printf_int.c ft_printf_n.c ft_printf_otoa.c ft_printf_ptr.c ft_printf_r.c \

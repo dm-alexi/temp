@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.c                                           :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/01 15:19:42 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/01 16:31:52 by sscarecr         ###   ########.fr       */
+/*   Created: 2019/09/09 20:12:34 by sscarecr          #+#    #+#             */
+/*   Updated: 2020/03/15 21:51:12 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_abs(int n)
+#include "libft.h"
+
+long int	ft_atol(const char *nptr)
 {
-	return (n >= 0 ? n : -n);
+	return (ft_strtol(nptr, (char **)NULL, 10));
 }

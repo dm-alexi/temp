@@ -46,11 +46,12 @@ int	get_dim(t_map *map)
 	line = NULL;
 	if ((r = get_next_line(STDIN_FILENO, &line)) < 0)
 		return (sys_error());
-	if (!r || (map->h = ft_strtol(line + 8, &t, 10)) <= 0 ||
+	if (!r || !ft_strnequ(line, "Plateau ", 8) ||
+	(map->h = ft_strtol(line + 8, &t, 10)) <= 0 ||
 	(map->w = ft_atoi(t)) <= 0)
 	{
 		free(line);
-		return (error("invalid map size\n"));
+		return (1);
 	}
 	free(line);
 	if ((!map->field && !(map->field = (char*)malloc(map->h * map->w))) ||

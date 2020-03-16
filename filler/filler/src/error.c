@@ -14,15 +14,15 @@
 #include <unistd.h>
 #include "libft.h"
 
-void	sys_error(void)
+int	sys_error(void)
 {
 	perror("Error");
-	exit(EXIT_FAILURE);
+	return (1);
 }
 
-void	error(char *s)
+int	error(char *s)
 {
 	write(STDERR_FILENO, "Error: ", 7);
 	write(STDERR_FILENO, s, ft_strlen(s));
-	exit(EXIT_FAILURE);
+	return (1);
 }

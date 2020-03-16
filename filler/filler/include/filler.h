@@ -43,13 +43,13 @@ typedef struct	s_queue
 	struct s_queue	*next;
 }				t_queue;
 
-void			sys_error(void);
-void			error(char *s);
-void			get_player(t_map *map);
+int				sys_error(void);
+int				error(char *s);
+int				get_player(t_map *map);
 int				get_dim(t_map *map);
-void			get_map(t_map *map);
-void			setup(t_map *map);
-void			get_piece(t_piece *piece);
+int				get_map(t_map *map);
+int				setup(t_map *map);
+int				get_piece(t_piece *piece);
 void			solve(t_map map, t_piece piece);
 
 #endif

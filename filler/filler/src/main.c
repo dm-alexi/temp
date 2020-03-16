@@ -20,15 +20,14 @@ int	main(void)
 	map.field = NULL;
 	map.arr = NULL;
 	piece.field = NULL;
-	get_player(&map);
-	while (get_dim(&map))
-	{
-		get_map(&map);
-		get_piece(&piece);
-		solve(map, piece);
-		free(piece.field);
-		piece.field = NULL;
-	}
+	if (!get_player(&map))
+		while (!get_dim(&map) && !get_map(&map) && !get_piece(&piece))
+		{
+			solve(map, piece);
+			free(piece.field);
+			piece.field = NULL;
+		}
+	free(piece.field);
 	free(map.field);
 	free(map.arr);
 	return (0);

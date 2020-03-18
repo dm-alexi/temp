@@ -14,14 +14,10 @@
 #include <unistd.h>
 #include "libft.h"
 
-void	sys_error(void)
+void	sys_error(char *s)
 {
-	perror("Error");
-	exit(EXIT_FAILURE);
-}
-
-void	sys_error_ext(char *s)
-{
+	if (!s)
+		write(STDERR_FILENO, "Error: ", 7);
 	perror(s);
 	exit(EXIT_FAILURE);
 }

@@ -1,7 +1,7 @@
 #include "corewar.h"
 #include "libft.h"
 
-static int	is_digital(char *s)
+static int		is_digital(char *s)
 {
 	if (!s || !*s)
 		return (0);
@@ -10,17 +10,17 @@ static int	is_digital(char *s)
 	return (*s == '\0');
 }
 
-static int	valid_filename(char *s)
+static int		valid_filename(char *s)
 {
 	int	n;
 
 	return ((n = ft_strlen(s)) > 4 && ft_strequ(s + n - 4, ".cor"));
 }
 
-static int	count_players(int ac, char **av)
+static unsigned	count_players(int ac, char **av)
 {
-	int	i;
-	int	count;
+	int			i;
+	unsigned	count;
 
 	i = 0;
 	count = 0;
@@ -30,14 +30,14 @@ static int	count_players(int ac, char **av)
 	return (count);
 }
 
-static char	**get_files(int ac, char **av, int n)
+static char		**get_files(int ac, char **av, int n)
 {
 	int		i;
 	int		tmp;
 	char	**files;
 
 	if (!(files = (char**)ft_memalloc(sizeof(char*) * n)))
-		sys_error();
+		sys_error(NULL);
 	i = 0;
     while (++i < ac)
 		if (ft_strequ(av[i], "-n"))
@@ -58,7 +58,7 @@ static char	**get_files(int ac, char **av, int n)
 	return (files);
 }
 
-void		input(t_vm *vm, int ac, char **av)
+void			input(t_vm *vm, int ac, char **av)
 {
 	int		i;
 	char	**files;

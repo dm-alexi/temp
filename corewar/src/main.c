@@ -7,7 +7,7 @@ int	main(int ac, char **av)
 
 	if (!(vm = ft_memalloc(sizeof(t_vm))))
 		sys_error();
-
     input(vm, ac, av);
+    introduce(vm);
 	return (0);
 }

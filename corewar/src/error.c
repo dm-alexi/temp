@@ -20,6 +20,12 @@ void	sys_error(void)
 	exit(EXIT_FAILURE);
 }
 
+void	sys_error_ext(char *s)
+{
+	perror(s);
+	exit(EXIT_FAILURE);
+}
+
 void	error(char *s)
 {
 	write(STDERR_FILENO, "Error: ", 7);

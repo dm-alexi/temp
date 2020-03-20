@@ -13,6 +13,7 @@ void	init_arena(t_vm *vm)
 		ft_memcpy(vm->arena + i * step, vm->players[i].code,
 		vm->players[i].header.prog_size);
         vm->start = new_process(vm->start, ++vm->num_process,
-		vm->players[i].num);
+		vm->players[i].num, i * step);
+		vm->start->reg[0] = -(i + 1);
 	}
 }

@@ -17,6 +17,18 @@ void	introduce(t_vm *vm)
 		vm->players[i].header.comment);
 }
 
+void	declare_alive(t_vm *vm, unsigned player_num)
+{
+	ft_printf("A process shows that player %u (%s) is alive", player_num,
+	vm->players[player_num - 1].header.prog_name);
+}
+
+void	declare_winner(t_vm *vm)
+{
+    ft_printf("Player %u (%s) won\n", vm->last_alive,
+	vm->players[vm->last_alive - 1].header.prog_name);
+}
+
 void	dump(t_vm *vm)
 {
 	t_byte	*t;

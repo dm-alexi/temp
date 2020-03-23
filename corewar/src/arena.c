@@ -17,3 +17,17 @@ void	init_arena(t_vm *vm)
 		vm->start->reg[0] = -(i + 1);
 	}
 }
+
+int		readbytes(int start, t_byte *arena)
+{
+    char	s[DIR_SIZE];
+    int		i;
+
+	i = 0;
+	while (i < DIR_SIZE)
+	{
+		s[i] = arena[(start + i) % MEM_SIZE];
+		++i;
+	}
+	return (*((int*)s));
+}

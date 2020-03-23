@@ -58,7 +58,7 @@ int		battle(t_vm *vm)
 		{
             if (cur->exec_cycle < vm->cycle)
                 read_instr(cur, vm);
-			else if (cur->exec_cycle == vm->cycle)
+			if (cur->exec_cycle == vm->cycle)
 				exec_instr(cur, vm);
 			cur = cur->next;
 		}

@@ -56,6 +56,7 @@ void			declare_winner(t_vm *vm);
 void			dump(t_vm *vm);
 
 void			init_arena(t_vm *vm);
+int				readbytes(int start, t_byte *arena);
 t_process		*new_process(t_process *next, unsigned num, unsigned player_num,
 					t_byte pc);
 int				battle(t_vm *vm);

@@ -24,6 +24,8 @@ int		readbytes(int start, t_byte *arena)
     int		i;
 
 	i = 0;
+	if (start + DIR_SIZE < MEM_SIZE)
+		return (*((int*)(arena + start)));
 	while (i < DIR_SIZE)
 	{
 		s[i] = arena[(start + i) % MEM_SIZE];

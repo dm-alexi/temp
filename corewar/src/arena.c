@@ -18,7 +18,7 @@ void	init_arena(t_vm *vm)
 	}
 }
 
-int		readbytes(int start, t_byte *arena)
+int		read_dir(int start, t_byte *arena)
 {
     char	s[DIR_SIZE];
     int		i;
@@ -33,3 +33,20 @@ int		readbytes(int start, t_byte *arena)
 	}
 	return (*((int*)s));
 }
+
+int		read_ind(int start, t_byte *arena)
+{
+	char	s[IND_SIZE];
+    int		i;
+
+	i = 0;
+	if (start + IND_SIZE < MEM_SIZE)
+		return (*((int*)(arena + start)));
+	while (i < IND_SIZE)
+	{
+		s[i] = arena[(start + i) % MEM_SIZE];
+		++i;
+	}
+	return (*((int*)s));
+}
+

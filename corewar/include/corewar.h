@@ -43,6 +43,18 @@ typedef struct	s_vm
 	unsigned	last_alive;
 }				t_vm;
 
+typedef struct	s_op
+{
+    void	(*func)(t_process*, t_vm*);
+    t_byte	argtype;
+    int		argnum;
+    t_byte	args[3];
+    int		dirsize;
+    int		lag;
+}				t_op;
+
+extern const t_op	g_tab[];
+
 void			sys_error(char *s);
 void			error(char *s);
 void			error_ext(char *s, char *t);
@@ -56,7 +68,8 @@ void			declare_winner(t_vm *vm);
 void			dump(t_vm *vm);
 
 void			init_arena(t_vm *vm);
-int				readbytes(int start, t_byte *arena);
+int				read_dir(int start, t_byte *arena);
+int				read_ind(int start, t_byte *arena);
 t_process		*new_process(t_process *next, unsigned num, unsigned player_num,
 					t_byte pc);
 int				battle(t_vm *vm);

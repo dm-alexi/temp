@@ -6,10 +6,9 @@ void	live(t_process *t, t_vm *vm)
 
 	t->last_live = vm->cycle;
     ++vm->live_calls;
-	n = readbytes(t->pc + 1, vm->arena);
-	if (-n > 0 && -n <= vm->num_players)
+	n = read_dir(t->pc + 1, vm->arena);
+	if (-n > 0 && -n <= vm->num_players) //check if it's really negative
 		vm->last_alive = vm->players[-n - 1].num;
-	t->pc = (t->pc + 1 + DIR_SIZE) % MEM_SIZE;
 }
 
 void	ld(t_process *t, t_vm *vm)

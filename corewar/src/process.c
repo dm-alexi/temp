@@ -10,7 +10,7 @@ t_process	*new_process(t_process *next, unsigned num, unsigned player_num,
 		sys_error(NULL);
     p->next = next;
     p->player_num = player_num;
-    p->num = num;
+    p->num = num; // check if this is necessary
     p->pc = pc;
     return (p);
 }

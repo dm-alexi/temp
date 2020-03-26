@@ -45,10 +45,10 @@ typedef struct	s_vm
 
 typedef struct	s_op
 {
-    void	(*func)(t_process*, t_vm*);
+    void	(*func)(t_process*, t_vm*, int* args);
     t_byte	argtype;
     int		argnum;
-    t_byte	args[3];
+    char	args[3];
     int		dirsize;
     int		lag;
 }				t_op;
@@ -70,6 +70,7 @@ void			dump(t_vm *vm);
 void			init_arena(t_vm *vm);
 int				read_dir(int start, t_byte *arena);
 int				read_ind(int start, t_byte *arena);
+void			write_bytes(int n, int start, t_byte *arena);
 t_process		*new_process(t_process *next, unsigned num, unsigned player_num,
 					t_byte pc);
 int				battle(t_vm *vm);
@@ -77,21 +78,21 @@ void			read_instr(t_process *cur, t_vm *vm);
 void			exec_instr(t_process *cur, t_vm *vm);
 void			delete_vm(t_vm *vm);
 
-void			live(t_process *t, t_vm *vm);
-void			ld(t_process *t, t_vm *vm);
-void			st(t_process *t, t_vm *vm);
-void			add(t_process *t, t_vm *vm);
-void			sub(t_process *t, t_vm *vm);
-void			and(t_process *t, t_vm *vm);
-void			or(t_process *t, t_vm *vm);
-void			xor(t_process *t, t_vm *vm);
-void			zjmp(t_process *t, t_vm *vm);
-void			ldi(t_process *t, t_vm *vm);
-void			sti(t_process *t, t_vm *vm);
-void			fork(t_process *t, t_vm *vm);
-void			lld(t_process *t, t_vm *vm);
-void			lldi(t_process *t, t_vm *vm);
-void			lfork(t_process *t, t_vm *vm);
-void			aff(t_process *t, t_vm *vm);
+void			live(t_process *t, t_vm *vm, int *args);
+void			ld(t_process *t, t_vm *vm, int *args);
+void			st(t_process *t, t_vm *vm, int *args);
+void			add(t_process *t, t_vm *vm, int *args);
+void			sub(t_process *t, t_vm *vm, int *args);
+void			and(t_process *t, t_vm *vm, int *args);
+void			or(t_process *t, t_vm *vm, int *args);
+void			xor(t_process *t, t_vm *vm, int *args);
+void			zjmp(t_process *t, t_vm *vm, int *args);
+void			ldi(t_process *t, t_vm *vm, int *args);
+void			sti(t_process *t, t_vm *vm, int *args);
+void			fork(t_process *t, t_vm *vm, int *args);
+void			lld(t_process *t, t_vm *vm, int *args);
+void			lldi(t_process *t, t_vm *vm, int *args);
+void			lfork(t_process *t, t_vm *vm, int *args);
+void			aff(t_process *t, t_vm *vm, int *args);
 
 #endif

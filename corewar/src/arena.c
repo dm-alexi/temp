@@ -23,14 +23,13 @@ int		read_dir(int start, t_byte *arena)
     char	s[DIR_SIZE];
     int		i;
 
-	i = 0;
+    if (start < 0)
+		start += MEM_SIZE;
 	if (start + DIR_SIZE < MEM_SIZE)
 		return (*((int*)(arena + start)));
-	while (i < DIR_SIZE)
-	{
+	i = -1;
+	while (++i < DIR_SIZE)
 		s[i] = arena[(start + i) % MEM_SIZE];
-		++i;
-	}
 	return (*((int*)s));
 }
 
@@ -39,14 +38,30 @@ int		read_ind(int start, t_byte *arena)
 	char	s[IND_SIZE];
     int		i;
 
-	i = 0;
+	if (start < 0)
+		start += MEM_SIZE;
 	if (start + IND_SIZE < MEM_SIZE)
-		return (*((int*)(arena + start)));
-	while (i < IND_SIZE)
-	{
+		return (*((short*)(arena + start)));
+	i = -1;
+	while (++i < IND_SIZE)
 		s[i] = arena[(start + i) % MEM_SIZE];
-		++i;
-	}
-	return (*((int*)s));
+	return (*((short*)s));
 }
 
+void	write_bytes(int n, int start, t_byte *arena)
+{
+	t_byte	*s;
+	int		i;
+
+	if (start < 0)
+		start += MEM_SIZE;
+	if (start + DIR_SIZE < MEM_SIZE)
+		*(int*)(arena + start) = n;
+	else
+	{
+		s = (t_byte*)&n;
+		i = -1;
+		while (++i < REG_SIZE)
+			arena[(start + i) % MEM_SIZE] = s[i];
+	}
+}

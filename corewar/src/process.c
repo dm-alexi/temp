@@ -15,51 +15,57 @@ t_process	*new_process(t_process *next, unsigned num, unsigned player_num,
     return (p);
 }
 
-int		skip_size(int op, t_byte c)
-{
-	int	n;
-	int	argnum;
-
-	if (!g_tab[op].argtype)
-		return (g_tab[op].dirsize);
-	argnum = g_tab[op].argnum;
-	n = 1;
-	while (c >>= 2)
-		if (++argnum > 3)
-		{
-            if ((c & 0x03) == REG_CODE)
-				n += T_REG;
-			else if ((c & 0x03) == DIR_CODE)
-				n += g_tab[op].dirsize;
-			else if ((c & 0x03) == IND_CODE)
-				n += T_IND;
-		}
-	return (n);
-}
-
-int			check_instr(t_process *cur, t_vm *vm)
+int			check_args(t_process *t, t_vm *vm)
 {
 	t_byte	c;
 	int		i;
 	int		n;
+	int		sign;
 
-	i = 0;
-	while (i < g_tab[cur->op].argnum)
+	if (!g_tab[t->op].argtype)
+		return (g_tab[t->op].dirsize);
+	i = -1;
+	n = 1;
+	sign = 1;
+	while (++i < g_tab[t->op].argnum &&
+	(c = ((vm->arena[(t->pc + 1) % MEM_SIZE] >> (6 - 2 * i)) & 0x03)))
 	{
-		c = ((vm->arena[(cur->pc + 1) % MEM_SIZE] >> (6 - 2 * i)) & 0x03);
-        if (c == REG_CODE && (g_tab[cur->op].args[i] & T_REG) &&
-		vm->arena[cur->op + 2 + n] > 0 &&
-		vm->arena[cur->op + 2 + n] <= REG_NUMBER)
+		if (c == REG_CODE && (sign = (g_tab[t->op].args[i] & T_REG) &&
+		(vm->arena[(t->pc + 1 + n) % MEM_SIZE] > 0) &&
+		vm->arena[(t->pc + 1 + n) % MEM_SIZE] <= REG_NUMBER ? sign : -1))
 			++n;
-		else if (c == DIR_CODE && (g_tab[cur->op].args[i] & T_DIR))
-			n += g_tab[cur->op].dirsize;
-		else if (c == IND_CODE && (g_tab[cur->op].args[i] & T_IND))
-			n += IND_SIZE;
-		else
-			return (0);
-		++i;
+		else if (c == DIR_CODE && (n += g_tab[t->op].dirsize))
+			sign = (g_tab[t->op].args[i] & T_DIR) ? sign : -1;
+		else if (c == IND_CODE && (n += IND_SIZE))
+			sign = (g_tab[t->op].args[i] & T_IND) ?	sign : -1;
 	}
-	return (1);
+	return (c ? n * sign : -n);
+}
+
+void		get_args(t_process *t, t_vm *vm, int *args)
+{
+	t_byte	c;
+	int		i;
+	int		p;
+
+	p = t->pc + 1;
+	i = -1;
+	if (!g_tab[t->op].argtype)
+		args[0] = (g_tab[t->op].dirsize == DIR_SIZE ?
+		read_dir(p % MEM_SIZE, vm->arena) : read_ind(p % MEM_SIZE, vm->arena));
+	else
+		while (++i < g_tab[t->op].argnum)
+		{
+			c = ((vm->arena[(t->pc + 1) % MEM_SIZE] >> (6 - 2 * i)) & 0x03);
+			if (c == REG_CODE && ++p)
+				args[i] = vm->arena[p % MEM_SIZE];
+			else if (c == DIR_CODE && (p += g_tab[t->op].dirsize))
+				args[i] = (g_tab[t->op].dirsize == DIR_SIZE ?
+				read_dir(p % MEM_SIZE, vm->arena) :
+				read_ind(p % MEM_SIZE, vm->arena));
+			else if (c == IND_CODE && (p += IND_SIZE))
+				args[i] = read_ind(p % MEM_SIZE, vm->arena);
+		}
 }
 
 void		read_instr(t_process *cur, t_vm *vm)
@@ -72,13 +78,21 @@ void		read_instr(t_process *cur, t_vm *vm)
 
 void		exec_instr(t_process *cur, t_vm *vm)
 {
-    if (cur->op > 0 && cur->op <= OP)
+	static int	args[3];
+	int			n;
+
+	if (cur->op > 0 && cur->op <= OP)
 	{
-		if (!g_tab[cur->op].argtype || check_instr(cur, vm))
-			g_tab[cur->op].func(cur, vm);
-        if (g_tab[cur->op].func != zjmp)
-			cur->pc = (cur->pc + 1 + skip_size(cur->op,
-			vm->arena[(cur->pc + 1) % MEM_SIZE])) % MEM_SIZE;
+		n = check_args(cur, vm);
+		if (n <= 0)
+			cur->pc = (cur->pc + 1 - n) % MEM_SIZE;
+        else
+		{
+			get_args(cur, vm, args);
+			g_tab[cur->op].func(cur, vm, args);
+			if (g_tab[cur->op].func != zjmp)
+				cur->pc = (cur->pc + 1 + n) % MEM_SIZE;
+		}
 	}
 	else
 		cur->pc = (cur->pc + 1) % MEM_SIZE;

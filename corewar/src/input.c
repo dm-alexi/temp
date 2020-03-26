@@ -39,7 +39,7 @@ static char		**get_files(int ac, char **av, int n)
 	if (!(files = (char**)ft_memalloc(sizeof(char*) * n)))
 		sys_error(NULL);
 	i = 0;
-    while (++i < ac)
+	while (++i < ac)
 		if (ft_strequ(av[i], "-n"))
 			i < ac - 2 && is_digital(av[++i]) && (tmp = ft_atoi(av[i])) > 0 &&
 			tmp <= n && valid_filename(av[++i]) && !files[tmp - 1] ?
@@ -67,7 +67,7 @@ void			input(t_vm *vm, int ac, char **av)
 	vm->num_players > MAX_PLAYERS)
 		error("Invalid number of players.");
 	files = get_files(ac, av, vm->num_players);
-    i = 0;
+	i = 0;
 	while (++i < ac)
 	{
 		if (ft_strequ(av[i], "-d") || ft_strequ(av[i], "-dump"))

@@ -12,7 +12,7 @@ void	init_arena(t_vm *vm)
 	{
 		ft_memcpy(vm->arena + i * step, vm->players[i].code,
 		vm->players[i].header.prog_size);
-        vm->start = new_process(vm->start, ++vm->num_process,
+		vm->start = new_process(vm->start, ++vm->num_process,
 		vm->players[i].num, i * step);
 		vm->start->reg[0] = -(i + 1);
 	}
@@ -20,10 +20,10 @@ void	init_arena(t_vm *vm)
 
 int		read_dir(int start, t_byte *arena)
 {
-    char	s[DIR_SIZE];
-    int		i;
+	char	s[DIR_SIZE];
+	int		i;
 
-    if (start < 0)
+	if (start < 0)
 		start += MEM_SIZE;
 	if (start + DIR_SIZE < MEM_SIZE)
 		return (*((int*)(arena + start)));
@@ -36,7 +36,7 @@ int		read_dir(int start, t_byte *arena)
 int		read_ind(int start, t_byte *arena)
 {
 	char	s[IND_SIZE];
-    int		i;
+	int		i;
 
 	if (start < 0)
 		start += MEM_SIZE;

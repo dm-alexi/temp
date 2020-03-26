@@ -45,12 +45,12 @@ typedef struct	s_vm
 
 typedef struct	s_op
 {
-    void	(*func)(t_process*, t_vm*, int* args);
-    t_byte	argtype;
-    int		argnum;
-    char	args[3];
-    int		dirsize;
-    int		lag;
+	void	(*func)(t_process*, t_vm*, int* args);
+	t_byte	argtype;
+	int		argnum;
+	char	args[3];
+	int		dirsize;
+	int		lag;
 }				t_op;
 
 extern const t_op	g_tab[];

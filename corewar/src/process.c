@@ -4,15 +4,15 @@
 t_process	*new_process(t_process *next, unsigned num, unsigned player_num,
 						t_byte pc)
 {
-    t_process	*p;
+	t_process	*p;
 
-    if (!(p = (t_process*)ft_memalloc(sizeof(t_process))))
+	if (!(p = (t_process*)ft_memalloc(sizeof(t_process))))
 		sys_error(NULL);
-    p->next = next;
-    p->player_num = player_num;
-    p->num = num; // check if this is necessary
-    p->pc = pc;
-    return (p);
+	p->next = next;
+	p->player_num = player_num;
+	p->num = num; // check if this is necessary
+	p->pc = pc;
+	return (p);
 }
 
 int			check_args(t_process *t, t_vm *vm)

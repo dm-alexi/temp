@@ -25,7 +25,7 @@ void	declare_alive(t_vm *vm, unsigned player_num)
 
 void	declare_winner(t_vm *vm)
 {
-    ft_printf("Player %u (%s) won\n", vm->last_alive,
+	ft_printf("Player %u (%s) won\n", vm->last_alive,
 	vm->players[vm->last_alive - 1].header.prog_name);
 }
 

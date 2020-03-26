@@ -3,10 +3,10 @@
 
 void	delete_vm(t_vm *vm)
 {
-    t_process	*t;
-    int			i;
+	t_process	*t;
+	int			i;
 
-    while (vm->start)
+	while (vm->start)
 	{
 		t = vm->start->next;
 		free(vm->start);

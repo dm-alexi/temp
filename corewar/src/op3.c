@@ -17,7 +17,7 @@ void	sti(t_process *t, t_vm *vm, int *args)
 		b = args[2];
 	else if (c == T_REG)
 		b = t->reg[args[2] - 1];
-    write_bytes(t->reg[args[0] - 1], (t->pc + (a + b) % IDX_MOD) % MEM_SIZE,
+	write_bytes(t->reg[args[0] - 1], (t->pc + (a + b) % IDX_MOD) % MEM_SIZE,
 	vm->arena);
 }
 
@@ -28,14 +28,14 @@ void	fork(t_process *t, t_vm *vm, int *args)
 	if (!(p = (t_process*)ft_memalloc(sizeof(t_process))))
 		sys_error(NULL);
 	p->next = vm->start;
-    p->player_num = t->player_num;
-    p->num = ++vm->num_process; // check if this is necessary
-    p->carry = t->carry;
-    p->last_live = t->last_live;
-    p->exec_cycle = t->exec_cycle;
-    ft_memcpy(p->reg, t->reg, REG_SIZE * REG_NUMBER);
-    p->pc = (t->pc + args[0] % IDX_MOD) % MEM_SIZE;
-    vm->start = p;
+	p->player_num = t->player_num;
+	p->num = ++vm->num_process; // check if this is necessary
+	p->carry = t->carry;
+	p->last_live = t->last_live;
+	p->exec_cycle = t->exec_cycle;
+	ft_memcpy(p->reg, t->reg, REG_SIZE * REG_NUMBER);
+	p->pc = (t->pc + args[0] % IDX_MOD) % MEM_SIZE;
+	vm->start = p;
 }
 
 void	lld(t_process *t, t_vm *vm, int *args)
@@ -72,12 +72,12 @@ void	lfork(t_process *t, t_vm *vm, int *args)
 	if (!(p = (t_process*)ft_memalloc(sizeof(t_process))))
 		sys_error(NULL);
 	p->next = vm->start;
-    p->player_num = t->player_num;
-    p->num = ++vm->num_process; // check if this is necessary
-    p->carry = t->carry;
-    p->last_live = t->last_live;
-    p->exec_cycle = t->exec_cycle;
-    ft_memcpy(p->reg, t->reg, REG_SIZE * REG_NUMBER);
-    p->pc = (t->pc + args[0]) % MEM_SIZE;
-    vm->start = p;
+	p->player_num = t->player_num;
+	p->num = ++vm->num_process; // check if this is necessary
+	p->carry = t->carry;
+	p->last_live = t->last_live;
+	p->exec_cycle = t->exec_cycle;
+	ft_memcpy(p->reg, t->reg, REG_SIZE * REG_NUMBER);
+	p->pc = (t->pc + args[0]) % MEM_SIZE;
+	vm->start = p;
 }

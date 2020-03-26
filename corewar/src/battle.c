@@ -3,10 +3,10 @@
 
 static void	kill_processes(t_vm *vm)
 {
-    t_process	*t;
-    t_process	*tmp;
+	t_process	*t;
+	t_process	*tmp;
 
-    while (vm->start && vm->start->last_live <= vm->cycle - vm->cycles_to_die)
+	while (vm->start && vm->start->last_live <= vm->cycle - vm->cycles_to_die)
 	{
 		tmp = vm->start->next;
 		free(vm->start);
@@ -28,8 +28,8 @@ static void	kill_processes(t_vm *vm)
 
 int		check(t_vm *vm)
 {
-    kill_processes(vm);
-    if (!vm->start)
+	kill_processes(vm);
+	if (!vm->start)
 		return (1);
 	if (vm->live_calls >= NBR_LIVE || ++vm->checks == MAX_CHECKS)
 	{

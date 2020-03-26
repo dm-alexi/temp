@@ -3,7 +3,7 @@
 void	live(t_process *t, t_vm *vm, int *args)
 {
 	t->last_live = vm->cycle;
-    ++vm->live_calls;
+	++vm->live_calls;
 	if (-args[0] > 0 && -args[0] <= vm->num_players) //check if it's really negative
 		vm->last_alive = vm->players[-args[0] - 1].num;
 }
@@ -28,11 +28,11 @@ void	st(t_process *t, t_vm *vm, int *args)
 void	add(t_process *t, t_vm *vm, int *args)
 {
 	t->reg[args[2] - 1] = t->reg[args[0] - 1] + t->reg[args[1] - 1];
-    t->carry = !t->reg[args[2] - 1];
+	t->carry = !t->reg[args[2] - 1];
 }
 
 void	sub(t_process *t, t_vm *vm, int *args)
 {
 	t->reg[args[2] - 1] = t->reg[args[0] - 1] - t->reg[args[1] - 1];
-    t->carry = !t->reg[args[2] - 1];
+	t->carry = !t->reg[args[2] - 1];
 }

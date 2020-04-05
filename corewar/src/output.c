@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   output.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/04/05 16:30:27 by sscarecr          #+#    #+#             */
+/*   Updated: 2020/04/05 17:02:50 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifdef _WIN32
 # include <stdio.h>
 #endif
@@ -7,14 +19,17 @@
 
 void	introduce(t_vm *vm)
 {
-	int	i;
+	unsigned	i;
 
 	ft_printf("Introducing contestants...\n");
-	i = -1;
-	while (++i < vm->num_players)
+	i = 0;
+	while (i < vm->num_players)
+	{
 		ft_printf("* Player %d, weighing %u t_bytes, \"%s\" (\"%s\") !\n", i + 1,
 		vm->players[i].header.prog_size, vm->players[i].header.prog_name,
 		vm->players[i].header.comment);
+		++i;
+	}
 }
 
 void	declare_alive(t_vm *vm, unsigned player_num)

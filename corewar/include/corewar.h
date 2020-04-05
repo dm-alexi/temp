@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   corewar.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
+/*   Updated: 2020/04/05 16:39:10 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef COREWAR_H
 # define COREWAR_H
 # include "op.h"
@@ -89,7 +101,7 @@ void			xor(t_process *t, t_vm *vm, int *args);
 void			zjmp(t_process *t, t_vm *vm, int *args);
 void			ldi(t_process *t, t_vm *vm, int *args);
 void			sti(t_process *t, t_vm *vm, int *args);
-void			fork(t_process *t, t_vm *vm, int *args);
+void			ffork(t_process *t, t_vm *vm, int *args);
 void			lld(t_process *t, t_vm *vm, int *args);
 void			lldi(t_process *t, t_vm *vm, int *args);
 void			lfork(t_process *t, t_vm *vm, int *args);

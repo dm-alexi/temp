@@ -1,20 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   arena.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/04/05 16:22:33 by sscarecr          #+#    #+#             */
+/*   Updated: 2020/04/05 16:40:20 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 #include "libft.h"
 
 void	init_arena(t_vm *vm)
 {
-	int	i;
-	int	step;
+	unsigned	i;
+	int			step;
 
 	step = MEM_SIZE / vm->num_players;
-	i = -1;
-	while (++i < vm->num_players)
+	i = 0;
+	while (i < vm->num_players)
 	{
 		ft_memcpy(vm->arena + i * step, vm->players[i].code,
 		vm->players[i].header.prog_size);
 		vm->start = new_process(vm->start, ++vm->num_process,
 		vm->players[i].num, i * step);
 		vm->start->reg[0] = -(i + 1);
+		++i;
 	}
 }
 

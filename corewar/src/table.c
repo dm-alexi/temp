@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   table.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/04/05 16:30:45 by sscarecr          #+#    #+#             */
+/*   Updated: 2020/04/05 16:39:10 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include "corewar.h"
 
@@ -15,7 +27,7 @@ const t_op	g_tab[OP + 1] =
 	{zjmp, 0, 1, {T_DIR, 0, 0}, IND_SIZE, 20},
 	{ldi, 1, 3, {T_REG | T_DIR | T_IND, T_REG | T_DIR, T_REG}, IND_SIZE, 25},
 	{sti, 1, 3, {T_REG, T_REG | T_DIR | T_IND, T_REG | T_DIR}, IND_SIZE, 25},
-	{fork, 0, 1, {T_DIR, 0, 0}, IND_SIZE, 800},
+	{ffork, 0, 1, {T_DIR, 0, 0}, IND_SIZE, 800},
 	{lld, 1, 2, {T_DIR | T_IND, T_REG, 0}, DIR_SIZE, 10},
 	{lldi, 1, 3, {T_REG | T_DIR | T_IND, T_REG | T_DIR, T_REG}, IND_SIZE, 50},
 	{lfork, 0, 1, {T_DIR, 0, 0}, IND_SIZE, 1000},

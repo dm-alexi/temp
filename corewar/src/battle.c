@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   battle.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/04/05 16:28:39 by sscarecr          #+#    #+#             */
+/*   Updated: 2020/04/05 16:41:07 by sscarecr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 #include "libft.h"
 
@@ -14,6 +26,7 @@ static void	kill_processes(t_vm *vm)
 		--vm->num_process;
 	}
 	if ((t = vm->start))
+	{
 		while (t->next)
 			if (t->next->last_live <= vm->cycle - vm->cycles_to_die)
 			{
@@ -24,6 +37,7 @@ static void	kill_processes(t_vm *vm)
 			}
 			else
 				t = t->next;
+	}
 }
 
 int		check(t_vm *vm)

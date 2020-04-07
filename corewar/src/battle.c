@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:39 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/05 16:41:07 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/08 01:16:35 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	kill_processes(t_vm *vm)
 	}
 }
 
-int		check(t_vm *vm)
+int			check(t_vm *vm)
 {
 	kill_processes(vm);
 	if (!vm->start)
@@ -56,7 +56,7 @@ int		check(t_vm *vm)
 	return (0);
 }
 
-int		battle(t_vm *vm)
+int			battle(t_vm *vm)
 {
 	t_process	*cur;
 
@@ -70,8 +70,8 @@ int		battle(t_vm *vm)
 		cur = vm->start;
 		while (cur)
 		{
-            if (cur->exec_cycle < vm->cycle)
-                read_instr(cur, vm);
+			if (cur->exec_cycle < vm->cycle)
+				read_instr(cur, vm);
 			if (cur->exec_cycle == vm->cycle)
 				exec_instr(cur, vm);
 			cur = cur->next;

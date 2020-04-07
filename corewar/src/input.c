@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:33 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/05 16:29:34 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/08 01:10:24 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static char		**get_files(int ac, char **av, int n)
 			i += 2;
 		else if (valid_filename(av[i]))
 		{
-            while (files[tmp])
+			while (files[tmp])
 				++tmp;
 			files[tmp] = av[i];
 		}
@@ -83,10 +83,12 @@ void			input(t_vm *vm, int ac, char **av)
 	while (++i < ac)
 	{
 		if (ft_strequ(av[i], "-d") || ft_strequ(av[i], "-dump"))
-			i == ac - 1 || !is_digital(av[++i]) || vm->dump_len ?
-			error("incorrect use of dump option.") :
-			((vm->dump_len = (ft_strequ(av[i - 1], "-d") ? 64 : 32)) &&
-			(vm->dump_cycle = ft_strtol(av[i], NULL, 10)));
+		{
+			if (i == ac - 1 || !is_digital(av[++i]) || vm->dump_len)
+				error("incorrect use of dump option.");
+			vm->dump_len = (ft_strequ(av[i - 1], "-d") ? 64 : 32);
+			vm->dump_cycle = ft_strtol(av[i], NULL, 10);
+		}
 		else if (ft_strequ(av[i], "-n"))
 			i += 2;
 		else if (!(valid_filename(av[i])))

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/05 16:39:10 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/08 01:27:07 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include "op.h"
 # define OP 16
 
-typedef unsigned char t_byte;
+typedef unsigned char	t_byte;
 
 typedef struct	s_player
 {
@@ -26,16 +26,16 @@ typedef struct	s_player
 
 typedef struct	s_process
 {
-    unsigned			num; //check if this is necessary
-    unsigned			last_live;
-    t_byte				carry;
-    t_byte				op;
-    int					pc;
-    //t_byte				reg[REG_NUMBER][REG_SIZE];
-    int					reg[REG_NUMBER];
-    struct s_process	*next;
-    unsigned			player_num;
-    unsigned			exec_cycle;
+	unsigned			num; //check if this is necessary
+	unsigned			last_live;
+	t_byte				carry;
+	t_byte				op;
+	int					pc;
+	//t_byte				reg[REG_NUMBER][REG_SIZE];
+	int					reg[REG_NUMBER];
+	struct s_process	*next;
+	unsigned			player_num;
+	unsigned			exec_cycle;
 }				t_process;
 
 typedef struct	s_vm

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:43 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/05 16:55:09 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/08 01:14:33 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	live(t_process *t, t_vm *vm, int *args)
 {
 	t->last_live = vm->cycle;
 	++vm->live_calls;
-	if (-args[0] > 0 && (unsigned)(-args[0]) <= vm->num_players) //check if it's really negative
+	//check if it's really negative
+	if (-args[0] > 0 && (unsigned)(-args[0]) <= vm->num_players)
 		vm->last_alive = vm->players[-args[0] - 1].num;
 }
 

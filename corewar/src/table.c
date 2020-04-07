@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:45 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/05 16:39:10 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/08 01:12:27 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,12 @@ const t_op	g_tab[OP + 1] =
 	{st, 1, 2, {T_REG, T_REG | T_IND, 0}, DIR_SIZE, 5},
 	{add, 1, 3, {T_REG, T_REG, T_REG}, DIR_SIZE, 10},
 	{sub, 1, 3, {T_REG, T_REG, T_REG}, DIR_SIZE, 10},
-	{and, 1, 3, {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG}, DIR_SIZE, 6},
-	{or, 1, 3, {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG}, DIR_SIZE, 6},
-	{xor, 1, 3, {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG}, DIR_SIZE, 6},
+	{and, 1, 3, {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG}, DIR_SIZE,
+		6},
+	{or, 1, 3, {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG}, DIR_SIZE,
+		6},
+	{xor, 1, 3, {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG}, DIR_SIZE,
+		6},
 	{zjmp, 0, 1, {T_DIR, 0, 0}, IND_SIZE, 20},
 	{ldi, 1, 3, {T_REG | T_DIR | T_IND, T_REG | T_DIR, T_REG}, IND_SIZE, 25},
 	{sti, 1, 3, {T_REG, T_REG | T_DIR | T_IND, T_REG | T_DIR}, IND_SIZE, 25},

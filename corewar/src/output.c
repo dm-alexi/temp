@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:27 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/05 17:02:50 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/08 01:13:25 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	introduce(t_vm *vm)
 	i = 0;
 	while (i < vm->num_players)
 	{
-		ft_printf("* Player %d, weighing %u t_bytes, \"%s\" (\"%s\") !\n", i + 1,
-		vm->players[i].header.prog_size, vm->players[i].header.prog_name,
+		ft_printf("* Player %d, weighing %u t_bytes, \"%s\" (\"%s\") !\n",
+		i + 1, vm->players[i].header.prog_size, vm->players[i].header.prog_name,
 		vm->players[i].header.comment);
 		++i;
 	}
@@ -59,9 +59,9 @@ void	dump(t_vm *vm)
 	s = str;
 	while (t - vm->arena < MEM_SIZE)
 	{
-        *s++ = (*t / 16 > 9 ? *t / 16 - 10 + 'a' : *t / 16 + '0');
-        *s++ = (*t % 16 > 9 ? *t / 16 - 10 + 'a' : *t / 16 + '0');
-        if (!((++t - vm->arena) % vm->dump_len))
+		*s++ = (*t / 16 > 9 ? *t / 16 - 10 + 'a' : *t / 16 + '0');
+		*s++ = (*t % 16 > 9 ? *t / 16 - 10 + 'a' : *t / 16 + '0');
+		if (!((++t - vm->arena) % vm->dump_len))
 			*s++ = '\n';
 	}
 	if (MEM_SIZE % vm->dump_len > 0)

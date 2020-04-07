@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/05 16:30:41 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/08 01:17:55 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int			check_args(t_process *t, t_vm *vm)
 		else if (c == DIR_CODE && (n += g_tab[t->op].dirsize))
 			sign = (g_tab[t->op].args[i] & T_DIR) ? sign : -1;
 		else if (c == IND_CODE && (n += IND_SIZE))
-			sign = (g_tab[t->op].args[i] & T_IND) ?	sign : -1;
+			sign = (g_tab[t->op].args[i] & T_IND) ? sign : -1;
 	}
 	return (c ? n * sign : -n);
 }
@@ -98,7 +98,7 @@ void		exec_instr(t_process *cur, t_vm *vm)
 		n = check_args(cur, vm);
 		if (n <= 0)
 			cur->pc = (cur->pc + 1 - n) % MEM_SIZE;
-        else
+		else
 		{
 			get_args(cur, vm, args);
 			g_tab[cur->op].func(cur, vm, args);

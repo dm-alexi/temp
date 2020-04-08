@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:53 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/08 14:13:26 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/08 14:15:39 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	sti(t_process *t, t_vm *vm, int *args)
 		a = args[1];
 	else if (c == IND_CODE)
 		a = read_dir((t->pc + args[1] % IDX_MOD) % MEM_SIZE, vm->arena);
-	else if (c == REG_CODE)
+	else
 		a = t->reg[args[1] - 1];
 	if ((c = ((vm->arena[(t->pc + 1) % MEM_SIZE] >> 2) & 0x03)) == DIR_CODE)
 		b = args[2];
-	else if (c == REG_CODE)
+	else
 		b = t->reg[args[2] - 1];
 	write_bytes(t->reg[args[0] - 1], (t->pc + (a + b) % IDX_MOD) % MEM_SIZE,
 	vm->arena);

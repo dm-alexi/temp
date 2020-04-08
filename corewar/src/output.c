@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:27 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/08 01:13:25 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/08 22:46:40 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "libft.h"
 #include "corewar.h"
 
-void	introduce(t_vm *vm)
+void		introduce(t_vm *vm)
 {
 	unsigned	i;
 
@@ -32,19 +32,34 @@ void	introduce(t_vm *vm)
 	}
 }
 
-void	declare_alive(t_vm *vm, unsigned player_num)
+void		declare_alive(t_vm *vm, unsigned player_num)
 {
 	ft_printf("A process shows that player %u (%s) is alive", player_num,
 	vm->players[player_num - 1].header.prog_name);
 }
 
-void	declare_winner(t_vm *vm)
+void		declare_winner(t_vm *vm)
 {
 	ft_printf("Player %u (%s) won\n", vm->last_alive,
 	vm->players[vm->last_alive - 1].header.prog_name);
 }
 
-void	dump(t_vm *vm)
+static char	*addr_conv(int n)
+{
+	static char	addr[10] = "0x0000 : ";
+	t_byte		lb;
+	t_byte		rb;
+
+	rb = n % 256;
+	lb = n / 256;
+	addr[2] = (lb / 16 > 9 ? lb / 16 - 10 + 'a' : lb / 16 + '0');
+	addr[3] = (lb % 16 > 9 ? lb % 16 - 10 + 'a' : lb % 16 + '0');
+	addr[4] = (rb / 16 > 9 ? rb / 16 - 10 + 'a' : rb / 16 + '0');
+	addr[5] = (rb % 16 > 9 ? rb % 16 - 10 + 'a' : rb % 16 + '0');
+	return (addr);
+}
+
+void		dump(t_vm *vm)
 {
 	t_byte	*t;
 	char	*s;
@@ -52,19 +67,23 @@ void	dump(t_vm *vm)
 	int		size;
 
 	t = vm->arena;
-	size = MEM_SIZE * 2 + MEM_SIZE / vm->dump_len +
-	(MEM_SIZE % vm->dump_len > 0);
+	size = MEM_SIZE * 3 + (MEM_SIZE / vm->dump_len * 9);
 	if (!(str = (char*)malloc(size)))
 		sys_error(NULL);
 	s = str;
 	while (t - vm->arena < MEM_SIZE)
 	{
+		if (!((t - vm->arena) % vm->dump_len))
+		{
+			ft_memcpy(s, addr_conv(t - vm->arena), 9);
+			s += 9;
+		}
 		*s++ = (*t / 16 > 9 ? *t / 16 - 10 + 'a' : *t / 16 + '0');
-		*s++ = (*t % 16 > 9 ? *t / 16 - 10 + 'a' : *t / 16 + '0');
-		if (!((++t - vm->arena) % vm->dump_len))
-			*s++ = '\n';
+		*s++ = (*t % 16 > 9 ? *t % 16 - 10 + 'a' : *t % 16 + '0');
+		*s++ = (++t - vm->arena) % vm->dump_len ? ' ' : '\n';
 	}
 	if (MEM_SIZE % vm->dump_len > 0)
-		*s = '\n';
+		*--s = '\n';
 	write(STDOUT_FILENO, str, size);
+	free(str);
 }

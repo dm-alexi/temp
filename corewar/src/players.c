@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:35 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/08 01:25:39 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/08 22:08:15 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,59 @@
 #include "libft.h"
 #include "corewar.h"
 
-void	get_players(t_vm *vm, char **files)
+static void	byte_swap(unsigned *n)
+{
+	int		i;
+	char	*s;
+	char	c;
+
+	i = 0;
+	s = (char*)n;
+	while (i < (int)sizeof(unsigned) / 2)
+	{
+		c = s[i];
+		s[i] = s[sizeof(unsigned) - 1 - i];
+		s[sizeof(unsigned) - 1 - i] = c;
+		++i;
+	}
+}
+
+static void	get_player(t_player *player, char *file)
+{
+	int	fd;
+	int	r;
+
+	if ((fd = open(file, O_RDONLY)) < 0 ||
+	(r = read(fd, &(player->header), sizeof(t_header))) < 0)
+		sys_error(file);
+	byte_swap(&player->header.magic);
+	byte_swap(&player->header.prog_size);
+	if (r < (int)sizeof(t_header) || player->header.magic != COREWAR_EXEC_MAGIC)
+		error_ext("invalid file ", file);
+	ft_printf("%x = %x\n", player->header.magic, COREWAR_EXEC_MAGIC);
+	ft_printf("%s\n", player->header.prog_name);
+	ft_printf("%s\n", player->header.comment);
+	ft_printf("%#x <= %#x\n", player->header.prog_size, CHAMP_MAX_SIZE);
+	if (player->header.prog_size > CHAMP_MAX_SIZE)
+		error_ext(file, " code size exceeds maximum value.");
+	if (!(player->code = (t_byte*)malloc(player->header.prog_size)))
+		sys_error(NULL);
+	if ((r = read(fd, player->code, player->header.prog_size)) <
+	(int)player->header.prog_size)
+		r < 0 ? sys_error(file) : error_ext("invalid file ", file);
+	close(fd);
+}
+
+void		get_players(t_vm *vm, char **files)
 {
 	unsigned	i;
-	int			fd;
-	int			r;
 
 	vm->players = (t_player*)malloc(sizeof(t_player) * vm->num_players);
-	i = -1;
-	while (++i < vm->num_players)
+	i = 0;
+	while (i < vm->num_players)
 	{
-		if ((fd = open(files[i], O_RDONLY)) < 0 ||
-		(r = read(fd, &(vm->players + i)->header, sizeof(t_header))) < 0)
-			sys_error(files[i]);
-		if (r < (int)sizeof(t_header))
-			error_ext("invalid file ", files[i]);
-		if (vm->players[i].header.prog_size > CHAMP_MAX_SIZE)
-			error_ext(files[i], " code size exceeds maximum value.");
-		if (!(vm->players[i].code =
-		(t_byte*)malloc(vm->players[i].header.prog_size)))
-			sys_error(NULL);
-		if ((r = read(fd, (vm->players + i)->code,
-		vm->players[i].header.prog_size)) <
-		(int)vm->players[i].header.prog_size)
-			r < 0 ? sys_error(files[i]) : error_ext("invalid file ", files[i]);
+		get_player(vm->players + i, files[i]);
 		vm->players[i].num = i + 1;
-		close(fd);
+		++i;
 	}
 }

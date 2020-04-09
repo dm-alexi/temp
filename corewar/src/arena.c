@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:22:33 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/09 17:55:58 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/09 19:51:33 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,9 @@ int		read_ind(int start, t_byte *arena)
 	if (start < 0)
 		start += MEM_SIZE;
 	start %= MEM_SIZE;
-	if (start + IND_SIZE < MEM_SIZE)
-		return (*((short*)(arena + start)));
 	i = -1;
 	while (++i < IND_SIZE)
-		s[i] = arena[(start + i) % MEM_SIZE];
+		s[IND_SIZE - 1 - i] = arena[(start + i) % MEM_SIZE];
 	return (*((short*)s));
 }
 

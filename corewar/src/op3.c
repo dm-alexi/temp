@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:53 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/09 18:23:50 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/09 19:07:54 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ void	sti(t_process *t, t_vm *vm, int *args)
 		b = args[2];
 	else
 		b = t->reg[args[2] - 1];
-	write_bytes(t->reg[args[0] - 1], (t->pc + (a + b) % IDX_MOD) % MEM_SIZE,
-	vm->arena);
+	write_bytes(t->reg[args[0] - 1], t->pc + (a + b) % IDX_MOD, vm->arena);
 }
 
 void	ffork(t_process *t, t_vm *vm, int *args)

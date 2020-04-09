@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:43 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/09 18:22:19 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/09 19:07:32 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ void	ld(t_process *t, t_vm *vm, int *args)
 void	st(t_process *t, t_vm *vm, int *args)
 {
 	if (((vm->arena[(t->pc + 1) % MEM_SIZE] >> 4) & 0x03) == IND_CODE)
-		write_bytes(t->reg[args[0] - 1],
-		(t->pc + args[1] % IDX_MOD) % MEM_SIZE, vm->arena);
+		write_bytes(t->reg[args[0] - 1], t->pc + args[1] % IDX_MOD, vm->arena);
 	else
 		t->reg[args[1] - 1] = t->reg[args[0] - 1];
 }

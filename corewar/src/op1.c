@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:43 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/08 01:14:33 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/09 18:22:19 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ld(t_process *t, t_vm *vm, int *args)
 {
 	t->reg[args[1] - 1] =
 	(((vm->arena[(t->pc + 1) % MEM_SIZE] >> 6) & 0x03) == DIR_CODE ? args[0] :
-	read_dir((t->pc + args[0] % IDX_MOD) % MEM_SIZE, vm->arena));
+	read_dir((t->pc + args[0] % IDX_MOD), vm->arena));
 	t->carry = !t->reg[args[1] - 1];
 }
 

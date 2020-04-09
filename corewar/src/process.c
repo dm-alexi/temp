@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/08 01:17:55 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/09 18:20:41 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,24 +60,27 @@ void		get_args(t_process *t, t_vm *vm, int *args)
 	int		i;
 	int		p;
 
-	p = t->pc + 1;
+	p = t->pc + 2;
 	i = -1;
 	if (!g_tab[t->op].argtype)
 		args[0] = (g_tab[t->op].dirsize == DIR_SIZE ?
-		read_dir(p % MEM_SIZE, vm->arena) : read_ind(p % MEM_SIZE, vm->arena));
+		read_dir(p - 1, vm->arena) : read_ind(p - 1, vm->arena));
 	else
-		while (++i < g_tab[t->op].argnum)
-		{
-			c = ((vm->arena[(t->pc + 1) % MEM_SIZE] >> (6 - 2 * i)) & 0x03);
-			if (c == REG_CODE && ++p)
-				args[i] = vm->arena[p % MEM_SIZE];
-			else if (c == DIR_CODE && (p += g_tab[t->op].dirsize))
+		while (++i < g_tab[t->op].argnum &&
+		(c = ((vm->arena[(t->pc + 1) % MEM_SIZE] >> (6 - 2 * i)) & 0x03)))
+			if (c == REG_CODE)
+				args[i] = vm->arena[p++ % MEM_SIZE];
+			else if (c == DIR_CODE)
+			{
 				args[i] = (g_tab[t->op].dirsize == DIR_SIZE ?
-				read_dir(p % MEM_SIZE, vm->arena) :
-				read_ind(p % MEM_SIZE, vm->arena));
-			else if (c == IND_CODE && (p += IND_SIZE))
-				args[i] = read_ind(p % MEM_SIZE, vm->arena);
-		}
+				read_dir(p, vm->arena) : read_ind(p, vm->arena));
+				p += g_tab[t->op].dirsize;
+			}
+			else if (c == IND_CODE)
+			{
+				args[i] = read_ind(p, vm->arena);
+				p += IND_SIZE;
+			}
 }
 
 void		read_instr(t_process *cur, t_vm *vm)

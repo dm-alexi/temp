@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:35 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/08 22:08:15 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/08 22:51:35 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void	get_player(t_player *player, char *file)
 	int	fd;
 	int	r;
 
+	r = 0;
 	if ((fd = open(file, O_RDONLY)) < 0 ||
 	(r = read(fd, &(player->header), sizeof(t_header))) < 0)
 		sys_error(file);

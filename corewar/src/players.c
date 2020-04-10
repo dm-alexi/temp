@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:35 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/08 22:51:35 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/10 14:45:15 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,6 @@ static void	get_player(t_player *player, char *file)
 	byte_swap(&player->header.prog_size);
 	if (r < (int)sizeof(t_header) || player->header.magic != COREWAR_EXEC_MAGIC)
 		error_ext("invalid file ", file);
-	ft_printf("%x = %x\n", player->header.magic, COREWAR_EXEC_MAGIC);
-	ft_printf("%s\n", player->header.prog_name);
-	ft_printf("%s\n", player->header.comment);
-	ft_printf("%#x <= %#x\n", player->header.prog_size, CHAMP_MAX_SIZE);
 	if (player->header.prog_size > CHAMP_MAX_SIZE)
 		error_ext(file, " code size exceeds maximum value.");
 	if (!(player->code = (t_byte*)malloc(player->header.prog_size)))

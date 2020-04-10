@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/09 18:20:41 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/10 15:41:37 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 
 t_process	*new_process(t_process *next, unsigned num, unsigned player_num,
-						t_byte pc)
+						int pc)
 {
 	t_process	*p;
 

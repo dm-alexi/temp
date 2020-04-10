@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:48 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/09 18:22:53 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/10 14:01:24 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	and(t_process *t, t_vm *vm, int *args)
 	else
 		b = t->reg[args[1] - 1];
 	t->reg[args[2] - 1] = a & b;
+	t->carry = !t->reg[args[2] - 1];
 }
 
 void	or(t_process *t, t_vm *vm, int *args)
@@ -52,6 +53,7 @@ void	or(t_process *t, t_vm *vm, int *args)
 	else
 		b = t->reg[args[1] - 1];
 	t->reg[args[2] - 1] = a | b;
+	t->carry = !t->reg[args[2] - 1];
 }
 
 void	xor(t_process *t, t_vm *vm, int *args)
@@ -73,6 +75,7 @@ void	xor(t_process *t, t_vm *vm, int *args)
 	else
 		b = t->reg[args[1] - 1];
 	t->reg[args[2] - 1] = a ^ b;
+	t->carry = !t->reg[args[2] - 1];
 }
 
 void	zjmp(t_process *t, t_vm *vm, int *args)

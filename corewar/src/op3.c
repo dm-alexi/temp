@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:53 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/10 12:08:42 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/10 14:00:08 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	lldi(t_process *t, t_vm *vm, int *args)
 	else
 		b = t->reg[args[1] - 1];
 	t->reg[args[2] - 1] = read_dir((t->pc + a + b) % MEM_SIZE, vm->arena);
+	t->carry = !t->reg[args[2] - 1];
 }
 
 void	lfork(t_process *t, t_vm *vm, int *args)

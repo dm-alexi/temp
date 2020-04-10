@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/10 15:41:47 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/10 18:40:19 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct	s_process
 	t_byte				carry;
 	t_byte				op;
 	int					pc;
-	//t_byte				reg[REG_NUMBER][REG_SIZE];
 	int					reg[REG_NUMBER];
 	struct s_process	*next;
 	unsigned			player_num;

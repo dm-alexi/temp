@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:53 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/10 14:00:08 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/10 18:47:19 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,16 @@ void	ffork(t_process *t, t_vm *vm, int *args)
 	vm->start = p;
 }
 
+/*
+** Original corewar reads 2 bytes here instead of 4, which is probably a bug.
+** Function below reproduces this behavior. Substitute read_ind(...) with
+** read_dir(...) to get a 'correct' version.
+*/
+
 void	lld(t_process *t, t_vm *vm, int *args)
 {
 	t->reg[args[1] - 1] =
 	(((vm->arena[(t->pc + 1) % MEM_SIZE] >> 6) & 0x03) == DIR_CODE ? args[0] :
-	// original corewar reads 2 bytes here instead of 4, probably a bug
-	//read_dir(t->pc + args[0], vm->arena));
 	read_ind(t->pc + args[0], vm->arena));
 	t->carry = !t->reg[args[1] - 1];
 }

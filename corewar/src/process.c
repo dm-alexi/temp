@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/10 15:41:37 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/10 18:56:42 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void		get_args(t_process *t, t_vm *vm, int *args)
 void		read_instr(t_process *cur, t_vm *vm)
 {
 	if ((cur->op = vm->arena[cur->pc]) > 0 && cur->op <= OP)
-		cur->exec_cycle = vm->cycle + g_tab[cur->op].lag - 1; //check if -1 is correct
+		cur->exec_cycle = vm->cycle + g_tab[cur->op].lag - 1;
 	else
 		cur->exec_cycle = vm->cycle;
 }

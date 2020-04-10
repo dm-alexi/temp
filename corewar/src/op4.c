@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:59 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/10 15:49:13 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/10 15:54:04 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,5 @@ void	aff(t_process *t, t_vm *vm, int *args)
 
 	(void)vm;
 	s[6] = t->reg[args[0] - 1];
-	write(STDOUT_FILENO, s, 7);
+	write(STDOUT_FILENO, s, 8);
 }

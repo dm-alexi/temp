@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:39 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 02:38:43 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 02:46:21 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int			battle(t_vm *vm)
 		}
 		if (vm->cycle >= vm->next_check && check(vm))
 			break ;
-		if (vm->dump_len && vm->dump_cycle < vm->cycle)
+		if (vm->dump_len && vm->dump_cycle == vm->cycle)
 			return (dump(vm));
 	}
 	return (1);

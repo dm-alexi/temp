@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:53 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/11 02:36:16 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 01:02:23 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,17 @@ void	ffork(t_process *t, t_vm *vm, int *args)
 
 	if (!(p = (t_process*)ft_memalloc(sizeof(t_process))))
 		sys_error(NULL);
-	p->next = vm->start;
 	p->player_num = t->player_num;
 	p->num = ++vm->num_process; // check if this is necessary
 	p->carry = t->carry;
 	p->last_live = t->last_live;
 	p->exec_cycle = t->exec_cycle;
 	ft_memcpy(p->reg, t->reg, REG_SIZE * REG_NUMBER);
-	p->pc = (t->pc + args[0] % IDX_MOD) % MEM_SIZE;
+	p->pc = t->pc + args[0] % IDX_MOD;
+	while (p->pc < 0)
+		p->pc += MEM_SIZE;
+	p->pc %= MEM_SIZE;
+	p->next = vm->start;
 	vm->start = p;
 }
 
@@ -89,13 +92,16 @@ void	lfork(t_process *t, t_vm *vm, int *args)
 
 	if (!(p = (t_process*)ft_memalloc(sizeof(t_process))))
 		sys_error(NULL);
-	p->next = vm->start;
 	p->player_num = t->player_num;
 	p->num = ++vm->num_process; // check if this is necessary
 	p->carry = t->carry;
 	p->last_live = t->last_live;
 	p->exec_cycle = t->exec_cycle;
 	ft_memcpy(p->reg, t->reg, REG_SIZE * REG_NUMBER);
-	p->pc = (t->pc + args[0]) % MEM_SIZE;
+	p->pc = t->pc + args[0];
+	while (p->pc < 0)
+		p->pc += MEM_SIZE;
+	p->pc %= MEM_SIZE;
+	p->next = vm->start;
 	vm->start = p;
 }

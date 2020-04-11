@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:48 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/10 14:01:24 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 00:55:05 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,10 @@ void	xor(t_process *t, t_vm *vm, int *args)
 void	zjmp(t_process *t, t_vm *vm, int *args)
 {
 	(void)vm;
-	t->pc = (t->pc + (t->carry ? args[0] % IDX_MOD :
-	1 + g_tab[t->op].dirsize)) % MEM_SIZE;
+	t->pc += (t->carry ? args[0] % IDX_MOD : 1 + g_tab[t->op].dirsize);
+	while (t->pc < 0)
+		t->pc += MEM_SIZE;
+	t->pc %= MEM_SIZE;
 }
 
 void	ldi(t_process *t, t_vm *vm, int *args)

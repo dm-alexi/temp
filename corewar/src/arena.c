@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:22:33 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/11 23:51:51 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 00:55:51 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		read_dir(int start, t_byte *arena)
 	char	s[DIR_SIZE];
 	int		i;
 
-	if (start < 0)
+	while (start < 0)
 		start += MEM_SIZE;
 	start %= MEM_SIZE;
 	i = -1;
@@ -50,7 +50,7 @@ int		read_ind(int start, t_byte *arena)
 	char	s[IND_SIZE];
 	int		i;
 
-	if (start < 0)
+	while (start < 0)
 		start += MEM_SIZE;
 	start %= MEM_SIZE;
 	i = -1;
@@ -64,7 +64,7 @@ void	write_bytes(int n, int start, t_byte *arena)
 	t_byte	*s;
 	int		i;
 
-	if (start < 0)
+	while (start < 0)
 		start += MEM_SIZE;
 	start %= MEM_SIZE;
 	s = (t_byte*)&n;

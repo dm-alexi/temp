@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:27 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/11 02:37:04 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 01:01:28 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,6 @@ void		introduce(t_vm *vm)
 		vm->players[i].header.comment);
 		++i;
 	}
-}
-
-void		declare_alive(t_vm *vm, unsigned player_num)
-{
-	ft_printf("A process shows that player %u (%s) is alive\n", player_num,
-	vm->players[player_num - 1].header.prog_name);
 }
 
 void		declare_winner(t_vm *vm)

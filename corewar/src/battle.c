@@ -6,12 +6,21 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:39 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 00:18:36 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 02:16:14 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "libft.h"
+
+static void	kill_process(t_vm *vm, t_process *p)
+{
+	if (vm->verbosity & DEATHS)
+		ft_printf("Process %u hasn't lived for %d cycles (CTD %d)\n", p->num,
+		vm->cycle - p->last_live, vm->cycles_to_die);
+	free(p);
+	--vm->num_process;
+}
 
 static void	kill_processes(t_vm *vm)
 {
@@ -21,35 +30,33 @@ static void	kill_processes(t_vm *vm)
 	while (vm->start && vm->start->last_live <= vm->cycle - vm->cycles_to_die)
 	{
 		tmp = vm->start->next;
-		free(vm->start);
+		kill_process(vm, vm->start);
 		vm->start = tmp;
-		--vm->num_process;
 	}
-	if ((t = vm->start))
-	{
-		while (t->next)
-			if (t->next->last_live <= vm->cycle - vm->cycles_to_die)
-			{
-				tmp = t->next->next;
-				free(t->next);
-				t->next = tmp;
-				--vm->num_process;
-			}
-			else
-				t = t->next;
-	}
+	if (!(t = vm->start))
+		return ;
+	while (t->next)
+		if (t->next->last_live <= vm->cycle - vm->cycles_to_die)
+		{
+			tmp = t->next->next;
+			kill_process(vm, t->next);
+			t->next = tmp;
+		}
+		else
+			t = t->next;
 }
 
-int			check(t_vm *vm)
+static int	check(t_vm *vm)
 {
 	kill_processes(vm);
 	if (!vm->start)
 		return (1);
 	if (++vm->checks == MAX_CHECKS || vm->live_calls >= NBR_LIVE)
 	{
-		vm->cycles_to_die = vm->cycles_to_die > CYCLE_DELTA ?
-		vm->cycles_to_die - CYCLE_DELTA : 0;
+		vm->cycles_to_die -= CYCLE_DELTA;
 		vm->checks = 0;
+		if (vm->verbosity & CYCLES)
+			ft_printf("Cycle to die is now %d", vm->cycles_to_die);
 	}
 	vm->live_calls = 0;
 	vm->next_check = vm->cycle + vm->cycles_to_die;
@@ -65,10 +72,7 @@ int			battle(t_vm *vm)
 		if (vm->verbosity & CYCLES)
 			ft_printf("It is now cycle %u\n", vm->cycle);
 		if (vm->dump_len && vm->dump_cycle < vm->cycle)
-		{
-			dump(vm);
-			return (0);
-		}
+			return (dump(vm));
 		cur = vm->start;
 		while (cur)
 		{

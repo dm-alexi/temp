@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:43 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 01:32:46 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 01:51:04 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	live(t_process *t, t_vm *vm, int *args)
 	{
 		vm->last_alive = vm->players[-args[0] - 1].num;
 		if (vm->verbosity & LIVES)
-			ft_printf("A process shows that player %u (%s) is alive\n",
+			ft_printf("Player %u (%s) is said to be alive\n",
 			-args[0], vm->players[-args[0] - 1].header.prog_name);
 	}
 }

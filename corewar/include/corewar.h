@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 01:17:34 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 02:11:50 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct	s_vm
 	unsigned	num_process;
 	t_process	*start;
 	unsigned	cycle;
-	unsigned	cycles_to_die;
+	int			cycles_to_die;
 	unsigned	checks;
 	unsigned	next_check;
 	unsigned	live_calls;
@@ -83,7 +83,7 @@ void			get_players(t_vm *vm, char **files);
 
 void			introduce(t_vm *vm);
 void			declare_winner(t_vm *vm);
-void			dump(t_vm *vm);
+int				dump(t_vm *vm);
 
 void			init_arena(t_vm *vm);
 int				cut(int n);

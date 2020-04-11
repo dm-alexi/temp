@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:27 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 01:01:28 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 02:11:42 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		introduce(t_vm *vm)
 
 void		declare_winner(t_vm *vm)
 {
-	ft_printf("Player %u (%s) won\n", vm->last_alive,
+	ft_printf("Contestant %u, \"%s\", has won !\n", vm->last_alive,
 	vm->players[vm->last_alive - 1].header.prog_name);
 }
 
@@ -53,16 +53,15 @@ static char	*addr_conv(int n)
 	return (addr);
 }
 
-void		dump(t_vm *vm)
+int			dump(t_vm *vm)
 {
 	t_byte	*t;
 	char	*s;
 	char	*str;
-	int		size;
 
 	t = vm->arena;
-	size = MEM_SIZE * 3 + 10 * (MEM_SIZE / vm->dump_len + 1);
-	if (!(str = (char*)malloc(size)))
+	if (!(str =
+	(char*)malloc(3 * MEM_SIZE + 10 * (MEM_SIZE / vm->dump_len + 1))))
 		sys_error(NULL);
 	s = str;
 	while (t - vm->arena < MEM_SIZE)
@@ -78,6 +77,7 @@ void		dump(t_vm *vm)
 		if (!((++t - vm->arena) % vm->dump_len) || t - vm->arena == MEM_SIZE)
 			*s++ = '\n';
 	}
-	write(STDOUT_FILENO, str, size);
+	write(STDOUT_FILENO, str, s - str);
 	free(str);
+	return (0);
 }

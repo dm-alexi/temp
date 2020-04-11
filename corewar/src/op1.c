@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:43 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 00:06:42 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 01:32:46 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ void	live(t_process *t, t_vm *vm, int *args)
 void	ld(t_process *t, t_vm *vm, int *args)
 {
 	t->reg[args[1] - 1] =
-	(((vm->arena[(t->pc + 1) % MEM_SIZE] >> 6) & 0x03) == DIR_CODE ? args[0] :
-	read_dir((t->pc + args[0] % IDX_MOD), vm->arena));
+	((vm->arena[cut(t->pc + 1)] >> 6) & 0x03) == DIR_CODE ? args[0] :
+	read_dir(t->pc + args[0] % IDX_MOD, vm->arena);
 	t->carry = !t->reg[args[1] - 1];
 }
 
 void	st(t_process *t, t_vm *vm, int *args)
 {
-	if (((vm->arena[(t->pc + 1) % MEM_SIZE] >> 4) & 0x03) == IND_CODE)
+	if (((vm->arena[cut(t->pc + 1)] >> 4) & 0x03) == IND_CODE)
 		write_bytes(t->reg[args[0] - 1], t->pc + args[1] % IDX_MOD, vm->arena);
 	else
 		t->reg[args[1] - 1] = t->reg[args[0] - 1];

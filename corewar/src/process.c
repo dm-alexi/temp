@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/10 18:56:42 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 01:22:43 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ int			check_args(t_process *t, t_vm *vm)
 	n = 1;
 	sign = 1;
 	while (++i < g_tab[t->op].argnum &&
-	(c = ((vm->arena[(t->pc + 1) % MEM_SIZE] >> (6 - 2 * i)) & 0x03)))
+	(c = ((vm->arena[cut(t->pc + 1)] >> (6 - 2 * i)) & 0x03)))
 	{
 		if (c == REG_CODE && (sign = (g_tab[t->op].args[i] & T_REG) &&
-		(vm->arena[(t->pc + 1 + n) % MEM_SIZE] > 0) &&
-		vm->arena[(t->pc + 1 + n) % MEM_SIZE] <= REG_NUMBER ? sign : -1))
+		(vm->arena[cut(t->pc + 1 + n)] > 0) &&
+		vm->arena[cut(t->pc + 1 + n)] <= REG_NUMBER ? sign : -1))
 			++n;
 		else if (c == DIR_CODE && (n += g_tab[t->op].dirsize))
 			sign = (g_tab[t->op].args[i] & T_DIR) ? sign : -1;
@@ -60,16 +60,16 @@ void		get_args(t_process *t, t_vm *vm, int *args)
 	int		i;
 	int		p;
 
-	p = t->pc + 2;
+	p = cut(t->pc + 2);
 	i = -1;
 	if (!g_tab[t->op].argtype)
 		args[0] = (g_tab[t->op].dirsize == DIR_SIZE ?
 		read_dir(p - 1, vm->arena) : read_ind(p - 1, vm->arena));
 	else
 		while (++i < g_tab[t->op].argnum &&
-		(c = ((vm->arena[(t->pc + 1) % MEM_SIZE] >> (6 - 2 * i)) & 0x03)))
+		(c = ((vm->arena[cut(t->pc + 1)] >> (6 - 2 * i)) & 0x03)))
 			if (c == REG_CODE)
-				args[i] = vm->arena[p++ % MEM_SIZE];
+				args[i] = vm->arena[cut(p++)];
 			else if (c == DIR_CODE)
 			{
 				args[i] = (g_tab[t->op].dirsize == DIR_SIZE ?
@@ -100,15 +100,15 @@ void		exec_instr(t_process *cur, t_vm *vm)
 	{
 		n = check_args(cur, vm);
 		if (n <= 0)
-			cur->pc = (cur->pc + 1 - n) % MEM_SIZE;
+			cur->pc = cut(cur->pc + 1 - n);
 		else
 		{
 			get_args(cur, vm, args);
 			g_tab[cur->op].func(cur, vm, args);
 			if (g_tab[cur->op].func != zjmp)
-				cur->pc = (cur->pc + 1 + n) % MEM_SIZE;
+				cur->pc = cut(cur->pc + 1 + n);
 		}
 	}
 	else
-		cur->pc = (cur->pc + 1) % MEM_SIZE;
+		cur->pc = cut(cur->pc + 1);
 }

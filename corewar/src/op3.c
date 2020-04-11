@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:53 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 01:02:23 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 01:30:52 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	sti(t_process *t, t_vm *vm, int *args)
 	int		b;
 	t_byte	c;
 
-	if ((c = ((vm->arena[(t->pc + 1) % MEM_SIZE] >> 4) & 0x03)) == DIR_CODE)
+	if ((c = ((vm->arena[cut(t->pc + 1)] >> 4) & 0x03)) == DIR_CODE)
 		a = args[1];
 	else if (c == IND_CODE)
 		a = read_dir((t->pc + args[1] % IDX_MOD), vm->arena);
 	else
 		a = t->reg[args[1] - 1];
-	if ((c = ((vm->arena[(t->pc + 1) % MEM_SIZE] >> 2) & 0x03)) == DIR_CODE)
+	if ((c = ((vm->arena[cut(t->pc + 1)] >> 2) & 0x03)) == DIR_CODE)
 		b = args[2];
 	else
 		b = t->reg[args[2] - 1];
@@ -44,10 +44,7 @@ void	ffork(t_process *t, t_vm *vm, int *args)
 	p->last_live = t->last_live;
 	p->exec_cycle = t->exec_cycle;
 	ft_memcpy(p->reg, t->reg, REG_SIZE * REG_NUMBER);
-	p->pc = t->pc + args[0] % IDX_MOD;
-	while (p->pc < 0)
-		p->pc += MEM_SIZE;
-	p->pc %= MEM_SIZE;
+	p->pc = cut(t->pc + args[0] % IDX_MOD);
 	p->next = vm->start;
 	vm->start = p;
 }
@@ -61,7 +58,7 @@ void	ffork(t_process *t, t_vm *vm, int *args)
 void	lld(t_process *t, t_vm *vm, int *args)
 {
 	t->reg[args[1] - 1] =
-	(((vm->arena[(t->pc + 1) % MEM_SIZE] >> 6) & 0x03) == DIR_CODE ? args[0] :
+	(((vm->arena[cut(t->pc + 1)] >> 6) & 0x03) == DIR_CODE ? args[0] :
 	read_ind(t->pc + args[0], vm->arena));
 	t->carry = !t->reg[args[1] - 1];
 }
@@ -72,17 +69,17 @@ void	lldi(t_process *t, t_vm *vm, int *args)
 	int		b;
 	t_byte	c;
 
-	if ((c = ((vm->arena[(t->pc + 1) % MEM_SIZE] >> 6) & 0x03)) == DIR_CODE)
+	if ((c = ((vm->arena[cut(t->pc + 1)] >> 6) & 0x03)) == DIR_CODE)
 		a = args[0];
 	else if (c == IND_CODE)
 		a = read_dir(t->pc + args[0] % IDX_MOD, vm->arena);
 	else
 		a = t->reg[args[0] - 1];
-	if ((c = ((vm->arena[(t->pc + 1) % MEM_SIZE] >> 4) & 0x03)) == DIR_CODE)
+	if ((c = ((vm->arena[cut(t->pc + 1)] >> 4) & 0x03)) == DIR_CODE)
 		b = args[1];
 	else
 		b = t->reg[args[1] - 1];
-	t->reg[args[2] - 1] = read_dir((t->pc + a + b) % MEM_SIZE, vm->arena);
+	t->reg[args[2] - 1] = read_dir(t->pc + a + b, vm->arena);
 	t->carry = !t->reg[args[2] - 1];
 }
 
@@ -98,10 +95,7 @@ void	lfork(t_process *t, t_vm *vm, int *args)
 	p->last_live = t->last_live;
 	p->exec_cycle = t->exec_cycle;
 	ft_memcpy(p->reg, t->reg, REG_SIZE * REG_NUMBER);
-	p->pc = t->pc + args[0];
-	while (p->pc < 0)
-		p->pc += MEM_SIZE;
-	p->pc %= MEM_SIZE;
+	p->pc = cut(t->pc + args[0]);
 	p->next = vm->start;
 	vm->start = p;
 }

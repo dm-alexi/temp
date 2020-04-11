@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 00:25:32 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 01:17:34 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void			declare_winner(t_vm *vm);
 void			dump(t_vm *vm);
 
 void			init_arena(t_vm *vm);
+int				cut(int n);
 int				read_dir(int start, t_byte *arena);
 int				read_ind(int start, t_byte *arena);
 void			write_bytes(int n, int start, t_byte *arena);

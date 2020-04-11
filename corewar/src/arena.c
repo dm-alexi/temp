@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:22:33 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 00:55:51 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 01:18:50 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,17 @@ void	init_arena(t_vm *vm)
 	}
 }
 
+int		cut(int n)
+{
+	return (n < 0 ? n % MEM_SIZE + MEM_SIZE : n % MEM_SIZE);
+}
+
 int		read_dir(int start, t_byte *arena)
 {
 	char	s[DIR_SIZE];
 	int		i;
 
-	while (start < 0)
-		start += MEM_SIZE;
-	start %= MEM_SIZE;
+	start = cut(start);
 	i = -1;
 	while (++i < DIR_SIZE)
 		s[DIR_SIZE - 1 - i] = arena[(start + i) % MEM_SIZE];
@@ -50,9 +53,7 @@ int		read_ind(int start, t_byte *arena)
 	char	s[IND_SIZE];
 	int		i;
 
-	while (start < 0)
-		start += MEM_SIZE;
-	start %= MEM_SIZE;
+	start = cut(start);
 	i = -1;
 	while (++i < IND_SIZE)
 		s[IND_SIZE - 1 - i] = arena[(start + i) % MEM_SIZE];
@@ -64,9 +65,7 @@ void	write_bytes(int n, int start, t_byte *arena)
 	t_byte	*s;
 	int		i;
 
-	while (start < 0)
-		start += MEM_SIZE;
-	start %= MEM_SIZE;
+	start = cut(start);
 	s = (t_byte*)&n;
 	i = -1;
 	while (++i < REG_SIZE)

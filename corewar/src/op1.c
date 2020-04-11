@@ -6,18 +6,24 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:43 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/10 18:40:53 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 00:06:42 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include "libft.h"
 
 void	live(t_process *t, t_vm *vm, int *args)
 {
 	t->last_live = vm->cycle;
 	++vm->live_calls;
 	if (-args[0] > 0 && (unsigned)(-args[0]) <= vm->num_players)
+	{
 		vm->last_alive = vm->players[-args[0] - 1].num;
+		if (vm->verbosity & LIVES)
+			ft_printf("A process shows that player %u (%s) is alive\n",
+			-args[0], vm->players[-args[0] - 1].header.prog_name);
+	}
 }
 
 void	ld(t_process *t, t_vm *vm, int *args)

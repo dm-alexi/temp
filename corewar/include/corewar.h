@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/11 02:18:38 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 00:25:32 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 # define COREWAR_H
 # include "op.h"
 # define OP 16
+# define LIVES 1
+# define CYCLES 2
+# define OPERATIONS 4
+# define DEATHS 8
+# define MOVES 16
 
 typedef unsigned char	t_byte;
 
@@ -77,7 +82,6 @@ void			input(t_vm *vm, int ac, char **av);
 void			get_players(t_vm *vm, char **files);
 
 void			introduce(t_vm *vm);
-void			declare_alive(t_vm *vm, unsigned player_num);
 void			declare_winner(t_vm *vm);
 void			dump(t_vm *vm);
 

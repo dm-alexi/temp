@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:39 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/11 02:59:04 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 00:18:36 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int			check(t_vm *vm)
 	kill_processes(vm);
 	if (!vm->start)
 		return (1);
-	if (vm->live_calls >= NBR_LIVE || ++vm->checks == MAX_CHECKS)
+	if (++vm->checks == MAX_CHECKS || vm->live_calls >= NBR_LIVE)
 	{
 		vm->cycles_to_die = vm->cycles_to_die > CYCLE_DELTA ?
 		vm->cycles_to_die - CYCLE_DELTA : 0;
@@ -62,6 +62,8 @@ int			battle(t_vm *vm)
 
 	while (++vm->cycle)
 	{
+		if (vm->verbosity & CYCLES)
+			ft_printf("It is now cycle %u\n", vm->cycle);
 		if (vm->dump_len && vm->dump_cycle < vm->cycle)
 		{
 			dump(vm);

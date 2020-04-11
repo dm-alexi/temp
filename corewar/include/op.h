@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/04/08 01:31:11 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/11 02:50:42 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,20 @@
 # define DIR_CODE				2
 # define IND_CODE				3
 
+/*
+** Zaz's op.h is changed to fit new norminette restrictions. Original lines:
+** # define MEM_SIZE			(4*1024)
+** # define IDX_MOD				(MEM_SIZE / 8)
+** # define CHAMP_MAX_SIZE		(MEM_SIZE / 6)
+** Therefore it is necessary to manually adjust IDX_MOD and CHAMP_MAX_SIZE
+** if MEM_SIZE value is to be changed.
+*/
+
 # define MAX_ARGS_NUMBER		4
 # define MAX_PLAYERS			4
-# define MEM_SIZE				(4*1024)
-# define IDX_MOD				(MEM_SIZE / 8)
-# define CHAMP_MAX_SIZE			(MEM_SIZE / 6)
+# define MEM_SIZE				4096
+# define IDX_MOD				512
+# define CHAMP_MAX_SIZE			682
 
 # define COMMENT_CHAR			'#'
 # define LABEL_CHAR				':'
@@ -64,8 +73,8 @@ typedef char	t_arg_type;
 ** Champion restrictions
 */
 
-# define PROG_NAME_LENGTH		(128)
-# define COMMENT_LENGTH			(2048)
+# define PROG_NAME_LENGTH		128
+# define COMMENT_LENGTH			2048
 # define COREWAR_EXEC_MAGIC		0xea83f3
 
 typedef struct	s_header

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:33 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/08 01:10:24 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/11 02:54:53 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,78 +22,82 @@ static int		is_digital(char *s)
 	return (*s == '\0');
 }
 
-static int		valid_filename(char *s)
+static int		is_flag(char *s)
 {
-	int	n;
-
-	return ((n = ft_strlen(s)) > 4 && ft_strequ(s + n - 4, ".cor"));
+	return (ft_strequ(s, "-d") || ft_strequ(s, "-dump") || ft_strequ(s, "-v") ||
+	ft_strequ(s, "-s"));
 }
 
-static unsigned	count_players(int ac, char **av)
+static int		merge(char **files, char **unordered)
 {
-	int			i;
-	unsigned	count;
+	int i;
+	int j;
 
 	i = 0;
-	count = 0;
-	while (++i < ac)
-		if (valid_filename(av[i]))
-			++count;
-	return (count);
+	j = 0;
+	while (i < MAX_PLAYERS && unordered[i])
+	{
+		while (j < MAX_PLAYERS && files[j])
+			++j;
+		if (j == MAX_PLAYERS)
+			error("Too many champions.");
+		files[j++] = unordered[i++];
+	}
+	while (j < MAX_PLAYERS && files[j])
+		++j;
+	i = j;
+	while (i < MAX_PLAYERS)
+		if (files[i++])
+			error("Incorrect champion order.");
+	return (j);
 }
 
-static char		**get_files(int ac, char **av, int n)
+static int		exec_flag(t_vm *vm, int ac, char **av, int i)
 {
-	int		i;
-	int		tmp;
-	char	**files;
-
-	if (!(files = (char**)ft_memalloc(sizeof(char*) * n)))
-		sys_error(NULL);
-	i = 0;
-	while (++i < ac)
-		if (ft_strequ(av[i], "-n"))
-			i < ac - 2 && is_digital(av[++i]) && (tmp = ft_atoi(av[i])) > 0 &&
-			tmp <= n && valid_filename(av[++i]) && !files[tmp - 1] ?
-			(files[tmp - 1] = av[i]) : error("Invalid player file or number.");
-	i = 0;
-	tmp = 0;
-	while (++i < ac)
-		if (ft_strequ(av[i], "-n"))
-			i += 2;
-		else if (valid_filename(av[i]))
-		{
-			while (files[tmp])
-				++tmp;
-			files[tmp] = av[i];
-		}
-	return (files);
+	if (ft_strequ(av[i], "-d") || ft_strequ(av[i], "-dump"))
+	{
+		if (i == ac - 1 || !is_digital(av[i + 1]) || vm->dump_len)
+			usage();
+		vm->dump_len = (ft_strequ(av[i], "-d") ? 64 : 32);
+		vm->dump_cycle = ft_strtol(av[i + 1], NULL, 10);
+		return (2);
+	}
+	if (ft_strequ(av[i], "-s"))
+		return ((vm->visual = 1));
+	if (ft_strequ(av[i], "-v"))
+	{
+		if (i == ac - 1 || !is_digital(av[i + 1]) ||
+		(vm->verbosity = ft_atoi(av[i + 1])) > 31)
+			usage();
+		return (2);
+	}
+	return (0);
 }
 
 void			input(t_vm *vm, int ac, char **av)
 {
 	int		i;
-	char	**files;
+	int		ord;
+	int		tmp;
+	char	*unordered[MAX_PLAYERS];
+	char	*files[MAX_PLAYERS];
 
-	if (!(vm->num_players = count_players(ac, av)) ||
-	vm->num_players > MAX_PLAYERS)
-		error("Invalid number of players.");
-	files = get_files(ac, av, vm->num_players);
 	i = 0;
+	ord = 0;
+	ft_bzero(unordered, sizeof(char*) * MAX_PLAYERS);
+	ft_bzero(files, sizeof(char*) * MAX_PLAYERS);
 	while (++i < ac)
-	{
-		if (ft_strequ(av[i], "-d") || ft_strequ(av[i], "-dump"))
-		{
-			if (i == ac - 1 || !is_digital(av[++i]) || vm->dump_len)
-				error("incorrect use of dump option.");
-			vm->dump_len = (ft_strequ(av[i - 1], "-d") ? 64 : 32);
-			vm->dump_cycle = ft_strtol(av[i], NULL, 10);
-		}
+		if (is_flag(av[i]))
+			i += exec_flag(vm, ac, av, i) - 1;
 		else if (ft_strequ(av[i], "-n"))
-			i += 2;
-		else if (!(valid_filename(av[i])))
-			error_ext("invalid option ", av[i]);
-	}
+			i < ac - 2 && is_digital(av[++i]) && (tmp = ft_atoi(av[i])) > 0 &&
+			tmp <= MAX_PLAYERS && !is_flag(av[++i]) && !files[tmp - 1] ?
+			(files[tmp - 1] = av[i]) : error("Invalid player number.");
+		else if (ord >= MAX_PLAYERS)
+			error("Too many champions.");
+		else
+			unordered[ord++] = av[i];
+	if (!(vm->num_players = merge(files, unordered)))
+		usage();
 	get_players(vm, files);
-	free(files);
 }

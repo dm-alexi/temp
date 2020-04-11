@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:53 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/10 18:47:19 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/11 02:36:16 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ffork(t_process *t, t_vm *vm, int *args)
 /*
 ** Original corewar reads 2 bytes here instead of 4, which is probably a bug.
 ** Function below reproduces this behavior. Substitute read_ind(...) with
-** read_dir(...) to get a 'correct' version.
+** read_dir(...) to 'fix' it.
 */
 
 void	lld(t_process *t, t_vm *vm, int *args)

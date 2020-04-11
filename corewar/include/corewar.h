@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/10 18:40:19 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/11 02:18:38 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct	s_vm
 	unsigned	next_check;
 	unsigned	live_calls;
 	unsigned	last_alive;
+	unsigned	verbosity;
+	t_byte		visual;
 }				t_vm;
 
 typedef struct	s_op
@@ -68,7 +70,8 @@ extern const t_op	g_tab[];
 
 void			sys_error(char *s);
 void			error(char *s);
-void			error_ext(char *s, char *t);
+void			error2(char *s, char *t);
+void			usage(void);
 
 void			input(t_vm *vm, int ac, char **av);
 void			get_players(t_vm *vm, char **files);

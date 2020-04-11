@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 01:22:43 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 02:30:18 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_process	*new_process(t_process *next, unsigned num, unsigned player_num,
 		sys_error(NULL);
 	p->next = next;
 	p->player_num = player_num;
-	p->num = num; // check if this is necessary
+	p->num = num;
 	p->pc = pc;
 	return (p);
 }

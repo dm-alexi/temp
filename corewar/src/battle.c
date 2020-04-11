@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:39 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 02:16:14 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 02:38:43 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void	kill_process(t_vm *vm, t_process *p)
 		ft_printf("Process %u hasn't lived for %d cycles (CTD %d)\n", p->num,
 		vm->cycle - p->last_live, vm->cycles_to_die);
 	free(p);
-	--vm->num_process;
 }
 
 static void	kill_processes(t_vm *vm)
@@ -56,7 +55,7 @@ static int	check(t_vm *vm)
 		vm->cycles_to_die -= CYCLE_DELTA;
 		vm->checks = 0;
 		if (vm->verbosity & CYCLES)
-			ft_printf("Cycle to die is now %d", vm->cycles_to_die);
+			ft_printf("Cycle to die is now %d\n", vm->cycles_to_die);
 	}
 	vm->live_calls = 0;
 	vm->next_check = vm->cycle + vm->cycles_to_die;
@@ -71,8 +70,6 @@ int			battle(t_vm *vm)
 	{
 		if (vm->verbosity & CYCLES)
 			ft_printf("It is now cycle %u\n", vm->cycle);
-		if (vm->dump_len && vm->dump_cycle < vm->cycle)
-			return (dump(vm));
 		cur = vm->start;
 		while (cur)
 		{
@@ -84,6 +81,8 @@ int			battle(t_vm *vm)
 		}
 		if (vm->cycle >= vm->next_check && check(vm))
 			break ;
+		if (vm->dump_len && vm->dump_cycle < vm->cycle)
+			return (dump(vm));
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:53 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 01:30:52 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 02:31:13 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ffork(t_process *t, t_vm *vm, int *args)
 	if (!(p = (t_process*)ft_memalloc(sizeof(t_process))))
 		sys_error(NULL);
 	p->player_num = t->player_num;
-	p->num = ++vm->num_process; // check if this is necessary
+	p->num = ++vm->num_process;
 	p->carry = t->carry;
 	p->last_live = t->last_live;
 	p->exec_cycle = t->exec_cycle;
@@ -90,7 +90,7 @@ void	lfork(t_process *t, t_vm *vm, int *args)
 	if (!(p = (t_process*)ft_memalloc(sizeof(t_process))))
 		sys_error(NULL);
 	p->player_num = t->player_num;
-	p->num = ++vm->num_process; // check if this is necessary
+	p->num = ++vm->num_process;
 	p->carry = t->carry;
 	p->last_live = t->last_live;
 	p->exec_cycle = t->exec_cycle;

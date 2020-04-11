@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 02:11:50 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 02:40:36 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct	s_player
 
 typedef struct	s_process
 {
-	unsigned			num; //check if this is necessary
+	unsigned			num;
 	unsigned			last_live;
 	t_byte				carry;
 	t_byte				op;

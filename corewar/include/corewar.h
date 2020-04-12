@@ -6,14 +6,17 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 02:40:36 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 15:24:35 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COREWAR_H
 # define COREWAR_H
 # include "op.h"
+
 # define OP 16
+# define MAX_ARGS 3
+
 # define LIVES 1
 # define CYCLES 2
 # define OPERATIONS 4
@@ -63,12 +66,13 @@ typedef struct	s_vm
 
 typedef struct	s_op
 {
-	void	(*func)(t_process*, t_vm*, int* args);
-	t_byte	argtype;
+	void	(*func)(t_process*, t_vm*, t_byte *argtypes, int* args);
+	t_byte	typebyte;
 	int		argnum;
 	char	args[3];
 	int		dirsize;
 	int		lag;
+	char	*name;
 }				t_op;
 
 extern const t_op	g_tab[];
@@ -97,21 +101,21 @@ void			read_instr(t_process *cur, t_vm *vm);
 void			exec_instr(t_process *cur, t_vm *vm);
 void			delete_vm(t_vm *vm);
 
-void			live(t_process *t, t_vm *vm, int *args);
-void			ld(t_process *t, t_vm *vm, int *args);
-void			st(t_process *t, t_vm *vm, int *args);
-void			add(t_process *t, t_vm *vm, int *args);
-void			sub(t_process *t, t_vm *vm, int *args);
-void			and(t_process *t, t_vm *vm, int *args);
-void			or(t_process *t, t_vm *vm, int *args);
-void			xor(t_process *t, t_vm *vm, int *args);
-void			zjmp(t_process *t, t_vm *vm, int *args);
-void			ldi(t_process *t, t_vm *vm, int *args);
-void			sti(t_process *t, t_vm *vm, int *args);
-void			ffork(t_process *t, t_vm *vm, int *args);
-void			lld(t_process *t, t_vm *vm, int *args);
-void			lldi(t_process *t, t_vm *vm, int *args);
-void			lfork(t_process *t, t_vm *vm, int *args);
-void			aff(t_process *t, t_vm *vm, int *args);
+void			live(t_process *t, t_vm *vm, t_byte *argtypes, int *args);
+void			ld(t_process *t, t_vm *vm, t_byte *argtypes, int *args);
+void			st(t_process *t, t_vm *vm, t_byte *argtypes, int *args);
+void			add(t_process *t, t_vm *vm, t_byte *argtypes, int *args);
+void			sub(t_process *t, t_vm *vm, t_byte *argtypes, int *args);
+void			and(t_process *t, t_vm *vm, t_byte *argtypes, int *args);
+void			or(t_process *t, t_vm *vm, t_byte *argtypes, int *args);
+void			xor(t_process *t, t_vm *vm, t_byte *argtypes, int *args);
+void			zjmp(t_process *t, t_vm *vm, t_byte *argtypes, int *args);
+void			ldi(t_process *t, t_vm *vm, t_byte *argtypes, int *args);
+void			sti(t_process *t, t_vm *vm, t_byte *argtypes, int *args);
+void			ffork(t_process *t, t_vm *vm, t_byte *argtypes, int *args);
+void			lld(t_process *t, t_vm *vm, t_byte *argtypes, int *args);
+void			lldi(t_process *t, t_vm *vm, t_byte *argtypes, int *args);
+void			lfork(t_process *t, t_vm *vm, t_byte *argtypes, int *args);
+void			aff(t_process *t, t_vm *vm, t_byte *argtypes, int *args);
 
 #endif

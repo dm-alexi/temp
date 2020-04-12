@@ -6,15 +6,16 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:43 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 01:51:04 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 15:03:42 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "libft.h"
 
-void	live(t_process *t, t_vm *vm, int *args)
+void	live(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 {
+	(void)argtypes;
 	t->last_live = vm->cycle;
 	++vm->live_calls;
 	if (-args[0] > 0 && (unsigned)(-args[0]) <= vm->num_players)
@@ -26,32 +27,33 @@ void	live(t_process *t, t_vm *vm, int *args)
 	}
 }
 
-void	ld(t_process *t, t_vm *vm, int *args)
+void	ld(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 {
-	t->reg[args[1] - 1] =
-	((vm->arena[cut(t->pc + 1)] >> 6) & 0x03) == DIR_CODE ? args[0] :
-	read_dir(t->pc + args[0] % IDX_MOD, vm->arena);
+	t->reg[args[1] - 1] = (argtypes[0] == DIR_CODE ? args[0] :
+	read_dir(t->pc + args[0] % IDX_MOD, vm->arena));
 	t->carry = !t->reg[args[1] - 1];
 }
 
-void	st(t_process *t, t_vm *vm, int *args)
+void	st(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 {
-	if (((vm->arena[cut(t->pc + 1)] >> 4) & 0x03) == IND_CODE)
+	if (argtypes[1] == IND_CODE)
 		write_bytes(t->reg[args[0] - 1], t->pc + args[1] % IDX_MOD, vm->arena);
 	else
 		t->reg[args[1] - 1] = t->reg[args[0] - 1];
 }
 
-void	add(t_process *t, t_vm *vm, int *args)
+void	add(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 {
 	(void)vm;
+	(void)argtypes;
 	t->reg[args[2] - 1] = t->reg[args[0] - 1] + t->reg[args[1] - 1];
 	t->carry = !t->reg[args[2] - 1];
 }
 
-void	sub(t_process *t, t_vm *vm, int *args)
+void	sub(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 {
 	(void)vm;
+	(void)argtypes;
 	t->reg[args[2] - 1] = t->reg[args[0] - 1] - t->reg[args[1] - 1];
 	t->carry = !t->reg[args[2] - 1];
 }

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:45 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/08 01:12:27 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 15:26:35 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,27 @@
 
 const t_op	g_tab[OP + 1] =
 {
-	{NULL, 0, 0, {0, 0, 0}, 0, 0},
-	{live, 0, 1, {T_DIR, 0, 0}, DIR_SIZE, 10},
-	{ld, 1, 2, {T_DIR | T_IND, T_REG, 0}, DIR_SIZE, 5},
-	{st, 1, 2, {T_REG, T_REG | T_IND, 0}, DIR_SIZE, 5},
-	{add, 1, 3, {T_REG, T_REG, T_REG}, DIR_SIZE, 10},
-	{sub, 1, 3, {T_REG, T_REG, T_REG}, DIR_SIZE, 10},
+	{NULL, 0, 0, {0, 0, 0}, 0, 0, NULL},
+	{live, 0, 1, {T_DIR, 0, 0}, DIR_SIZE, 10, "live"},
+	{ld, 1, 2, {T_DIR | T_IND, T_REG, 0}, DIR_SIZE, 5, "ld"},
+	{st, 1, 2, {T_REG, T_REG | T_IND, 0}, DIR_SIZE, 5, "st"},
+	{add, 1, 3, {T_REG, T_REG, T_REG}, DIR_SIZE, 10, "add"},
+	{sub, 1, 3, {T_REG, T_REG, T_REG}, DIR_SIZE, 10, "sub"},
 	{and, 1, 3, {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG}, DIR_SIZE,
-		6},
+		6, "and"},
 	{or, 1, 3, {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG}, DIR_SIZE,
-		6},
+		6, "or"},
 	{xor, 1, 3, {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG}, DIR_SIZE,
-		6},
-	{zjmp, 0, 1, {T_DIR, 0, 0}, IND_SIZE, 20},
-	{ldi, 1, 3, {T_REG | T_DIR | T_IND, T_REG | T_DIR, T_REG}, IND_SIZE, 25},
-	{sti, 1, 3, {T_REG, T_REG | T_DIR | T_IND, T_REG | T_DIR}, IND_SIZE, 25},
-	{ffork, 0, 1, {T_DIR, 0, 0}, IND_SIZE, 800},
-	{lld, 1, 2, {T_DIR | T_IND, T_REG, 0}, DIR_SIZE, 10},
-	{lldi, 1, 3, {T_REG | T_DIR | T_IND, T_REG | T_DIR, T_REG}, IND_SIZE, 50},
-	{lfork, 0, 1, {T_DIR, 0, 0}, IND_SIZE, 1000},
-	{aff, 1, 1, {T_REG, 0, 0}, DIR_SIZE, 2}
+		6, "xor"},
+	{zjmp, 0, 1, {T_DIR, 0, 0}, IND_SIZE, 20, "zjmp"},
+	{ldi, 1, 3, {T_REG | T_DIR | T_IND, T_REG | T_DIR, T_REG}, IND_SIZE, 25,
+		"ldi"},
+	{sti, 1, 3, {T_REG, T_REG | T_DIR | T_IND, T_REG | T_DIR}, IND_SIZE, 25,
+		"sti"},
+	{ffork, 0, 1, {T_DIR, 0, 0}, IND_SIZE, 800, "fork"},
+	{lld, 1, 2, {T_DIR | T_IND, T_REG, 0}, DIR_SIZE, 10, "lld"},
+	{lldi, 1, 3, {T_REG | T_DIR | T_IND, T_REG | T_DIR, T_REG}, IND_SIZE, 50,
+		"lldi"},
+	{lfork, 0, 1, {T_DIR, 0, 0}, IND_SIZE, 1000, "lfork"},
+	{aff, 1, 1, {T_REG, 0, 0}, DIR_SIZE, 2, "aff"}
 };

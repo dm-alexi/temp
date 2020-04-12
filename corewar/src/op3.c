@@ -6,44 +6,37 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:53 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 02:31:13 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 15:21:25 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "libft.h"
 
-void	sti(t_process *t, t_vm *vm, int *args)
+void	sti(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 {
 	int		a;
 	int		b;
-	t_byte	c;
 
-	if ((c = ((vm->arena[cut(t->pc + 1)] >> 4) & 0x03)) == DIR_CODE)
+	if (argtypes[1] == DIR_CODE)
 		a = args[1];
-	else if (c == IND_CODE)
+	else if (argtypes[1] == IND_CODE)
 		a = read_dir((t->pc + args[1] % IDX_MOD), vm->arena);
 	else
 		a = t->reg[args[1] - 1];
-	if ((c = ((vm->arena[cut(t->pc + 1)] >> 2) & 0x03)) == DIR_CODE)
-		b = args[2];
-	else
-		b = t->reg[args[2] - 1];
+	b = (argtypes[2] == DIR_CODE ? args[2] : t->reg[args[2] - 1]);
 	write_bytes(t->reg[args[0] - 1], t->pc + (a + b) % IDX_MOD, vm->arena);
 }
 
-void	ffork(t_process *t, t_vm *vm, int *args)
+void	ffork(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 {
 	t_process	*p;
 
+	(void)argtypes;
 	if (!(p = (t_process*)ft_memalloc(sizeof(t_process))))
 		sys_error(NULL);
-	p->player_num = t->player_num;
+	ft_memcpy(p, t, sizeof(t_process));
 	p->num = ++vm->num_process;
-	p->carry = t->carry;
-	p->last_live = t->last_live;
-	p->exec_cycle = t->exec_cycle;
-	ft_memcpy(p->reg, t->reg, REG_SIZE * REG_NUMBER);
 	p->pc = cut(t->pc + args[0] % IDX_MOD);
 	p->next = vm->start;
 	vm->start = p;
@@ -55,46 +48,38 @@ void	ffork(t_process *t, t_vm *vm, int *args)
 ** read_dir(...) to 'fix' it.
 */
 
-void	lld(t_process *t, t_vm *vm, int *args)
+void	lld(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 {
-	t->reg[args[1] - 1] =
-	(((vm->arena[cut(t->pc + 1)] >> 6) & 0x03) == DIR_CODE ? args[0] :
+	t->reg[args[1] - 1] = (argtypes[0] == DIR_CODE ? args[0] :
 	read_ind(t->pc + args[0], vm->arena));
 	t->carry = !t->reg[args[1] - 1];
 }
 
-void	lldi(t_process *t, t_vm *vm, int *args)
+void	lldi(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 {
 	int		a;
 	int		b;
-	t_byte	c;
 
-	if ((c = ((vm->arena[cut(t->pc + 1)] >> 6) & 0x03)) == DIR_CODE)
+	if (argtypes[0] == DIR_CODE)
 		a = args[0];
-	else if (c == IND_CODE)
+	else if (argtypes[0] == IND_CODE)
 		a = read_dir(t->pc + args[0] % IDX_MOD, vm->arena);
 	else
 		a = t->reg[args[0] - 1];
-	if ((c = ((vm->arena[cut(t->pc + 1)] >> 4) & 0x03)) == DIR_CODE)
-		b = args[1];
-	else
-		b = t->reg[args[1] - 1];
+	b = (argtypes[1] == DIR_CODE ? args[1] : t->reg[args[1] - 1]);
 	t->reg[args[2] - 1] = read_dir(t->pc + a + b, vm->arena);
 	t->carry = !t->reg[args[2] - 1];
 }
 
-void	lfork(t_process *t, t_vm *vm, int *args)
+void	lfork(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 {
 	t_process	*p;
 
+	(void)argtypes;
 	if (!(p = (t_process*)ft_memalloc(sizeof(t_process))))
 		sys_error(NULL);
-	p->player_num = t->player_num;
+	ft_memcpy(p, t, sizeof(t_process));
 	p->num = ++vm->num_process;
-	p->carry = t->carry;
-	p->last_live = t->last_live;
-	p->exec_cycle = t->exec_cycle;
-	ft_memcpy(p->reg, t->reg, REG_SIZE * REG_NUMBER);
 	p->pc = cut(t->pc + args[0]);
 	p->next = vm->start;
 	vm->start = p;

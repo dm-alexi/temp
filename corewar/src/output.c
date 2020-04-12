@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:27 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 16:07:14 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 16:46:19 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void		print_operation(t_process *cur, t_byte *argtypes, int *args)
 {
 	int	i;
 
-	ft_printf("p%5u | %s", cur->num, g_tab[cur->op].name);
+	ft_printf("P%5u | %s", cur->num, g_tab[cur->op].name);
 	i = -1;
 	while (++i < g_tab[cur->op].argnum)
 		ft_printf(argtypes[i] == REG_CODE ? " r%d" : " %d", args[i]);

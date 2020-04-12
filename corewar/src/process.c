@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 16:00:20 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 17:13:59 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,12 @@ int			get_argtypes(t_process *t, t_vm *vm, t_byte *argtypes)
 	i = -1;
 	n = 1;
 	sign = 1;
-	while (++i < g_tab[t->op].argnum && (argtypes[i] =
-	(vm->arena[cut(t->pc + 1)] >> (6 - 2 * i)) & 0x03))
-		if (argtypes[i] == REG_CODE && ++n && !((g_tab[t->op].args[i] & T_REG)
-		&& vm->arena[cut(t->pc + n)] > 0 &&
+	while (++i < g_tab[t->op].argnum)
+	{
+		if (!(argtypes[i] = (vm->arena[cut(t->pc + 1)] >> (6 - 2 * i)) & 0x03))
+			sign = -1;
+		else if (argtypes[i] == REG_CODE && ++n &&
+		!((g_tab[t->op].args[i] & T_REG) && vm->arena[cut(t->pc + n)] > 0 &&
 		vm->arena[cut(t->pc + n)] <= REG_NUMBER))
 			sign = -1;
 		else if (argtypes[i] == DIR_CODE && (n += g_tab[t->op].dirsize) &&
@@ -50,7 +52,8 @@ int			get_argtypes(t_process *t, t_vm *vm, t_byte *argtypes)
 		else if (argtypes[i] == IND_CODE && (n += IND_SIZE) &&
 		!(g_tab[t->op].args[i] & T_IND))
 			sign = -1;
-	return (i == g_tab[t->op].argnum ? n * sign : -n);
+	}
+	return (n * sign);
 }
 
 void		get_args(t_process *t, t_vm *vm, t_byte *argtypes, int *args)

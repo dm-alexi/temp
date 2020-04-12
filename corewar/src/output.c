@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:27 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 02:11:42 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 16:07:14 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,17 @@ void		declare_winner(t_vm *vm)
 {
 	ft_printf("Contestant %u, \"%s\", has won !\n", vm->last_alive,
 	vm->players[vm->last_alive - 1].header.prog_name);
+}
+
+void		print_operation(t_process *cur, t_byte *argtypes, int *args)
+{
+	int	i;
+
+	ft_printf("p%5u | %s", cur->num, g_tab[cur->op].name);
+	i = -1;
+	while (++i < g_tab[cur->op].argnum)
+		ft_printf(argtypes[i] == REG_CODE ? " r%d" : " %d", args[i]);
+	ft_printf("\n");
 }
 
 static char	*addr_conv(int n)

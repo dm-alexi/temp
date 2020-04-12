@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 15:24:35 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 16:07:37 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void			get_players(t_vm *vm, char **files);
 
 void			introduce(t_vm *vm);
 void			declare_winner(t_vm *vm);
+void			print_operation(t_process *cur, t_byte *argtypes, int *args);
 int				dump(t_vm *vm);
 
 void			init_arena(t_vm *vm);

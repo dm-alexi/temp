@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 15:23:25 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 16:00:20 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ void		exec_instr(t_process *cur, t_vm *vm)
 		else
 		{
 			get_args(cur, vm, argtypes, args);
+			if (vm->verbosity & OPERATIONS)
+				print_operation(cur, argtypes, args);
 			g_tab[cur->op].func(cur, vm, argtypes, args);
 			if (g_tab[cur->op].func != zjmp)
 				cur->pc = cut(cur->pc + 1 + n);

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:48 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/13 19:46:41 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/13 19:51:58 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	zjmp(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	t->pc = cut(t->pc +
 	(t->carry ? args[0] % IDX_MOD : 1 + g_tab[t->op].dirsize));
 	if (vm->verbosity & OPERATIONS)
-		ft_printf("%d %s\n", args[0] % IDX_MOD, t->carry ? "OK" : "FAILED");
+		ft_printf("%d %s\n", args[0], t->carry ? "OK" : "FAILED");
 }
 
 void	ldi(t_process *t, t_vm *vm, t_byte *argtypes, int *args)

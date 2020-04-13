@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:53 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/13 19:00:45 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/13 19:24:19 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void	sti(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	write_bytes(t->reg[args[0] - 1], t->pc + (a + b) % IDX_MOD, vm->arena);
 	if (vm->verbosity & OPERATIONS)
 	{
-		ft_printf(argtypes[0] == REG_CODE ? "r%d " : "%d ",
-		argtypes[0] == REG_CODE ? args[0] : a);
-		ft_printf(argtypes[1] == REG_CODE ? "r%d r%d\n" : "%d r%d\n",
-		argtypes[1] == REG_CODE ? args[1] : b, args[2]);
+		ft_printf(argtypes[1] == REG_CODE ? "r%d r%d " : "r%d %d ", args[0],
+		argtypes[0] == REG_CODE ? args[1] : a);
+		ft_printf(argtypes[2] == REG_CODE ? "r%d\n" : "%d\n",
+		argtypes[2] == REG_CODE ? args[2] : b);
 		ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)\n",
 		a, b, a + b, t->pc + (a + b) % IDX_MOD);
 	}

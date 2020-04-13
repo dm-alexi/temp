@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:43 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/13 18:04:59 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/13 19:20:08 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,8 @@ void	st(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	else
 		t->reg[args[1] - 1] = t->reg[args[0] - 1];
 	if (vm->verbosity & OPERATIONS)
-	{
-		if (argtypes[1] == IND_CODE)
-			ft_printf("r%d %d\n", args[0], t->reg[args[0] - 1]);
-		else
-			ft_printf("r%d r%d\n", args[0], args[1]);
-	}
+		ft_printf(argtypes[1] == IND_CODE ? "r%d %d\n" : "r%d r%d\n",
+		args[0], args[1]);
 }
 
 void	add(t_process *t, t_vm *vm, t_byte *argtypes, int *args)

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/13 19:00:45 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/13 23:59:12 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void			get_players(t_vm *vm, char **files);
 
 void			introduce(t_vm *vm);
 void			declare_winner(t_vm *vm);
-void			print_operation(t_process *cur, t_byte *argtypes, int *args);
+void			print_movement(t_byte *arena, int pc, int n);
 int				dump(t_vm *vm);
 
 int				cut(int n);

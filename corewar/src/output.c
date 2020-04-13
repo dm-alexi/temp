@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:27 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/13 19:00:00 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/14 00:02:06 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,26 @@ static char	*addr_conv(int n)
 	addr[4] = (rb / 16 > 9 ? rb / 16 - 10 + 'a' : rb / 16 + '0');
 	addr[5] = (rb % 16 > 9 ? rb % 16 - 10 + 'a' : rb % 16 + '0');
 	return (addr);
+}
+
+void		print_movement(t_byte *arena, int pc, int n)
+{
+	char	line[7 + 12 * MAX_ARGS];
+	t_byte	t;
+	int		i;
+	int		j;
+
+	i = -1;
+	j = 0;
+	while (++i < n)
+	{
+		t = *(arena + (pc + i) % MEM_SIZE);
+		line[j++] = ' ';
+		line[j++] = (t / 16 > 9 ? t / 16 - 10 + 'a' : t / 16 + '0');
+		line[j++] = (t % 16 > 9 ? t % 16 - 10 + 'a' : t % 16 + '0');
+	}
+	line[j] = '\0';
+	ft_printf("ADV %d (%04x -> %04x)%s\n", n, pc, (pc + n) % MEM_SIZE, line);
 }
 
 int			dump(t_vm *vm)

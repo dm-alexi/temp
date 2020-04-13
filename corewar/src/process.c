@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/13 21:54:47 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/14 00:01:36 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,11 @@ void		exec_instr(t_process *cur, t_vm *vm)
 			get_args(cur, vm, argtypes, args);
 			g_tab[cur->op].func(cur, vm, argtypes, args);
 			if (g_tab[cur->op].func != zjmp)
+			{
+				if (vm->verbosity & MOVES)
+					print_movement(vm->arena, cur->pc, n + 1);
 				cur->pc = cut(cur->pc + 1 + n);
+			}
 		}
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/13 18:02:52 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/13 21:54:47 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ void		exec_instr(t_process *cur, t_vm *vm)
 		else
 		{
 			get_args(cur, vm, argtypes, args);
-			if (vm->verbosity & OPERATIONS)
-				ft_printf("P%5u | %s ", cur->num, g_tab[cur->op].name);
 			g_tab[cur->op].func(cur, vm, argtypes, args);
 			if (g_tab[cur->op].func != zjmp)
 				cur->pc = cut(cur->pc + 1 + n);

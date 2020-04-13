@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:53 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/13 19:48:41 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/13 21:54:32 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	sti(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	write_bytes(t->reg[args[0] - 1], t->pc + (a + b) % IDX_MOD, vm->arena);
 	if (vm->verbosity & OPERATIONS)
 	{
-		ft_printf("r%d %d %d\n", args[0], a, b);
+		ft_printf("P%5u | sti r%d %d %d\n", t->num, args[0], a, b);
 		ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)\n",
 		a, b, a + b, t->pc + (a + b) % IDX_MOD);
 	}
@@ -47,7 +47,8 @@ void	sfork(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	p->next = vm->start;
 	vm->start = p;
 	if (vm->verbosity & OPERATIONS)
-		ft_printf("%d (%d)\n", args[0], t->pc + args[0] % IDX_MOD);
+		ft_printf("P%5u | fork %d (%d)\n", t->num, args[0],
+		t->pc + args[0] % IDX_MOD);
 }
 
 /*
@@ -62,7 +63,7 @@ void	lld(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	read_ind(t->pc + args[0], vm->arena));
 	t->carry = !t->reg[args[1] - 1];
 	if (vm->verbosity & OPERATIONS)
-		ft_printf("%d r%d\n", t->reg[args[1] - 1], args[1]);
+		ft_printf("P%5u | lld %d r%d\n", t->num, t->reg[args[1] - 1], args[1]);
 }
 
 void	lldi(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
@@ -81,7 +82,7 @@ void	lldi(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	t->carry = !t->reg[args[2] - 1];
 	if (vm->verbosity & OPERATIONS)
 	{
-		ft_printf("%d %d r%d\n", a, b, args[2]);
+		ft_printf("P%5u | lldi %d %d r%d\n", t->num, a, b, args[2]);
 		ft_printf("       | -> load from %d + %d = %d (with pc %d)\n",
 		a, b, a + b, t->pc + a + b);
 	}
@@ -100,5 +101,5 @@ void	lfork(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	p->next = vm->start;
 	vm->start = p;
 	if (vm->verbosity & OPERATIONS)
-		ft_printf("%d (%d)\n", args[0], t->pc + args[0]);
+		ft_printf("P%5u | lfork %d (%d)\n", t->num, args[0], t->pc + args[0]);
 }

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:27 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/14 02:03:26 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/14 02:17:54 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void		print_movement(t_byte *arena, int pc, int n)
 		++i;
 	}
 	line[j] = '\0';
-	ft_printf("ADV %d (%#06x -> %#06x) %s\n", n, pc, (pc + n) % MEM_SIZE, line);
+	ft_printf("ADV %d (0x%04x -> 0x%04x) %s\n",
+		n, pc, (pc + n) % MEM_SIZE, line);
 }
 
 int			dump(t_vm *vm)
@@ -73,7 +74,7 @@ int			dump(t_vm *vm)
 	t = vm->arena;
 	while (t - vm->arena < MEM_SIZE)
 	{
-		ft_printf("%#06x : ", t - vm->arena);
+		ft_printf("0x%04x : ", t - vm->arena);
 		s = str;
 		while (t != vm->arena + MEM_SIZE)
 		{

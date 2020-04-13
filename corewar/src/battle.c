@@ -6,9 +6,13 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:39 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 02:46:21 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/13 00:32:54 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+** All battle functionality: cycles, checks, processes' deaths.
+*/
 
 #include "corewar.h"
 #include "libft.h"

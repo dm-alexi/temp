@@ -6,9 +6,13 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:27 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 16:46:19 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/13 19:00:00 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+** All basic output messages and dump.
+*/
 
 #ifdef _WIN32
 # include <stdio.h>
@@ -34,19 +38,9 @@ void		introduce(t_vm *vm)
 
 void		declare_winner(t_vm *vm)
 {
-	ft_printf("Contestant %u, \"%s\", has won !\n", vm->last_alive,
-	vm->players[vm->last_alive - 1].header.prog_name);
-}
-
-void		print_operation(t_process *cur, t_byte *argtypes, int *args)
-{
-	int	i;
-
-	ft_printf("P%5u | %s", cur->num, g_tab[cur->op].name);
-	i = -1;
-	while (++i < g_tab[cur->op].argnum)
-		ft_printf(argtypes[i] == REG_CODE ? " r%d" : " %d", args[i]);
-	ft_printf("\n");
+	ft_printf(COPYCAT ? "Contestant %u, \"%s\", has won !\n" :
+	"Player %u (%s) won\n",
+	vm->last_alive, vm->players[vm->last_alive - 1].header.prog_name);
 }
 
 static char	*addr_conv(int n)

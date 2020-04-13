@@ -6,9 +6,13 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:18 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/11 02:39:06 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/13 00:29:54 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+** All error and usage messages.
+*/
 
 #include <stdio.h>
 #include <unistd.h>
@@ -41,7 +45,8 @@ void	error2(char *s, char *t)
 
 void	usage(void)
 {
-	write(STDIN_FILENO, "Usage: ", 7);
-	write(STDIN_FILENO, "\n", 1);
+	static const char *message = "Usage: \n";
+
+	write(STDIN_FILENO, message, ft_strlen(message));
 	exit(EXIT_SUCCESS);
 }

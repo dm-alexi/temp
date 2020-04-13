@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 16:07:37 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/13 19:00:45 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,23 @@
 # define COREWAR_H
 # include "op.h"
 
-# define OP 16
-# define MAX_ARGS 3
+/*
+** In COPYCAT mode all the general messages from zaz's Corewar are reproduced.
+** NB: it doesn't comply with the subject!
+*/
 
-# define LIVES 1
-# define CYCLES 2
-# define OPERATIONS 4
-# define DEATHS 8
-# define MOVES 16
+# define COPYCAT		1
+
+# define OP_NUM			16
+# define MAX_ARGS		3
+# define DUMP_LEN		32
+# define D_LEN			64
+
+# define LIVES			1
+# define CYCLES			2
+# define OPERATIONS		4
+# define DEATHS			8
+# define MOVES			16
 
 typedef unsigned char	t_byte;
 
@@ -47,11 +56,9 @@ typedef struct	s_process
 
 typedef struct	s_vm
 {
+	t_byte		arena[MEM_SIZE];
 	unsigned	num_players;
 	t_player	*players;
-	unsigned	dump_cycle;
-	unsigned	dump_len;
-	t_byte		arena[MEM_SIZE];
 	unsigned	num_process;
 	t_process	*start;
 	unsigned	cycle;
@@ -60,6 +67,8 @@ typedef struct	s_vm
 	unsigned	next_check;
 	unsigned	live_calls;
 	unsigned	last_alive;
+	unsigned	dump_cycle;
+	unsigned	dump_len;
 	unsigned	verbosity;
 	t_byte		visual;
 }				t_vm;
@@ -90,13 +99,11 @@ void			declare_winner(t_vm *vm);
 void			print_operation(t_process *cur, t_byte *argtypes, int *args);
 int				dump(t_vm *vm);
 
-void			init_arena(t_vm *vm);
 int				cut(int n);
+void			init_arena(t_vm *vm);
 int				read_dir(int start, t_byte *arena);
 int				read_ind(int start, t_byte *arena);
 void			write_bytes(int n, int start, t_byte *arena);
-t_process		*new_process(t_process *next, unsigned num, unsigned player_num,
-					int pc);
 int				battle(t_vm *vm);
 void			read_instr(t_process *cur, t_vm *vm);
 void			exec_instr(t_process *cur, t_vm *vm);
@@ -113,7 +120,7 @@ void			xor(t_process *t, t_vm *vm, t_byte *argtypes, int *args);
 void			zjmp(t_process *t, t_vm *vm, t_byte *argtypes, int *args);
 void			ldi(t_process *t, t_vm *vm, t_byte *argtypes, int *args);
 void			sti(t_process *t, t_vm *vm, t_byte *argtypes, int *args);
-void			ffork(t_process *t, t_vm *vm, t_byte *argtypes, int *args);
+void			sfork(t_process *t, t_vm *vm, t_byte *argtypes, int *args);
 void			lld(t_process *t, t_vm *vm, t_byte *argtypes, int *args);
 void			lldi(t_process *t, t_vm *vm, t_byte *argtypes, int *args);
 void			lfork(t_process *t, t_vm *vm, t_byte *argtypes, int *args);

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:53 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 15:21:25 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/13 19:00:45 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,18 @@ void	sti(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 		a = t->reg[args[1] - 1];
 	b = (argtypes[2] == DIR_CODE ? args[2] : t->reg[args[2] - 1]);
 	write_bytes(t->reg[args[0] - 1], t->pc + (a + b) % IDX_MOD, vm->arena);
+	if (vm->verbosity & OPERATIONS)
+	{
+		ft_printf(argtypes[0] == REG_CODE ? "r%d " : "%d ",
+		argtypes[0] == REG_CODE ? args[0] : a);
+		ft_printf(argtypes[1] == REG_CODE ? "r%d r%d\n" : "%d r%d\n",
+		argtypes[1] == REG_CODE ? args[1] : b, args[2]);
+		ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)\n",
+		a, b, a + b, t->pc + (a + b) % IDX_MOD);
+	}
 }
 
-void	ffork(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
+void	sfork(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 {
 	t_process	*p;
 
@@ -40,6 +49,8 @@ void	ffork(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	p->pc = cut(t->pc + args[0] % IDX_MOD);
 	p->next = vm->start;
 	vm->start = p;
+	if (vm->verbosity & OPERATIONS)
+		ft_printf("%d (%d)\n", args[0], t->pc + args[0] % IDX_MOD);
 }
 
 /*
@@ -53,6 +64,8 @@ void	lld(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	t->reg[args[1] - 1] = (argtypes[0] == DIR_CODE ? args[0] :
 	read_ind(t->pc + args[0], vm->arena));
 	t->carry = !t->reg[args[1] - 1];
+	if (vm->verbosity & OPERATIONS)
+		ft_printf("%d r%d\n", t->reg[args[1] - 1], args[1]);
 }
 
 void	lldi(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
@@ -69,6 +82,15 @@ void	lldi(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	b = (argtypes[1] == DIR_CODE ? args[1] : t->reg[args[1] - 1]);
 	t->reg[args[2] - 1] = read_dir(t->pc + a + b, vm->arena);
 	t->carry = !t->reg[args[2] - 1];
+	if (vm->verbosity & OPERATIONS)
+	{
+		ft_printf(argtypes[0] == REG_CODE ? "r%d " : "%d ",
+		argtypes[0] == REG_CODE ? args[0] : a);
+		ft_printf(argtypes[1] == REG_CODE ? "r%d r%d\n" : "%d r%d\n",
+		argtypes[1] == REG_CODE ? args[1] : b, args[2]);
+		ft_printf("       | -> load from %d + %d = %d (with pc %d)\n",
+		a, b, a + b, t->pc + a + b);
+	}
 }
 
 void	lfork(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
@@ -83,4 +105,6 @@ void	lfork(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	p->pc = cut(t->pc + args[0]);
 	p->next = vm->start;
 	vm->start = p;
+	if (vm->verbosity & OPERATIONS)
+		ft_printf("%d (%d)\n", args[0], t->pc + args[0]);
 }

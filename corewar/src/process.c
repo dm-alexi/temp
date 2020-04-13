@@ -6,28 +6,27 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 17:13:59 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/13 18:02:52 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+** Read and execute instructions.
+*/
 
 #include "corewar.h"
 #include "libft.h"
 
-t_process	*new_process(t_process *next, unsigned num, unsigned player_num,
-						int pc)
-{
-	t_process	*p;
+/*
+** Cut any address to fit arena size.
+*/
 
-	if (!(p = (t_process*)ft_memalloc(sizeof(t_process))))
-		sys_error(NULL);
-	p->next = next;
-	p->player_num = player_num;
-	p->num = num;
-	p->pc = pc;
-	return (p);
+int			cut(int n)
+{
+	return (n < 0 ? n % MEM_SIZE + MEM_SIZE : n % MEM_SIZE);
 }
 
-int			get_argtypes(t_process *t, t_vm *vm, t_byte *argtypes)
+static int	get_argtypes(t_process *t, t_vm *vm, t_byte *argtypes)
 {
 	int	i;
 	int	n;
@@ -56,7 +55,7 @@ int			get_argtypes(t_process *t, t_vm *vm, t_byte *argtypes)
 	return (n * sign);
 }
 
-void		get_args(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
+static void	get_args(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 {
 	int		i;
 	int		p;
@@ -85,10 +84,9 @@ void		get_args(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 
 void		read_instr(t_process *cur, t_vm *vm)
 {
-	if ((cur->op = vm->arena[cur->pc]) > 0 && cur->op <= OP)
-		cur->exec_cycle = vm->cycle + g_tab[cur->op].lag - 1;
-	else
-		cur->exec_cycle = vm->cycle;
+	cur->op = vm->arena[cur->pc];
+	cur->exec_cycle = (cur->op > 0 && cur->op <= OP_NUM) ?
+		vm->cycle + g_tab[cur->op].lag - 1 : vm->cycle;
 }
 
 void		exec_instr(t_process *cur, t_vm *vm)
@@ -97,7 +95,7 @@ void		exec_instr(t_process *cur, t_vm *vm)
 	int		args[MAX_ARGS];
 	int		n;
 
-	if (cur->op > 0 && cur->op <= OP)
+	if (cur->op > 0 && cur->op <= OP_NUM)
 	{
 		n = get_argtypes(cur, vm, argtypes);
 		if (n <= 0)
@@ -106,7 +104,7 @@ void		exec_instr(t_process *cur, t_vm *vm)
 		{
 			get_args(cur, vm, argtypes, args);
 			if (vm->verbosity & OPERATIONS)
-				print_operation(cur, argtypes, args);
+				ft_printf("P%5u | %s ", cur->num, g_tab[cur->op].name);
 			g_tab[cur->op].func(cur, vm, argtypes, args);
 			if (g_tab[cur->op].func != zjmp)
 				cur->pc = cut(cur->pc + 1 + n);

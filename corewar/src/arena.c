@@ -6,14 +6,37 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:22:33 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 01:18:50 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/13 00:16:29 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+** All arena read and write operations.
+** NB: Arena is big-endian!
+*/
 
 #include "corewar.h"
 #include "libft.h"
 
-void	init_arena(t_vm *vm)
+static t_process	*new_process(t_process *next, unsigned num,
+	unsigned player_num, int pc)
+{
+	t_process	*p;
+
+	if (!(p = (t_process*)ft_memalloc(sizeof(t_process))))
+		sys_error(NULL);
+	p->next = next;
+	p->player_num = player_num;
+	p->num = num;
+	p->pc = pc;
+	return (p);
+}
+
+/*
+** Place champions' code in the arena and create initial processes.
+*/
+
+void				init_arena(t_vm *vm)
 {
 	unsigned	i;
 	int			step;
@@ -24,6 +47,7 @@ void	init_arena(t_vm *vm)
 	{
 		ft_memcpy(vm->arena + i * step, vm->players[i].code,
 		vm->players[i].header.prog_size);
+		free(vm->players[i].code);
 		vm->start = new_process(vm->start, ++vm->num_process,
 		vm->players[i].num, i * step);
 		vm->start->reg[0] = -(i + 1);
@@ -31,12 +55,11 @@ void	init_arena(t_vm *vm)
 	}
 }
 
-int		cut(int n)
-{
-	return (n < 0 ? n % MEM_SIZE + MEM_SIZE : n % MEM_SIZE);
-}
+/*
+** Read an argument of T_DIR type.
+*/
 
-int		read_dir(int start, t_byte *arena)
+int					read_dir(int start, t_byte *arena)
 {
 	char	s[DIR_SIZE];
 	int		i;
@@ -48,7 +71,11 @@ int		read_dir(int start, t_byte *arena)
 	return (*((int*)s));
 }
 
-int		read_ind(int start, t_byte *arena)
+/*
+** Read an argument of T_IND type.
+*/
+
+int					read_ind(int start, t_byte *arena)
 {
 	char	s[IND_SIZE];
 	int		i;
@@ -60,7 +87,11 @@ int		read_ind(int start, t_byte *arena)
 	return (*((short*)s));
 }
 
-void	write_bytes(int n, int start, t_byte *arena)
+/*
+** Write an argument to the arena.
+*/
+
+void				write_bytes(int n, int start, t_byte *arena)
 {
 	t_byte	*s;
 	int		i;

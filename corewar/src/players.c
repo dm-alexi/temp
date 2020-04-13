@@ -6,13 +6,18 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:35 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/11 02:25:28 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/13 18:59:33 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+** Read champion files and perform data validation.
+** NB: Champion files are big-endian!
+*/
+
 #include <fcntl.h>
 #include <unistd.h>
-#include "libft.h"
+#include <stdlib.h>
 #include "corewar.h"
 
 static void	byte_swap(unsigned *n)

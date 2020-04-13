@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:23 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 00:58:02 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/12 23:58:25 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 void	delete_vm(t_vm *vm)
 {
 	t_process	*t;
-	unsigned	i;
 
 	while (vm->start)
 	{
@@ -24,8 +23,5 @@ void	delete_vm(t_vm *vm)
 		free(vm->start);
 		vm->start = t;
 	}
-	i = 0;
-	while (i < vm->num_players)
-		free(vm->players[i++].code);
 	free(vm->players);
 }

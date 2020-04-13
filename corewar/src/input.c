@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:33 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/11 02:54:53 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/13 00:06:53 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ static int		is_flag(char *s)
 	return (ft_strequ(s, "-d") || ft_strequ(s, "-dump") || ft_strequ(s, "-v") ||
 	ft_strequ(s, "-s"));
 }
+
+/*
+** Merge ordered champion list (with -n option) with the unordered one.
+** Return total number of champions.
+*/
 
 static int		merge(char **files, char **unordered)
 {
@@ -52,13 +57,17 @@ static int		merge(char **files, char **unordered)
 	return (j);
 }
 
+/*
+** Execute command line option (except -n). Return number of arguments to skip.
+*/
+
 static int		exec_flag(t_vm *vm, int ac, char **av, int i)
 {
 	if (ft_strequ(av[i], "-d") || ft_strequ(av[i], "-dump"))
 	{
 		if (i == ac - 1 || !is_digital(av[i + 1]) || vm->dump_len)
 			usage();
-		vm->dump_len = (ft_strequ(av[i], "-d") ? 64 : 32);
+		vm->dump_len = (ft_strequ(av[i], "-d") ? D_LEN : DUMP_LEN);
 		vm->dump_cycle = ft_strtol(av[i + 1], NULL, 10);
 		return (2);
 	}
@@ -73,6 +82,10 @@ static int		exec_flag(t_vm *vm, int ac, char **av, int i)
 	}
 	return (0);
 }
+
+/*
+** Handle all command line arguments and perform full input validation.
+*/
 
 void			input(t_vm *vm, int ac, char **av)
 {

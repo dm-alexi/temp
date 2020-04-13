@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:48 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/13 21:52:48 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/13 22:43:51 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	and(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	t->reg[args[2] - 1] = a & b;
 	t->carry = !t->reg[args[2] - 1];
 	if (vm->verbosity & OPERATIONS)
-		ft_printf("P%5u | and %d %d r%d\n", t->num, a, b, args[2]);
+		ft_printf("P %4u | and %d %d r%d\n", t->num, a, b, args[2]);
 }
 
 void	or(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
@@ -56,7 +56,7 @@ void	or(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	t->reg[args[2] - 1] = a | b;
 	t->carry = !t->reg[args[2] - 1];
 	if (vm->verbosity & OPERATIONS)
-		ft_printf("P%5u | or %d %d r%d\n", t->num, a, b, args[2]);
+		ft_printf("P %4u | or %d %d r%d\n", t->num, a, b, args[2]);
 }
 
 void	xor(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
@@ -79,7 +79,7 @@ void	xor(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	t->reg[args[2] - 1] = a ^ b;
 	t->carry = !t->reg[args[2] - 1];
 	if (vm->verbosity & OPERATIONS)
-		ft_printf("P%5u | xor %d %d r%d\n", t->num, a, b, args[2]);
+		ft_printf("P %4u | xor %d %d r%d\n", t->num, a, b, args[2]);
 }
 
 void	zjmp(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
@@ -88,7 +88,7 @@ void	zjmp(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	t->pc = cut(t->pc +
 	(t->carry ? args[0] % IDX_MOD : 1 + g_tab[t->op].dirsize));
 	if (vm->verbosity & OPERATIONS)
-		ft_printf("P%5u | zjmp %d %s\n", t->num, args[0],
+		ft_printf("P %4u | zjmp %d %s\n", t->num, args[0],
 		t->carry ? "OK" : "FAILED");
 }
 
@@ -107,7 +107,7 @@ void	ldi(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	t->reg[args[2] - 1] = read_dir((t->pc + (a + b) % IDX_MOD), vm->arena);
 	if (vm->verbosity & OPERATIONS)
 	{
-		ft_printf("P%5u | ldi %d %d r%d\n", t->num, a, b, args[2]);
+		ft_printf("P %4u | ldi %d %d r%d\n", t->num, a, b, args[2]);
 		ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n",
 		a, b, a + b, t->pc + (a + b) % IDX_MOD);
 	}

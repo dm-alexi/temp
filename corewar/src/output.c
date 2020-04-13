@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:27 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/14 00:06:13 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/14 02:03:26 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,6 @@ void		declare_winner(t_vm *vm)
 	vm->last_alive, vm->players[vm->last_alive - 1].header.prog_name);
 }
 
-static char	*addr_conv(int n)
-{
-	static char	addr[10] = "0x0000 : ";
-	t_byte		lb;
-	t_byte		rb;
-
-	rb = n % 256;
-	lb = n / 256;
-	addr[2] = (lb / 16 > 9 ? lb / 16 - 10 + 'a' : lb / 16 + '0');
-	addr[3] = (lb % 16 > 9 ? lb % 16 - 10 + 'a' : lb % 16 + '0');
-	addr[4] = (rb / 16 > 9 ? rb / 16 - 10 + 'a' : rb / 16 + '0');
-	addr[5] = (rb % 16 > 9 ? rb % 16 - 10 + 'a' : rb % 16 + '0');
-	return (addr);
-}
-
 void		print_movement(t_byte *arena, int pc, int n)
 {
 	char	line[7 + 12 * MAX_ARGS];
@@ -65,44 +50,41 @@ void		print_movement(t_byte *arena, int pc, int n)
 	int		i;
 	int		j;
 
-	i = -1;
+	i = 0;
 	j = 0;
-	while (++i < n)
+	while (i < n)
 	{
 		t = *(arena + (pc + i) % MEM_SIZE);
-		line[j++] = ' ';
 		line[j++] = (t / 16 > 9 ? t / 16 - 10 + 'a' : t / 16 + '0');
 		line[j++] = (t % 16 > 9 ? t % 16 - 10 + 'a' : t % 16 + '0');
+		line[j++] = ' ';
+		++i;
 	}
 	line[j] = '\0';
-	ft_printf("ADV %d (%#06x -> %#06x)%s\n", n, pc, (pc + n) % MEM_SIZE, line);
+	ft_printf("ADV %d (%#06x -> %#06x) %s\n", n, pc, (pc + n) % MEM_SIZE, line);
 }
 
 int			dump(t_vm *vm)
 {
 	t_byte	*t;
+	char	str[LONG_DUMP / 2 * 3 + 3];
 	char	*s;
-	char	*str;
 
 	t = vm->arena;
-	if (!(str =
-	(char*)malloc(3 * MEM_SIZE + 10 * (MEM_SIZE / vm->dump_len + 1))))
-		sys_error(NULL);
-	s = str;
 	while (t - vm->arena < MEM_SIZE)
 	{
-		if (!((t - vm->arena) % vm->dump_len))
+		ft_printf("%#06x : ", t - vm->arena);
+		s = str;
+		while (t != vm->arena + MEM_SIZE)
 		{
-			ft_memcpy(s, addr_conv(t - vm->arena), 9);
-			s += 9;
+			*s++ = (*t / 16 > 9 ? *t / 16 - 10 + 'a' : *t / 16 + '0');
+			*s++ = (*t % 16 > 9 ? *t % 16 - 10 + 'a' : *t % 16 + '0');
+			*s++ = ' ';
+			if ((++t - vm->arena) % vm->dump_len == 0)
+				break ;
 		}
-		*s++ = (*t / 16 > 9 ? *t / 16 - 10 + 'a' : *t / 16 + '0');
-		*s++ = (*t % 16 > 9 ? *t % 16 - 10 + 'a' : *t % 16 + '0');
-		*s++ = ' ';
-		if (!((++t - vm->arena) % vm->dump_len) || t - vm->arena == MEM_SIZE)
-			*s++ = '\n';
+		*s++ = '\n';
+		write(STDOUT_FILENO, str, s - str);
 	}
-	write(STDOUT_FILENO, str, s - str);
-	free(str);
 	return (0);
 }

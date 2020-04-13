@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:33 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/13 00:06:53 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/14 01:28:26 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int		exec_flag(t_vm *vm, int ac, char **av, int i)
 	{
 		if (i == ac - 1 || !is_digital(av[i + 1]) || vm->dump_len)
 			usage();
-		vm->dump_len = (ft_strequ(av[i], "-d") ? D_LEN : DUMP_LEN);
+		vm->dump_len = (ft_strequ(av[i], "-d") ? LONG_DUMP : SHORT_DUMP);
 		vm->dump_cycle = ft_strtol(av[i + 1], NULL, 10);
 		return (2);
 	}

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/13 23:59:12 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/14 01:27:50 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include "op.h"
 
 /*
-** In COPYCAT mode all the general messages from zaz's Corewar are reproduced.
+** In COPYCAT mode all the 'general' messages from zaz's Corewar are reproduced.
 ** NB: it doesn't comply with the subject!
 */
 
@@ -23,8 +23,8 @@
 
 # define OP_NUM			16
 # define MAX_ARGS		3
-# define DUMP_LEN		32
-# define D_LEN			64
+# define SHORT_DUMP		32
+# define LONG_DUMP		64
 
 # define LIVES			1
 # define CYCLES			2
@@ -81,7 +81,6 @@ typedef struct	s_op
 	char	args[3];
 	int		dirsize;
 	int		lag;
-	char	*name;
 }				t_op;
 
 extern const t_op	g_tab[];

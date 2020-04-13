@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:48 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/13 18:56:39 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/13 19:46:41 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,7 @@ void	and(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	t->reg[args[2] - 1] = a & b;
 	t->carry = !t->reg[args[2] - 1];
 	if (vm->verbosity & OPERATIONS)
-	{
-		ft_printf(argtypes[0] == REG_CODE ? "r%d " : "%d ",
-		argtypes[0] == REG_CODE ? args[0] : a);
-		ft_printf(argtypes[1] == REG_CODE ? "r%d r%d\n" : "%d r%d\n",
-		argtypes[1] == REG_CODE ? args[1] : b, args[2]);
-	}
+		ft_printf("%d %d r%d\n", a, b, args[2]);
 }
 
 void	or(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
@@ -61,12 +56,7 @@ void	or(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	t->reg[args[2] - 1] = a | b;
 	t->carry = !t->reg[args[2] - 1];
 	if (vm->verbosity & OPERATIONS)
-	{
-		ft_printf(argtypes[0] == REG_CODE ? "r%d " : "%d ",
-		argtypes[0] == REG_CODE ? args[0] : a);
-		ft_printf(argtypes[1] == REG_CODE ? "r%d r%d\n" : "%d r%d\n",
-		argtypes[1] == REG_CODE ? args[1] : b, args[2]);
-	}
+		ft_printf("%d %d r%d\n", a, b, args[2]);
 }
 
 void	xor(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
@@ -89,12 +79,7 @@ void	xor(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	t->reg[args[2] - 1] = a ^ b;
 	t->carry = !t->reg[args[2] - 1];
 	if (vm->verbosity & OPERATIONS)
-	{
-		ft_printf(argtypes[0] == REG_CODE ? "r%d " : "%d ",
-		argtypes[0] == REG_CODE ? args[0] : a);
-		ft_printf(argtypes[1] == REG_CODE ? "r%d r%d\n" : "%d r%d\n",
-		argtypes[1] == REG_CODE ? args[1] : b, args[2]);
-	}
+		ft_printf("%d %d r%d\n", a, b, args[2]);
 }
 
 void	zjmp(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
@@ -121,10 +106,7 @@ void	ldi(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	t->reg[args[2] - 1] = read_dir((t->pc + (a + b) % IDX_MOD), vm->arena);
 	if (vm->verbosity & OPERATIONS)
 	{
-		ft_printf(argtypes[0] == REG_CODE ? "r%d " : "%d ",
-		argtypes[0] == REG_CODE ? args[0] : a);
-		ft_printf(argtypes[1] == REG_CODE ? "r%d r%d\n" : "%d r%d\n",
-		argtypes[1] == REG_CODE ? args[1] : b, args[2]);
+		ft_printf("%d %d r%d\n", a, b, args[2]);
 		ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n",
 		a, b, a + b, t->pc + (a + b) % IDX_MOD);
 	}

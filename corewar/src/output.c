@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:27 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/14 02:17:54 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/14 02:29:02 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void		print_movement(t_byte *arena, int pc, int n)
 int			dump(t_vm *vm)
 {
 	t_byte	*t;
-	char	str[LONG_DUMP / 2 * 3 + 3];
+	char	str[LONG_DUMP * 3 + 1];
 	char	*s;
 
 	t = vm->arena;

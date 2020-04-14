@@ -6,16 +6,17 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:18 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/14 01:12:22 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/15 02:08:59 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** All error and usage messages.
+** All error and usage messages and invariant check.
 */
 
 #include <stdio.h>
 #include <unistd.h>
+#include "corewar.h"
 #include "libft.h"
 
 void	sys_error(char *s)
@@ -58,4 +59,23 @@ void	usage(void)
 	"\t\t  - 16 : Show PC movements (except for jumps)\n"
 	"\t-s\t: Visualization mode\n");
 	exit(EXIT_SUCCESS);
+}
+
+/*
+** Check the validity of macro-defined constants
+*/
+
+void	check_invariants(void)
+{
+	if (OP_NUM <= 0 || SHORT_DUMP <= 0 || LONG_DUMP <= 0 ||
+	SHORT_DUMP > LONG_DUMP)
+		error("corewar.h constants are invalid.");
+	if (IND_SIZE != sizeof(short) || REG_SIZE != sizeof(int) ||
+	DIR_SIZE > REG_SIZE || REG_CODE == DIR_CODE || REG_CODE == IND_CODE ||
+	DIR_CODE == IND_CODE || MEM_SIZE <= 0 || MAX_ARGS_NUMBER <= 0 ||
+	MAX_ARGS_NUMBER > 4 || MAX_PLAYERS <= 0 || MEM_SIZE <= 0 ||
+	CHAMP_MAX_SIZE * MAX_PLAYERS > MEM_SIZE || REG_NUMBER <= 0 ||
+	CYCLE_DELTA <= 0 || T_REG == T_DIR || T_REG == T_IND || T_IND == T_DIR ||
+	PROG_NAME_LENGTH < 0 || COMMENT_LENGTH < 0)
+		error("op.h constants are invalid.");
 }

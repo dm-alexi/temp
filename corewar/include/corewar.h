@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/14 01:27:50 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/15 01:53:56 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@
 ** NB: it doesn't comply with the subject!
 */
 
-# define COPYCAT		1
+# define COPYCAT		0
 
 # define OP_NUM			16
-# define MAX_ARGS		3
 # define SHORT_DUMP		32
 # define LONG_DUMP		64
 
@@ -89,6 +88,7 @@ void			sys_error(char *s);
 void			error(char *s);
 void			error2(char *s, char *t);
 void			usage(void);
+void			check_invariants(void);
 
 void			input(t_vm *vm, int ac, char **av);
 void			get_players(t_vm *vm, char **files);

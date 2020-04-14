@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/15 01:04:35 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/15 01:55:18 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ void		read_instr(t_process *cur, t_vm *vm)
 
 void		exec_instr(t_process *cur, t_vm *vm)
 {
-	t_byte	argtypes[MAX_ARGS];
-	int		args[MAX_ARGS];
+	t_byte	argtypes[MAX_ARGS_NUMBER];
+	int		args[MAX_ARGS_NUMBER];
 	int		steps;
 
 	if (cur->op > 0 && cur->op <= OP_NUM)

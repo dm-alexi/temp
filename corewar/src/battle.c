@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:39 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/13 23:26:48 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/15 02:02:39 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	kill_processes(t_vm *vm)
 static int	check(t_vm *vm)
 {
 	kill_processes(vm);
-	if (++vm->checks == MAX_CHECKS || vm->live_calls >= NBR_LIVE)
+	if (++vm->checks >= MAX_CHECKS || vm->live_calls >= NBR_LIVE)
 	{
 		vm->cycles_to_die -= CYCLE_DELTA;
 		vm->checks = 0;

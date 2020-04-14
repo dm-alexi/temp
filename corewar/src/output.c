@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:27 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/15 00:43:53 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/15 02:08:23 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		declare_winner(t_vm *vm)
 
 void		print_movement(t_byte *arena, int pc, int n)
 {
-	char	line[7 + 12 * MAX_ARGS];
+	char	line[7 + 3 * REG_SIZE * MAX_ARGS_NUMBER];
 	t_byte	t;
 	int		i;
 	int		j;

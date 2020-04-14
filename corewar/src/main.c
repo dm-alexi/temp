@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:39 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/12 23:56:22 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/15 02:05:14 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	main(int ac, char **av)
 {
 	t_vm	vm;
 
+	check_invariants();
 	ft_bzero(&vm, sizeof(t_vm));
 	input(&vm, ac, av);
 	vm.cycles_to_die = CYCLE_TO_DIE;

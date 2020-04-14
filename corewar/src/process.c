@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/14 00:01:36 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/15 00:30:21 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,30 +29,25 @@ int			cut(int n)
 static int	get_argtypes(t_process *t, t_vm *vm, t_byte *argtypes)
 {
 	int	i;
-	int	n;
 	int	sign;
+	int steps;
 
 	if (!g_tab[t->op].typebyte && (argtypes[0] = DIR_CODE))
 		return (g_tab[t->op].dirsize);
 	i = -1;
-	n = 1;
 	sign = 1;
+	steps = 1;
 	while (++i < g_tab[t->op].argnum)
-	{
-		if (!(argtypes[i] = (vm->arena[cut(t->pc + 1)] >> (6 - 2 * i)) & 0x03))
-			sign = -1;
-		else if (argtypes[i] == REG_CODE && ++n &&
-		!((g_tab[t->op].args[i] & T_REG) && vm->arena[cut(t->pc + n)] > 0 &&
-		vm->arena[cut(t->pc + n)] <= REG_NUMBER))
-			sign = -1;
-		else if (argtypes[i] == DIR_CODE && (n += g_tab[t->op].dirsize) &&
+		if (!(argtypes[i] = (vm->arena[cut(t->pc + 1)] >> (6 - 2 * i)) & 0x03)
+		|| (argtypes[i] == REG_CODE && ++steps &&
+		!((g_tab[t->op].args[i] & T_REG) && vm->arena[cut(t->pc + steps)] > 0
+		&& vm->arena[cut(t->pc + steps)] <= REG_NUMBER))
+		|| (argtypes[i] == DIR_CODE && (steps += g_tab[t->op].dirsize) &&
 		!(g_tab[t->op].args[i] & T_DIR))
+		|| (argtypes[i] == IND_CODE && (steps += IND_SIZE) &&
+		!(g_tab[t->op].args[i] & T_IND)))
 			sign = -1;
-		else if (argtypes[i] == IND_CODE && (n += IND_SIZE) &&
-		!(g_tab[t->op].args[i] & T_IND))
-			sign = -1;
-	}
-	return (n * sign);
+	return (steps * sign);
 }
 
 static void	get_args(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
@@ -93,23 +88,21 @@ void		exec_instr(t_process *cur, t_vm *vm)
 {
 	t_byte	argtypes[MAX_ARGS];
 	int		args[MAX_ARGS];
-	int		n;
+	int		steps;
 
 	if (cur->op > 0 && cur->op <= OP_NUM)
 	{
-		n = get_argtypes(cur, vm, argtypes);
-		if (n <= 0)
-			cur->pc = cut(cur->pc + 1 - n);
-		else
+		if ((steps = get_argtypes(cur, vm, argtypes)) > 0)
 		{
 			get_args(cur, vm, argtypes, args);
 			g_tab[cur->op].func(cur, vm, argtypes, args);
-			if (g_tab[cur->op].func != zjmp)
-			{
-				if (vm->verbosity & MOVES)
-					print_movement(vm->arena, cur->pc, n + 1);
-				cur->pc = cut(cur->pc + 1 + n);
-			}
+		}
+		if (steps < 0 || g_tab[cur->op].func != zjmp)
+		{
+			steps = steps < 0 ? -steps : steps;
+			if (vm->verbosity & MOVES)
+				print_movement(vm->arena, cur->pc, steps + 1);
+			cur->pc = cut(cur->pc + 1 + steps);
 		}
 	}
 	else

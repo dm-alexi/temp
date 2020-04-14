@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:27 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/14 02:29:02 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/15 00:43:53 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ void		print_movement(t_byte *arena, int pc, int n)
 		++i;
 	}
 	line[j] = '\0';
-	ft_printf("ADV %d (0x%04x -> 0x%04x) %s\n",
-		n, pc, (pc + n) % MEM_SIZE, line);
+	ft_printf("ADV %d (0x%04x -> 0x%04x) %s\n", n, pc, pc + n, line);
 }
 
 int			dump(t_vm *vm)

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:48 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/15 00:37:14 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/15 00:40:59 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	zjmp(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	if (vm->verbosity & OPERATIONS)
 		ft_printf("P %4u | zjmp %d %s\n", t->num, args[0],
 		t->carry ? "OK" : "FAILED");
-	if (vm->verbosity & MOVES)
+	if (vm->verbosity & MOVES && !t->carry)
 		print_movement(vm->arena, t->pc, 1 + g_tab[t->op].dirsize);
 	t->pc = cut(t->pc +
 	(t->carry ? args[0] % IDX_MOD : 1 + g_tab[t->op].dirsize));

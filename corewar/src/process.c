@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/15 00:30:21 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/04/15 01:04:35 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void		exec_instr(t_process *cur, t_vm *vm)
 			get_args(cur, vm, argtypes, args);
 			g_tab[cur->op].func(cur, vm, argtypes, args);
 		}
-		if (steps < 0 || g_tab[cur->op].func != zjmp)
+		if (g_tab[cur->op].func != zjmp)
 		{
 			steps = steps < 0 ? -steps : steps;
 			if (vm->verbosity & MOVES)

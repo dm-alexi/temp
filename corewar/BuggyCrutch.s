@@ -1,30 +1,22 @@
 .name		"Buggy Crutch"
-.comment	"I'm sexy and I know it!"
+.comment	"No, you're a towel!"
 
 entry:
-	sti		r1, %7, %1
+	st		r1, 26
+	st		r1, 26
+	st		r1, 26
+	st		r1, 26
+	st		r1, 39
+lives:
 	live	%21
-	fork	%:entry
-	sti		r1, %7, %1
 	live	%21
-	fork	%:entry
-	sti		r1, %7, %1
 	live	%21
-	fork	%:entry
-	sti		r1, %7, %1
 	live	%21
-	fork	%:entry
-	sti		r1, %7, %1
+	ld		:entry, r15
+	zjmp	%:lives
+	st		r2, :entry
+splitter:
 	live	%21
-	fork	%:entry
-	sti		r1, %7, %1
-	live	%21
-	fork	%:entry
-	sti		r1, %7, %1
-	live	%21
-	fork	%:entry
-	sti		r1, %7, %1
-	live	%21
-	fork	%:entry
-	and		r1, %0, r2
-	zjmp	%:entry
+	fork	%:lives
+	ld		:entry, r15
+	zjmp	%:splitter

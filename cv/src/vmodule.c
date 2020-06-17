@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vmodul.c                                           :+:      :+:    :+:   */
+/*   vmodule.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asmall <asmall@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 17:49:33 by asmall            #+#    #+#             */
-/*   Updated: 2020/05/12 15:03:08 by asmall           ###   ########.fr       */
+/*   Updated: 2020/06/17 22:26:14 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include "visualizator.h"
+#include "visualizer.h"
 
-int		arena_players_modul(t_vm *vm, unsigned i, int step, int byte)
+int		arena_players_module(t_vm *vm, unsigned i, int step, int byte)
 {
 	unsigned j;
 
@@ -33,7 +33,7 @@ int		arena_players_modul(t_vm *vm, unsigned i, int step, int byte)
 	return (byte);
 }
 
-void	init_arena_modul(t_vm *vm, int byte)
+void	init_arena_module(t_vm *vm, int byte)
 {
 	vm->arena[byte].color_b = 111;
 	vm->arena[byte].color_g = 111;
@@ -70,7 +70,7 @@ void	run_pause_module(t_vm *vm, int flag)
 	}
 }
 
-void	exec_instr_modul(t_process *cur, t_vm *vm)
+void	exec_instr_module(t_process *cur, t_vm *vm)
 {
 	vm->arena[cur->pc].cursor = 0;
 	cur->pc = cut(cur->pc + 1);

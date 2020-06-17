@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   push_info_pt2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asmall <asmall@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/12 15:49:05 by asmall            #+#    #+#             */
-/*   Updated: 2020/05/12 18:43:20 by asmall           ###   ########.fr       */
+/*   Updated: 2020/06/17 22:19:31 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "visualizator.h"
+#include "visualizer.h"
 
 void			push_int_slash_data(float y, int data_1,
 					int data_2, char *text)

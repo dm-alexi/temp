@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:22:33 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/17 19:59:45 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/17 22:22:13 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 */
 
 #include "corewar.h"
-#include "visualizator.h"
+#include "visualizer.h"
 
 t_process		*new_process_vm(t_process *next, unsigned num,
 					unsigned player_num, int pc)
@@ -52,10 +52,10 @@ void			init_arena(t_vm *vm)
 	i = 0;
 	while (i < vm->num_players)
 	{
-		byte = arena_players_modul(vm, i, step, byte);
+		byte = arena_players_module(vm, i, step, byte);
 		while (byte < diff && byte < MEM_SIZE)
 		{
-			init_arena_modul(vm, byte);
+			init_arena_module(vm, byte);
 			byte++;
 		}
 		diff += temp;

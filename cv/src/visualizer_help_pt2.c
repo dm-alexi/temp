@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   visualizator_help_pt2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asmall <asmall@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/12 18:02:09 by asmall            #+#    #+#             */
-/*   Updated: 2020/05/13 20:24:57 by asmall           ###   ########.fr       */
+/*   Updated: 2020/06/17 22:19:31 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "visualizator.h"
+#include "visualizer.h"
 
 void			set_sdl_color2(SDL_Color *color, int i)
 {

@@ -6,11 +6,11 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:06:04 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/17 21:46:01 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/17 22:25:52 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "visualizator.h"
+#include "visualizer.h"
 
 int			init_help(t_vm *vm)
 {
@@ -84,7 +84,7 @@ void		set_render_draw_color(char color)
 		SDL_SetRenderDrawColor(g_main_render, 111, 111, 111, 255);
 }
 
-void		visualisator_event(t_vm *vm)
+void		visualizer_event(t_vm *vm)
 {
 	SDL_Event	event;
 

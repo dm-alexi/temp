@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   visualizator.h                                     :+:      :+:    :+:   */
+/*   visualizer.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/12 14:10:35 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/17 19:17:54 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/17 22:18:20 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VISUALIZATOR_H
-# define VISUALIZATOR_H
+#ifndef VISUALIZER_H
+# define VISUALIZER_H
 
 # if __APPLE__
 #  include "SDL.h"
@@ -61,7 +61,7 @@ void			set_sdl_color(SDL_Color *color, int i);
 void			put_text_texture(float y, char *temp_2,
 					char *temp_3, SDL_Texture *text_texture);
 void			key_pause_quite(t_vm *vm);
-void			visualisator_event(t_vm *vm);
+void			visualizer_event(t_vm *vm);
 void			live_players(t_vm *vm, SDL_FRect coor, int sum);
 
 #endif

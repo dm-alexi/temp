@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asmall <asmall@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/05/11 18:55:20 by asmall           ###   ########.fr       */
+/*   Updated: 2020/06/17 22:25:15 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,5 @@ void		exec_instr(t_process *cur, t_vm *vm)
 		}
 	}
 	else
-		exec_instr_modul(cur, vm);
+		exec_instr_module(cur, vm);
 }

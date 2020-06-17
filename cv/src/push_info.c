@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   push_info.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asmall <asmall@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:05:44 by asmall            #+#    #+#             */
-/*   Updated: 2020/05/13 20:25:02 by asmall           ###   ########.fr       */
+/*   Updated: 2020/06/17 22:19:31 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "visualizator.h"
+#include "visualizer.h"
 
 void			push_distribution(t_battlefield *arena, float y)
 {

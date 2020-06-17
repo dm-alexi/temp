@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   battle.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asmall <asmall@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:39 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/05/12 14:53:33 by asmall           ###   ########.fr       */
+/*   Updated: 2020/06/17 22:19:31 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 */
 
 #include "corewar.h"
-#include "visualizator.h"
+#include "visualizer.h"
 
 static void	kill_process(t_vm *vm, t_process *p)
 {

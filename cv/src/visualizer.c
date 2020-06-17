@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   visualizator.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asmall <asmall@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:06:18 by asmall            #+#    #+#             */
-/*   Updated: 2020/05/12 18:42:17 by asmall           ###   ########.fr       */
+/*   Updated: 2020/06/17 22:19:31 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "visualizator.h"
+#include "visualizer.h"
 
 void			push_info(t_vm *vm, char *status)
 {

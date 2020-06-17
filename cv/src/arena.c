@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arena.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asmall <asmall@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:22:33 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/05/12 14:53:18 by asmall           ###   ########.fr       */
+/*   Updated: 2020/06/17 19:59:45 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ t_process		*new_process_vm(t_process *next, unsigned num,
 ** Place champions' code in the arena and create initial processes.
 */
 
-void			init_arena(t_vm *vm, unsigned i)
+void			init_arena(t_vm *vm)
 {
+	unsigned	i;
 	int			step;
 	int			byte;
 	int			temp;
@@ -48,7 +49,8 @@ void			init_arena(t_vm *vm, unsigned i)
 	diff = MEM_SIZE / vm->num_players;
 	temp = MEM_SIZE / vm->num_players;
 	step = MEM_SIZE / vm->num_players;
-	while (++i < vm->num_players)
+	i = 0;
+	while (i < vm->num_players)
 	{
 		byte = arena_players_modul(vm, i, step, byte);
 		while (byte < diff && byte < MEM_SIZE)
@@ -58,6 +60,7 @@ void			init_arena(t_vm *vm, unsigned i)
 		}
 		diff += temp;
 		free(vm->players[i].code);
+		++i;
 	}
 }
 

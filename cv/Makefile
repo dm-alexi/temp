@@ -21,9 +21,9 @@ else
 endif
 # Note: Current version only supports Linux and Mac OSX.
 ifeq ($(detected_OS),Darwin)
-FRAMEWORKS = -I/Library/Frameworks/SDL2.framework/Headers -F ~/Library/Frameworks -framework SDL2 -I/Library/Frameworks/SDL2_ttf.framework/Headers -F ~/Library/Frameworks -framework SDL2_ttf
+	FRAMEWORKS = -I/Library/Frameworks/SDL2.framework/Headers -F ~/Library/Frameworks -framework SDL2 -I/Library/Frameworks/SDL2_ttf.framework/Headers -F ~/Library/Frameworks -framework SDL2_ttf
 else
-FRAMEWORKS = -lSDL2 -lSDL2_ttf
+	FRAMEWORKS = -lSDL2 -lSDL2_ttf
 endif
 
 all: $(NAME)

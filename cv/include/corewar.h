@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asmall <asmall@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/05/12 15:06:46 by asmall           ###   ########.fr       */
+/*   Updated: 2020/06/17 20:00:20 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ typedef struct		s_process
 	int					reg[REG_NUMBER];
 	struct s_process	*next;
 	unsigned			player_num;
-	char				color;
 	unsigned			exec_cycle;
+	char				color;
 }					t_process;
 
 typedef struct		s_battlefield
@@ -117,7 +117,7 @@ void				print_movement(t_battlefield *arena, int pc, int n);
 int					dump(t_vm *vm);
 
 int					cut(int n);
-void				init_arena(t_vm *vm, unsigned i);
+void				init_arena(t_vm *vm);
 void				init_arena_modul(t_vm *vm, int byte);
 
 int					arena_players_modul(t_vm *vm,

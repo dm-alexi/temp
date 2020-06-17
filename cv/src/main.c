@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asmall <asmall@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:39 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/05/11 16:31:26 by asmall           ###   ########.fr       */
+/*   Updated: 2020/06/17 19:59:53 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int ac, char **av)
 		vm.dump_len = 0;
 		vm.verbosity = 0;
 	}
-	init_arena(&vm, -1);
+	init_arena(&vm);
 	if (!vm.visual)
 		introduce(&vm);
 	if (battle(&vm) && !vm.visual)

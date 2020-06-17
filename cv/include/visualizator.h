@@ -3,32 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   visualizator.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asmall <asmall@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/12 14:10:35 by asmall            #+#    #+#             */
-/*   Updated: 2020/05/13 20:24:54 by asmall           ###   ########.fr       */
+/*   Updated: 2020/06/17 19:17:54 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VISUALIZATOR_H
 # define VISUALIZATOR_H
 
+# if __APPLE__
+#  include <SDL.h>
+#  include <SDL_ttf.h>
+# else
+#  include <SDL2/SDL.h>
+#  include <SDL2/SDL_ttf.h>
+# endif
+
 # include "corewar.h"
 # include "libft.h"
 
-/*
-** If you work on Linux/Ubuntu:
-*/
-
-//# include <SDL2/SDL.h>
-//# include <SDL2/SDL_image.h>
-//# include <SDL2/SDL_ttf.h>
-
-/*
-** If you work on Mac:
-*/
-# include "../visualizator/SDL2.framework/Headers/SDL.h"
-# include "../visualizator/SDL2_ttf.framework/Headers/SDL_ttf.h"
+//# include "../visualizator/SDL2.framework/Headers/SDL.h"
+//# include "../visualizator/SDL2_ttf.framework/Headers/SDL_ttf.h"
 
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 700

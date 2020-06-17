@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:39 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/17 22:19:31 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/17 22:31:52 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int			battle(t_vm *vm)
 	while (!vm->vis_quit)
 	{
 		if (vm->visual)
-			visualisator_event(vm);
+			visualizer_event(vm);
 		if (!vm->vis_pause)
 		{
 			vm->cycle++;

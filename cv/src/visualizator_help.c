@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   visualizator_help.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asmall <asmall@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:06:04 by asmall            #+#    #+#             */
-/*   Updated: 2020/05/13 20:13:17 by asmall           ###   ########.fr       */
+/*   Updated: 2020/06/17 21:46:01 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int			init_help(t_vm *vm)
 		return (0);
 	}
 	if (vm->num_players > 1)
-		g_font = TTF_OpenFont("visualizator/InputMono-Regular.ttf",
+		g_font = TTF_OpenFont("resource/InputMono-Regular.ttf",
 			15 - (vm->num_players - 1));
 	else
-		g_font = TTF_OpenFont("visualizator/InputMono-Regular.ttf", 15);
+		g_font = TTF_OpenFont("resource/InputMono-Regular.ttf", 15);
 	if (!g_font)
 	{
 		ft_printf("%s\n", TTF_GetError());

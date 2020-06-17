@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:27 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/17 21:20:11 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/17 21:51:13 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,27 +59,7 @@ void		print_movement(t_battlefield *arena, int pc, int n)
 	line[j] = '\0';
 	ft_printf("ADV %d (0x%04x -> 0x%04x) %s\n", n, pc, pc + n, line);
 }
-/*
-int			dump(t_vm *vm)
-{
-	int	i;
-	int	print_bytes;
 
-	print_bytes = 0;
-	i = -1;
-	ft_printf("0x%04x : ", print_bytes);
-	while (++i < MEM_SIZE)
-	{
-		if (print_bytes % LONG_DUMP == 0 && print_bytes != 0)
-			ft_printf("\n0x%04x : ", print_bytes);
-		else
-			ft_printf("%02hhx ", vm->arena[i].code);
-		print_bytes++;
-	}
-	write(1, "\n", 1);
-	return (0);
-}
-*/
 int			dump(t_vm *vm)
 {
 	t_battlefield	*t;

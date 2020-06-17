@@ -15,8 +15,8 @@
 ** NB: Arena is big-endian!
 */
 
-#include "../include/corewar.h"
-#include "../include/visualizator.h"
+#include "corewar.h"
+#include "visualizator.h"
 
 t_process		*new_process_vm(t_process *next, unsigned num,
 					unsigned player_num, int pc)

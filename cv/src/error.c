@@ -16,7 +16,7 @@
 
 #include <stdio.h>
 #include <unistd.h>
-#include "../include/corewar.h"
+#include "corewar.h"
 
 void	sys_error(char *s)
 {

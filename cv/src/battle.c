@@ -14,8 +14,8 @@
 ** All battle functionality: cycles, checks, processes' deaths.
 */
 
-#include "../include/corewar.h"
-#include "../include/visualizator.h"
+#include "corewar.h"
+#include "visualizator.h"
 
 static void	kill_process(t_vm *vm, t_process *p)
 {

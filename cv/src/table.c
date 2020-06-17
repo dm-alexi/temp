@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "../include/corewar.h"
+#include "corewar.h"
 
 /*
 ** Corewar operations reference table

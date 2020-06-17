@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/corewar.h"
+#include "corewar.h"
 
 void	sti(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 {

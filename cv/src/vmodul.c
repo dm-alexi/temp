@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/corewar.h"
-#include "../include/visualizator.h"
+#include "corewar.h"
+#include "visualizator.h"
 
 int		arena_players_modul(t_vm *vm, unsigned i, int step, int byte)
 {

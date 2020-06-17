@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/corewar.h"
+#include "corewar.h"
 
 static int		is_digital(char *s)
 {

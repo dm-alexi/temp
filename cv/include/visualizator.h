@@ -13,22 +13,22 @@
 #ifndef VISUALIZATOR_H
 # define VISUALIZATOR_H
 
-# include "../include/corewar.h"
-# include "../libft/include/libft.h"
+# include "corewar.h"
+# include "libft.h"
 
 /*
 ** If you work on Linux/Ubuntu:
 */
 
-# include <SDL2/SDL.h>
-# include <SDL2/SDL_image.h>
-# include <SDL2/SDL_ttf.h>
+//# include <SDL2/SDL.h>
+//# include <SDL2/SDL_image.h>
+//# include <SDL2/SDL_ttf.h>
 
 /*
 ** If you work on Mac:
-** # include "../visualizator/SDL2.framework/Headers/SDL.h"
-** # include "../visualizator/SDL2_ttf.framework/Headers/SDL_ttf.h"
 */
+# include "../visualizator/SDL2.framework/Headers/SDL.h"
+# include "../visualizator/SDL2_ttf.framework/Headers/SDL_ttf.h"
 
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 700

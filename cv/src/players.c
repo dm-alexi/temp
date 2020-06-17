@@ -18,7 +18,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "../include/corewar.h"
+#include "corewar.h"
 
 static void	byte_swap(unsigned *n)
 {

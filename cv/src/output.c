@@ -14,11 +14,8 @@
 ** All basic output messages and dump.
 */
 
-#ifdef _WIN32
-# include <stdio.h>
-#endif
 #include <unistd.h>
-#include "../include/corewar.h"
+#include "corewar.h"
 
 void		introduce(t_vm *vm)
 {

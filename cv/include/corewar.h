@@ -13,7 +13,7 @@
 #ifndef COREWAR_H
 # define COREWAR_H
 # include "op.h"
-# include "../libft/include/libft.h"
+# include "libft.h"
 
 /*
 ** In COPYCAT mode all the 'general' messages from zaz's Corewar are reproduced.

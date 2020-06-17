@@ -14,7 +14,7 @@
 ** Read and execute instructions.
 */
 
-#include "../include/corewar.h"
+#include "corewar.h"
 
 /*
 ** Cut any address to fit arena size.

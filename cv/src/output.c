@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   output.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asmall <asmall@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:27 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/05/11 19:29:14 by asmall           ###   ########.fr       */
+/*   Updated: 2020/06/17 21:20:11 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void		print_movement(t_battlefield *arena, int pc, int n)
 	line[j] = '\0';
 	ft_printf("ADV %d (0x%04x -> 0x%04x) %s\n", n, pc, pc + n, line);
 }
-
+/*
 int			dump(t_vm *vm)
 {
 	int	i;
@@ -77,5 +77,32 @@ int			dump(t_vm *vm)
 		print_bytes++;
 	}
 	write(1, "\n", 1);
+	return (0);
+}
+*/
+int			dump(t_vm *vm)
+{
+	t_battlefield	*t;
+	char			str[LONG_DUMP * 3 + 1];
+	char			*s;
+
+	t = vm->arena;
+	while (t - vm->arena < MEM_SIZE)
+	{
+		ft_printf("0x%04x : ", t - vm->arena);
+		s = str;
+		while (t != vm->arena + MEM_SIZE)
+		{
+			*s++ = (t->code / 16 > 9 ?
+				t->code / 16 - 10 + 'a' : t->code / 16 + '0');
+			*s++ = (t->code % 16 > 9 ?
+				t->code % 16 - 10 + 'a' : t->code % 16 + '0');
+			*s++ = ' ';
+			if ((++t - vm->arena) % vm->dump_len == 0)
+				break ;
+		}
+		*s++ = '\n';
+		write(STDOUT_FILENO, str, s - str);
+	}
 	return (0);
 }

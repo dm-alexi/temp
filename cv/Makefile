@@ -33,10 +33,7 @@ all: $(NAME)
 
 -include $(OBJ:.o=.d)
 
-# bash script - on Mac to install Framework
-# @bash visualizer/script.bash
-
-$(NAME): $(OBJ) $(LIBFT)
+$(NAME): $(LIBFT) $(OBJ)
 	$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(FRAMEWORKS) $(LIBFT)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)

@@ -6,7 +6,8 @@ SRC_DIR = src
 OBJ_DIR = obj
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
-LIBFT_HEAD = $(LIBFT_DIR)/include
+LIBFT_HEAD_DIR = $(LIBFT_DIR)/include
+LDFLAGS = -I $(HEAD_DIR) -I $(LIBFT_HEAD_DIR)
 HEAD_FILES = corewar.h op.h visualizator.h
 SRC_FILES = main.c error.c input.c arena.c battle.c delete.c op1.c op2.c op3.c op4.c output.c players.c process.c table.c vmodul.c \
 	choose_colors_pt1.c choose_colors_pt2.c push_info.c push_info_pt2.c visualizator.c visualizator_help_pt2.c visualizator_help.c
@@ -19,9 +20,11 @@ ifeq ($(OS),Windows_NT)
 else
 	detected_OS = $(shell sh -c 'uname 2>/dev/null || echo Unknown')
 endif
-# Note: Current version only supports Linux and Mac OSX.
+# Note: Current version only supports Linux and Mac OS.
 ifeq ($(detected_OS),Darwin)
-	FRAMEWORKS = -I/Library/Frameworks/SDL2.framework/Headers -F ~/Library/Frameworks -framework SDL2 -I/Library/Frameworks/SDL2_ttf.framework/Headers -F ~/Library/Frameworks -framework SDL2_ttf
+	FRAMEWORKS = -framework SDL2 -framework SDL2_ttf
+	FLAGS += -F ~/Library/Frameworks 
+	LDFLAGS += -I ~/Library/Frameworks/SDL2.framework/Headers -I ~/Library/Frameworks/SDL2_ttf.framework/Headers
 else
 	FRAMEWORKS = -lSDL2 -lSDL2_ttf
 endif
@@ -37,7 +40,7 @@ $(NAME): $(OBJ) $(LIBFT)
 	$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(FRAMEWORKS) $(LIBFT)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(FLAGS) -I $(HEAD_DIR) -I $(LIBFT_HEAD) -o $@ -c $< -MMD
+	$(CC) $(FLAGS) $(LDFLAGS) -o $@ -c $< -MMD
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)

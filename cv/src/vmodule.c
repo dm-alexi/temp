@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 17:49:33 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/20 00:29:36 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/20 00:40:03 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		arena_players_module(t_vm *vm, unsigned i, int step, int byte)
 		vm->arena[byte].write_cycles = 0;
 		choose_color(&vm->arena[byte], i);
 		byte++;
-		++j
+		++j;
 	}
 	return (byte);
 }

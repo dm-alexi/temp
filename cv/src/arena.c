@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:22:33 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/19 17:56:03 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/20 00:29:59 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void			init_arena(t_vm *vm)
 	unsigned	i;
 	int			step;
 	int			byte;
-	int			temp;
 	int			diff;
 
 	byte = 0;

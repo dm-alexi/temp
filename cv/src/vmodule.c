@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 17:49:33 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/19 18:55:18 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/20 00:29:36 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,27 @@
 
 int		arena_players_module(t_vm *vm, unsigned i, int step, int byte)
 {
-	int j;
+	unsigned j;
 
-	j = -1;
+	j = 0;
 	vm->start = new_process_vm(vm->start, ++vm->num_process,
 	vm->players[i].num - 1, i * step);
 	vm->players[i].amount_cursors++;
 	vm->arena[byte].cursor = 1;
 	vm->start->reg[0] = -(i + 1);
-	while (++j < vm->players[i].header.prog_size)
+	while (j < vm->players[i].header.prog_size)
 	{
 		vm->arena[byte].code = vm->players[i].code[j];
 		vm->arena[byte].write_cycles = 0;
 		choose_color(&vm->arena[byte], i);
 		byte++;
+		++j
 	}
 	return (byte);
 }
 
 void	init_arena_module(t_vm *vm, int byte)
 {
-	//vm->arena[byte].color_b = 111;
-	//vm->arena[byte].color_g = 111;
 	vm->arena[byte].color_rgb = 0x6f6f6f;
 	vm->arena[byte].code = 0x0;
 	vm->arena[byte].color = 'n';

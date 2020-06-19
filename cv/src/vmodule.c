@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 17:49:33 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/17 22:26:14 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/19 18:55:18 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int		arena_players_module(t_vm *vm, unsigned i, int step, int byte)
 {
-	unsigned j;
+	int j;
 
 	j = -1;
 	vm->start = new_process_vm(vm->start, ++vm->num_process,
@@ -35,9 +35,9 @@ int		arena_players_module(t_vm *vm, unsigned i, int step, int byte)
 
 void	init_arena_module(t_vm *vm, int byte)
 {
-	vm->arena[byte].color_b = 111;
-	vm->arena[byte].color_g = 111;
-	vm->arena[byte].color_r = 111;
+	//vm->arena[byte].color_b = 111;
+	//vm->arena[byte].color_g = 111;
+	vm->arena[byte].color_rgb = 0x6f6f6f;
 	vm->arena[byte].code = 0x0;
 	vm->arena[byte].color = 'n';
 	vm->arena[byte].write_cycles = 0;

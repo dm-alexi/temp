@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:22:33 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/20 00:29:59 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 01:21:32 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_process		*new_process_vm(t_process *next, unsigned num,
 		sys_error(NULL);
 	p->next = next;
 	p->player_num = player_num;
-	p->color = choose_color_char(player_num);
+	p->color = choose_color(player_num);
 	p->num = num;
 	p->pc = pc;
 	return (p);
@@ -99,7 +99,7 @@ int				read_ind(int start, t_battlefield *arena)
 */
 
 void			write_bytes(int n, int start,
-					t_battlefield *arena, char color)
+					t_battlefield *arena, int color)
 {
 	t_byte		*s;
 	int			i;

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/12 14:10:35 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/21 01:42:41 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 01:50:10 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ SDL_Renderer	*g_main_render;
 TTF_Font		*g_font;
 
 int				choose_color(int n);
-//void			choose_color(t_battlefield *cell, int i);
-//char			choose_color_char(int i);
 int				choose_reverse_color(t_battlefield *cell);
 int				init(t_vm *vm);
 
@@ -53,7 +51,7 @@ void			push_pause(void);
 void			push_distribution(t_battlefield *arena, float y);
 void			push_players(t_vm *vm, int start_y);
 void			push_winner_vis(t_vm *vm);
-void			set_render_draw_color(char color);
+void			set_render_draw_color(int color);
 void			set_sdl_color(SDL_Color *color, int i);
 void			put_text_texture(float y, char *temp_2,
 					char *temp_3, SDL_Texture *text_texture);

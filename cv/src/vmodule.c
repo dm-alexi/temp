@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 17:49:33 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/21 01:27:02 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 01:52:47 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	init_arena_module(t_vm *vm, int byte)
 {
 	vm->arena[byte].color = 0x6f6f6f;
 	vm->arena[byte].code = 0x0;
-	//vm->arena[byte].color = 'n';
 	vm->arena[byte].write_cycles = 0;
 }
 

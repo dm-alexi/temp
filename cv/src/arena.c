@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:22:33 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/21 01:25:10 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 01:52:10 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,5 @@ void			write_bytes(int n, int start,
 		arena[(start + i) % MEM_SIZE].code = s[REG_SIZE - 1 - i];
 		arena[(start + i) % MEM_SIZE].color = color;
 		arena[(start + i) % MEM_SIZE].write_cycles = 100;
-		//choose_reverse_color(&arena[(start + i) % MEM_SIZE]);
 	}
 }

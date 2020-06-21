@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:22:33 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/21 01:52:10 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 11:41:34 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,29 @@ t_process		*new_process_vm(t_process *next, unsigned num,
 void			init_arena(t_vm *vm)
 {
 	unsigned	i;
+	unsigned	j;
 	int			step;
-	int			byte;
-	int			diff;
 
-	byte = 0;
-	diff = MEM_SIZE / vm->num_players;
 	step = MEM_SIZE / vm->num_players;
+	i = 0;
+	while (i < MEM_SIZE)
+		vm->arena[i++].color = 0x6f6f6f;
 	i = 0;
 	while (i < vm->num_players)
 	{
-		byte = arena_players_module(vm, i, step, byte);
-		while (byte < diff && byte < MEM_SIZE)
+		j = 0;
+		vm->start = new_process_vm(vm->start, ++vm->num_process,
+			vm->players[i].num - 1, i * step);
+		vm->players[i].amount_cursors++;
+		vm->arena[i * step].cursor = 1;
+		vm->start->reg[0] = -(i + 1);
+		while (j < vm->players[i].header.prog_size)
 		{
-			init_arena_module(vm, byte);
-			byte++;
+			vm->arena[i * step + j].code = vm->players[i].code[j];
+			vm->arena[i * step + j].color = choose_color(i);
+			++j;
 		}
-		diff += step;
-		free(vm->players[i].code);
-		++i;
+		free(vm->players[i++].code);
 	}
 }
 

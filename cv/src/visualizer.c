@@ -6,15 +6,15 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:06:18 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/21 20:26:14 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 21:53:17 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visualizer.h"
 
-void			push_info(t_vm *vm, char *status)
+void			push_info(t_vm *vm)
 {
-	push_char_text(status, 20, WHITE);
+	push_char_text(vm->vis_pause ? "***Pause***" : "***Running***", 20, WHITE);
 	push_int_text(vm->num_process, "Total processes: ", 40, WHITE);
 	push_int_text(vm->cycle, "Current cycle: ", 60, WHITE);
 	push_int_text(vm->cycles_to_die, "Cycle to die: ", 90, WHITE);

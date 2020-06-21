@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/21 21:32:36 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 21:49:38 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void				write_bytes(int n, int start, t_battlefield *arena,
 int					battle(t_vm *vm);
 
 void				battle_module(t_vm *vm);
-void				run_pause_module(t_vm *vm, int flag);
+void				run_module(t_vm *vm);
 void				read_instr(t_process *cur, t_vm *vm);
 void				exec_instr(t_process *cur, t_vm *vm);
 void				delete_vm(t_vm *vm);

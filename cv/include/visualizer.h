@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/12 14:10:35 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/21 12:58:23 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 21:53:30 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int				choose_reverse_color(t_battlefield *cell);
 void			init_visualizer(t_vm *vm);
 
 void			push_to_render_battlefield(t_vm *vm);
-void			push_info(t_vm *vm, char *status);
+void			push_info(t_vm *vm);
 void			push_int_text(int data, char *info_text,
 					float y, SDL_Color color);
 void			push_int_slash_data(float y, int data_1,

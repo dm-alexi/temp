@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:39 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/21 00:59:59 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 16:05:26 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static int	check(t_vm *vm)
 	return (vm->start == NULL);
 }
 
-void		battle_help(t_vm *vm)
+static void	run_cycle(t_vm *vm)
 {
 	t_process	*cur;
 
@@ -91,8 +91,8 @@ void		battle_help(t_vm *vm)
 
 int			battle(t_vm *vm)
 {
-	if (vm->visual && !init(vm))
-		return (0);
+	if (vm->visual)
+		init_visualizer(vm);
 	while (!vm->vis_quit)
 	{
 		if (vm->visual)
@@ -100,7 +100,7 @@ int			battle(t_vm *vm)
 		if (!vm->vis_pause)
 		{
 			vm->cycle++;
-			battle_help(vm);
+			run_cycle(vm);
 			if (vm->cycle >= vm->next_check && check(vm))
 				break ;
 			if (vm->visual)

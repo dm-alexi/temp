@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/21 11:53:57 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 13:03:40 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,8 @@ t_process			*new_process_vm(t_process *next, unsigned num,
 						unsigned player_num, int pc);
 int					read_dir(int start, t_battlefield *arena);
 int					read_ind(int start, t_battlefield *arena);
-void				write_bytes(int n, int start,
-						t_battlefield *arena, int color);
+void				write_bytes(int n, int start, t_battlefield *arena,
+						int color);
 int					battle(t_vm *vm);
 
 void				battle_module(t_vm *vm);

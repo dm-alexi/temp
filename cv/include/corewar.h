@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/21 16:12:19 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 20:26:31 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ typedef unsigned char	t_byte;
 
 typedef struct		s_player
 {
-	t_header			header;
-	t_byte				*code;
-	unsigned			num;
-	unsigned			last_alive;
-	unsigned			lives_in_current_period;
-	unsigned			amount_cursors;
+	t_header	header;
+	t_byte		*code;
+	unsigned	num;
+	unsigned	last_alive;
+	unsigned	lives_in_current_period;
+	unsigned	num_cursors;
 }					t_player;
 
 typedef struct		s_process
@@ -60,41 +60,41 @@ typedef struct		s_process
 
 typedef struct		s_battlefield
 {
-	t_byte				code;
-	int					color;
-	int					write_cycles;
-	t_byte				cursor;
+	t_byte	code;
+	int		color;
+	int		write_cycles;
+	int		cursors;
 }					t_battlefield;
 
 typedef struct		s_vm
 {
-	t_battlefield		arena[MEM_SIZE];
-	unsigned			num_players;
-	t_player			*players;
-	unsigned			num_process;
-	t_process			*start;
-	unsigned			cycle;
-	int					cycles_to_die;
-	unsigned			checks;
-	unsigned			next_check;
-	unsigned			live_calls;
-	unsigned			last_alive;
-	unsigned			dump_cycle;
-	unsigned			dump_len;
-	unsigned			verbosity;
-	t_byte				visual;
-	t_byte				vis_quit;
-	t_byte				vis_pause;
+	t_battlefield	arena[MEM_SIZE];
+	unsigned		num_players;
+	t_player		*players;
+	unsigned		num_process;
+	t_process		*start;
+	unsigned		cycle;
+	int				cycles_to_die;
+	unsigned		checks;
+	unsigned		next_check;
+	unsigned		live_calls;
+	unsigned		last_alive;
+	unsigned		dump_cycle;
+	unsigned		dump_len;
+	unsigned		verbosity;
+	t_byte			visual;
+	t_byte			vis_quit;
+	t_byte			vis_pause;
 }					t_vm;
 
 typedef struct		s_op
 {
-	void			(*func)(t_process*, t_vm*, t_byte *argtypes, int* args);
-	t_byte			typebyte;
-	int				argnum;
-	char			args[3];
-	int				dirsize;
-	int				lag;
+	void	(*func)(t_process*, t_vm*, t_byte *argtypes, int* args);
+	t_byte	typebyte;
+	int		argnum;
+	char	args[3];
+	int		dirsize;
+	int		lag;
 }					t_op;
 
 extern const t_op	g_tab[];

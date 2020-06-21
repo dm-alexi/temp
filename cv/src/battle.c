@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:39 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/21 18:22:13 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 20:27:18 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static void	kill_process(t_vm *vm, t_process *p)
 	if (vm->verbosity & DEATHS)
 		ft_printf("Process %u hasn't lived for %d cycles (CTD %d)\n", p->num,
 		vm->cycle - p->last_live, vm->cycles_to_die);
-	vm->players[p->player_num].amount_cursors--;
+	vm->players[p->player_num].num_cursors--;
 	vm->num_process--;
-	vm->arena[p->pc].cursor = 0;
+	vm->arena[p->pc].cursors--;
 	free(p);
 }
 

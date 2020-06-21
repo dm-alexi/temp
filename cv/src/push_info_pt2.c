@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/12 15:49:05 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/17 22:19:31 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 20:28:59 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ void			push_players(t_vm *vm, int start_y)
 			"Last alive: ", pos + 40, WHITE);
 		push_int_text(vm->players[i].lives_in_current_period,
 			"Lives in current period : ", pos + 60, WHITE);
-		push_int_text(vm->players[i].amount_cursors,
-			"Amount of coaches: ", pos + 80, WHITE);
+		push_int_text(vm->players[i].num_cursors,
+			"Number of coaches: ", pos + 80, WHITE);
 		pos += 110;
 	}
 }

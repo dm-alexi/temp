@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:06:18 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/21 18:26:28 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 20:26:14 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void			arena_play2(t_vm *vm, SDL_FRect cell)
 		j = -1;
 		while (++j < (float)MEM_SIZE / 64)
 		{
-			if (vm->arena[i + j + lines_count].cursor)
+			if (vm->arena[i + j + lines_count].cursors)
 			{
 				cell.x = cell.w * j;
 				cell.y = cell.h * i;

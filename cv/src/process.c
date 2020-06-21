@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/17 22:25:15 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 20:26:03 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,9 @@ void		exec_instr(t_process *cur, t_vm *vm)
 			steps = steps < 0 ? -steps : steps;
 			if (vm->verbosity & MOVES)
 				print_movement(vm->arena, cur->pc, steps + 1);
-			vm->arena[cur->pc].cursor = 0;
+			vm->arena[cur->pc].cursors--;
 			cur->pc = cut(cur->pc + 1 + steps);
-			vm->arena[cur->pc].cursor = 1;
+			vm->arena[cur->pc].cursors++;
 		}
 	}
 	else

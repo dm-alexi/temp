@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 17:49:33 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/21 16:03:22 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 20:26:12 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	run_pause_module(t_vm *vm, int flag)
 
 void	exec_instr_module(t_process *cur, t_vm *vm)
 {
-	vm->arena[cur->pc].cursor = 0;
+	vm->arena[cur->pc].cursors--;
 	cur->pc = cut(cur->pc + 1);
-	vm->arena[cur->pc].cursor = 1;
+	vm->arena[cur->pc].cursors++;
 }

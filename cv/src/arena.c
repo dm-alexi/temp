@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:22:33 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/21 21:31:01 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/22 01:04:24 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "corewar.h"
 #include "visualizer.h"
 
-t_process		*new_process(t_process *next, unsigned num,
+static t_process	*new_process(t_process *next, unsigned num,
 					unsigned player_num, int pc)
 {
 	t_process	*p;
@@ -37,7 +37,7 @@ t_process		*new_process(t_process *next, unsigned num,
 ** Place champions' code in the arena and create initial processes.
 */
 
-void			init_arena(t_vm *vm)
+void				init_arena(t_vm *vm)
 {
 	unsigned	i;
 	unsigned	j;
@@ -70,7 +70,7 @@ void			init_arena(t_vm *vm)
 ** Read an argument of T_DIR type.
 */
 
-int				read_dir(int start, t_battlefield *arena)
+int					read_dir(int start, t_battlefield *arena)
 {
 	char		s[DIR_SIZE];
 	int			i;
@@ -86,7 +86,7 @@ int				read_dir(int start, t_battlefield *arena)
 ** Read an argument of T_IND type.
 */
 
-int				read_ind(int start, t_battlefield *arena)
+int					read_ind(int start, t_battlefield *arena)
 {
 	char		s[IND_SIZE];
 	int			i;
@@ -102,8 +102,8 @@ int				read_ind(int start, t_battlefield *arena)
 ** Write an argument to the arena.
 */
 
-void			write_bytes(int n, int start,
-					t_battlefield *arena, int color)
+void				write_bytes(int n, int start, t_battlefield *arena,
+						int color)
 {
 	t_byte		*s;
 	int			i;

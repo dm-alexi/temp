@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/12 14:10:35 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/21 21:53:30 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 23:51:10 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@
 # define INFORMATION_SIZE 350
 # define WHITE (SDL_Color){255, 255, 255, 255}
 
+/*
+** Arena width and height in cells for visuzlization purposes.
+** Must be adjusted manually if MEM_SIZE value is to be changed.
+*/
+
+# define ARENA_WIDTH 64
+# define ARENA_HEIGHT 64
+
 SDL_Window		*g_main_window;
 SDL_Renderer	*g_main_render;
 TTF_Font		*g_font;
@@ -47,7 +55,6 @@ void			push_int_slash_data(float y, int data_1,
 					int data_2, char *text);
 void			push_char_text(char *text, float y, SDL_Color color);
 void			push_live_breakdown(t_vm *vm, int y);
-void			push_pause(void);
 void			push_distribution(t_battlefield *arena, float y);
 void			push_players(t_vm *vm, int start_y);
 void			push_winner_vis(t_vm *vm);

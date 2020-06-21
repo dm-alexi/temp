@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:06:18 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/21 21:53:17 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 23:51:03 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ int				arena_play(t_vm *vm, SDL_FRect cell, unsigned i,
 					vm->arena[i + j + lines_count].write_cycles,
 				(vm->arena[i + j + lines_count].color >> 16 & 0xff) +
 					vm->arena[i + j + lines_count].write_cycles, 255);
-			if (!vm->vis_pause && vm->arena[i + j +
-				lines_count].write_cycles > 0)
+			if (!vm->vis_pause && vm->arena[i + j +	lines_count].write_cycles)
 				vm->arena[i + j + lines_count].write_cycles--;
 			SDL_RenderFillRectF(g_main_render, &cell);
 		}
@@ -84,11 +83,11 @@ void			arena_play2(t_vm *vm, SDL_FRect cell)
 
 void			push_to_render_battlefield(t_vm *vm)
 {
-	unsigned	i;
+	int			i;
 	SDL_FRect	cell;
 
-	cell.w = (float)(SCREEN_WIDTH - INFORMATION_SIZE) / 64;
-	cell.h = (float)SCREEN_HEIGHT / 64;
+	cell.w = (float)(SCREEN_WIDTH - INFORMATION_SIZE) / ARENA_WIDTH;
+	cell.h = (float)SCREEN_HEIGHT / ARENA_HEIGHT;
 	SDL_SetRenderDrawColor(g_main_render, 0, 0, 0, 255);
 	SDL_RenderClear(g_main_render);
 	arena_play(vm, cell, -1, 0);
@@ -102,18 +101,4 @@ void			push_to_render_battlefield(t_vm *vm)
 			SCREEN_WIDTH - INFORMATION_SIZE, cell.h * i);
 	}
 	arena_play2(vm, cell);
-}
-
-void			push_pause(void)
-{
-	SDL_Rect	pause;
-
-	pause.h = 20;
-	pause.w = 300;
-	pause.y = 20;
-	pause.x = SCREEN_WIDTH - INFORMATION_SIZE + 50;
-	SDL_SetRenderDrawColor(g_main_render, 0, 0, 0, 255);
-	SDL_RenderFillRect(g_main_render, &pause);
-	push_char_text("**Pause**", 20, WHITE);
-	SDL_RenderPresent(g_main_render);
 }

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/21 21:28:32 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 23:39:58 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void		exec_instr(t_process *cur, t_vm *vm)
 	int		args[MAX_ARGS_NUMBER];
 	int		steps;
 
+	steps = 0;
 	if (cur->op > 0 && cur->op <= OP_NUM)
 	{
 		if ((steps = get_argtypes(cur, vm, argtypes)) > 0)
@@ -104,8 +105,6 @@ void		exec_instr(t_process *cur, t_vm *vm)
 		if (vm->verbosity & MOVES)
 			print_movement(vm->arena, cur->pc, steps + 1);
 	}
-	else
-		steps = 0;
 	vm->arena[cur->pc].cursors--;
 	cur->pc = cut(cur->pc + 1 + steps);
 	vm->arena[cur->pc].cursors++;

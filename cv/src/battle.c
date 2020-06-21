@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:39 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/21 16:05:26 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 18:22:13 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,10 @@ static void	run_cycle(t_vm *vm)
 {
 	t_process	*cur;
 
-	cur = vm->start;
+	vm->cycle++;
 	if (vm->verbosity & CYCLES)
 		ft_printf("It is now cycle %u\n", vm->cycle);
+	cur = vm->start;
 	while (cur)
 	{
 		if (cur->exec_cycle < vm->cycle)
@@ -91,6 +92,9 @@ static void	run_cycle(t_vm *vm)
 
 int			battle(t_vm *vm)
 {
+	int	finished;
+
+	finished = 0;
 	if (vm->visual)
 		init_visualizer(vm);
 	while (!vm->vis_quit)
@@ -99,9 +103,8 @@ int			battle(t_vm *vm)
 			visualizer_event(vm);
 		if (!vm->vis_pause)
 		{
-			vm->cycle++;
 			run_cycle(vm);
-			if (vm->cycle >= vm->next_check && check(vm))
+			if (vm->cycle >= vm->next_check && (finished = check(vm)))
 				break ;
 			if (vm->visual)
 				run_pause_module(vm, 1);
@@ -113,5 +116,5 @@ int			battle(t_vm *vm)
 	}
 	if (vm->visual)
 		battle_module(vm);
-	return (1);
+	return (finished);
 }

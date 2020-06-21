@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/21 13:03:40 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 16:12:19 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,9 @@ typedef struct		s_op
 
 extern const t_op	g_tab[];
 
-void				sys_error(char *s);
-void				error(char *s);
-void				error2(char *s, char *t);
+void				sys_error(const char *s);
+void				error(const char *s);
+void				error2(const char *s, const char *t);
 void				usage(void);
 void				check_invariants(void);
 

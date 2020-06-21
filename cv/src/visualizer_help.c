@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:06:04 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/21 13:02:36 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 16:10:39 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	init_visualizer(t_vm *vm)
 {
+	(void)vm; // check later
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 		error2("SDL could not initialize. SDL error: ", SDL_GetError());
 	if (!(g_main_window = SDL_CreateWindow("Corewar", SDL_WINDOWPOS_UNDEFINED,
@@ -63,16 +64,17 @@ void	live_players(t_vm *vm, SDL_FRect coor, int sum)
 	unsigned	i;
 	float		k;
 
-	i = -1;
-	while (++i < vm->num_players)
-		sum += vm->players[i].lives_in_current_period;
+	i = 0;
+	while (i < vm->num_players)
+		sum += vm->players[i++].lives_in_current_period;
 	k = 300 / (float)sum;
-	i = -1;
-	while (++i < vm->num_players)
+	i = 0;
+	while (i < vm->num_players)
 	{
 		coor.w = vm->players[i].lives_in_current_period * k;
 		set_render_draw_color(choose_color(i));
 		SDL_RenderFillRectF(g_main_render, &coor);
 		coor.x += coor.w;
+		++i;
 	}
 }

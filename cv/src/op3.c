@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:53 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/21 20:27:39 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 21:12:25 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	sfork(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	p->color = t->color;
 	vm->start = p;
 	vm->players[t->player_num].num_cursors++;
+	vm->arena[p->pc].cursors++;
 	if (vm->verbosity & OPERATIONS)
 		ft_printf("P %4u | fork %d (%d)\n", t->num, args[0],
 		t->pc + args[0] % IDX_MOD);
@@ -104,6 +105,7 @@ void	lfork(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	p->color = t->color;
 	vm->start = p;
 	vm->players[t->player_num].num_cursors++;
+	vm->arena[p->pc].cursors++;
 	if (vm->verbosity & OPERATIONS)
 		ft_printf("P %4u | lfork %d (%d)\n", t->num, args[0], t->pc + args[0]);
 }

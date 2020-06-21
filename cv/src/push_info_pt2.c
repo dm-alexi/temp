@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/12 15:49:05 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/21 20:28:59 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/21 21:54:56 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void			push_winner_vis(t_vm *vm)
 	vm->vis_pause = 0;
 	vm->vis_quit = 0;
 	push_to_render_battlefield(vm);
-	push_info(vm, "**Pause**");
+	push_info(vm);
 	pos.x = SCREEN_WIDTH - INFORMATION_SIZE + 50;
 	pos.y = SCREEN_HEIGHT - 120;
 	text_surface = NULL;

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:06:04 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/26 13:38:24 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/26 20:08:02 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	init_visualizer(t_vm *vm)
 		error(TTF_GetError());
 }
 
-void	visualizer_event(t_vm *vm)
+void	event_handler(t_vm *vm)
 {
 	SDL_Event	event;
 
@@ -41,16 +41,6 @@ void	visualizer_event(t_vm *vm)
 		(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE))
 			vm->vis_quit = 1;
 	}
-}
-
-void	set_sdl_color(SDL_Color *color, int i)
-{
-	static const int	colors[] = {0x00009b, 0x009b9b, 0x008000, 0x9b0000,
-		0x800080, 0x9b9b00, 0xa9a9a9, 0x323232, 0x6f6f6f};
-
-	color->r = colors[i] & 0xff;
-	color->g = colors[i] >> 8 & 0xff;
-	color->b = colors[i] >> 16 & 0xff;
 }
 
 void	live_players(t_vm *vm, SDL_Rect coor, int sum)
@@ -72,4 +62,16 @@ void	live_players(t_vm *vm, SDL_Rect coor, int sum)
 		coor.x += coor.w;
 		++i;
 	}
+}
+
+void	finish_visualization(t_vm *vm)
+{
+	visualize(vm);
+	while (!vm->vis_quit && !vm->vis_pause)
+		event_handler(vm);
+	TTF_CloseFont(g_font);
+	TTF_Quit();
+	SDL_DestroyRenderer(g_main_render);
+	SDL_DestroyWindow(g_main_window);
+	SDL_Quit();
 }

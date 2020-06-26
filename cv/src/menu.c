@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:05:44 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/26 17:51:29 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/26 19:56:02 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	push_live_breakdown(t_vm *vm, int y)
 	}
 }
 
-void	push_char_text(char *text, int y, SDL_Color color)
+void	draw_text(char *text, int y, SDL_Color color)
 {
 	SDL_Surface	*text_surface;
 	SDL_Texture	*text_texture;
@@ -77,7 +77,7 @@ void	push_char_text(char *text, int y, SDL_Color color)
 	SDL_FreeSurface(text_surface);
 }
 
-void	push_int_text(int data, char *info_text, int y)
+void	draw_data(int data, char *info_text, int y)
 {
 	char		*number;
 	char		*full_line;
@@ -87,11 +87,11 @@ void	push_int_text(int data, char *info_text, int y)
 	!(full_line = ft_strjoin(info_text, number)))
 		sys_error(NULL);
 	free(number);
-	push_char_text(full_line, y, WHITE);
+	draw_text(full_line, y, WHITE);
 	free(full_line);
 }
 
-void		push_int_slash_data(int y, int data_1, int data_2, char *text)
+void	draw_double_data(int y, int data_1, int data_2, char *text)
 {
 	char	*tmp1;
 	char	*tmp2;
@@ -110,22 +110,31 @@ void		push_int_slash_data(int y, int data_1, int data_2, char *text)
 	ft_strcat(full_line, tmp2);
 	free(tmp1);
 	free(tmp2);
-	push_char_text(full_line, y, WHITE);
+	draw_text(full_line, y, WHITE);
 	free(full_line);
 }
 
-void	key_pause_quite(t_vm *vm)
+void		push_players(t_vm *vm, int start_y)
 {
-	SDL_Event	event;
+	unsigned	i;
+	int			pos;
+	SDL_Color	color;
 
-	while (!vm->vis_pause && !vm->vis_quit)
-		while (SDL_PollEvent(&event))
-		{
-			if (event.type == SDL_QUIT || (event.type == SDL_KEYDOWN
-				&& event.key.keysym.sym == SDLK_ESCAPE))
-				vm->vis_quit = 1;
-			if (event.type == SDL_KEYDOWN
-				&& event.key.keysym.sym == SDLK_SPACE)
-				vm->vis_pause = 1;
-		}
+	i = -1;
+	pos = start_y;
+	while (++i < vm->num_players)
+	{
+		draw_data(i + 1, "Player # ", pos);
+		color.r = g_colors[i] & 0xff;
+		color.g = g_colors[i] >> 8 & 0xff;
+		color.b = g_colors[i] >> 16 & 0xff;
+		draw_text(vm->players[i].header.prog_name, pos + 20, color);
+		draw_data(vm->players[i].last_alive,
+			"Last alive: ", pos + 40);
+		draw_data(vm->players[i].lives_in_current_period,
+			"Lives in current period : ", pos + 60);
+		draw_data(vm->players[i].num_cursors,
+			"Number of coaches: ", pos + 80);
+		pos += 110;
+	}
 }

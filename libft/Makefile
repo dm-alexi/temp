@@ -1,11 +1,10 @@
 NAME = libft.a
 CC = gcc
-FLAGS = -c -Wall -Wextra -Werror -MMD
+FLAGS = -c -Wall -Wextra -Werror
 HEAD_DIR = include
 SRC_DIR = src
 OBJ_DIR = obj
 PRINTF_DIR = ft_printf
-HEAD_FILES = libft.h ft_printf.h ft_bigint.h get_next_line.h
 PRINTF_FILES = ft_printf.c ft_printf_b.c ft_printf_e.c ft_printf_efg.c ft_printf_f.c ft_printf_float.c ft_printf_int.c ft_printf_n.c ft_printf_otoa.c ft_printf_ptr.c ft_printf_r.c \
 	ft_printf_string.c ft_printf_uint.c ft_printf_utoa.c ft_printf_wchar.c ft_printf_xtoa.c ft_setformat.c ft_bigint.c ft_bigint_exp.c
 SRC_FILES = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c ft_memchr.c ft_memcmp.c ft_strlen.c ft_strdup.c ft_strcpy.c ft_strncpy.c ft_strcat.c ft_strncat.c ft_strlcat.c \
@@ -27,7 +26,7 @@ $(NAME): $(OBJ)
 	ranlib $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(FLAGS) -I$(HEAD_DIR) -o $@ $<
+	$(CC) $(FLAGS) -I$(HEAD_DIR) -o $@ $< -MMD
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)

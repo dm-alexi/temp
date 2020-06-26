@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:39 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/26 17:33:39 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/26 20:08:09 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,18 +99,18 @@ void		battle(t_vm *vm)
 	while (!vm->vis_quit)
 	{
 		if (vm->visual)
-			visualizer_event(vm);
+			event_handler(vm);
 		if (!vm->vis_pause)
 		{
 			run_cycle(vm);
 			if (vm->cycle >= vm->next_check && check(vm))
 				break ;
 			if (vm->dump_len && vm->dump_cycle == vm->cycle && dump(vm))
-				return ;
+				break ;
 		}
 		if (vm->visual)
-			run_module(vm);
+			visualize(vm);
 	}
 	if (vm->visual)
-		battle_module(vm);
+		finish_visualization(vm);
 }

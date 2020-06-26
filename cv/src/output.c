@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:27 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/26 17:37:26 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/26 18:23:03 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <unistd.h>
 #include "corewar.h"
 
-void		introduce(t_vm *vm)
+void	introduce(t_vm *vm)
 {
 	unsigned	i;
 
@@ -32,7 +32,7 @@ void		introduce(t_vm *vm)
 	}
 }
 
-void		declare_winner(t_vm *vm)
+void	declare_winner(t_vm *vm)
 {
 	if (vm->winner >= 0)
 		ft_printf(COPYCAT ? "Contestant %u, \"%s\", has won !\n" :
@@ -40,7 +40,7 @@ void		declare_winner(t_vm *vm)
 		vm->last_alive, vm->players[vm->winner - 1].header.prog_name);
 }
 
-void		print_movement(t_battlefield *arena, int pc, int n)
+void	print_movement(t_battlefield *arena, int pc, int n)
 {
 	char	line[7 + 3 * REG_SIZE * MAX_ARGS_NUMBER];
 	t_byte	t;
@@ -61,7 +61,7 @@ void		print_movement(t_battlefield *arena, int pc, int n)
 	ft_printf("ADV %d (0x%04x -> 0x%04x) %s\n", n, pc, pc + n, line);
 }
 
-int			dump(t_vm *vm)
+int		dump(t_vm *vm)
 {
 	t_battlefield	*t;
 	char			str[LONG_DUMP * 3 + 1];

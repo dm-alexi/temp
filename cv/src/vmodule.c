@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 17:49:33 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/21 21:51:42 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/26 14:53:23 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	battle_module(t_vm *vm)
 
 void	run_module(t_vm *vm)
 {
-	push_to_render_battlefield(vm);
+	draw_arena(vm);
 	push_info(vm);
 	SDL_RenderPresent(g_main_render);
 }

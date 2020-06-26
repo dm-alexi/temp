@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:27 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/17 21:51:13 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/26 17:37:26 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ void		introduce(t_vm *vm)
 
 void		declare_winner(t_vm *vm)
 {
-	ft_printf(COPYCAT ? "Contestant %u, \"%s\", has won !\n" :
-	"Player %u (%s) won\n",
-	vm->last_alive, vm->players[vm->last_alive - 1].header.prog_name);
+	if (vm->winner >= 0)
+		ft_printf(COPYCAT ? "Contestant %u, \"%s\", has won !\n" :
+		"Player %u (%s) won\n",
+		vm->last_alive, vm->players[vm->winner - 1].header.prog_name);
 }
 
 void		print_movement(t_battlefield *arena, int pc, int n)
@@ -84,5 +85,5 @@ int			dump(t_vm *vm)
 		*s++ = '\n';
 		write(STDOUT_FILENO, str, s - str);
 	}
-	return (0);
+	return (1);
 }

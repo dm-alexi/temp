@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:06:04 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/22 00:18:07 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/26 13:38:24 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,6 @@ void	init_visualizer(t_vm *vm)
 		error2("SDL_ttf could not initialize. SDL error: ", TTF_GetError());
 	if (!(g_font = TTF_OpenFont("resource/InputMono-Regular.ttf", 15)))
 		error(TTF_GetError());
-}
-
-void	set_render_draw_color(int color)
-{
-	SDL_SetRenderDrawColor(g_main_render, color & 0xff, color >> 8 & 0xff,
-		color >> 16 & 0xff, 255);
 }
 
 void	visualizer_event(t_vm *vm)
@@ -72,7 +66,8 @@ void	live_players(t_vm *vm, SDL_Rect coor, int sum)
 	while (i < vm->num_players)
 	{
 		coor.w = vm->players[i].lives_in_current_period * k;
-		set_render_draw_color(choose_color(i));
+		SDL_SetRenderDrawColor(g_main_render, g_colors[i] & 0xff,
+			g_colors[i] >> 8 & 0xff, g_colors[i] >> 16 & 0xff, 255);
 		SDL_RenderFillRect(g_main_render, &coor);
 		coor.x += coor.w;
 		++i;

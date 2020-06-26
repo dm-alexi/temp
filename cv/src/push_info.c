@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:05:44 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/22 01:42:59 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/26 17:20:44 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	push_distribution(t_battlefield *arena, int y)
 	{
 		coor.h = 15;
 		coor.w = colors[i] * k;
-		set_render_draw_color(choose_color(i));
+		SDL_SetRenderDrawColor(g_main_render, g_colors[i] & 0xff,
+			g_colors[i] >> 8 & 0xff, g_colors[i] >> 16 & 0xff, 255);
 		SDL_RenderFillRect(g_main_render, &coor);
 		coor.x += coor.w;
 	}
@@ -58,41 +59,55 @@ void	push_live_breakdown(t_vm *vm, int y)
 	}
 }
 
-void	put_text_texture(int y, char *temp_2, char *temp_3,
-			SDL_Texture *text_texture)
+void	push_char_text(char *text, int y, SDL_Color color)
 {
-	SDL_Rect	coor;
-
-	(temp_2) ? (TTF_SizeText(g_font, temp_2, &coor.w, &coor.h)) :
-		TTF_SizeText(g_font, temp_3, &coor.w, &coor.h);
-	coor.x = SCREEN_WIDTH - INFORMATION_SIZE + OFFSET;
-	coor.y = y;
-	SDL_RenderCopy(g_main_render, text_texture, NULL, &coor);
-	SDL_DestroyTexture(text_texture);
-}
-
-void	push_int_text(int data, char *info_text, int y, SDL_Color color)
-{
-	char		*temp_1;
-	char		*temp_2;
 	SDL_Surface	*text_surface;
 	SDL_Texture	*text_texture;
+	SDL_Rect	coor;
 
-	text_surface = NULL;
-	text_texture = NULL;
-	temp_1 = ft_itoa(data);
-	temp_2 = ft_strjoin(info_text, temp_1);
-	ft_strdel(&temp_1);
-	text_surface = TTF_RenderText_Solid(g_font, temp_2, color);
-	if (text_surface)
-	{
-		text_texture = SDL_CreateTextureFromSurface(g_main_render,
-			text_surface);
-		SDL_FreeSurface(text_surface);
-		if (text_texture)
-			put_text_texture(y, temp_2, 0, text_texture);
-	}
-	ft_strdel(&temp_2);
+	coor.x = SCREEN_WIDTH - INFORMATION_SIZE + OFFSET;
+	coor.y = y;
+	TTF_SizeText(g_font, text, &coor.w, &coor.h);
+	if (!(text_surface = TTF_RenderText_Solid(g_font, text, color)) || 
+	!(text_texture = SDL_CreateTextureFromSurface(g_main_render, text_surface)))
+		error(SDL_GetError());
+	SDL_RenderCopy(g_main_render, text_texture, NULL, &coor);
+	SDL_DestroyTexture(text_texture);
+	SDL_FreeSurface(text_surface);
+}
+
+void	push_int_text(int data, char *info_text, int y)
+{
+	char		*number;
+	char		*full_line;
+	
+	if (!(number = ft_itoa(data)) ||
+	!(full_line = ft_strjoin(info_text, number)))
+		sys_error(NULL);
+	free(number);
+	push_char_text(full_line, y, WHITE);
+	free(full_line);
+}
+
+void		push_int_slash_data(int y, int data_1, int data_2, char *text)
+{
+	char	*tmp1;
+	char	*tmp2;
+	char	*full_line;
+
+	if (!(tmp1 = ft_itoa(data_1)) ||
+	!(tmp2 = ft_itoa(data_2)) ||
+	!(full_line = (char*)ft_memalloc(ft_strlen(text)
+	+ ft_strlen(tmp1) + ft_strlen(tmp2) + 2)))
+		sys_error(NULL);
+	ft_strcat(full_line, text);
+	ft_strcat(full_line, tmp1);
+	full_line[ft_strlen(full_line)] = '/';
+	ft_strcat(full_line, tmp2);
+	free(tmp1);
+	free(tmp2);
+	push_char_text(full_line, y, WHITE);
+	free(full_line);
 }
 
 void	key_pause_quite(t_vm *vm)

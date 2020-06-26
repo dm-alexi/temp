@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:05:44 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/26 17:20:44 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/26 17:51:29 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	push_char_text(char *text, int y, SDL_Color color)
 	SDL_Texture	*text_texture;
 	SDL_Rect	coor;
 
+	text_texture = NULL;
 	coor.x = SCREEN_WIDTH - INFORMATION_SIZE + OFFSET;
 	coor.y = y;
 	TTF_SizeText(g_font, text, &coor.w, &coor.h);
@@ -81,6 +82,7 @@ void	push_int_text(int data, char *info_text, int y)
 	char		*number;
 	char		*full_line;
 	
+	full_line = NULL;
 	if (!(number = ft_itoa(data)) ||
 	!(full_line = ft_strjoin(info_text, number)))
 		sys_error(NULL);
@@ -95,6 +97,8 @@ void		push_int_slash_data(int y, int data_1, int data_2, char *text)
 	char	*tmp2;
 	char	*full_line;
 
+	tmp2 = NULL;
+	full_line = NULL;
 	if (!(tmp1 = ft_itoa(data_1)) ||
 	!(tmp2 = ft_itoa(data_2)) ||
 	!(full_line = (char*)ft_memalloc(ft_strlen(text)

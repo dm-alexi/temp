@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:05:44 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/29 16:18:20 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/29 18:11:12 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static void	draw_players(t_vm *vm, int pos)
 		color.r = g_colors[i] & 0xff;
 		color.g = g_colors[i] >> 8 & 0xff;
 		color.b = g_colors[i] >> 16 & 0xff;
+		color.a = 255;
 		draw_text(vm->players[i].header.prog_name, pos + 20, color);
 		draw_data(vm->players[i].last_alive, "Last alive: ", pos + 40);
 		draw_data(vm->players[i].lives_in_current_period,
@@ -83,6 +84,7 @@ static void	draw_winner(t_vm *vm, int y)
 	color.r = g_colors[vm->winner - 1] & 0xff;
 	color.g = g_colors[vm->winner - 1] >> 8 & 0xff;
 	color.b = g_colors[vm->winner - 1] >> 16 & 0xff;
+	color.a = 255;
 	draw_text(full_line, y, color);
 	free(full_line);
 }
@@ -101,7 +103,7 @@ void		draw_menu(t_vm *vm)
 	draw_double_data(150, vm->checks, MAX_CHECKS, "MAX_checks: ");
 	draw_players(vm, 180);
 	draw_text("Live breakdown:", SCREEN_HEIGHT - 80, WHITE);
-	push_live_breakdown(vm, SCREEN_HEIGHT - 60);
+	draw_live_bar(vm, SCREEN_HEIGHT - 60);
 	draw_text("Arena distribution:", SCREEN_HEIGHT - 40, WHITE);
-	push_distribution(vm->arena, SCREEN_HEIGHT - 20);
+	draw_distribution(vm->arena, SCREEN_HEIGHT - 20);
 }

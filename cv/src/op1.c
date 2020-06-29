@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:43 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/26 19:15:20 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/29 13:12:53 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	live(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 	++vm->live_calls;
 	if (vm->verbosity & OPERATIONS)
 		ft_printf("P %4u | live %d\n", t->num, args[0]);
-	if (-args[0] > 0 && (unsigned)(-args[0]) <= vm->num_players)
+	if (-args[0] > 0 && -args[0] <= vm->num_players)
 	{
 		vm->last_alive = vm->players[-args[0] - 1].num;
 		vm->players[-args[0] - 1].last_alive = vm->cycle;

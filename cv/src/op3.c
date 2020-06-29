@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:53 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/21 21:12:25 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/29 13:07:39 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	sti(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 {
-	int		a;
-	int		b;
+	int	a;
+	int	b;
 
 	if (argtypes[1] == DIR_CODE)
 		a = args[1];
@@ -71,8 +71,8 @@ void	lld(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 
 void	lldi(t_process *t, t_vm *vm, t_byte *argtypes, int *args)
 {
-	int		a;
-	int		b;
+	int	a;
+	int	b;
 
 	if (argtypes[0] == DIR_CODE)
 		a = args[0];

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/26 20:04:33 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/29 12:52:49 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@
 # define SHORT_DUMP		32
 # define LONG_DUMP		64
 
+/*
+** Verbosity level constants
+*/
+
 # define LIVES			1
 # define CYCLES			2
 # define OPERATIONS		4
@@ -38,23 +42,23 @@ typedef struct		s_player
 {
 	t_header	header;
 	t_byte		*code;
-	unsigned	num;
-	unsigned	last_alive;
-	unsigned	lives_in_current_period;
-	unsigned	num_cursors;
+	int			num;
+	int			last_alive;
+	int			lives_in_current_period;
+	int			num_cursors;
 }					t_player;
 
 typedef struct		s_process
 {
-	unsigned			num;
-	unsigned			last_live;
+	int					num;
+	int					last_live;
 	t_byte				carry;
 	t_byte				op;
 	int					pc;
 	int					reg[REG_NUMBER];
 	struct s_process	*next;
-	unsigned			player_num;
-	unsigned			exec_cycle;
+	int					player_num;
+	int					exec_cycle;
 	int					color;
 }					t_process;
 
@@ -69,19 +73,19 @@ typedef struct		s_battlefield
 typedef struct		s_vm
 {
 	t_battlefield	arena[MEM_SIZE];
-	unsigned		num_players;
+	int				num_players;
 	t_player		*players;
-	unsigned		num_process;
+	int				num_process;
 	t_process		*start;
-	unsigned		cycle;
+	int				cycle;
 	int				cycles_to_die;
-	unsigned		checks;
-	unsigned		next_check;
-	unsigned		live_calls;
-	unsigned		last_alive;
-	unsigned		dump_cycle;
-	unsigned		dump_len;
-	unsigned		verbosity;
+	int				checks;
+	int				next_check;
+	int				live_calls;
+	int				last_alive;
+	int				dump_cycle;
+	int				dump_len;
+	int				verbosity;
 	int				winner;
 	t_byte			visual;
 	t_byte			vis_quit;

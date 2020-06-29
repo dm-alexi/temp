@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:06:04 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/26 20:08:02 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/29 13:11:12 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	event_handler(t_vm *vm)
 
 void	live_players(t_vm *vm, SDL_Rect coor, int sum)
 {
-	unsigned	i;
-	float		k;
+	int		i;
+	float	k;
 
 	i = 0;
 	while (i < vm->num_players)

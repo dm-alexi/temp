@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:27 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/26 18:23:03 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/29 13:09:42 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 void	introduce(t_vm *vm)
 {
-	unsigned	i;
+	int	i;
 
 	ft_printf("Introducing contestants...\n");
 	i = 0;

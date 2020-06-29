@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:39 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/29 13:06:27 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/29 19:20:37 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 */
 
 #include "corewar.h"
-#include "visualizer.h"
 
 static void	kill_process(t_vm *vm, t_process *p)
 {

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:22:33 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/29 19:29:09 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/29 23:27:59 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 ** NB: Arena is big-endian!
 */
 
+#include "libft.h"
 #include "corewar.h"
 
 static t_process	*new_process(t_process *next, int num, int player_num,

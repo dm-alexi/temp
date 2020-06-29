@@ -6,10 +6,11 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:29:53 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/29 16:15:37 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/29 23:32:59 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "corewar.h"
 
 void	sti(t_process *t, t_vm *vm, t_byte *argtypes, int *args)

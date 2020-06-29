@@ -6,10 +6,11 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:05:44 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/29 23:23:23 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/29 23:39:00 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "corewar.h"
 
 static void		draw_data(t_vm *vm, int data, char *info_text, int y)
@@ -112,6 +113,6 @@ void			draw_menu(t_vm *vm)
 	draw_players(vm, 180);
 	draw_text(vm, "Live breakdown:", SCREEN_HEIGHT - 80, white);
 	draw_live_bar(vm, SCREEN_HEIGHT - 60);
-	draw_text(vm, "Processes breakdown:", SCREEN_HEIGHT - 40, white);
+	draw_text(vm, "Process breakdown:", SCREEN_HEIGHT - 40, white);
 	draw_process_bar(vm, SCREEN_HEIGHT - 20);
 }

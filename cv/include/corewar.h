@@ -6,14 +6,13 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:28:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/06/29 23:22:50 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/29 23:27:29 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COREWAR_H
 # define COREWAR_H
 # include "op.h"
-# include "libft.h"
 
 # if __APPLE__
 #  include "SDL.h"

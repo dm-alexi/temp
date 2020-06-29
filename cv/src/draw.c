@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:04:28 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/29 13:17:25 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/29 16:19:01 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		choose_reverse_color(t_battlefield *cell)
 	return (i);
 }
 
-void		draw_text(char *text, int y, SDL_Color color)
+void	draw_text(char *text, int y, SDL_Color color)
 {
 	SDL_Surface	*text_surface;
 	SDL_Texture	*text_texture;
@@ -35,7 +35,7 @@ void		draw_text(char *text, int y, SDL_Color color)
 	coor.x = SCREEN_WIDTH - INFORMATION_SIZE + OFFSET;
 	coor.y = y;
 	TTF_SizeText(g_font, text, &coor.w, &coor.h);
-	if (!(text_surface = TTF_RenderText_Solid(g_font, text, color)) || 
+	if (!(text_surface = TTF_RenderText_Solid(g_font, text, color)) ||
 	!(text_texture = SDL_CreateTextureFromSurface(g_main_render, text_surface)))
 		error(SDL_GetError());
 	SDL_RenderCopy(g_main_render, text_texture, NULL, &coor);

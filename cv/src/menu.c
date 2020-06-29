@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:05:44 by asmall            #+#    #+#             */
-/*   Updated: 2020/06/29 13:07:10 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/06/29 16:18:20 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	draw_data(int data, char *info_text, int y)
 {
 	char		*number;
 	char		*full_line;
-	
+
 	full_line = NULL;
 	if (!(number = ft_itoa(data)) ||
 	!(full_line = ft_strjoin(info_text, number)))

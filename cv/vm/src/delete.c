@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   delete.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/05 21:54:23 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/07/01 01:50:25 by sscarecr         ###   ########.fr       */
+/*   Created: 2020/04/05 16:29:23 by sscarecr          #+#    #+#             */
+/*   Updated: 2020/07/01 01:43:39 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
+#include "corewar.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+void	delete_vm(t_vm *vm)
 {
-	char	*str;
-	char	*t;
-	size_t	len1;
-	size_t	len2;
+	t_process	*t;
 
-	if (!s1 || !s2)
-		return (NULL);
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	if (len1 + len2 < len1 || !(len1 + len2 + 1) ||
-	!(str = (char*)malloc(len1 + len2 + 1)))
-		return (NULL);
-	t = str;
-	while (*s1)
-		*t++ = *s1++;
-	while ((*t++ = *s2++))
-		;
-	return (str);
+	while (vm->start)
+	{
+		t = vm->start->next;
+		free(vm->start);
+		vm->start = t;
+	}
+	free(vm->players);
 }

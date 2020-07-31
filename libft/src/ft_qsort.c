@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_qsort.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 22:51:36 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/10 19:44:39 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 21:40:29 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void		*partition(void *low, void *high, size_t size,
+static t_byte	*partition(void *low, void *high, size_t size,
 	int (*compar)(const void*, const void*))
 {
-	unsigned char	*l;
-	unsigned char	*r;
-	unsigned char	*p;
+	t_byte	*l;
+	t_byte	*r;
+	t_byte	*p;
 
-	p = (unsigned char *)low;
-	r = (unsigned char *)high;
+	p = (t_byte*)low;
+	r = (t_byte*)high;
 	l = p + size;
 	ft_memswap(p, p + (r - p) / size / 2 * size, size);
 	while (1)
@@ -32,7 +32,7 @@ static void		*partition(void *low, void *high, size_t size,
 		if (l >= r)
 		{
 			ft_memswap(p, r, size);
-			return ((void*)r);
+			return (r);
 		}
 		ft_memswap(l, r, size);
 		l += size;
@@ -43,9 +43,9 @@ static void		*partition(void *low, void *high, size_t size,
 void			ft_qsort(void *base, size_t num, size_t size,
 	int (*compar)(const void*, const void*))
 {
-	unsigned char	*l;
-	unsigned char	*r;
-	unsigned char	*p;
+	t_byte	*l;
+	t_byte	*r;
+	t_byte	*p;
 
 	if (!base || num < 2 || !size || !compar)
 		return ;
@@ -54,9 +54,9 @@ void			ft_qsort(void *base, size_t num, size_t size,
 		ft_isort(base, num, size, compar);
 		return ;
 	}
-	l = (unsigned char*)base;
+	l = (t_byte*)base;
 	r = l + size * (num - 1);
-	p = (unsigned char*)partition(base, r, size, compar);
+	p = partition(base, r, size, compar);
 	ft_qsort(base, (p - l) / size, size, compar);
 	ft_qsort(p + size, (r - p) / size, size, compar);
 }

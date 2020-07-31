@@ -6,16 +6,18 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 22:01:10 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/23 23:35:37 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 22:43:10 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include "libft.h"
 #include "ft_printf.h"
 
 static int	xlen(uintmax_t n, char **s, t_format *format)
 {
-	int		len;
-	int		preflen;
+	int	len;
+	int	preflen;
 
 	preflen = (format->sharp ? 2 : 0);
 	len = (!n && format->prec);

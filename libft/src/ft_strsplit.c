@@ -6,33 +6,35 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 20:10:41 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/02 11:55:17 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 21:54:21 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
-size_t			ft_word_count(char const *s, char c)
+size_t		ft_word_count(char const *s, char c)
 {
 	size_t	n;
 
-	if (!s)
-		return (0);
 	n = 0;
-	while (*s == c)
-		++s;
-	while (*s)
+	if (s)
 	{
-		while (*s && *s != c)
-			++s;
-		++n;
 		while (*s == c)
 			++s;
+		while (*s)
+		{
+			while (*s && *s != c)
+				++s;
+			++n;
+			while (*s == c)
+				++s;
+		}
 	}
 	return (n);
 }
 
-static char		**clean(char **arr, size_t n)
+static char	**clean(char **arr, size_t n)
 {
 	while (n--)
 		free(arr[n]);
@@ -40,7 +42,7 @@ static char		**clean(char **arr, size_t n)
 	return (NULL);
 }
 
-char			**ft_strsplit(char const *s, char c)
+char		**ft_strsplit(char const *s, char c)
 {
 	const char	*t;
 	char		**arr;

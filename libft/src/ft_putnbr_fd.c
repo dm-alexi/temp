@@ -3,21 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 21:40:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/07 18:48:59 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 11:18:01 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
+/*
+** String size necessary to contain 64-bit signed integer
+*/
+
+#define MAXINTLEN	20
+
 void	ft_putnbr_fd(int n, int fd)
 {
-	char	s[20];
+	char	s[MAXINTLEN];
 	char	*t;
 
-	t = s + 19;
+	t = s + MAXINTLEN - 1;
 	if (n == 0)
 		*t-- = '0';
 	else if (n < 0)
@@ -31,5 +37,5 @@ void	ft_putnbr_fd(int n, int fd)
 		*t-- = n % 10 + '0';
 		n /= 10;
 	}
-	write(fd, t + 1, 19 - (t - s));
+	write(fd, t + 1, MAXINTLEN - 1 - (t - s));
 }

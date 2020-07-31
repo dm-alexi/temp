@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 20:12:34 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/15 21:51:12 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 00:43:01 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 long int	ft_atol(const char *nptr)
 {
-	return (ft_strtol(nptr, (char **)NULL, 10));
+	return (ft_strtol(nptr, NULL, 10));
 }

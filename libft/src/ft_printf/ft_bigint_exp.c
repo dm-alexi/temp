@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 14:34:18 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/15 20:05:27 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 22:25:30 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -337,7 +337,7 @@ static const t_bigint	g_power5_big[] =
 			91 } }
 };
 
-static void				ft_bigint_mult_int(t_bigint *res, const t_bigint *a,
+static void	ft_bigint_mult_int(t_bigint *res, const t_bigint *a,
 	const uint32_t b)
 {
 	int			i;
@@ -365,7 +365,7 @@ static void				ft_bigint_mult_int(t_bigint *res, const t_bigint *a,
 	}
 }
 
-static void				ft_bigint_mult(t_bigint *res, const t_bigint *a,
+static void	ft_bigint_mult(t_bigint *res, const t_bigint *a,
 	const t_bigint *b)
 {
 	int			i;
@@ -394,7 +394,7 @@ static void				ft_bigint_mult(t_bigint *res, const t_bigint *a,
 		ft_bigint_mult(res, b, a);
 }
 
-static void				ft_bigint_pow2(t_bigint *res, int32_t exp)
+static void	ft_bigint_pow2(t_bigint *res, int32_t exp)
 {
 	t_bigint	tmp;
 	t_bigint	*cur;
@@ -419,7 +419,7 @@ static void				ft_bigint_pow2(t_bigint *res, int32_t exp)
 		ft_bigint_copy(res, cur);
 }
 
-static void				ft_bigint_pow5(t_bigint *res, int32_t exp)
+static void	ft_bigint_pow5(t_bigint *res, int32_t exp)
 {
 	t_bigint	tmp;
 	t_bigint	*cur;
@@ -448,7 +448,7 @@ static void				ft_bigint_pow5(t_bigint *res, int32_t exp)
 ** Makes t_bigint from val; returns -exp10 (positive!)
 */
 
-int						ft_bigint_make(t_bigint *res, int exp, uint64_t val)
+int			ft_bigint_make(t_bigint *res, int exp, uint64_t val)
 {
 	t_bigint	pow;
 	t_bigint	tmp;

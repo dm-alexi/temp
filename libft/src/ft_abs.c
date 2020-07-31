@@ -6,11 +6,11 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 15:19:42 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/15 21:11:46 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 10:09:03 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_abs(int n)
+int	ft_abs(int n)
 {
 	return (n >= 0 ? n : -n);
 }

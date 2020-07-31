@@ -6,15 +6,17 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 21:31:26 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/23 23:32:16 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 22:36:57 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include "libft.h"
 #include "ft_printf.h"
 
 static int	olen(uintmax_t n, char **s, t_format *format)
 {
-	int		len;
+	int	len;
 
 	if (!n && format->sharp && !format->prec)
 		format->prec = 1;
@@ -37,8 +39,8 @@ static int	olen(uintmax_t n, char **s, t_format *format)
 
 int			ft_otoa(uintmax_t n, char **s, t_format *format)
 {
-	int		len;
-	int		tmp;
+	int	len;
+	int	tmp;
 
 	if ((len = olen(n, s, format)) < 0)
 		return (len);

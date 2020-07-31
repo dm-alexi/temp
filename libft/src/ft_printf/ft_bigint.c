@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 14:36:31 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/15 21:51:39 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 22:15:20 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_bigint_get(t_bigint *res, uint64_t a)
 
 void	ft_bigint_copy(t_bigint *dst, const t_bigint *src)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (i < src->len)

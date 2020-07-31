@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 22:09:53 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/07 15:26:45 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 10:49:32 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
 char	*ft_strtrim(char const *s)
@@ -19,14 +20,14 @@ char	*ft_strtrim(char const *s)
 
 	if (!s)
 		return (NULL);
-	while (*s == ' ' || *s == '\t' || *s == '\n')
+	while (ft_isspace(*s))
 		++s;
 	if (*s == '\0')
-		return (ft_strdup(s));
+		return (ft_memalloc(1));
 	e = (char *)s;
 	while (*e)
 		++e;
-	while (*--e == ' ' || *e == '\t' || *e == '\n')
+	while (ft_isspace(*--e))
 		;
 	if (!(str = (char*)malloc(e - s + 2)))
 		return (NULL);

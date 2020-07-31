@@ -6,15 +6,16 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 20:57:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/05 20:57:02 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 21:56:03 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
 static int	longlen(long long n, int base)
 {
-	int		len;
+	int	len;
 
 	len = (n < 0);
 	while (n && ++len)

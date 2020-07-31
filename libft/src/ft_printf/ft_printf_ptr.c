@@ -6,14 +6,16 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 19:21:27 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/23 19:03:40 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 22:37:16 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdlib.h>
+#include "libft.h"
 #include "ft_printf.h"
 
-static int		ptrlen(uintptr_t p, char **s, t_format *format)
+static int	ptrlen(uintptr_t p, char **s, t_format *format)
 {
 	int		len;
 
@@ -32,7 +34,7 @@ static int		ptrlen(uintptr_t p, char **s, t_format *format)
 	return (len);
 }
 
-int				ft_printf_ptr(t_format *format, va_list *va, int fd)
+int			ft_printf_ptr(t_format *format, va_list *va, int fd)
 {
 	uintptr_t	p;
 	int			len;

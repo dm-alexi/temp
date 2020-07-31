@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 21:13:24 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/07 11:25:28 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/30 14:47:54 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
 void	ft_bzero(void *ptr, size_t num)
 {
-	unsigned char	*s;
+	t_byte	*s;
 
 	s = ptr;
 	while (num--)

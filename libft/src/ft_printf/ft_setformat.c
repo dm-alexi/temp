@@ -6,13 +6,14 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 18:35:48 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/28 18:35:49 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 22:43:48 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "ft_printf.h"
 
-static void		set_specifier(const char **s, t_format *format)
+static void	set_specifier(const char **s, t_format *format)
 {
 	if (ft_strnequ(*s, "hh", 2) && (*s += 2))
 		format->length = 'H';
@@ -24,7 +25,7 @@ static void		set_specifier(const char **s, t_format *format)
 		format->type = *((*s)++);
 }
 
-static void		set_wp(const char **s, t_format *format, va_list *va)
+static void	set_wp(const char **s, t_format *format, va_list *va)
 {
 	format->prec = -1;
 	if (ft_isdigit(**s))
@@ -50,7 +51,7 @@ static void		set_wp(const char **s, t_format *format, va_list *va)
 	}
 }
 
-static void		set_flags(const char **s, t_format *format)
+static void	set_flags(const char **s, t_format *format)
 {
 	ft_bzero(format, sizeof(t_format));
 	while (**s && ft_strchr("-+ #0\'", **s))
@@ -71,7 +72,7 @@ static void		set_flags(const char **s, t_format *format)
 	}
 }
 
-void			ft_setformat(const char **s, t_format *format, va_list *va)
+void		ft_setformat(const char **s, t_format *format, va_list *va)
 {
 	set_flags(s, format);
 	set_wp(s, format, va);

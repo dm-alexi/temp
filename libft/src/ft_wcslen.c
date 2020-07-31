@@ -6,11 +6,11 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 20:27:59 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/05 20:36:04 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 22:00:24 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <stddef.h>
 
 size_t	ft_wcslen(const wchar_t *wcs)
 {

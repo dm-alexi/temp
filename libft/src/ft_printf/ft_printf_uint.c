@@ -6,11 +6,12 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 19:35:11 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/27 18:15:14 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 22:40:26 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdlib.h>
 #include "ft_printf.h"
 
 static uintmax_t	get_uinteger(t_format *format, va_list *va)

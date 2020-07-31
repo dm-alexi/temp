@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 21:18:19 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/09/19 11:34:48 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 11:02:07 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
 static int	intlen(int n)
 {
-	int		len;
+	int	len;
 
 	len = (n < 0);
 	while (n && ++len)

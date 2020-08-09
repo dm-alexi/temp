@@ -6,11 +6,13 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 18:28:09 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/14 19:09:52 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/08/09 09:39:40 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <mlx.h>
+#include "libft.h"
 #include "visual.h"
 
 static t_image	*new_image(void *mlx, int width, int height)

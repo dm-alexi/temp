@@ -6,22 +6,24 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 19:49:53 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/11/02 17:23:55 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 22:38:30 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdlib.h>
+#include "libft.h"
 #include "ft_printf.h"
 
-static void		put_char(char **dst, char *src)
+static void	put_char(char **dst, char *src)
 {
-	unsigned char	c;
+	t_byte	c;
 
 	if (ft_isprint(*src))
 		*((*dst)++) = *src;
 	else
 	{
-		c = (unsigned char)*src;
+		c = (t_byte)*src;
 		*((*dst)++) = '\\';
 		*((*dst)++) = c / 100 + '0';
 		*((*dst)++) = (c % 100) / 10 + '0';
@@ -29,7 +31,7 @@ static void		put_char(char **dst, char *src)
 	}
 }
 
-static int		get_rline(t_format *format, char **s)
+static int	get_rline(t_format *format, char **s)
 {
 	char	*tmp;
 	char	*str;
@@ -55,7 +57,7 @@ static int		get_rline(t_format *format, char **s)
 	return (format->width);
 }
 
-int				ft_printf_r(t_format *format, va_list *va, int fd)
+int			ft_printf_r(t_format *format, va_list *va, int fd)
 {
 	char	*s;
 	int		len;

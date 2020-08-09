@@ -6,11 +6,12 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 18:46:55 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/25 22:50:40 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 22:28:32 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdlib.h>
+#include "libft.h"
 #include "ft_printf.h"
 
 static int	cut_tail(char *s, int total)
@@ -94,9 +95,9 @@ int			ft_process_gf(char **s, int exp, int len, t_format *format)
 
 int			ft_printf_f(t_format *format, int len, char *str, char **s)
 {
-	int		total;
-	int		i;
-	int		j;
+	int	total;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < len)

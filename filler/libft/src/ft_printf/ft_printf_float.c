@@ -6,17 +6,19 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:22:02 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/27 15:18:28 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 22:30:24 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <unistd.h>
+#include "libft.h"
 #include "ft_printf.h"
 
 static int	float_zero_e(t_format *format, char **s)
 {
-	int		len;
-	int		tmp;
+	int	len;
+	int	tmp;
 
 	len = 5 + (format->sign != 0) + (format->sharp ? format->prec + 1 : 0);
 	if (len > format->width)
@@ -39,7 +41,7 @@ static int	float_zero_e(t_format *format, char **s)
 
 static int	float_zero_fg(t_format *format, char **s)
 {
-	int		len;
+	int	len;
 
 	if ((format->type == 'G' || format->type == 'g') && format->prec)
 		format->prec = format->sharp ? format->prec - 1 : 0;
@@ -111,9 +113,9 @@ static int	floatlen(long double d, t_format *format, char **s)
 
 int			ft_printf_float(t_format *format, va_list *va, int fd)
 {
-	long double		d;
-	char			*s;
-	int				len;
+	long double	d;
+	char		*s;
+	int			len;
 
 	d = (format->length == 'L') ?
 		va_arg(*va, long double) : (long double)va_arg(*va, double);

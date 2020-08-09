@@ -6,10 +6,11 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 21:58:48 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/14 15:23:57 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/08/09 09:34:46 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "visual.h"
 
 void	delete_game(t_game *game)

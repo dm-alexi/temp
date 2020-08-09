@@ -6,15 +6,17 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 21:34:06 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/26 00:05:56 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 22:26:53 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include "libft.h"
 #include "ft_printf.h"
 
 static int	explen(int exp)
 {
-	int		i;
+	int	i;
 
 	i = 1;
 	while ((exp /= 10) && ++i)
@@ -59,8 +61,8 @@ int			ft_process_e(char **s, int exp, int len, t_format *format)
 
 int			ft_printf_e(t_format *format, int len, char *str, char **s)
 {
-	int		i;
-	int		total;
+	int	i;
+	int	total;
 
 	i = -1;
 	while (++i < len)

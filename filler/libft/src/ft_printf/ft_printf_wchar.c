@@ -6,11 +6,13 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 15:46:22 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/28 19:06:40 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 22:45:01 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdlib.h>
+#include "libft.h"
 #include "ft_printf.h"
 
 static int	wchar2utf8(char *str, const wchar_t c)
@@ -43,10 +45,10 @@ static int	wchar2utf8(char *str, const wchar_t c)
 
 int			ft_printf_wchar(t_format *format, va_list *va, int fd)
 {
-	wchar_t		c;
-	char		str[4];
-	int			n;
-	int			offset;
+	wchar_t	c;
+	char	str[4];
+	int		n;
+	int		offset;
 
 	c = (wchar_t)va_arg(*va, int);
 	n = wchar2utf8(str, c);
@@ -63,10 +65,10 @@ int			ft_printf_wchar(t_format *format, va_list *va, int fd)
 
 int			ft_printf_wstring(t_format *format, va_list *va, int fd)
 {
-	wchar_t		*s;
-	char		*str;
-	int			n;
-	int			tmp;
+	wchar_t	*s;
+	char	*str;
+	int		n;
+	int		tmp;
 
 	if (!(s = (wchar_t*)va_arg(*va, wchar_t*)))
 		s = L"(null)";

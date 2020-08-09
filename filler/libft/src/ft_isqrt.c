@@ -6,23 +6,27 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 22:44:52 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/05 20:57:17 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 21:50:13 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isqrt(int nb)
-{
-	int		x;
-	int		y;
+/*
+** Integer square root
+*/
 
-	if (nb <= 0)
+int	ft_isqrt(int n)
+{
+	int	x;
+	int	y;
+
+	if (n <= 0)
 		return (0);
-	x = nb;
+	x = n;
 	y = x / 2 + x % 2;
 	while (y < x)
 	{
 		x = y;
-		y = (x + nb / x) / 2;
+		y = (x + n / x) / 2;
 	}
 	return (x);
 }

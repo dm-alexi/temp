@@ -6,10 +6,11 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/14 19:46:33 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/08/09 09:39:09 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <mlx.h>
 #include "visual.h"
 #define ESC 53

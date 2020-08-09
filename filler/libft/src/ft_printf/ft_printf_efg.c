@@ -6,18 +6,20 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 15:42:57 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/27 15:43:36 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 22:24:11 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include "libft.h"
 #include "ft_printf.h"
 
 static const int	g_pow10[] = {1, 10, 100, 1000, 10000, 100000, 1000000,
 	10000000, 100000000, 1000000000};
 
-static int		intlen(uint32_t n)
+static int	intlen(uint32_t n)
 {
-	int		i;
+	int	i;
 
 	i = 1;
 	while ((int)n >= g_pow10[i])
@@ -25,7 +27,7 @@ static int		intlen(uint32_t n)
 	return (i);
 }
 
-static void		get_raw_string(t_bigint *t, char *s, int len)
+static void	get_raw_string(t_bigint *t, char *s, int len)
 {
 	int			i;
 	int			j;
@@ -50,9 +52,9 @@ static void		get_raw_string(t_bigint *t, char *s, int len)
 	}
 }
 
-int				ft_round(char *s, int len, int hollow)
+int			ft_round(char *s, int len, int hollow)
 {
-	int		i;
+	int	i;
 
 	if (s[i = len - hollow] > 5)
 		++s[len - 1 - hollow];
@@ -79,7 +81,7 @@ int				ft_round(char *s, int len, int hollow)
 	return (len - hollow);
 }
 
-int				ft_printf_efg(t_format *format, t_bigint *t, int exp, char **s)
+int			ft_printf_efg(t_format *format, t_bigint *t, int exp, char **s)
 {
 	char	*str;
 	int		len;

@@ -6,10 +6,11 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 18:46:54 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/26 18:47:50 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/08/09 09:28:14 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "filler.h"
 
 int	main(void)

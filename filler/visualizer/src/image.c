@@ -6,12 +6,13 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 14:13:26 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/02/17 19:23:36 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/08/09 09:36:41 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
-#include "fractol.h"
+#include "libft.h"
+#include "visual.h"
 
 t_image		*new_image(void *mlx, int width, int height)
 {

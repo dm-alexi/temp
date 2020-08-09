@@ -6,11 +6,13 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/12/17 19:29:52 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/08/09 01:32:15 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdlib.h>
+#include "libft.h"
 #include "get_next_line.h"
 
 /*
@@ -20,32 +22,31 @@
 ** returns -1. If the end of file is reached and no data is read, returns 0.
 */
 
-static int		fillbuf(const int fd, t_buf *buf)
+static int		fillbuf(t_file *file)
 {
 	int		len;
 	char	*s;
+	t_buf	*buf;
 
-	if (!buf->len)
-	{
-		buf->offset = buf->str;
-		if ((buf->len = read(fd, buf->str, BUFF_SIZE)) <= 0)
-			return (buf->len);
-	}
+	buf = file->buffer;
+	if (!buf->len && (buf->start = buf->str) &&
+	(buf->len = read(file->fd, buf->str, BUFF_SIZE)) <= 0)
+		return (buf->len);
 	len = 0;
-	while (!(s = (char*)ft_memchr(buf->offset, '\n', buf->len)))
+	while (!(s = (char*)ft_memchr(buf->start, '\n', buf->len)))
 	{
 		len += buf->len;
-		buf->next = (t_buf*)malloc(sizeof(t_buf));
+		if (!(buf->next = (t_buf*)ft_memalloc(sizeof(t_buf))))
+			return (-1);
 		buf = buf->next;
-		buf->next = NULL;
-		buf->offset = buf->str;
-		if ((buf->len = read(fd, buf->str, BUFF_SIZE)) == -1)
+		buf->start = buf->str;
+		if ((buf->len = read(file->fd, buf->str, BUFF_SIZE)) < 0)
 			return (-1);
 		else if (buf->len == 0)
 			break ;
 	}
 	if (s)
-		len += s - buf->offset;
+		len += s - buf->start;
 	return (len + 1);
 }
 
@@ -55,98 +56,109 @@ static int		fillbuf(const int fd, t_buf *buf)
 ** is empty and the end of file is reached, returns 0.
 */
 
-static int		readbuf(const int fd, t_file *f, char **line)
+static int		readbuf(t_file *file, char **line)
 {
 	char	*s;
 	t_buf	*tmp;
 	int		len;
 
-	if ((len = fillbuf(fd, f->arr[fd])) <= 0)
+	if ((len = fillbuf(file)) <= 0)
 		return (len);
 	if (!(*line = (char*)malloc(len)))
 		return (-1);
 	s = *line;
 	*(s + len - 1) = '\0';
-	while ((tmp = f->arr[fd]->next))
+	while ((tmp = file->buffer->next))
 	{
-		ft_memcpy(s, f->arr[fd]->offset, f->arr[fd]->len);
-		s += f->arr[fd]->len;
-		len -= f->arr[fd]->len;
-		free(f->arr[fd]);
-		f->arr[fd] = tmp;
+		ft_memcpy(s, file->buffer->start, file->buffer->len);
+		s += file->buffer->len;
+		len -= file->buffer->len;
+		free(file->buffer);
+		file->buffer = tmp;
 	}
-	ft_memcpy(s, f->arr[fd]->offset, len - 1);
-	f->arr[fd]->offset += len;
-	f->arr[fd]->len = f->arr[fd]->len > len ? f->arr[fd]->len - len : 0;
+	ft_memcpy(s, file->buffer->start, len - 1);
+	file->buffer->start += len;
+	file->buffer->len = file->buffer->len > len ? file->buffer->len - len : 0;
 	return (1);
 }
 
 /*
-** Deletes a file descriptor from the array f.arr. If possible, reallocates
-** the array to a minimum size necessary.
+** Deletes a t_file corresponding to the give file descriptor.
 */
 
-static void		delfile(int fd, t_file *f)
+static void		delfile(const int fd, t_file **f)
 {
-	t_buf	*t;
-	t_buf	**tmp;
+	t_file	*tmp;
+	t_file	*t;
+	t_buf	*buf;
+	int		k;
 
-	while ((t = f->arr[fd]))
+	k = fd % ARRAY_SIZE;
+	if (f[k]->fd == fd && (t = f[k]))
+		f[k] = f[k]->next;
+	else
 	{
-		f->arr[fd] = f->arr[fd]->next;
-		free(t);
+		tmp = f[k];
+		while (tmp->next->fd != fd)
+			tmp = tmp->next;
+		t = tmp->next;
+		tmp->next = t->next;
 	}
-	if (fd == f->len - 1)
+	while (t->buffer)
 	{
-		while (fd >= 0 && !f->arr[fd])
-			--fd;
-		if (fd < 0)
-		{
-			free(f->arr);
-			f->arr = NULL;
-		}
-		else if ((tmp = ft_realloc(f->arr, f->len * sizeof(t_buf*),
-		(fd + 1) * sizeof(t_buf*))))
-			f->arr = tmp;
-		f->len = fd + 1;
+		buf = t->buffer->next;
+		free(t->buffer);
+		t->buffer = buf;
 	}
+	free(t);
 }
 
 /*
-** Expands the array f.arr to include newly added file descriptor.
-** Upon successful execution returns 0, otherwise 1.
+** Searches and returns a t_file* corresponding to the given file descriptor,
+** creates one if needed.
 */
 
-static int		expand(const int fd, t_file *f)
+static t_file	*get_file(const int fd, t_file **f)
 {
-	size_t	size;
-	t_buf	**tmp;
+	t_file	*tmp;
+	t_file	*t;
+	int		k;
 
-	size = (fd + 1) * sizeof(t_buf*);
-	if (!(tmp = (t_buf**)ft_realloc(f->arr, f->len * sizeof(t_buf*), size)))
-		return (1);
-	ft_bzero(tmp + f->len, size - f->len * sizeof(t_buf*));
-	f->arr = tmp;
-	f->len = fd + 1;
-	return (0);
+	k = fd % ARRAY_SIZE;
+	if (!f[k] || f[k]->fd > fd)
+	{
+		if (!(t = (t_file*)ft_memalloc(sizeof(t_file))))
+			return (NULL);
+		t->fd = fd;
+		t->next = f[k];
+		return (f[k] = t);
+	}
+	tmp = f[k];
+	while (tmp->next && tmp->fd < fd)
+		tmp = tmp->next;
+	if (tmp->fd == fd)
+		return (tmp);
+	if (!(t = (t_file*)ft_memalloc(sizeof(t_file))))
+		return (NULL);
+	t->fd = fd;
+	t->next = tmp->next;
+	return (tmp->next = t);
 }
 
 int				get_next_line(const int fd, char **line)
 {
-	static t_file	f;
+	static t_file	*f[ARRAY_SIZE];
+	t_file			*file;
 	int				r;
 
-	if (fd < 0 || !line || (fd >= f.len && expand(fd, &f)))
+	if (fd < 0 || !line || !(file = get_file(fd, f)))
 		return (-1);
-	if (!f.arr[fd])
+	if (!file->buffer && !(file->buffer = (t_buf*)ft_memalloc(sizeof(t_buf))))
 	{
-		if (!(f.arr[fd] = (t_buf*)malloc(sizeof(t_buf))))
-			return (-1);
-		f.arr[fd]->next = NULL;
-		f.arr[fd]->len = 0;
-		f.arr[fd]->offset = f.arr[fd]->str;
+		delfile(fd, f);
+		return (-1);
 	}
-	if ((r = readbuf(fd, &f, line)) <= 0)
-		delfile(fd, &f);
+	if ((r = readbuf(file, line)) <= 0)
+		delfile(fd, f);
 	return (r);
 }

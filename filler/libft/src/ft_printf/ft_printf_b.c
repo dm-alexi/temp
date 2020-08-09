@@ -6,15 +6,17 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 17:58:27 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/27 18:17:16 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 22:26:41 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include "libft.h"
 #include "ft_printf.h"
 
 static int	blen(uintmax_t n, char **s, t_format *format)
 {
-	int		len;
+	int	len;
 
 	len = !n;
 	while (n && ++len)
@@ -31,8 +33,8 @@ static int	blen(uintmax_t n, char **s, t_format *format)
 
 int			ft_btoa(uintmax_t n, char **s, t_format *format)
 {
-	int		len;
-	int		tmp;
+	int	len;
+	int	tmp;
 
 	if ((len = blen(n, s, format)) < 0)
 		return (len);

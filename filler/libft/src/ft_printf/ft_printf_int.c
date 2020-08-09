@@ -6,18 +6,19 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:22:02 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/26 14:24:00 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 22:34:34 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stddef.h>
+#include <stdlib.h>
+#include "libft.h"
 #include "ft_printf.h"
 
-static int			intmaxlen(intmax_t n, char **s, t_format *format)
+static int		intmaxlen(intmax_t n, char **s, t_format *format)
 {
-	int		len;
-	int		apostrophes;
+	int	len;
+	int	apostrophes;
 
 	len = !n && format->prec;
 	apostrophes = 0;
@@ -38,11 +39,11 @@ static int			intmaxlen(intmax_t n, char **s, t_format *format)
 	return (len);
 }
 
-static int			intmaxtoa(intmax_t n, char **s, t_format *format)
+static int		intmaxtoa(intmax_t n, char **s, t_format *format)
 {
-	int		len;
-	int		tmp;
-	int		count;
+	int	len;
+	int	tmp;
+	int	count;
 
 	if ((len = intmaxlen(n, s, format)) <= 0)
 		return (len);
@@ -61,7 +62,7 @@ static int			intmaxtoa(intmax_t n, char **s, t_format *format)
 	return (len);
 }
 
-static intmax_t		get_integer(t_format *format, va_list *va)
+static intmax_t	get_integer(t_format *format, va_list *va)
 {
 	if (!format->length)
 		return ((int)va_arg(*va, int));
@@ -82,7 +83,7 @@ static intmax_t		get_integer(t_format *format, va_list *va)
 	return ((int)va_arg(*va, int));
 }
 
-int					ft_printf_int(t_format *format, va_list *va, int fd)
+int				ft_printf_int(t_format *format, va_list *va, int fd)
 {
 	char		*s;
 	intmax_t	integer;

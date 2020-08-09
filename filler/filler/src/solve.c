@@ -6,10 +6,11 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 18:46:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/11 19:44:26 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/08/09 09:31:38 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "filler.h"
 
 int		score(t_map map, t_piece piece, int x, int y)

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 18:46:50 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/11 22:59:51 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/08/09 09:30:17 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #else
 # include <unistd.h>
 #endif
+#include <stdlib.h>
+#include "libft.h"
 #include "filler.h"
 
 int	get_player(t_map *map)

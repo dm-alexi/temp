@@ -6,11 +6,13 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 20:27:21 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/14 19:56:50 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/08/09 09:35:37 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
+#include <stdlib.h>
+#include "libft.h"
 #include "visual.h"
 
 static void	image_put_pixel(t_image *image, int x, int y, int color)

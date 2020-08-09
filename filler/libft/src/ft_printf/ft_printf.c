@@ -6,14 +6,15 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:14:16 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/28 18:37:20 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 22:44:49 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include "libft.h"
 #include "ft_printf.h"
 
-int		print_formatted(const char **s, va_list *va, int n, int fd)
+int	print_formatted(const char **s, va_list *va, int n, int fd)
 {
 	t_format	format;
 
@@ -41,12 +42,12 @@ int		print_formatted(const char **s, va_list *va, int n, int fd)
 	return (0);
 }
 
-int		ft_printf(const char *line, ...)
+int	ft_printf(const char *line, ...)
 {
-	int				n;
-	int				count;
-	va_list			va;
-	const char		*s;
+	int			n;
+	int			count;
+	va_list		va;
+	const char	*s;
 
 	n = 0;
 	va_start(va, line);
@@ -70,12 +71,12 @@ int		ft_printf(const char *line, ...)
 	return (n);
 }
 
-int		ft_dprintf(int fd, const char *line, ...)
+int	ft_dprintf(int fd, const char *line, ...)
 {
-	int				n;
-	int				count;
-	va_list			va;
-	const char		*s;
+	int			n;
+	int			count;
+	va_list		va;
+	const char	*s;
 
 	n = 0;
 	va_start(va, line);

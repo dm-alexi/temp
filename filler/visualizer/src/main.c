@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 21:24:35 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/14 15:17:02 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/08/09 09:38:50 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 #endif
 #include <fcntl.h>
+#include "libft.h"
 #include "visual.h"
 
 static int	usage(void)

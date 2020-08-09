@@ -6,16 +6,18 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 21:31:26 by sscarecr          #+#    #+#             */
-/*   Updated: 2019/10/23 22:49:50 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/07/31 22:41:00 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include "libft.h"
 #include "ft_printf.h"
 
 static int	ulen(uintmax_t n, char **s, t_format *format)
 {
-	int		len;
-	int		apostrophes;
+	int	len;
+	int	apostrophes;
 
 	len = (!n && format->prec);
 	apostrophes = 0;
@@ -36,9 +38,9 @@ static int	ulen(uintmax_t n, char **s, t_format *format)
 
 int			ft_utoa(uintmax_t n, char **s, t_format *format)
 {
-	int		len;
-	int		tmp;
-	int		count;
+	int	len;
+	int	tmp;
+	int	count;
 
 	if ((len = ulen(n, s, format)) < 0)
 		return (len);

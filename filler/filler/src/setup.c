@@ -6,10 +6,12 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 23:01:05 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/03/11 23:01:07 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/08/09 09:31:31 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include "libft.h"
 #include "filler.h"
 
 static int	clear(t_queue **q)

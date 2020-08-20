@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 18:46:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/08/09 09:31:38 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/08/15 12:30:18 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	solve(t_map map, t_piece piece)
 	t_point	k;
 	t_point	t;
 
+	k = (t_point){0, 0};
 	smin = map.w * map.h * piece.h * piece.w;
 	t.y = -piece.h;
 	while (++t.y < map.h)

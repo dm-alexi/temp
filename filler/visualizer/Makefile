@@ -7,20 +7,35 @@ OBJ_DIR = obj
 LIBFT_DIR = ../libft
 LIBFT = $(LIBFT_DIR)/libft.a
 LIBFT_HEAD = $(LIBFT_DIR)/include
-SRC_FILES = main.c error.c input.c init.c ui.c draw.c
+LDFLAGS = -I $(HEAD_DIR) -I $(LIBFT_HEAD)
+SRC_FILES = main.c error.c input.c delete.c visualizer.c menu.c events.c
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
+
+# OS detection.
+ifeq ($(OS),Windows_NT)
+	detected_OS = Windows
+else
+	detected_OS = $(shell sh -c 'uname 2>/dev/null || echo Unknown')
+endif
+# Note: Current version only supports Linux and Mac OS.
+ifeq ($(detected_OS),Darwin)
+	FRAMEWORKS = -framework SDL2 -framework SDL2_ttf
+	FLAGS += -F ~/Library/Frameworks 
+	LDFLAGS += -I ~/Library/Frameworks/SDL2.framework/Headers -I ~/Library/Frameworks/SDL2_ttf.framework/Headers
+else
+	FRAMEWORKS = -lSDL2 -lSDL2_ttf
+endif
 
 all: $(NAME)
 
 -include $(OBJ:.o=.d)
 
-$(NAME): $(OBJ)
-	make -C $(LIBFT_DIR)
-	$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(LIBFT) -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
+$(NAME): $(LIBFT) $(OBJ)
+	$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(FRAMEWORKS) $(LIBFT)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(FLAGS) -I$(HEAD_DIR) -I$(LIBFT_HEAD) -o $@ -c $< -MMD
+	$(CC) $(FLAGS) $(LDFLAGS) -o $@ -c $< -MMD
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)

@@ -6,17 +6,12 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 21:24:35 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/08/09 09:38:50 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/08/21 00:11:47 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifdef _WIN32
-# include <stdio.h>
-#else
-# include <unistd.h>
-#endif
+#include <unistd.h>
 #include <fcntl.h>
-#include "libft.h"
 #include "visual.h"
 
 static int	usage(void)
@@ -38,6 +33,7 @@ int			main(int ac, char **av)
 	input(fd, &game);
 	if (fd != STDIN_FILENO)
 		close(fd);
-	init_visual(&game);
+	visualization(&game);
+	delete_game(&game);
 	return (0);
 }

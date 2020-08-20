@@ -6,12 +6,11 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 21:24:32 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/08/09 09:37:40 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/08/18 22:13:02 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "libft.h"
 #include "visual.h"
 
 static int	get_player(int fd, char **line, char **name)

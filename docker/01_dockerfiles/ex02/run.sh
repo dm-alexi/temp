@@ -1,0 +1,1 @@
+docker run -it --rm --name ruby-server -p 3000:3000 ruby-app

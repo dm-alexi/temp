@@ -1,0 +1,1 @@
+docker build ft-rails/ -t ft-rails:on-build && docker build . -t ruby-app

@@ -1,1 +1,0 @@
-docker run -it --rm --name VSCode vscode bash

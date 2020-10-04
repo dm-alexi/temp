@@ -1,1 +1,0 @@
-docker run -dit --rm -v $PWD/www:/usr/local/apache2/htdocs/ -p 8080:80 --name Balloon balloon

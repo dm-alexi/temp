@@ -1,0 +1,1 @@
+docker run -it --rm --name TimeServer -p 8080:80 timeserver

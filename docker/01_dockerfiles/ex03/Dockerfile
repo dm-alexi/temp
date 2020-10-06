@@ -13,5 +13,5 @@ RUN mkdir -p /etc/gitlab/ssl && chmod 755 /etc/gitlab/ssl \
 	&& echo "nginx['ssl_certificate_key'] = \"/etc/gitlab/ssl/gitlab.key\"" >> /etc/gitlab/gitlab.rb \
 	&& echo "nginx['redirect_http_to_https'] = true" >> /etc/gitlab/gitlab.rb \
 	&& echo "letsencrypt['enable'] = false" >> /etc/gitlab/gitlab.rb
-ENTRYPOINT echo "external_url \"https://$DOCKER_IP\"" >> /etc/gitlab/gitlab.rb \
-	&& (/opt/gitlab/embedded/bin/runsvdir-start &) && gitlab-ctl reconfigure && tail -f /dev/null
+ENTRYPOINT echo "external_url \"https://$(ip -4 -o address | grep eth0 | cut -d/ -f1 | awk '{print $NF}')\"" >> /etc/gitlab/gitlab.rb \
+	&& (/opt/gitlab/embedded/bin/runsvdir-start &) && gitlab-ctl reconfigure && service ssh start && tail -f /dev/null

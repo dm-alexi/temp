@@ -1,1 +1,0 @@
-docker-machine ssh Aiur $(docker swarm join-token worker | grep docker | xargs)

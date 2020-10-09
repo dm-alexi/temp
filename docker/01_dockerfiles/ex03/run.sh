@@ -1,1 +1,0 @@
-docker run -it --rm --name gitlab --shm-size=4g --privileged ft-gitlab

@@ -1,1 +1,0 @@
-docker run -it --rm -v $PWD/projects:/home/projects/ --name GO goenv

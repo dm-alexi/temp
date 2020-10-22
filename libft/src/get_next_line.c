@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/08/09 01:32:15 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/10/22 17:31:39 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static void		delfile(const int fd, t_file **f)
 	t_buf	*buf;
 	int		k;
 
-	k = fd % ARRAY_SIZE;
+	k = fd % GNL_ARRAY_SIZE;
 	if (f[k]->fd == fd && (t = f[k]))
 		f[k] = f[k]->next;
 	else
@@ -124,7 +124,7 @@ static t_file	*get_file(const int fd, t_file **f)
 	t_file	*t;
 	int		k;
 
-	k = fd % ARRAY_SIZE;
+	k = fd % GNL_ARRAY_SIZE;
 	if (!f[k] || f[k]->fd > fd)
 	{
 		if (!(t = (t_file*)ft_memalloc(sizeof(t_file))))
@@ -147,7 +147,7 @@ static t_file	*get_file(const int fd, t_file **f)
 
 int				get_next_line(const int fd, char **line)
 {
-	static t_file	*f[ARRAY_SIZE];
+	static t_file	*f[GNL_ARRAY_SIZE];
 	t_file			*file;
 	int				r;
 

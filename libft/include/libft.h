@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 22:14:21 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/07/31 22:02:52 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/10/23 14:52:19 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ char			*ft_lltoa(long long n, int base, int upcase);
 char			*ft_ulltoa(unsigned long long n, int base, int upcase);
 size_t			ft_wcslen(const wchar_t *wcs);
 size_t			ft_word_count(char const *s, char c);
+int				ft_hash8(void *value, size_t size);
 
 /*
 				** projects

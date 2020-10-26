@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 15:52:09 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/10/26 12:07:17 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/10/26 17:39:29 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct	s_image
 	int		height;
 	int		endian;
 	char	*map;
+	void	(*put_pixel)(int, int, int);
 }				t_image;
 
 typedef struct	s_screen

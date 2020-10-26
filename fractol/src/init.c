@@ -6,11 +6,12 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 18:57:56 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/10/24 13:16:18 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/10/26 15:11:04 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
+#include "mlx_events.h"
 #include "fractol.h"
 
 void	init_julia(t_screen *s)
@@ -23,7 +24,7 @@ void	init_julia(t_screen *s)
 	s->maxy = 2.0;
 	s->c.re = JULIA_RE;
 	s->c.im = JULIA_IM;
-	mlx_hook(s->win, 6, 1L << 6, &mouse_move, s);
+	mlx_hook(s->win, MOTION_NOTIFY, POINTER_MOTION_MASK, &mouse_move, s);
 }
 
 void	init_mandelbrot(t_screen *s)

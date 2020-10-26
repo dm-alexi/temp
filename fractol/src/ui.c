@@ -6,30 +6,14 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/10/26 12:08:56 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/10/26 16:30:07 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "mlx.h"
+#include "mlx_keys.h"
 #include "fractol.h"
-#define ESC 53
-#define MOUSE1 1
-#define MOUSE2 2
-#define SCROLL_UP 4
-#define SCROLL_DN 5
-#define UP 126
-#define DOWN 125
-#define LEFT 123
-#define RIGHT 124
-#define SPACE 49
-#define NUM_PLUS 69
-#define PLUS 24
-#define NUM_MINUS 78
-#define MINUS 27
-#define Q 12
-#define A 0
-#define Z 6
 
 #define MOVE_SPEED 0.05
 #define ZOOM_FACTOR 1.1
@@ -60,6 +44,7 @@ int			key_handle(int key, void *param)
 	t_screen	*s;
 
 	s = param;
+	ft_printf("%d\n", key);
 	if (key == ESC)
 		exit(EXIT_SUCCESS);
 	else if (key == SPACE)

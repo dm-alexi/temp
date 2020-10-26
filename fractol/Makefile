@@ -21,7 +21,7 @@ else
 endif
 # Note: Current version only supports Linux and Mac OS.
 ifeq ($(detected_OS),Darwin)
-	LDLIBS = -lmlx -framework OpenGL -framework AppKit
+	LDLIBS = -lft -lmlx -framework OpenGL -framework AppKit
 else
 	LDLIBS = -lft -lmlx -lXext -lX11 -lm -pthread
 endif

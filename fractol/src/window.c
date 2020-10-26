@@ -6,12 +6,13 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 17:32:30 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/10/24 12:42:19 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/10/26 15:10:09 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "mlx.h"
+#include "mlx_events.h"
 #include "fractol.h"
 
 static int	win_close(void *param)
@@ -42,8 +43,8 @@ int			init(void *mlx, int type)
 		sys_error();
 	screen->mlx = mlx;
 	inits[type](screen);
-	mlx_hook(screen->win, 2, 1L << 0, &key_handle, screen);
-	mlx_hook(screen->win, 4, 1L << 2, &mouse_handle, screen);
+	mlx_hook(screen->win, KEY_PRESS, KEY_PRESS_MASK, &key_handle, screen);
+	mlx_hook(screen->win, BUTTON_PRESS, BUTTON_PRESS_MASK, &mouse_handle, screen);
 	mlx_hook(screen->win, 17, 1L << 17, &win_close, screen);
 	threads(screen);
 	return (1);

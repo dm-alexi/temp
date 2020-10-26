@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 15:53:50 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/10/26 12:07:47 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/10/26 12:33:01 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static int	usage(void)
 {
-	ft_printf("usage: fractol [m | j | b | u | s]\n\nFractal types:\n" \
+	ft_printf("usage: fractol [m | j | b | u | s]...\n\nFractal types:\n" \
 	"\tm : Madnelbrot set\n\tj : Julia set\n\tb : Burning Ship\n"\
 	"\tu : Multibrot set\n\ts : Sierpinsky carpet\n");
 	return (0);

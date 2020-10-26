@@ -6,13 +6,15 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 15:52:09 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/10/24 12:37:30 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/10/26 12:07:17 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
+
 # include "libft.h"
+
 # define FRACTALS 5
 # define INIT_ITER 128
 # define WIDTH 729
@@ -32,12 +34,6 @@
 
 # define JULIA_RE 0.325
 # define JULIA_IM -0.0375
-
-typedef struct	s_complex
-{
-	double re;
-	double im;
-}				t_complex;
 
 typedef struct	s_image
 {

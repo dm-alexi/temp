@@ -6,11 +6,10 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:31:00 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/10/24 12:41:15 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/10/26 12:08:56 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
 #include <stdlib.h>
 #include "mlx.h"
 #include "fractol.h"

@@ -1,16 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_complex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/05 22:11:31 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/07/31 10:13:18 by sscarecr         ###   ########.fr       */
+/*   Created: 2020/10/26 11:48:33 by sscarecr          #+#    #+#             */
+/*   Updated: 2020/10/26 11:53:40 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_toupper(int c)
+#include "libft.h"
+
+t_complex		complex_add(t_complex a, t_complex b)
 {
-	return (c >= 'a' && c <= 'z' ? c - 'a' + 'A' : c);
+	return (t_complex){.re = a.re + b.re, .im = a.im + b.im};
+}
+
+t_complex		complex_mul(t_complex a, t_complex b)
+{
+	return (t_complex){.re = a.re * b.re - a.im * b.im,
+		.im = a.re * b.im + a.im * b.re};
 }

@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/23 13:57:21 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/10/23 15:48:17 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/10/26 11:58:08 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_hash8(void *value, size_t size)
 
 	hash = size % 256;
 	t = value;
-	while (t - value < size)
+	while (t < (t_byte*)value + size)
 		hash = table[(hash + *t++) % 256];
 	return (hash);
 }

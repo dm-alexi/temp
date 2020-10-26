@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 22:14:21 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/10/23 14:52:19 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/10/26 11:48:13 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,20 @@
 # define LIBFT_H
 # include <stddef.h>
 
-typedef unsigned char	t_byte;
-
 typedef struct	s_list
 {
 	void			*content;
 	size_t			content_size;
 	struct s_list	*next;
 }				t_list;
+
+typedef unsigned char	t_byte;
+
+typedef struct	s_complex
+{
+	double	re;
+	double	im;
+}				t_complex;
 
 /*
 				** libc functions
@@ -122,6 +128,8 @@ char			*ft_ulltoa(unsigned long long n, int base, int upcase);
 size_t			ft_wcslen(const wchar_t *wcs);
 size_t			ft_word_count(char const *s, char c);
 int				ft_hash8(void *value, size_t size);
+t_complex		complex_add(t_complex a, t_complex b);
+t_complex		complex_mul(t_complex a, t_complex b);
 
 /*
 				** projects

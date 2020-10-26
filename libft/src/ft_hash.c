@@ -6,15 +6,19 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/23 13:57:21 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/10/23 14:45:35 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/10/26 11:58:08 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+** 8-bit Pearson hash
+*/
+
 int	ft_hash8(void *value, size_t size)
 {
-	const t_byte	table[256] = {
+	static const t_byte	table[256] = {
 	98, 6, 85, 150, 36, 23, 112, 164, 135, 207, 169, 5, 26, 64, 165, 219,
 	61, 20, 68, 89, 130, 63, 52, 102, 24, 229, 132, 245, 80, 216, 195, 115,
 	90, 168, 156, 203, 177, 120, 2, 190, 188, 7, 100, 185, 174, 243, 162, 10,
@@ -31,12 +35,12 @@ int	ft_hash8(void *value, size_t size)
 	110, 14, 204, 72, 21, 41, 56, 66, 28, 193, 40, 217, 25, 54, 179, 117,
 	238, 87, 240, 155, 180, 170, 242, 212, 191, 163, 78, 218, 137, 194, 175, 3,
 	43, 119, 224, 71, 122, 142, 42, 160, 104, 48, 247, 103, 15, 11, 138, 239 };
-	int				hash;
-	t_byte			*t;
+	int					hash;
+	t_byte				*t;
 
 	hash = size % 256;
 	t = value;
-	while (t - value < size)
+	while (t < (t_byte*)value + size)
 		hash = table[(hash + *t++) % 256];
 	return (hash);
 }

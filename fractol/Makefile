@@ -40,10 +40,14 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-$(LIBFT):
+$(LIBFT): libft
+
+$(MLX): mlx
+
+libft:
 	make -C $(LIBFT_DIR)
 
-$(MLX):
+mlx:
 	make -C $(MLX_DIR)
 
 clean:
@@ -58,4 +62,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re $(LIBFT) $(MLX)
+.PHONY: all clean fclean re libft mlx

@@ -12,7 +12,7 @@
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUFF_SIZE 1024
+# define BUFF_SIZE 4096
 # define GNL_ARRAY_SIZE 255
 
 typedef struct	s_buf

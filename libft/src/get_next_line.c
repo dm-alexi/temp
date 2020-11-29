@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 15:54:58 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/10/22 17:31:39 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/11/29 11:58:24 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "get_next_line.h"
 
 /*
-** Fills the buffer by repeatedly reading BUFF_SIZE bytes from a give file,
+** Fills the buffer by repeatedly reading BUFF_SIZE bytes from a given file,
 ** stops at encountering '\n'. Returns the size of a string needed to contain
 ** the resulting line, including the terminating '\0'. In case of a read() error
 ** returns -1. If the end of file is reached and no data is read, returns 0.
@@ -83,7 +83,7 @@ static int		readbuf(t_file *file, char **line)
 }
 
 /*
-** Deletes a t_file corresponding to the give file descriptor.
+** Deletes a t_file corresponding to the given file descriptor.
 */
 
 static void		delfile(const int fd, t_file **f)

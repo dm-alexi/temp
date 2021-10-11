@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.school-21.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 18:05:40 by sscarecr          #+#    #+#             */
-/*   Updated: 2021/10/10 19:30:21 by sscarecr         ###   ########.fr       */
+/*   Updated: 2021/10/11 19:49:08 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ typedef struct s_philo
 	int	max_eat;
 }	t_philo;
 
-int	get_uint(char *s);
+int	get_non_negative(char *s);
 int	usage(void);
 int	error(char *s);
+long long now();
 
 #endif

@@ -6,20 +6,23 @@
 /*   By: sscarecr <sscarecr@student.school-21.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 16:32:55 by sscarecr          #+#    #+#             */
-/*   Updated: 2021/10/10 19:32:07 by sscarecr         ###   ########.fr       */
+/*   Updated: 2021/10/11 19:54:10 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <pthread.h>
+#include <sys/time.h>
+#include <unistd.h>
+#include <stdio.h>
 #include "philosophers.h"
 
-int	philosopher(void *param)
+void*	philosopher(void *param)
 {
 	t_philo	*p;
 
 	p = (t_philo *)param;
-	return (0);
+	return (NULL);
 }
 
 int	go(int *args)
@@ -55,7 +58,7 @@ int	main(int ac, char **av)
 	i = 0;
 	while (++i < ac)
 	{
-		arguments[i - 1] = get_uint(av[i]);
+		arguments[i - 1] = get_non_negative(av[i]);
 		if (arguments[i - 1] < 0)
 			return (error(av[i]));
 	}

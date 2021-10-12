@@ -17,7 +17,7 @@ all: $(NAME)
 -include $(OBJ:.o=.d)
 
 $(NAME): $(OBJ)
-	$(CC) $(FLAGS) -o $(NAME) $(OBJ)
+	$(CC) $(FLAGS) -o $(NAME) $(OBJ) -lpthread
 
 $(SRC_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(FLAGS) -c -o $@ $< -MMD

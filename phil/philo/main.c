@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <sscarecr@student.school-21.ru    +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 16:32:55 by sscarecr          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/10/11 20:26:00 by sscarecr         ###   ########.fr       */
-=======
-/*   Updated: 2021/10/11 19:54:10 by sscarecr         ###   ########.fr       */
->>>>>>> c9e9f7e040256d754205a4f98a66fd9c380cdcd7
+/*   Updated: 2021/10/12 23:42:34 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +20,24 @@
 void*	philosopher(void *param)
 {
 	t_philo	*p;
-	long long	last_meal;
+	int		counter;
 
 	p = (t_philo *)param;
-	last_meal = now();
-	printf("%d - %lld\n", p->num, last_meal);
-
+	counter = 0;
+	while (!p->max_eat || (p->max_eat > 0 && counter < p->max_eat))
+	{
+		pthread_mutex_lock(p->left);
+		printf("%lld %d has taken a fork\n", now(), p->num);
+		pthread_mutex_lock(p->right);
+		p->last_meal = now();
+		printf("%lld %d has taken a fork\n", p->last_meal, p->num);
+		printf("%lld %d is eating\n", p->last_meal, p->num);
+		usleep(1000 * p->time_to_eat);
+		pthread_mutex_unlock(p->left);
+		pthread_mutex_unlock(p->right);
+		printf("%lld %d is sleeping\n", now(), p->num);
+		++counter;
+	}
 	return (NULL);
 }
 
@@ -38,19 +46,24 @@ int	go(int *args)
 	pthread_t		*threads;
 	t_philo			*philo;
 	pthread_mutex_t	*mutex;
-	int			i;
+	int				i;
 
 	threads = (pthread_t *)malloc(sizeof(pthread_t) * args[0]);
 	philo = (t_philo *)malloc(sizeof(t_philo) * args[0]);
 	mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * args[0]);
 	if (!threads || !philo || !mutex)
 		return (error(NULL));
-	i = args[0];
+	i = 0;
+	while (i < args[0])
+		if (pthread_mutex_init(mutex + i++, NULL))
+			return (error(NULL));
 	while (--i >= 0)
 	{
 		philo[i] = (t_philo){.num = i + 1, .time_to_die = args[1], .time_to_eat
-			= args[2], .time_to_sleep = args[3], .max_eat = args[4]};
-
+			= args[2], .time_to_sleep = args[3], .max_eat = args[4],
+			.right = mutex + (i + ((i + 1) % 2)) % args[0],
+			.left = mutex + (i + (i % 2)) % args[0], .last_meal = now()};
+		printf("%d: %d, %d\n", i + 1, (i + (i % 2)) % args[0] + 1, (i + ((i + 1) % 2)) % args[0] + 1);
 	}
 	while (++i < args[0])
 		if (pthread_create(threads + i, NULL, philosopher, philo + i))

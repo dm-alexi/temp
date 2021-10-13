@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   misc.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.school-21.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 18:06:25 by sscarecr          #+#    #+#             */
-/*   Updated: 2021/10/12 22:49:44 by sscarecr         ###   ########.fr       */
+/*   Updated: 2021/10/13 19:34:55 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <sys/time.h>
 
-int	get_non_negative(char *s)
+long long	get_microseconds(char *s)
 {
-	int	n;
+	long long	n;
 
 	n = 0;
 	while (*s && (*s == ' ' || *s == '\n' || *s == '\t' || *s == '\r'
@@ -30,7 +30,7 @@ int	get_non_negative(char *s)
 			n = n * 10 + (*s++ - '0');
 		else
 			return (-1);
-	return (n);
+	return (n * 1000);
 }
 
 int	usage(void)

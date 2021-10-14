@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <sscarecr@student.school-21.ru    +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 18:05:40 by sscarecr          #+#    #+#             */
-/*   Updated: 2021/10/13 20:50:20 by sscarecr         ###   ########.fr       */
+/*   Updated: 2021/10/14 23:58:40 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,32 @@
 typedef struct s_philo
 {
 	int				num;
+	int				meals;
 	long long		last_meal;
 	pthread_mutex_t	*left;
 	pthread_mutex_t	*right;
-	void			*rules;
+	void			*game;
 }	t_philo;
 
-typedef struct s_rules
+typedef struct s_game
 {
 	long long		ttd;
 	long long		tte;
 	long long		tts;
 	int				number;
-	int				meals;
-	int				filled;
-	int				finish;
-	pthread_mutex_t output;
-	pthread_mutex_t *forks;
+	int				max_meals;
+	int				finished;
+	int				stop;
+	pthread_mutex_t	output;
+	pthread_mutex_t	*forks;
 	t_philo			*philos;
 	pthread_t		*threads;
-}	t_rules;
+}	t_game;
 
-int	get_microseconds(char *s);
-int	usage(void);
-int	error(char *s);
-long long now();
+int			get_nonnegative(char *s);
+int			usage(void);
+int			error(void);
+long long	now(void);
+int			clear(t_game *game);
 
 #endif

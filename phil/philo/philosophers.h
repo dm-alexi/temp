@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 18:05:40 by sscarecr          #+#    #+#             */
-/*   Updated: 2021/10/14 23:58:40 by sscarecr         ###   ########.fr       */
+/*   Updated: 2021/10/16 00:32:00 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PHILOSOPHERS_H
 # define TRUE	1
 # define FALSE	0
-# define STEP	5
+# define STEP	1000
 
 typedef struct s_philo
 {
@@ -35,6 +35,7 @@ typedef struct s_game
 	int				max_meals;
 	int				finished;
 	int				stop;
+	int				last_one;
 	pthread_mutex_t	output;
 	pthread_mutex_t	*forks;
 	t_philo			*philos;

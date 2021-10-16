@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 16:32:55 by sscarecr          #+#    #+#             */
-/*   Updated: 2021/10/15 00:16:20 by sscarecr         ###   ########.fr       */
+/*   Updated: 2021/10/16 00:41:43 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,24 @@ void	*philos(void *param)
 	while (!game->stop)
 	{
 		print(game, p->num, "is thinking");
+		// while (game->last_one == p->num)
+		// 	usleep(STEP);
 		pthread_mutex_lock(p->left);
 		print(game, p->num, "has taken a fork");
 		pthread_mutex_lock(p->right);
 		p->last_meal = now();
 		print(game, p->num, "has taken a fork");
 		print(game, p->num, "is eating");
-		usleep(game->tte);
+		usleep(1000 * game->tte);
+		print(game, p->num, "is sleeping");
 		pthread_mutex_unlock(p->left);
 		pthread_mutex_unlock(p->right);
-		print(game, p->num, "is sleeping");
 		pthread_mutex_lock(&game->output);
 		if (game->max_meals && (++(p->meals) == game->max_meals))
 			++(game->finished);
+		// game->last_one = p->num;
 		pthread_mutex_unlock(&game->output);
-		usleep(game->tts);
+		usleep(1000 * game->tts);
 	}
 	return (NULL);
 }
@@ -63,12 +66,14 @@ void	loop(t_game *game)
 		pthread_mutex_lock(&game->output);
 		while (++i < game->number)
 		{
-			if (now() - (game->philos + i)->last_meal >= game->ttd)
+			if (now() - (game->philos + i)->last_meal > game->ttd)
 			{
 				printf("%lld %d died\n", now(), i + 1);
+				printf("%lld his last meal\n", (game->philos + i)->last_meal);
 				game->stop = TRUE;
 				break ;
 			}
+			//else printf("-- %lld %lld\n", now() - (game->philos + i)->last_meal, game->ttd);
 		}
 		if (game->max_meals > 0 && game->finished == game->number)
 			game->stop = TRUE;
@@ -94,15 +99,21 @@ int	init(t_game *game)
 			return (1);
 	while (--i >= 0)
 		game->philos[i] = (t_philo){.num = i + 1, .last_meal = now(),
+			// .left = game->forks + i,
+			// .right = game->forks + (i + 1) % game->number,
 			.right = game->forks + (i + ((i + 1) % 2)) % game->number,
 			.left = game->forks + (i + (i % 2)) % game->number,
 			.meals = 0, .game = game};
+	// game->philos[game->number - 1].left = game->forks;
+	// game->philos[game->number - 1].right = game->forks + game->number - 1;
 	while (++i < game->number)
 		if (pthread_create(game->threads + i, NULL, philos, game->philos + i))
 			return (1);
 	loop(game);
+	// while (--i >= 0)
+	// 	pthread_join(game->threads[i], NULL);
 	while (--i >= 0)
-		pthread_join(game->threads[i], NULL);
+		pthread_detach(game->threads[i]);
 	return (0);
 }
 
@@ -117,11 +128,12 @@ int	main(int ac, char **av)
 	i = 0;
 	while (++i < ac)
 		arg[i - 1] = get_nonnegative(av[i]);
-	if (arg[0] < 2 || arg[1] < 0 || arg[2] < 0 || arg[3] < 0 || arg[4] < 0)
+	if (arg[0] < 1 || arg[1] < 0 || arg[2] < 0 || arg[3] < 0 || arg[4] < 0)
 		return (usage());
-	game = (t_game){.finished = 0, .number = arg[0], .ttd = arg[1] * 1000LL,
-		.tte = arg[2] * 1000LL, .tts = arg[3] * 1000LL, .max_meals = arg[4],
+	game = (t_game){.finished = 0, .number = arg[0], .ttd = arg[1],
+		.tte = arg[2], .tts = arg[3], .max_meals = arg[4], .last_one = 0,
 		.forks = NULL, .philos = NULL, .threads = NULL, .stop = 0};
+	// printf("TTD = %lld\nTTE = %lld\nTTS = %lld\n num = %d\n", game.ttd, game.tte, game.tts, game.number);
 	if (init(&game) && clear(&game))
 		return (error());
 	clear(&game);

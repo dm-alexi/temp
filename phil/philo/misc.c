@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 18:06:25 by sscarecr          #+#    #+#             */
-/*   Updated: 2021/10/14 23:58:55 by sscarecr         ###   ########.fr       */
+/*   Updated: 2021/10/16 00:15:16 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ long long	now(void)
 	struct timeval	tp;
 
 	gettimeofday(&tp, NULL);
-	return (tp.tv_sec * 1000 + (long long)(tp.tv_usec / 1000 + 0.5));
+	return (tp.tv_sec * 1000 + (long long)((tp.tv_usec + 500) / 1000));
 }
 
 int	clear(t_game *game)

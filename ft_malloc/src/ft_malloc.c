@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 21:52:33 by sscarecr          #+#    #+#             */
-/*   Updated: 2021/10/20 23:36:03 by sscarecr         ###   ########.fr       */
+/*   Updated: 2021/10/21 21:48:57 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	*alloc_big(size_t size)
 {
 	t_big	*ptr; 
 	
+	if ((size + sizeof(t_big)) % getpagesize() > 0)
+		size += getpagesize - ((size + sizeof(t_big)) % getpagesize());
 	ptr = mmap(NULL, size + sizeof(t_big), PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
 	if (ptr == MAP_FAILED)
 		return NULL;
@@ -84,17 +86,22 @@ void	*alloc_big(size_t size)
 
 void	*ft_malloc(size_t size)
 {
+	if (size + sizeof(t_area) <= TINYSIZE - sizeof(t_page))
+		return alloc_area(&g_pages.tiny, TINYSIZE, size);
+	else if (size + sizeof(t_area) <= SMALLSIZE - sizeof(t_page))
+		return alloc_area(&g_pages.small, SMALLSIZE, size);
+	return alloc_big(size);
+}
+
+void	*malloc(size_t size)
+{
 	void	*ptr;
 
 	if (!size)
 		return NULL;
-	size = roundup(size);
+	size += size % MINSIZE > 0 ? MINSIZE - size % MINSIZE : 0;
 	pthread_mutex_lock(&g_mutex);
-	if (size + sizeof(t_area) <= TINYSIZE - sizeof(t_page))
-		ptr = alloc_area(&g_pages.tiny, TINYSIZE, size);
-	else if (size + sizeof(t_area) <= SMALLSIZE - sizeof(t_page))
-		ptr = alloc_area(&g_pages.small, SMALLSIZE, size);
-	else ptr = alloc_big(size);
+	ptr = ft_malloc(size);
 	pthread_mutex_lock(&g_mutex);
 	return ptr;
 }

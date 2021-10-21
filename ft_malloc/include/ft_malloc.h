@@ -6,20 +6,18 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 19:31:17 by sscarecr          #+#    #+#             */
-/*   Updated: 2021/10/20 22:01:29 by sscarecr         ###   ########.fr       */
+/*   Updated: 2021/10/21 21:18:03 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_MALLOC_H
 # define FT_MALLOC_H
 
-# define MINSIZE	sizeof(void*)
+# define MINSIZE	sizeof(size_t)
 # define TINYSIZE	getpagesize()
 # define SMALLSIZE	(128 * (TINYSIZE))
 # define VACANT		0
 # define OCCUPIED	1
-
-# define roundup(x) ((x) - ((x) % MINSIZE) + ((x) % MINSIZE > 0) * MINSIZE)
 
 # include <pthread.h>
 # include <stdlib.h>
@@ -57,5 +55,9 @@ extern pthread_mutex_t	g_mutex;
 extern t_pages			g_pages;
 
 t_page	*get_page(t_page **first, size_t size);
+void	free_big(t_big *big);
+void	*malloc(size_t size);
+void	free(void *ptr);
+void	ft_memcpy(void *dst, void *src, size_t num);
 
 #endif

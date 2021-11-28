@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 19:31:17 by sscarecr          #+#    #+#             */
-/*   Updated: 2021/10/21 21:18:03 by sscarecr         ###   ########.fr       */
+/*   Updated: 2021/10/24 18:15:34 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ typedef	unsigned char	byte;
 typedef struct s_area
 {
 	struct s_area	*prev;
-	size_t			size;
-	size_t			status;
+	struct s_area	*next;
+	int				size;
+	int				status;
 } t_area;
 
 typedef struct s_bigarea
@@ -58,6 +59,7 @@ t_page	*get_page(t_page **first, size_t size);
 void	free_big(t_big *big);
 void	*malloc(size_t size);
 void	free(void *ptr);
+void	show_alloc_mem(void);
 void	ft_memcpy(void *dst, void *src, size_t num);
 
 #endif

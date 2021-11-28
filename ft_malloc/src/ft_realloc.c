@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 20:08:35 by sscarecr          #+#    #+#             */
-/*   Updated: 2021/10/21 23:04:03 by sscarecr         ###   ########.fr       */
+/*   Updated: 2021/10/24 18:14:13 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void	*realloc_small(void *ptr, int size, t_area *area, t_page *page)
 	int		diff = size - area->size;
 	int		tmp;
 	
-	if (!diff)
-		return ptr;
 	if (diff > 0 && (!area->next || area->next->status == OCCUPIED || area->next->size + sizeof(t_area) < diff))
 	{
 		if (p = (size + sizeof(t_area) > SMALLSIZE - sizeof(t_page)) ?
@@ -55,7 +53,6 @@ void	*realloc_small(void *ptr, int size, t_area *area, t_page *page)
 	{
 		area->size += sizeof(t_area) + area->next->size;
 		area->next = area->next->next;
-		return ptr;
 	}
 	else if (diff > 0)
 	{
@@ -63,8 +60,44 @@ void	*realloc_small(void *ptr, int size, t_area *area, t_page *page)
 		ft_memcpy((byte*)(area->next) + diff, area->next, sizeof(t_area));
 		area->next = (t_area*)((byte*)(area->next) + diff);
 		area->next->size -= diff;
-		return ptr;
 	}
+	return ptr;
+}
+
+void	*realloc_tiny(void *ptr, int size, t_area *area, t_page *page)
+{
+	void	*p;
+	int		diff = size - area->size;
+	int		tmp;
+	
+	if (diff > 0 && (!area->next || area->next->status == OCCUPIED || area->next->size + sizeof(t_area) < diff))
+	{
+		if (size + sizeof(t_area) <= TINYSIZE - sizeof(t_page))
+			p = alloc_area(&g_pages.tiny, TINYSIZE, size));
+		else if (size + sizeof(t_area) <= SMALLSIZE - sizeof(t_page))
+			p = alloc_area(&g_pages.tiny, TINYSIZE, size);
+		else
+			p =  alloc_big(size);
+		if (p)
+		{
+			ft_memcpy(p, ptr, area->size);
+			free_area(g_pages.tiny, page, TINYSIZE, area);
+		}
+		return p;
+	}
+	else if (diff > 0 && area->next->size - diff < MINSIZE)
+	{
+		area->size += sizeof(t_area) + area->next->size;
+		area->next = area->next->next;
+	}
+	else if (diff > 0)
+	{
+		area->size = size;
+		ft_memcpy((byte*)(area->next) + diff, area->next, sizeof(t_area));
+		area->next = (t_area*)((byte*)(area->next) + diff);
+		area->next->size -= diff;
+	}
+	return ptr;
 }
 
 void	*realloc(void *ptr, size_t size)
@@ -86,7 +119,7 @@ void	*realloc(void *ptr, size_t size)
 	else if (area = find_small(ptr, &page))
 		p = realloc_small(ptr, size, area, page);
 	else if (area = find_tiny(ptr, &page))
-		p = realloc_small(ptr, size, area, page);
+		p = realloc_tiny(ptr, size, area, page);
 	pthread_mutex_unlock(&g_mutex);
 	return p;
 }

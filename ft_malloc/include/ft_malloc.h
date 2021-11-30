@@ -3,24 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_malloc.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.school-21.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 19:31:17 by sscarecr          #+#    #+#             */
-/*   Updated: 2021/10/24 18:15:34 by sscarecr         ###   ########.fr       */
+/*   Updated: 2021/11/30 21:21:46 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_MALLOC_H
 # define FT_MALLOC_H
 
-# define MINSIZE	sizeof(size_t)
-# define TINYSIZE	getpagesize()
-# define SMALLSIZE	(128 * (TINYSIZE))
-# define VACANT		0
-# define OCCUPIED	1
+# define MINSIZE		sizeof(size_t)
+# define MAXTINYSIZE	(getpagesize() / 4)
+# define TINYTABLE		(getpagesize() * 32)
+# define MAXSMALLSIZE	(getpagesize() * 16)
+# define SMALLTABLE		(MAXSMALLSIZE * 128)
+# define VACANT			0
+# define OCCUPIED		1
 
 # include <pthread.h>
-# include <stdlib.h>
+# include <string.h>
 
 typedef	unsigned char	byte;
 

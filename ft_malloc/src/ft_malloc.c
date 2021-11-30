@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sscarecr <sscarecr@student.school-21.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 21:52:33 by sscarecr          #+#    #+#             */
-/*   Updated: 2021/10/21 21:48:57 by sscarecr         ###   ########.fr       */
+/*   Updated: 2021/11/30 21:32:31 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #include "ft_malloc.h"
 
 g_mutex = PTHREAD_MUTEX_INITIALIZER;
-g_pages = (t_pages){NULL, NULL, NULL};
+g_pages = (t_pages){.tiny = NULL, .small = NULL, .big = NULL};
 
-t_area	*alloc_area_on_new_page(t_page *first, int page_size, int size);
+t_area	*alloc_area_on_new_page(t_page *first, int page_size, int size)
 {
 	t_area	*area;
 	t_page	*page;
@@ -29,10 +29,10 @@ t_area	*alloc_area_on_new_page(t_page *first, int page_size, int size);
 		first->prev = page;
 	page->prev = NULL;
 	page->next = first;
-	*first = page;
+	first = page;
 	area = (t_area*)((byte*)page + sizeof(t_page));
 	if (size > page_size - sizeof(t_page) - 2 * sizeof(t_area) - MINSIZE)
-		*area = (t_area){.prev = NULL, .next = NULL, .status = OCCUPIED
+		*area = (t_area){.prev = NULL, .next = NULL, .status = OCCUPIED,
 			.size = size - sizeof(t_page) - sizeof(t_area)};
 	else
 	{
@@ -69,9 +69,9 @@ void	*alloc_area(t_page *first, int page_size, int size)
 void	*alloc_big(size_t size)
 {
 	t_big	*ptr; 
-	
+
 	if ((size + sizeof(t_big)) % getpagesize() > 0)
-		size += getpagesize - ((size + sizeof(t_big)) % getpagesize());
+		size += getpagesize() - ((size + sizeof(t_big)) % getpagesize());
 	ptr = mmap(NULL, size + sizeof(t_big), PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
 	if (ptr == MAP_FAILED)
 		return NULL;
@@ -84,15 +84,6 @@ void	*alloc_big(size_t size)
 	return (void*)((byte*)ptr + sizeof(t_big));
 }
 
-void	*ft_malloc(size_t size)
-{
-	if (size + sizeof(t_area) <= TINYSIZE - sizeof(t_page))
-		return alloc_area(&g_pages.tiny, TINYSIZE, size);
-	else if (size + sizeof(t_area) <= SMALLSIZE - sizeof(t_page))
-		return alloc_area(&g_pages.small, SMALLSIZE, size);
-	return alloc_big(size);
-}
-
 void	*malloc(size_t size)
 {
 	void	*ptr;
@@ -101,7 +92,12 @@ void	*malloc(size_t size)
 		return NULL;
 	size += size % MINSIZE > 0 ? MINSIZE - size % MINSIZE : 0;
 	pthread_mutex_lock(&g_mutex);
-	ptr = ft_malloc(size);
-	pthread_mutex_lock(&g_mutex);
+	if (size <= MAXTINYSIZE)
+		ptr = alloc_area(&g_pages.tiny, TINYTABLE, size);
+	else if (size <= MAXSMALLSIZE)
+		ptr = alloc_area(&g_pages.small, SMALLTABLE, size);
+	else
+		ptr = alloc_big(size);
+	pthread_mutex_unlock(&g_mutex);
 	return ptr;
 }

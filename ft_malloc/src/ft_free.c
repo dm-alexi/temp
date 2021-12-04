@@ -30,7 +30,7 @@ void	free_area(t_page *first, t_page *page, int size, t_area *area)
 	area->status = VACANT;
 	if (area->next && area->next->status == VACANT)
 	{
-		area->size += area->next->size + sizeof(t_area)
+		area->size += area->next->size + sizeof(t_area);
 		area->next = area->next->next;
 	}
 	if (area->prev && area->prev->status == VACANT)
@@ -42,12 +42,12 @@ void	free_area(t_page *first, t_page *page, int size, t_area *area)
 	if (!area->prev && !area->next)
 	{
 		if (page == first)
-			*first = page->next;
+			first = page->next;
 		if (page->prev)
 			page->prev->next = page->next;
 		if (page->next)
 			page->next->prev = page->prev;
-		munmap(page, size)
+		munmap(page, size);
 	}
 }
 

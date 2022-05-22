@@ -34,6 +34,12 @@ void	wait(long long finish)
 		usleep(left);
 }
 
+int	allowed(t_game *game, int num)
+{
+	return (game->philos[num].last_meal <= game->philos[(num + game->number - 1) % game->number].last_meal &&
+		game->philos[num].last_meal <= game->philos[(num + 1) % game->number].last_meal);
+}
+
 void	*philos(void *param)
 {
 	t_philo	*p;
@@ -44,6 +50,8 @@ void	*philos(void *param)
 	while (game->number > 1 && !game->stop)
 	{
 		print(game, p->num, "is thinking");
+		while (!game->stop && !allowed(game, p->num - 1))
+			usleep(STEP);
 		pthread_mutex_lock(p->left);
 		print(game, p->num, "has taken a fork");
 		pthread_mutex_lock(p->right);

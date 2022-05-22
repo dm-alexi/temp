@@ -14,7 +14,7 @@
 # define PHILOSOPHERS_H
 # define TRUE	1
 # define FALSE	0
-# define STEP	1000
+# define STEP	100
 
 typedef struct s_philo
 {

@@ -6,13 +6,15 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 18:06:25 by sscarecr          #+#    #+#             */
-/*   Updated: 2021/10/16 00:15:16 by sscarecr         ###   ########.fr       */
+/*   Updated: 2021/10/14 23:58:55 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <pthread.h>
 #include <sys/time.h>
+#include <semaphore.h>
 #include "philosophers.h"
 
 int	get_nonnegative(char *s)
@@ -37,17 +39,16 @@ int	get_nonnegative(char *s)
 
 int	usage(void)
 {
-	printf("usage: ./philo number_of_philosophers time_to_die time_to_eat "
+	printf("usage: ./philo_bonus number_of_philosophers time_to_die time_to_eat "
 		"time_to_sleep [number_of_times_each_philosopher_must_eat]\n"
-		"Note: all parameters must be positive integers, "
-		"number_of_philosophers must be greater than 1.\n");
-	return (0);
+		"Note: all parameters must be positive integers.\n");
+	exit (0);
 }
 
 int	error(void)
 {
 	printf("Error: system error\n");
-	return (1);
+	exit (1);
 }
 
 long long	now(void)
@@ -55,13 +56,13 @@ long long	now(void)
 	struct timeval	tp;
 
 	gettimeofday(&tp, NULL);
-	return (tp.tv_sec * 1000 + (long long)((tp.tv_usec + 500) / 1000));
+	return (tp.tv_sec * 1000000 + tp.tv_usec);
 }
 
 int	clear(t_game *game)
 {
-	free(game->philos);
-	free(game->forks);
-	free(game->threads);
+	sem_close(game->forks);
+	sem_close(game->output);
+	sem_close(game->access);
 	return (1);
 }

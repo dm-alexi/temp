@@ -6,7 +6,7 @@
 /*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 18:05:40 by sscarecr          #+#    #+#             */
-/*   Updated: 2021/10/16 00:32:00 by sscarecr         ###   ########.fr       */
+/*   Updated: 2021/10/14 23:58:40 by sscarecr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,30 @@
 # define PHILOSOPHERS_H
 # define TRUE	1
 # define FALSE	0
-# define STEP	1000
+# define STEP	100
+# define SEM	"/forks"
+# define OUT	"/output"
+# define ACC	"/access"
+# define DEA	"/death"
+# define FED	"/fed"
 
-typedef struct s_philo
-{
-	int				num;
-	int				meals;
-	long long		last_meal;
-	pthread_mutex_t	*left;
-	pthread_mutex_t	*right;
-	void			*game;
-}	t_philo;
+# include <sys/types.h>
 
 typedef struct s_game
 {
 	long long		ttd;
 	long long		tte;
 	long long		tts;
+	long long		last_meal;
 	int				number;
 	int				max_meals;
 	int				finished;
-	int				stop;
-	int				last_one;
-	pthread_mutex_t	output;
-	pthread_mutex_t	*forks;
-	t_philo			*philos;
-	pthread_t		*threads;
+	int			id;
+	sem_t	*forks;
+	sem_t	*output;
+	sem_t	*access;
+	sem_t	*death;
+	sem_t	*fed;
 }	t_game;
 
 int			get_nonnegative(char *s);
